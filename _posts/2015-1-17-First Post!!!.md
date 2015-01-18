@@ -2,6 +2,7 @@
 layout: post
 title: First Post!!!
 description: Just trying it out!
+tags: hi
 ---
 
 Wow it really worked!!!
