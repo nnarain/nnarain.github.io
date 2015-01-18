@@ -1,6 +1,7 @@
 ---
 layout: post
 title: First Post!!!
+description: Just trying it out!
 ---
 
 Wow it really worked!!!
