@@ -1,10 +1,9 @@
 # Site settings
 title: Natesh's Blog!
 email: nnaraindev@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+description: > 
+    A place where I can drop code snippets and how-to's of various projects I'm working on.
+    Anything from C to Assembler to Graphics to Web dev!
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://nnarain.github.io" # the base hostname & protocol for your site
 github_username:  nnarain
