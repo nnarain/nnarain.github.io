@@ -34,3 +34,6 @@ Anything I find useful.
 Depends on what I'm working on!
 
 
+By the way here is my [YouTube Channel](https://www.youtube.com/channel/UCVYy1Jiww7YAsgEFD2CSQSw), I haven't got a lot of videos but I might in the future!
+
+
