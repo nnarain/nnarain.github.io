@@ -12,9 +12,13 @@ layout: default
       <div class="panel-heading"><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></div>
       <div class="panel-body">
         <h2><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+        {{post.description}}
       </div>
       <div class="panel-footer">
-        {{post.description}}
+        Tags: 
+        {% if post.tags %} 
+          {{ post.tags }} 
+        {% endif %}
       </div>
 
     </div>
@@ -23,16 +27,3 @@ layout: default
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>
-
-
-<!--
-
-      <li class="list-group-item">
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-
- -->
