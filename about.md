@@ -27,6 +27,10 @@ Anything I find useful.
 * OpenGL techniques?
 * Assembler on HCS12?
 * Arduino?
+* Android Dev?
+* Electronics projects?
+* How to use this blogging system?
 
 Depends on what I'm working on!
+
 
