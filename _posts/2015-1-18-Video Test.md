@@ -2,7 +2,7 @@
 layout: post
 title: Video in Markdown Test
 description: Getting video embedded in the markdown files
-tags: markdown html
+tag: markdown html jekyll
 ---
 
 Lets see if we can embed video in these markdown files.
