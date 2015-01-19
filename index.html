@@ -15,9 +15,12 @@ layout: default
         {{post.description}}
       </div>
       <div class="panel-footer">
-        Tags: 
-        {% if post.tags %} 
-          {{ post.tags }} 
+        <b>Tags:</b> 
+        {% if post.tag %}
+          {% assign ts = post.tag | split:&nbsp %}
+          {% for t in ts %}
+            <span class="label label-success">{{t}}</span>
+          {% endfor %}
         {% endif %}
       </div>
 
