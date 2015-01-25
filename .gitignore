@@ -5,3 +5,6 @@ Gemfile.lock
 # scripts
 *.py
 *.bat
+
+# old files
+*.old
