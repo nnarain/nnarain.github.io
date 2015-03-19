@@ -3,10 +3,10 @@ layout: post
 title: HCS12 Board Design Complete!
 description: Completed the design for my first embedded system
 tag: HCS12 embedded-systems electronics
-thumbnail: /assets/hcs12-controller-thumbnail.png
+thumbnail: /assets/2015/02/28/hcs12-controller-thumbnail.png
 ---
 
-![image not found!](/assets/hcs12-controller-thumbnail.png)
+![image not found!](/assets/2015/02/28/hcs12-controller-thumbnail.png)
 
 This is the finished design of my semester 4 project in college.
 
@@ -14,7 +14,7 @@ The task is to design and build a board to control DC motors, servos, stepper mo
 
 Here's the PCB layout:
 
-![image not found!](/assets/board-layout.png)
+![image not found!](/assets/2015/02/28/board-layout.png)
 
 Pretty neat, eh?
 

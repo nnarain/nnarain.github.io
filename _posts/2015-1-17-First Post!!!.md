@@ -3,7 +3,7 @@ layout: post
 title: First Post!!!
 description: Just trying it out!
 tag: greetings!
-thumbnail: /assets/helloworld.png
+thumbnail: /assets/2015/01/17/helloworld.png
 ---
 
 Wow it really worked!!!
