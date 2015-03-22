@@ -36,6 +36,16 @@ This is basically just an air pump used to suck components up to the nozzle and 
 
 As you can see, the ez-pick is quite handy!
 
-![image not found!](/assets/2015/03/18/done.jpg)
+![image not found!](/assets/2015/03/18/placement-done.jpg)
 
 And here it is with all the components places. Tomorrow it goes into the reflow oven to solder the parts down.
+
+![image not found!](/assets/2015/03/18/reflow.jpg)
+
+This oven is designed to heat the board evenly across its surface and activate the solder paste.
+
+As expected the there were a few bridges on the CPU pins, but a bit of flux and rework solved that quite easily.
+
+![image not found!](/assets/2015/03/18/fully-assembled.jpg)
+
+And here it is fully assembled :D
