@@ -8,3 +8,7 @@ Gemfile.lock
 
 # old files
 *.old
+
+# drafts 
+drafts/*
+
