@@ -2,7 +2,7 @@
 layout: post
 title: Board Bring Up
 description: Getting the Board in working order
-tag: hcs12 embedded-systems electronics
+tag: HCS12 embedded-systems electronics
 thumbnail: assets/2015/03/27/board-2.jpg
 ---
 
