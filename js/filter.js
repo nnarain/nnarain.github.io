@@ -28,6 +28,7 @@ function filter(tags)
 	$(".panel").filter(":not(" + panelSelector + ")").hide("slow");
 }
 
+// set the action the the search bar
 $("#Search").submit(
 	function(event)
 	{
@@ -44,4 +45,21 @@ $("#Search").submit(
 			filter(tags);
 		}
 	}
-)
+);
+
+// set the tag elements to be clickable 
+$(".tag").click(
+	function()
+	{
+		var tag = $(this).text();
+		filter(tag);
+	}
+);
+
+// show all posts
+$("#Posts").click(
+	function()
+	{
+		$(".panel").show("slow");
+	}
+);
