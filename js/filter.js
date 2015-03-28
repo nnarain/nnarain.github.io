@@ -29,3 +29,37 @@ function filter(tags)
 	// hide elements
 	$(".panel").filter(filter_selector).hide();
 }
+
+$("#bnSearch").click(
+	function()
+	{
+		var tags = $("#etSearch").val();
+
+		if(tags == "")
+		{
+			$(".panel").show();
+		}
+		else
+		{
+			filter(tags);
+		}
+	}
+)
+
+$("#Search").submit(
+	function(event)
+	{
+		event.preventDefault();
+
+		var tags = $("#etSearch").val();
+
+		if(tags == "")
+		{
+			$(".panel").show();
+		}
+		else
+		{
+			filter(tags);
+		}
+	}
+)
