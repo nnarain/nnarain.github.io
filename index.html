@@ -5,10 +5,11 @@ layout: default
 <div class="wrapper">
     <div class="home">
 
-      <h1 class="page-heading">Posts</h1>
+      <h1 class="page-heading" id="Posts">Posts</h1>
+      <br>
 
       {% for post in site.posts %}
-        <div class="panel panel-default">
+        <div class="panel panel-default" data-tags="{{post.tags}}">
 
           <div class="panel-heading"><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></div>
           <div class="panel-body">
@@ -35,7 +36,7 @@ layout: default
             {% if post.tag %}
               {% assign ts = post.tag | split:&nbsp %}
               {% for t in ts %}
-                <span class="label label-success">{{t}}</span>
+                <span class="label label-success tag">{{t}}</span>
               {% endfor %}
             {% endif %}
           </div>
