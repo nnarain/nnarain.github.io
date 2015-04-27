@@ -16,5 +16,5 @@ Power supply looks stable and I can successfully connect to the CPU!
 At this point I need to start exercising the ports to ensure everything is working correctly
 
 I'm keeping the source modules here:
-[https://github.com/nnarain/ESEEmbeddedController](https://github.com/nnarain/ESEEmbeddedController)
+[https://github.com/nnarain/ESEPlatformController](https://github.com/nnarain/ESEPlatformController)
 
