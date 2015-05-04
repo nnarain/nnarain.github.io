@@ -13,12 +13,13 @@ B.Eng (Electronic Systems Engineering)
 General Experience
 
 * Programmed embedded systems in C
+* Designed embedded hardware using Altium
 * Applied Object Orient design using Java and C++
 * Scripting in Python
 * Basic Web dev skills - HTML, Javascript, Ruby on Rails (I made this site with basic Bootstrap and jQuery)
 * Designed digital logic circuits
 * Frameworks and APIs: Qt, Android
-* Tools and Software: Microsoft Visual Studio, Eclipse, Git
+* Software Tools: Microsoft Visual Studio, Eclipse, Git
 * Fimiliar with Linux operating systems (No kernel level stuff... yet!)
 
 
