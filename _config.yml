@@ -10,3 +10,4 @@ github_username:  nnarain
 
 # Build settings
 markdown: kramdown
+paginate: 5
