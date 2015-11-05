@@ -2,7 +2,7 @@
 layout: post
 title: Standalone ASIO with Visual Studio 2015
 description: Notes for working with ASIO without Boost C++ using VS 2015
-tag: asio c++ boost
+tag: asio c++ boost visualstudio
 thumbnail: 
 ---
 
