@@ -5,9 +5,6 @@ layout: default
 <div class="wrapper">
     <div class="home">
 
-      <h1 class="page-heading" id="Posts">Posts</h1>
-      <br>
-
       {% for post in paginator.posts %}
         <div class="panel panel-default" data-tags="{{post.tags}}">
 
@@ -45,19 +42,50 @@ layout: default
       {% endfor %}
 
       <!-- Pagination links -->
-      <div class="pagination">
-        {% if paginator.previous_page %}
-          <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
-        {% else %}
-          <span class="previous">Previous</span>
-        {% endif %}
-          <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-        {% if paginator.next_page %}
-          <a href="{{ paginator.next_page_path }}" class="next">Next</a>
-        {% else %}
-          <span class="next ">Next</span>
-        {% endif %}
-      </div>
+      <nav>
+        <ul class="pagination">
+          <!-- Previous Arrow -->
+          <li>
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          {% else %}
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          {% endif %}
+          </li>
+
+          <!-- Numbered links for pages -->
+          {% for page in (1..paginator.total_pages)%}
+          <li>
+            {% if page == 1%}
+            <a href="/">
+              {{page}}
+            </a>
+            {% else %}
+            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">
+              {{page}}
+            </a>
+            {%endif%}
+          </li>
+          {% endfor %}
+
+          <!-- Next Arrow -->
+          <li>
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          {% else %}
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          {% endif %}
+          </li>
+        </ul>
+      </nav>
 
       <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
