@@ -1,0 +1,52 @@
+---
+layout: default
+---
+
+<div class="wrapper">
+
+    <div class="home">
+        
+        {% for post in site.posts %}
+        <div class="panel panel-default" data-tags="{{post.tags}}">
+
+          <div class="panel-heading"><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></div>
+          <div class="panel-body">
+
+            <div class="row">
+              {% if post.thumbnail %}
+              <div class="col-xs-6 col-md-3">
+                <a href="{{post.url | prepend: site.baseurl}}" class="thumbnail">
+                  <img src="{{post.thumbnail}}">
+                </a>
+              </div>
+              {% endif %}
+
+              <div class="col-md-9">
+                <h2><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+                {{post.description}}
+              </div>
+            </div>
+
+
+          </div>
+          <div class="panel-footer">
+            <b>Tags:</b> 
+            {% if post.tag %}
+              {% assign ts = post.tag | split:&nbsp %}
+              {% for t in ts %}
+                <span class="label label-success tag">{{t}}</span>
+              {% endfor %}
+            {% endif %}
+          </div>
+
+        </div>
+      {% endfor %}
+        
+    </div>
+    
+</div>
+
+<script type="text/javascript">
+    // filter the posts to just the related tags in the search query
+    filter($.url("?tags"));
+</script>

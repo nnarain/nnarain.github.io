@@ -28,11 +28,12 @@ function filter(tags)
 	$(".panel").filter(":not(" + panelSelector + ")").hide("slow");
 }
 
+/*
 // set the action the the search bar
 $("#Search").submit(
 	function(event)
 	{
-		event.preventDefault();
+		//event.preventDefault();
 
 		var tags = $("#etSearch").val();
 
@@ -46,6 +47,7 @@ $("#Search").submit(
 		}
 	}
 );
+*/
 
 // set the tag elements to be clickable 
 $(".tag").click(
