@@ -6,7 +6,10 @@ description: >
     Anything from C to Assembler to Graphics to Web dev!
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://nnarain.github.io" # the base hostname & protocol for your site
+
+# social media
 github_username:  nnarain
+youtube_username: nnaraindev
 
 # Build settings
 markdown: kramdown
