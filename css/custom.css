@@ -17,3 +17,8 @@
 {
     color: #5CB85C;
 }
+
+.list-group-item
+{
+    word-wrap: break-word;
+}

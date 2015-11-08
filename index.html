@@ -2,126 +2,149 @@
 layout: default
 ---
 
-<div class="row">
-    <div class="col-sm-1 col-md-3"></div> 
-    <div class="col-sm-10 col-md-6">
+
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-10">
-          {% for post in paginator.posts %}
-            <div class="panel panel-default" data-tags="{{post.tags}}">
+     <div class="col-sm-12 col-md-8">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+              {% for post in paginator.posts %}
+                <div class="panel panel-default" data-tags="{{post.tags}}">
 
-              <div class="panel-heading"><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></div>
-              <div class="panel-body">
+                  <div class="panel-heading"><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></div>
+                  <div class="panel-body">
 
-                <div class="row">
-                  {% if post.thumbnail %}
-                  <div class="col-xs-6 col-md-3">
-                    <a href="{{post.url | prepend: site.baseurl}}" class="thumbnail">
-                      <img src="{{post.thumbnail}}">
-                    </a>
+                    <div class="row">
+                      {% if post.thumbnail %}
+                      <div class="col-xs-6 col-md-3">
+                        <a href="{{post.url | prepend: site.baseurl}}" class="thumbnail">
+                          <img src="{{post.thumbnail}}">
+                        </a>
+                      </div>
+                      {% endif %}
+
+                      <div class="col-md-9">
+                        <h2><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+                        {{post.description}}
+                      </div>
+                    </div>
+
+
                   </div>
-                  {% endif %}
-
-                  <div class="col-md-9">
-                    <h2><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-                    {{post.description}}
+                  <div class="panel-footer">
+                    <b>Tags:</b> 
+                    {% if post.tag %}
+                      {% assign ts = post.tag | split:&nbsp %}
+                      {% for t in ts %}
+                        <span class="label label-success tag">{{t}}</span>
+                      {% endfor %}
+                    {% endif %}
                   </div>
+
                 </div>
-
-
-              </div>
-              <div class="panel-footer">
-                <b>Tags:</b> 
-                {% if post.tag %}
-                  {% assign ts = post.tag | split:&nbsp %}
-                  {% for t in ts %}
-                    <span class="label label-success tag">{{t}}</span>
-                  {% endfor %}
-                {% endif %}
-              </div>
-
-            </div>
-          {% endfor %}
-
-          <!-- Pagination links -->
-          <nav>
-            <ul class="pagination">
-              <!-- Previous Arrow -->
-              <li>
-              {% if paginator.previous_page %}
-                <a href="{{ paginator.previous_page_path }}" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              {% else %}
-                <a href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              {% endif %} 
-              </li>
-
-              <!-- Numbered links for pages -->
-              {% for page in (1..paginator.total_pages)%}
-              <li>
-                {% if page == 1%}
-                <a href="/">
-                  {{page}}
-                </a>
-                {% else %}
-                <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">
-                  {{page}}
-                </a>
-                {%endif%}
-              </li>
               {% endfor %}
 
-              <!-- Next Arrow -->
-              <li>
-              {% if paginator.next_page %}
-                <a href="{{ paginator.next_page_path }}" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              {% else %}
-                <a href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              {% endif %}
-              </li>
-            </ul>
-          </nav>
-
-          <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-        </div>
-    </div>
-</div>
-    <div class="col-sm-1 col-md-3"></div>
-<!--
-<div class="col-sm-4">
-    <div class="panel panel-default">
-        <div class="panel-heading"><span class="post-meta">{{site.github_username}}</span></div>
-        <div class="panel-body">
-            <div class="row">
-                <div id="avatar" class="col-xs-6 col-md-3">
-                    <a href="{{post.url | prepend: site.baseurl}}" class="thumbnail">
-                        <img id="avatarImg" src="" />
+              <!-- Pagination links -->
+              <nav>
+                <ul class="pagination">
+                  <!-- Previous Arrow -->
+                  <li>
+                  {% if paginator.previous_page %}
+                    <a href="{{ paginator.previous_page_path }}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
                     </a>
+                  {% else %}
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  {% endif %} 
+                  </li>
+
+                  <!-- Numbered links for pages -->
+                  {% for page in (1..paginator.total_pages)%}
+                  <li>
+                    {% if page == 1%}
+                    <a href="/">
+                      {{page}}
+                    </a>
+                    {% else %}
+                    <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">
+                      {{page}}
+                    </a>
+                    {%endif%}
+                  </li>
+                  {% endfor %}
+
+                  <!-- Next Arrow -->
+                  <li>
+                  {% if paginator.next_page %}
+                    <a href="{{ paginator.next_page_path }}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  {% else %}
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  {% endif %}
+                  </li>
+                </ul>
+              </nav>
+
+              <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+            </div>
+</div>
+    </div>
+    <div class="hidden-xs hidden-sm col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="post-meta">{{site.github_username}}</span></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div id="avatar" class="col-xs-6 col-md-3">
+                        <a href="{{post.url | prepend: site.baseurl}}" class="thumbnail">
+                            <img id="avatarImg" src="" />
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-9">
+                        {{site.welcome_message}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul id="feedList" class="list-group">
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="panel-footer"></div>
+        </div>
     </div>
-</div>
--->
 </div>
 
 <script type="text/javascript">
 
     $("#Search").prop("disabled", false);
-
-    $.get("https://api.github.com/users/{{site.github_username}}", function(data){
-        console.log(data);
-
-        $("#avatarImg").attr("src", data.avatar_url);
+    
+    getGithubAvatar("{{site.github_username}}", function(avatarURL){
+        $("#avatarImg").attr("src", avatarURL);
+    });
+    
+    getGithubActivityFeed("{{site.github_username}}", function(activity){
+        console.log(activity);
+        
+        var outputString = "";
+        
+        for(var key in activity.commits)
+        {
+            var repo = activity.commits[key];
+            
+            outputString += "<li class=\"list-group-item list-text\">";
+            outputString += "pushed to <a href=\"" + repo.url + "\">" + key + "</a>";
+            outputString += "</li>";
+        }
+        
+        $("#feedList").html(outputString);
     });
 
 </script>
