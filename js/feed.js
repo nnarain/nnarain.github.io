@@ -3,6 +3,8 @@ function getGithubActivityFeed(username, callback)
 {
     $.get("https://api.github.com/users/" + username + "/events/public", function(data){        
         
+        console.log(data);
+        
         var len = data.length;
         
         var commits = {};
@@ -25,12 +27,27 @@ function getGithubActivityFeed(username, callback)
                     // add repo to dictionary
                     commits[name] = {
                         "num": 0,
-                        "url": "https://github.com/" + name
+                        "url": "https://github.com/" + name,
+                        "messages":[]
                     };
                 }
                 
+                var numCommits = event.payload.distinct_size;
+                
                 // increment commit count
-                commits[name].num += event.payload.distinct_size;
+                commits[name].num += numCommits;
+                
+                if(numCommits > 0)
+                {
+                    // add commit messages
+                    for(var j = 0; j < numCommits; ++j)
+                    {
+                        var commit = event.payload.commits["" + j];
+                        var message = commit.message;
+
+                        commits[name].messages.push(message);
+                    }
+                }
             }
         }
         
