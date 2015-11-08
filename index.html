@@ -109,8 +109,15 @@ layout: default
                             </a>
                         </div>
                         <div class="col-xs-6 col-md-9">
+                            <!--
                             <ul id="feedList" class="list-group">
                             </ul>
+                            -->
+                            
+                            <div id="feedList" class="panel-group">
+                                
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -131,18 +138,70 @@ layout: default
     getGithubActivityFeed("{{site.github_username}}", function(activity){
         console.log(activity);
         
-        var outputString = "";
+        var output = "";
+        
+        var idx = 0;
         
         for(var key in activity.commits)
         {
             var repo = activity.commits[key];
             
-            outputString += "<li class=\"list-group-item list-text\">";
-            outputString += "pushed to <a href=\"" + repo.url + "\">" + key + "</a>";
-            outputString += "</li>";
+            /*
+            output += "<li class=\"list-group-item list-text\">";
+            output += "pushed to <a href=\"" + repo.url + "\">" + key + "</a>";
+            output += "</li>";
+            */
+            output += "<div class=\"panel panel-default\">";
+            {
+                output += "<div class=\"panel-heading\">";
+                {
+                    output += "<h4 class=\"panel-title\">";
+                    {
+                        output += "<a data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
+                        output += "pushed to " + key;
+                        output += "</a>";
+                    }
+                    output += "</h4>";
+                }
+                output += "</div>";
+                
+                output += "<div id=\"collapse" + idx + "\" class=\"panel-collapse collapse\">";
+                {
+                    output += "<div class=\"panel-body\">";
+                    {
+                        output += "<ul class=\"list-group\">";
+                        {
+                            var numMessages = repo.messages.length >= 10 ? 10 : repo.messages.length;
+
+                            for(var i = 0; i < numMessages; i++)
+                            {
+                                output += "<li class=\"list-group-item\">";
+                                {
+                                    output += repo.messages[i];
+                                }
+                                output += "</li>";
+                            }
+                        }
+                        output += "</ul>";
+                    }
+                    output += "</div>";
+                }
+                output += "</div>";
+            }
+            output += "</div>";
+            
+            idx++;
         }
         
-        $("#feedList").html(outputString);
+        $("#feedList").html(output);
     });
 
 </script>
+
+
+
+
+
+
+
+

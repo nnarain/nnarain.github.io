@@ -22,3 +22,9 @@
 {
     word-wrap: break-word;
 }
+
+.thumbnail:hover
+{
+    border-color: #5CB85C;
+    background-color: #5CB85C;
+}
