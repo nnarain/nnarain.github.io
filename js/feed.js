@@ -1,4 +1,7 @@
 
+var PLUS_ICON = 'glyphicon-plus';
+var MINUS_ICON = 'glyphicon-minus';
+
 function getGithubActivityFeed(username, callback)
 {
     $.get("https://api.github.com/users/" + username + "/events/public", function(data){        
@@ -96,7 +99,7 @@ function setupFeed(username)
                         //    output += "<span data-toggle='tooltip' data-placement='top' title='View Commits'>pushed</span> to " + key;
                         //    output += "</a>";
                             output += "<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
-                            output += "<span data-toggle='tooltip' data-placement='top' title='Show Commits' class='glyphicon glyphicon-plus green icon-toggle'></span> ";
+                            output += "<span data-toggle='tooltip' data-placement='top' title='Show Commits' class='glyphicon green icon-toggle'></span> ";
                             output += "</a>";
 
                             output += "pushed to <a href='" + repo.url + "'>" + key + "</a>";
@@ -141,19 +144,16 @@ function setupFeed(username)
         // enable tool tips
         $('[data-toggle="tooltip"]').tooltip();
         
+        // add plus icon to toggles
+        $(".icon-toggle").addClass(PLUS_ICON);
         // add logic for toggling the accordion collapse\re-track icon
-        
-        // toggle plus and minus icons when panel toggle is click
-        var plus  = "glyphicon-plus";
-        var minus = "glyphicon-minus";
-
         $(".icon-toggle").click(function(){
             
             // has plus, so set to hide commits
-            if($(this).hasClass(plus))
+            if($(this).hasClass(PLUS_ICON))
             {
-                $(this).removeClass(plus);
-                $(this).addClass(minus);
+                $(this).removeClass(PLUS_ICON);
+                $(this).addClass(MINUS_ICON);
                 
                 $(this)
                     .attr('title', "Hide Commits")
@@ -161,10 +161,10 @@ function setupFeed(username)
                     .tooltip('show');
             }
             // has minus so set to add commits
-            else if($(this).hasClass(minus))
+            else if($(this).hasClass(MINUS_ICON))
             {
-                $(this).removeClass(minus);      
-                $(this).addClass(plus);
+                $(this).removeClass(MINUS_ICON);      
+                $(this).addClass(PLUS_ICON);
                 
                 $(this)
                     .attr('title', "Show Commits")
