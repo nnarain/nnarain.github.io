@@ -75,7 +75,6 @@ function setupFeed(username)
     });
     
     getGithubActivityFeed(username, function(activity){
-        console.log("called");
         
         var output = "";
         
@@ -97,7 +96,7 @@ function setupFeed(username)
                         //    output += "<span data-toggle='tooltip' data-placement='top' title='View Commits'>pushed</span> to " + key;
                         //    output += "</a>";
                             output += "<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
-                            output += "<span data-toggle='tooltip' data-placement='top' title='View Commits' class='glyphicon glyphicon-plus green'></span> ";
+                            output += "<span data-toggle='tooltip' data-placement='top' title='Show Commits' class='glyphicon glyphicon-plus green icon-toggle'></span> ";
                             output += "</a>";
 
                             output += "pushed to <a href='" + repo.url + "'>" + key + "</a>";
@@ -136,7 +135,46 @@ function setupFeed(username)
             idx++;
         }
         
+        // added the generated feed to the document
         $("#feedList").html(output);
+        
+        // enable tool tips
         $('[data-toggle="tooltip"]').tooltip();
+        
+        // add logic for toggling the accordion collapse\re-track icon
+        
+        // toggle plus and minus icons when panel toggle is click
+        var plus  = "glyphicon-plus";
+        var minus = "glyphicon-minus";
+
+        $(".icon-toggle").click(function(){
+            
+            // has plus, so set to hide commits
+            if($(this).hasClass(plus))
+            {
+                $(this).removeClass(plus);
+                $(this).addClass(minus);
+                
+                $(this)
+                    .attr('title', "Hide Commits")
+                    .tooltip('fixTitle')
+                    .tooltip('show');
+            }
+            // has minus so set to add commits
+            else if($(this).hasClass(minus))
+            {
+                $(this).removeClass(minus);      
+                $(this).addClass(plus);
+                
+                $(this)
+                    .attr('title', "Show Commits")
+                    .tooltip('fixTitle')
+                    .tooltip('show');
+            }
+            else
+            {
+                // problem
+            }
+        });
     });
 }
