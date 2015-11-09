@@ -67,3 +67,76 @@ function getGithubAvatar(username, callback)
         callback(data.avatar_url);
     });
 }
+
+function setupFeed(username)
+{
+    getGithubAvatar(username, function(avatarURL){
+        $("#avatarImg").attr("src", avatarURL);
+    });
+    
+    getGithubActivityFeed(username, function(activity){
+        console.log("called");
+        
+        var output = "";
+        
+        var idx = 0;
+        
+        for(var key in activity.commits)
+        {
+            var repo = activity.commits[key];
+            
+            output += "<div class=\"panel panel-default\">";
+            {
+                output += "<div class=\"panel-heading\">";
+                {
+                    output += "<h4 class=\"panel-title\">";
+                    {
+                        output += "<small>"
+                        {
+                        //    output += "<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
+                        //    output += "<span data-toggle='tooltip' data-placement='top' title='View Commits'>pushed</span> to " + key;
+                        //    output += "</a>";
+                            output += "<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
+                            output += "<span data-toggle='tooltip' data-placement='top' title='View Commits' class='glyphicon glyphicon-plus green'></span> ";
+                            output += "</a>";
+
+                            output += "pushed to <a href='" + repo.url + "'>" + key + "</a>";
+                        }
+                        output += "</small>"
+                    }
+                    output += "</h4>";
+                }
+                output += "</div>";
+                
+                output += "<div id=\"collapse" + idx + "\" class=\"panel-collapse collapse\">";
+                {
+                    output += "<div class=\"panel-body\">";
+                    {
+                        output += "<ul class=\"list-group\">";
+                        {
+                            var numMessages = repo.messages.length >= 10 ? 10 : repo.messages.length;
+
+                            for(var i = 0; i < numMessages; i++)
+                            {
+                                output += "<li class=\"list-group-item\">";
+                                {
+                                    output += repo.messages[i];
+                                }
+                                output += "</li>";
+                            }
+                        }
+                        output += "</ul>";
+                    }
+                    output += "</div>";
+                }
+                output += "</div>";
+            }
+            output += "</div>";
+            
+            idx++;
+        }
+        
+        $("#feedList").html(output);
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+}
