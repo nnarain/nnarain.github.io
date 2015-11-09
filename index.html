@@ -2,7 +2,6 @@
 layout: default
 ---
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-7">
@@ -100,7 +99,7 @@ layout: default
     </div>
         <div class="hidden-xs hidden-sm col-md-4">
             <div class="panel panel-default">
-                <div class="panel-heading"><span class="post-meta">{{site.github_username}}</span></div>
+                <div class="panel-heading"><span class="post-meta">{{site.github_username}} - Github Activity</span></div>
                 <div class="panel-body">
                     <div class="row">
                         <div id="avatar" class="col-xs-6 col-md-3">
@@ -109,15 +108,8 @@ layout: default
                             </a>
                         </div>
                         <div class="col-xs-6 col-md-9">
-                            <!--
-                            <ul id="feedList" class="list-group">
-                            </ul>
-                            -->
-                            
                             <div id="feedList" class="panel-group">
-                                
-                            </div>
-                            
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -128,15 +120,13 @@ layout: default
 </div>
 
 <script type="text/javascript">
-
-    $("#Search").prop("disabled", false);
     
     getGithubAvatar("{{site.github_username}}", function(avatarURL){
         $("#avatarImg").attr("src", avatarURL);
     });
     
     getGithubActivityFeed("{{site.github_username}}", function(activity){
-        console.log(activity);
+       // console.log(activity);
         
         var output = "";
         
@@ -146,20 +136,24 @@ layout: default
         {
             var repo = activity.commits[key];
             
-            /*
-            output += "<li class=\"list-group-item list-text\">";
-            output += "pushed to <a href=\"" + repo.url + "\">" + key + "</a>";
-            output += "</li>";
-            */
             output += "<div class=\"panel panel-default\">";
             {
                 output += "<div class=\"panel-heading\">";
                 {
                     output += "<h4 class=\"panel-title\">";
                     {
-                        output += "<a data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
-                        output += "pushed to " + key;
-                        output += "</a>";
+                        output += "<small>"
+                        {
+                        //    output += "<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
+                        //    output += "<span data-toggle='tooltip' data-placement='top' title='View Commits'>pushed</span> to " + key;
+                        //    output += "</a>";
+                            output += "<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#feedList\" href=\"#collapse" + idx + "\">";
+                            output += "<span data-toggle='tooltip' data-placement='top' title='View Commits' class='glyphicon glyphicon-plus green'></span> ";
+                            output += "</a>";
+
+                            output += "pushed to <a href='" + repo.url + "'>" + key + "</a>";
+                        }
+                        output += "</small>"
                     }
                     output += "</h4>";
                 }
@@ -194,6 +188,7 @@ layout: default
         }
         
         $("#feedList").html(output);
+        $('[data-toggle="tooltip"]').tooltip();
     });
 
 </script>

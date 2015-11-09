@@ -3,7 +3,7 @@ function getGithubActivityFeed(username, callback)
 {
     $.get("https://api.github.com/users/" + username + "/events/public", function(data){        
         
-        console.log(data);
+        //console.log(data);
         
         var len = data.length;
         

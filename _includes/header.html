@@ -18,14 +18,15 @@
 
       <ul class="nav navbar-nav navbar-right">
 
-        <!-- Search Bar -->
-        <li>
-          <form class="navbar-form" id="Search" action="search.html">
-            <div class="form-group">
-              <input name="tags" id="etSearch" type="text" class="form-control" placeholder="Search Tags" />
+    <!-- Search Bar -->
+    <li>
+        <form class="navbar-form" id="Search" action="search.html">
+            <div class="form-group has-feedback">
+                <input name="tags" id="etSearch" type="text" class="form-control" placeholder="Search Tags" />
+                <i class="glyphicon glyphicon-search form-control-feedback"></i>
             </div>
-          </form>
-        </li>
+        </form>
+    </li>
 
         <!-- Info Pages -->
         {% for page in site.pages %}
