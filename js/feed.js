@@ -122,7 +122,11 @@ function setupFeed(username)
                             {
                                 output += "<li class=\"list-group-item\">";
                                 {
-                                    output += repo.messages[i];
+                                    output += "<small>";
+                                    {
+                                        output += repo.messages[i];
+                                    }
+                                    output += "</small>";
                                 }
                                 output += "</li>";
                             }
@@ -147,34 +151,28 @@ function setupFeed(username)
         // add plus icon to toggles
         $(".icon-toggle").addClass(PLUS_ICON);
         // add logic for toggling the accordion collapse\re-track icon
-        $(".icon-toggle").click(function(){
-            
-            // has plus, so set to hide commits
-            if($(this).hasClass(PLUS_ICON))
-            {
-                $(this).removeClass(PLUS_ICON);
-                $(this).addClass(MINUS_ICON);
-                
-                $(this)
-                    .attr('title', "Hide Commits")
-                    .tooltip('fixTitle')
-                    .tooltip('show');
-            }
-            // has minus so set to add commits
-            else if($(this).hasClass(MINUS_ICON))
-            {
-                $(this).removeClass(MINUS_ICON);      
-                $(this).addClass(PLUS_ICON);
-                
-                $(this)
-                    .attr('title', "Show Commits")
-                    .tooltip('fixTitle')
-                    .tooltip('show');
-            }
-            else
-            {
-                // problem
-            }
+        // add plus icon to toggles
+        $(".icon-toggle").addClass(PLUS_ICON);
+        // add logic for toggling the accordion collapse\re-track icon
+        $('.collapse').on('shown.bs.collapse', function(){
+            $(this)
+                .parent()
+                .find(".glyphicon-plus")
+                .removeClass("glyphicon-plus")
+                .addClass("glyphicon-minus")
+                .attr('title', "Hide Commits")
+                .tooltip('fixTitle')
+                .tooltip('show');;
+        }).on('hidden.bs.collapse', function(){
+            $(this)
+                .parent()
+                .find(".glyphicon-minus")
+                .removeClass("glyphicon-minus")
+                .addClass("glyphicon-plus")
+                .attr('title', "Show Commits")
+                .tooltip('fixTitle')
+                .tooltip('show');
         });
     });
 }
+
