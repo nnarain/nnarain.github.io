@@ -4,6 +4,7 @@ title: Intro to my Voxel Engine
 description: Introduction to my cubic voxel renderer
 tag: opengl c++ lua
 thumbnail: /assets/2015/06/26/voxelterrain.png
+repo_url: https://github.com/nnarain/VoxelEngine/tree/develop
 ---
 
 I don't really have a name for this project, so I have just been calling it "Voxel Engine" ...
