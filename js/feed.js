@@ -43,7 +43,7 @@ function getGithubActivityFeed(username, callback)
                 if(numCommits > 0)
                 {
                     // add commit messages
-                    for(var j = 0; j < numCommits; ++j)
+                    for(var j = numCommits-1; j >= 0; --j)
                     {
                         var commit = event.payload.commits["" + j];
                         var message = commit.message;
