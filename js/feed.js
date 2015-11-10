@@ -1,6 +1,6 @@
 
-var PLUS_ICON = 'glyphicon-plus';
-var MINUS_ICON = 'glyphicon-minus';
+var PLUS_ICON = 'glyphicon-plus-sign';
+var MINUS_ICON = 'glyphicon-minus-sign';
 
 function getGithubActivityFeed(username, callback)
 {

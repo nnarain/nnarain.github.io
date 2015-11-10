@@ -6,6 +6,7 @@
 .list-group-item
 {
     word-wrap: break-word;
+    font-size: 14px;
 }
 
 .list-group-item:hover
