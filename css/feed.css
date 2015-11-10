@@ -1,0 +1,14 @@
+.panel-heading>h4>small>a
+{
+    text-decoration: none;
+}
+
+.list-group-item
+{
+    word-wrap: break-word;
+}
+
+.list-group-item:hover
+{
+    background-color: #d8ffd8;
+}
