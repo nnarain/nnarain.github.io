@@ -150,28 +150,26 @@ function setupFeed(username)
         
         // add plus icon to toggles
         $(".icon-toggle").addClass(PLUS_ICON);
-        // add logic for toggling the accordion collapse\re-track icon
-        // add plus icon to toggles
-        $(".icon-toggle").addClass(PLUS_ICON);
+        
         // add logic for toggling the accordion collapse\re-track icon
         $('.collapse').on('shown.bs.collapse', function(){
             $(this)
                 .parent()
-                .find(".glyphicon-plus")
-                .removeClass("glyphicon-plus")
-                .addClass("glyphicon-minus")
+                .find("." + PLUS_ICON)
+                .removeClass(PLUS_ICON)
+                .addClass(MINUS_ICON)
                 .attr('title', "Hide Commits")
-                .tooltip('fixTitle')
-                .tooltip('show');;
+                .tooltip('fixTitle');
+        //        .tooltip('show');
         }).on('hidden.bs.collapse', function(){
             $(this)
                 .parent()
-                .find(".glyphicon-minus")
-                .removeClass("glyphicon-minus")
-                .addClass("glyphicon-plus")
+                .find("." + MINUS_ICON)
+                .removeClass(MINUS_ICON)
+                .addClass(PLUS_ICON)
                 .attr('title', "Show Commits")
-                .tooltip('fixTitle')
-                .tooltip('show');
+                .tooltip('fixTitle');
+        //        .tooltip('show');
         });
     });
 }
