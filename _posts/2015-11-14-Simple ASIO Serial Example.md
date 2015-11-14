@@ -62,6 +62,8 @@ int main()
 			std::cout << "Recieved: ";
 			std::cout << message << std::endl;
 		}
+        
+        serial.close();
 	}
 	catch (asio::system_error& e)
 	{
