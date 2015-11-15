@@ -13,12 +13,28 @@ layout: default
                 </p>
                 {% if page.repo_url %}
                     <a href="{{page.repo_url}}"><span class="label label-success"><i class="glyphicon glyphicon-globe"></i>  View Repository</span></a>
+                    <br>
                 {% endif %}
+                
+                {% if page.prev_post %}
+                    <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-right"></i> Previous</span></a>
+                {% endif %}
+                {% if page.next_post %}
+                    <a href="/{{page.next_post | replace: '-', '/'}}.html"><span class="label label-success">Next <i class="glyphicon glyphicon-arrow-right"></i></span></a>
+                {% endif %}
+                
             </header>
             
             <article>
                 {{content}}
             </article>
+            
+            {% if page.prev_post %}
+                <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-right"></i> Previous</span></a>
+            {% endif %}
+            {% if page.next_post %}
+                <a href="/{{page.next_post | replace: '-', '/'}}.html"><span class="label label-success">Next <i class="glyphicon glyphicon-arrow-right"></i></span></a>
+            {% endif %}
         </div>
         <div class="col-xs-1 col-md-3"></div>
     </div>
