@@ -18,12 +18,12 @@ layout: default
                 
                 {% if page.prev_post %}
                     <a href="/{{page.prev_post | replace: '-', '/'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post | split: '-' | last}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
                     </a>
                 {% endif %}
                 {% if page.next_post %}
                     <a href="/{{page.next_post | replace: '-', '/'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post | split: '-' | last}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
                     </a>
                 {% endif %}
                 
@@ -35,12 +35,12 @@ layout: default
             
                 {% if page.prev_post %}
                     <a href="/{{page.prev_post | replace: '-', '/'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post | split: '-' | last}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
                     </a>
                 {% endif %}
                 {% if page.next_post %}
                     <a href="/{{page.next_post | replace: '-', '/'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post | split: '-' | last}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
                     </a>
                 {% endif %}
         </div>
