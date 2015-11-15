@@ -17,7 +17,7 @@ layout: default
                 {% endif %}
                 
                 {% if page.prev_post %}
-                    <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-right"></i> Previous</span></a>
+                    <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span></a>
                 {% endif %}
                 {% if page.next_post %}
                     <a href="/{{page.next_post | replace: '-', '/'}}.html"><span class="label label-success">Next <i class="glyphicon glyphicon-arrow-right"></i></span></a>
@@ -30,7 +30,7 @@ layout: default
             </article>
             
             {% if page.prev_post %}
-                <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-right"></i> Previous</span></a>
+                <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span></a>
             {% endif %}
             {% if page.next_post %}
                 <a href="/{{page.next_post | replace: '-', '/'}}.html"><span class="label label-success">Next <i class="glyphicon glyphicon-arrow-right"></i></span></a>
