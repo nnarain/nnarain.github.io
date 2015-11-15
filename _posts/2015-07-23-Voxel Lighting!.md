@@ -5,6 +5,8 @@ description: Update on my Voxel Engine!
 tag: opengl c++
 thumbnail: /assets/2015/07/23/terrain-multiple-lights-lightmap.png
 repo_url: https://github.com/nnarain/VoxelEngine
+prev_post: 2015-06-26-Intro to my Voxel Engine
+next_post: 
 ---
 
 Quick update on the progress of my voxel engine.
