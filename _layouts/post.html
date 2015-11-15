@@ -17,10 +17,14 @@ layout: default
                 {% endif %}
                 
                 {% if page.prev_post %}
-                    <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span></a>
+                    <a href="/{{page.prev_post | replace: '-', '/'}}.html">
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
+                    </a>
                 {% endif %}
                 {% if page.next_post %}
-                    <a href="/{{page.next_post | replace: '-', '/'}}.html"><span class="label label-success">Next <i class="glyphicon glyphicon-arrow-right"></i></span></a>
+                    <a href="/{{page.next_post | replace: '-', '/'}}.html">
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
+                    </a>
                 {% endif %}
                 
             </header>
@@ -29,12 +33,16 @@ layout: default
                 {{content}}
             </article>
             
-            {% if page.prev_post %}
-                <a href="/{{page.prev_post | replace: '-', '/'}}.html"><span class="label label-success"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span></a>
-            {% endif %}
-            {% if page.next_post %}
-                <a href="/{{page.next_post | replace: '-', '/'}}.html"><span class="label label-success">Next <i class="glyphicon glyphicon-arrow-right"></i></span></a>
-            {% endif %}
+                {% if page.prev_post %}
+                    <a href="/{{page.prev_post | replace: '-', '/'}}.html">
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
+                    </a>
+                {% endif %}
+                {% if page.next_post %}
+                    <a href="/{{page.next_post | replace: '-', '/'}}.html">
+                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
+                    </a>
+                {% endif %}
         </div>
         <div class="col-xs-1 col-md-3"></div>
     </div>
@@ -43,5 +51,8 @@ layout: default
 <script type="text/javascript">
 
 $("#Search :input").prop("disabled", true);
+
+// enable tool tips
+$('[data-toggle="tooltip"]').tooltip();
 
 </script>
