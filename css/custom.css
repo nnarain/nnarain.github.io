@@ -17,3 +17,12 @@
 {
     color: #5CB85C;
 }
+
+.hidden
+{
+    display: none;
+}
+
+.label-as-badge {
+    border-radius: 1em;
+}

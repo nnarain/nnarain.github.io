@@ -1,5 +1,10 @@
 
-
+/**
+    Show posts with the specified tags
+    
+    @param tags
+        list of tags, delimited by white space.
+*/
 function filter(tags)
 {
 
@@ -24,30 +29,11 @@ function filter(tags)
 	}
 
 	// hide elements
-	$(".panel").filter(panelSelector).show("slow");
-	$(".panel").filter(":not(" + panelSelector + ")").hide("slow");
+	var numPosts = $(".panel").filter(panelSelector).show().length;
+	$(".panel").filter(":not(" + panelSelector + ")").hide();
+    
+    return numPosts;
 }
-
-/*
-// set the action the the search bar
-$("#Search").submit(
-	function(event)
-	{
-		//event.preventDefault();
-
-		var tags = $("#etSearch").val();
-
-		if(tags == "")
-		{
-			$(".panel").show("slow");
-		}
-		else
-		{
-			filter(tags);
-		}
-	}
-);
-*/
 
 // set the tag elements to be clickable 
 $(".tag").click(
@@ -55,13 +41,5 @@ $(".tag").click(
 	{
 		var tag = $(this).text();
 		filter(tag);
-	}
-);
-
-// show all posts
-$("#Posts").click(
-	function()
-	{
-		$(".panel").show("slow");
 	}
 );

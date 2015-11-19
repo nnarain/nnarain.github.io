@@ -6,6 +6,8 @@ layout: default
 
     <div class="home">
         
+        <div id="searchAlert" class="alert hidden">t</div>
+        
         {% for post in site.posts %}
         <div class="panel panel-default" data-tags="{{post.tags}}">
 
@@ -47,6 +49,41 @@ layout: default
 </div>
 
 <script type="text/javascript">
-    // filter the posts to just the related tags in the search query
-    filter($.url("?tags"));
+    
+    
+    $(document).ready(function(){
+        // filter the posts to just the related tags in the search query
+        var tags = $.url("?tags");
+        var numPosts = filter(tags);
+        
+        var alertField = $("#searchAlert");
+        alertField.removeClass("hidden");
+        
+        var message = "";
+        
+        if(numPosts > 0)
+        {
+            message = "<span class='label label-success label-as-badge'>" + numPosts + "</span>" + " Results for '" + tags + "'";
+            
+            alertField.addClass("alert-success");
+        }
+        else
+        {
+            message = "<b>Oops!</b> Doesn't look like there are any posts for '" + tags + "'";
+            
+            alertField.addClass("alert-danger"); 
+        }
+        
+        alertField.html(message);
+    });
 </script>
+
+
+
+
+
+
+
+
+
+
