@@ -139,15 +139,7 @@ layout: default
 
     $(document).ready(function(){
         setupFeed("{{site.github_username}}");
-        
-        $('.thumbnail').hover(
-            function(){
-                $(this).find('.caption').slideDown(250); //.fadeIn(250)
-            },
-            function(){
-                $(this).find('.caption').slideUp(250); //.fadeOut(205)
-            }
-        ); 
+        initPostThumbnails();
     });
     
 </script>
