@@ -4,9 +4,17 @@ email: nnaraindev@gmail.com
 description: > 
     A place where I can drop code snippets and how-to's of various projects I'm working on.
     Anything from C to Assembler to Graphics to Web dev!
+welcome_message: >
+    Hey there! Welcome to my blog!
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://nnarain.github.io" # the base hostname & protocol for your site
+
+# social media
 github_username:  nnarain
+youtube_username: nnaraindev
 
 # Build settings
 markdown: kramdown
+
+paginate: 5
+paginate_path: "/blog/page:num"

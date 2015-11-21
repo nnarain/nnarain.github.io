@@ -6,3 +6,23 @@
     font-size: 24px;
     color: #5CB85C;
 }
+
+.page-links-green
+{
+    display: block;
+    color: #5CB85C;
+}
+
+.pagination>li>a
+{
+    color: #5CB85C;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.label-as-badge {
+    border-radius: 1em;
+}

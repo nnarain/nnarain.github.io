@@ -7,20 +7,18 @@ permalink: /resume/
 Natesh
 ------
 
-B.Eng (Electronic Systems Engineering)
+Candidate for B.Eng, Electronic Systems Engineering (2017)
 
 
-General Experience
+Technical Skills
 
-* Programmed embedded systems in C
-* Designed embedded hardware using Altium
-* Applied Object Orient design using Java and C++
-* Scripting in Python
-* Basic Web dev skills - HTML, Javascript, Ruby on Rails (I made this site with basic Bootstrap and jQuery)
+* **Languages**: C, C++, Java, Python
+* Schematic Capture and PCB layout design using Altium
+* Applied object oriented principles and design patterns
+* Basic Web Development - HTML, Javascript, Ruby on Rails (I made this site with basic Bootstrap and jQuery)
 * Designed digital logic circuits
 * Frameworks and APIs: Qt, Android
-* Software Tools: Microsoft Visual Studio, Eclipse, Git
-* Fimiliar with Linux operating systems (No kernel level stuff... yet!)
+* **Software Tools**: Microsoft Visual Studio, Eclipse, Git
 
 
 Achievements
@@ -31,14 +29,16 @@ Achievements
 	* [Bring Up]({% post_url 2015-3-27-Board Bring Up %})
 * Programmed a desktop [Intercom](https://github.com/nnarain/ESEIntercom) system, using Qt, for communication over RS-232, capable of sending text, audio and images
 * Programmed a simple [first person shooter](https://github.com/nnarain/firstpersonshooter) in Java using OpenGL ES 2.0
-* Designed, built and programmed a [fire fighting robot](https://www.youtube.com/watch?v=8brg6CSZgG8) that can navigate a maze, find, and extinguish a candle
+* Designed, built and programmed a [fire fighting robot]({% post_url 2015-9-21-Fire Fighting Robot! %}) that can navigate a maze, find, and extinguish a candle
 * Built an embedded magnetic field meter (AVR platform) and used it to graph a magnetic field
+* A [simple opengl utility library](https://github.com/nnarain/sgl-wrapper) which provids and object oriented wrapper for OpenGL as well as math classes, model (wavefront) and image loading.
 
 Achievements to Come..
 
-* A [simple opengl utility library](https://github.com/nnarain/sgl-wrapper) with provided and object oriented wrapper for OpenGL as well as math classes and model and image loading.
+* Planning to work more on my [Voxel Engine](https://github.com/nnarain/VoxelEngine/tree/develop). Might build again from the ground up!
 
 Future Projects
 
+* Game programming in Unity3D
 * I'd like to work on a game engine someday
 * A Gameboy emulator. I attempted it [here](https://github.com/nnarain/GameBoyCore) , wasn't very successful but I haven't given up!
