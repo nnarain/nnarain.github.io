@@ -19,4 +19,4 @@ paginate: 5
 paginate_path: "/blog/page:num"
 
 # code highlighting
-highlight_theme: default
+highlight_theme: vs
