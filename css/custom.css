@@ -31,4 +31,5 @@ pre
 {
     background-color: transparent;
     border: 0px;
+    overflow-x: auto;
 }
