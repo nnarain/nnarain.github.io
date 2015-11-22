@@ -26,3 +26,9 @@
 .label-as-badge {
     border-radius: 1em;
 }
+
+pre
+{
+    background-color: transparent;
+    border: 0px;
+}

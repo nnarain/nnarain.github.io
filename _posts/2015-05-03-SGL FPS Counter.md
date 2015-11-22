@@ -5,6 +5,8 @@ description: Simple textured cube with a FPS counter
 tag: opengl c++ programming
 thumbnail: /assets/2015/05/03/crate5.gif
 repo_url: https://github.com/nnarain/sgl-wrapper
+prev_post:
+next_post: 2015-07-08-Deferred Shading with SGL
 ---
 
 [SGL](https://github.com/nnarain/sgl-wrapper) is a Object Oriented library that I made to teach myself OpenGL.
