@@ -17,6 +17,12 @@
     <script type="text/javascript">
         // enable tool tips
         $('[data-toggle="tooltip"]').tooltip();
+        
+        $(document).ready(function(){
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+        });
     </script>
 
   </body>
