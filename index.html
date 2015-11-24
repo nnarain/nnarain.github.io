@@ -140,6 +140,9 @@ layout: default
     $(document).ready(function(){
         setupFeed("{{site.github_username}}");
         initPostThumbnails();
+        getPostComments("5", function(commentData){
+            console.log(commentData);
+        });
     });
     
 </script>
