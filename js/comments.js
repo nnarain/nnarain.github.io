@@ -3,7 +3,6 @@ function getPostComments(issueNumber, callback)
 {
     // get the issue, specified by number, for the site page
     $.get("https://api.github.com/repos/nnarain/nnarain.github.io/issues/" + issueNumber, function(issueData){
-//      console.log(issueData);
         
         // get the issue's comments url
         var commentsUrl = issueData.comments_url;
@@ -13,8 +12,7 @@ function getPostComments(issueNumber, callback)
         {
             // get the comments
             $.get(commentsUrl, function(commentsData){
-             //   console.log(commentsData);
-                
+
                 var len = commentsData.length;
                 
                 var ret = {"comments":[]};
