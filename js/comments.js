@@ -42,7 +42,7 @@ function getPostComments(issueNumber, callback)
         }
         else
         {
-            callback({"length":0});   
+            callback({"comments":[]});
         }
     });
 }
