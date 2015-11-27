@@ -46,6 +46,20 @@ layout: default
         </div>
         <div class="col-xs-1 col-md-3"></div>
     </div>
+    
+    <!-- Comment Section -->
+    {% if page.issue_number %}
+        <hr>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4>Comments</h4>
+                <div id="comment_section">
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    {% endif %} 
 </div>
 
 <script type="text/javascript">
@@ -54,5 +68,61 @@ $("#Search :input").prop("disabled", true);
 
 // enable tool tips
 $('[data-toggle="tooltip"]').tooltip();
+   
+function generateCommnetPanel(comment)
+{
+    var output = '';
+    
+    output += '<div class="panel panel-default">';
+    {
+        output += '<div class="panel-heading">';
+        {
+            output += '<a href="' + comment.user.url + '">';
+            {
+                output += '<img class="" src="' + comment.user.avatar_url + '" width=32 height=32/>';
+            }
+            output += '</a>';
+            output += comment.user.name;
+        }
+        output += '</div>';
+        
+        output += '<div class="panel-body">';
+        {
+            output += comment.body;
+        }
+        output += '</div>'
+    }
+    output += '</div>';
+    
+    return output;
+}
+    
+/**
+    Generate the comment section for the comments recieved
+*/
+function generateCommentSection(data)
+{
+    var comments = data.comments;
+    var len = comments.length;
+    
+    var output = '';
+    
+    for(var i = 0; i < len; ++i)
+    {
+        var comment = comments["" + i];
+        output += generateCommnetPanel(comment);
+    }
+    
+    $("#comment_section").html(output);
+}
+    
+{% if page.issue_number %}
+    $(document).ready(function(){
+        // get comment data
+        getPostComments("{{page.issue_number}}", function(data){
+            generateCommentSection(data);
+        });
+    });
+{% endif %}
 
 </script>
