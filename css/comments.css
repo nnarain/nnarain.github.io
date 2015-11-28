@@ -1,11 +1,62 @@
 
-
+/* V1
 .comment-section
 {
+    padding-top: 30px;
 }
 
 .comment-avatar
 {
-    width: 64;
-    height: 64;
+    padding-right: 5px;
+}
+
+*/
+
+.comment-section
+{
+    padding: 10px;
+}
+
+.comment-list
+{
+    padding:0;
+    list-style:none;
+    max-height:200px;
+/*    overflow:auto; */
+}
+
+.comment-list li 
+{
+    margin:0;
+    margin-top:10px;
+}
+
+.comment-text p 
+{
+    margin:0;
+}
+
+.commentList li > div 
+{
+    display:table-cell;
+}
+
+.sub-text 
+{
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+
+.comment-avatar
+{
+    width: 32px;
+    height: 100%;
+    float: left;
+}
+
+.comment-avatar img
+{
+    width: 100%;
+    border-radius: 50%;
 }

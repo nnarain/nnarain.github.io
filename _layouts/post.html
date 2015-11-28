@@ -53,9 +53,27 @@ layout: default
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <h4>Comments</h4>
-                <div id="comment_section">
+                <!--
+                <div id="comment-section" class="comment-section">
                 </div>
+                -->
+                
+            <div id="commentSection" class="comment-section">
+                <h4>Comments</h4>
+                <ul id="commentList" class="comment-list">
+                    <!--
+                    <li>
+                        <div class="comment-avatar">
+                            <img src="https://avatars3.githubusercontent.com/u/8395093?v=3&s=460"/>
+                        </div>
+                        <div class="comment-text">
+                            <p>Text 1</p>
+                            <span class="date sub-text">November 28 2015</span>
+                        </div>
+                    </li>
+                    -->
+                </ul>
+            </div>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -73,26 +91,25 @@ function generateCommnetPanel(comment)
 {
     var output = '';
     
-    output += '<div class="panel panel-default">';
+    output += '<li>';
     {
-        output += '<div class="panel-heading">';
+        output += '<div class="comment-avatar">';
         {
-            output += '<a href="' + comment.user.url + '">';
-            {
-                output += '<img class="" src="' + comment.user.avatar_url + '" width=32 height=32/>';
-            }
-            output += '</a>';
-            output += comment.user.name;
+            output += '<img src="' + comment.user.avatar_url + '"/>';
         }
         output += '</div>';
-        
-        output += '<div class="panel-body">';
+        output += '<div class="comment-text">';
         {
-            output += comment.body;
+            output += '<p>';
+            {
+                output += comment.body;
+            }
+            output += '</p>';
+            output += '<span class="date sub-text">' + comment.date.split('T')[0] + '</span>';
         }
-        output += '</div>'
+        output += '</div>';
     }
-    output += '</div>';
+    output += '</li>';
     
     return output;
 }
@@ -104,7 +121,7 @@ function generateCommentSection(data)
 {
     var comments = data.comments;
     var len = comments.length;
-    
+
     var output = '';
     
     for(var i = 0; i < len; ++i)
@@ -113,7 +130,7 @@ function generateCommentSection(data)
         output += generateCommnetPanel(comment);
     }
     
-    $("#comment_section").html(output);
+    $("#commentList").html(output);
 }
     
 {% if page.issue_number %}
