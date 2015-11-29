@@ -15,21 +15,31 @@
 .comment-section
 {
     padding: 10px;
-    border-top: 1px solid #DADADA;
     margin-top: 10px;
+    
+    border-top: 1px solid #DADADA;
 }
 
 .comment-list
 {
-    padding:0;
     list-style:none;
-/*    max-height:200px; */
-/*    overflow:auto; */
+}
+
+.comment-avatar
+{
+    width: 32px;
+    height: 100%;
+    float: left;
+}
+
+.comment-avatar a > img
+{
+    width: 100%;
+    border-radius: 50%;
 }
 
 .comment-list li 
 {
-    margin:0;
     margin-top:10px;
 }
 
@@ -52,15 +62,3 @@
     padding-left: 10px;
 }
 
-.comment-avatar
-{
-    width: 32px;
-    height: 100%;
-    float: left;
-}
-
-.comment-avatar a > img
-{
-    width: 100%;
-    border-radius: 50%;
-}
