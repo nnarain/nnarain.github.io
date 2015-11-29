@@ -34,9 +34,10 @@
 .comment-text p 
 {
     margin:0;
+    padding-left: 10px;
 }
 
-.commentList li > div 
+.comment-list li > div 
 {
     display:table-cell;
 }
@@ -46,6 +47,7 @@
     color:#aaa;
     font-family:verdana;
     font-size:11px;
+    padding-left: 10px;
 }
 
 .comment-avatar
