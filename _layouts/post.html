@@ -46,6 +46,28 @@ layout: default
         </div>
         <div class="col-xs-1 col-md-3"></div>
     </div>
+    
+    <!-- Comment Section -->
+    {% if page.issue_number %}
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <!--
+                <div id="comment-section" class="comment-section">
+                </div>
+                -->
+                
+            <div id="commentSection" class="comment-section">
+                <h3>Comments</h4>
+                <h4>Click <a href="https://github.com/nnarain/nnarain.github.io/issues/{{page.issue_number}}">here</a> to leave a comment</h4>
+                <ul id="commentList" class="comment-list">
+                </ul>
+            </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    {% endif %} 
 </div>
 
 <script type="text/javascript">
@@ -54,5 +76,64 @@ $("#Search :input").prop("disabled", true);
 
 // enable tool tips
 $('[data-toggle="tooltip"]').tooltip();
+   
+function generateCommentPanel(comment)
+{
+    var output = '';
+    
+    output += '<li>';
+    {
+        output += '<div class="comment-avatar">';
+        {
+            output += '<a href="' + comment.user.url + '">';
+            {
+                output += '<img src="' + comment.user.avatar_url + '"/>';
+            }
+            output += '</a>';
+        }
+        output += '</div>';
+        output += '<div class="comment-text">';
+        {
+            output += '<p>';
+            {
+                output += comment.body;
+            }
+            output += '</p>';
+            output += '<span class="date sub-text">' + comment.date.split('T')[0] + '</span>';
+        }
+        output += '</div>';
+    }
+    output += '</li>';
+    
+    return output;
+}
+    
+/**
+    Generate the comment section for the comments recieved
+*/
+function generateCommentSection(data)
+{
+    var comments = data.comments;
+    var len = comments.length;
+
+    var output = '';
+    
+    for(var i = 0; i < len; ++i)
+    {
+        var comment = comments["" + i];
+        output += generateCommentPanel(comment);
+    }
+    
+    $("#commentList").html(output);
+}
+    
+{% if page.issue_number %}
+    $(document).ready(function(){
+        // get comment data
+        getPostComments("{{page.issue_number}}", function(data){
+            generateCommentSection(data);
+        });
+    });
+{% endif %}
 
 </script>
