@@ -65,8 +65,11 @@ layout: default
                     </ul>
                     
                     <form id="addCommentForm" class="form-inline add-comment" role="form">
+                        <!--
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="A Github account is required"></i>
+                        -->
                         <div class="form-group">
-                            <input type="text" class="form-control" id="commentTextField" placeholder="Add a Comment">
+                            <input type="text" class="form-control" id="commentTextField" placeholder="Add a Comment" data-toggle="tooltip" data-placement="top" title="A Github account is required">
                         </div>
                         <button type="submit" class="btn btn-success">Add</button>
                     </form>
@@ -104,7 +107,7 @@ layout: default
                         <!-- Modal Content -->
                         <div class="modal-content panel-warning">
                             <div class="modal-header panel-heading">
-                                Warning! Comment is empty!
+                                Comment is empty!
                             </div>
                         </div>
                     </div>
