@@ -31,3 +31,8 @@ pre
     border: 0px;
     overflow-x: auto;
 }
+
+.post-sequence-bottom
+{
+    padding-bottom: 10px;
+}
