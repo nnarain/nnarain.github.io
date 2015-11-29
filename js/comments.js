@@ -44,3 +44,11 @@ function getPostComments(issueNumber, callback)
         }
     });
 }
+
+function makeBasicAuth(username, password)
+{
+    var token = username + ":" + password;
+    var hash = btoa(token);
+    
+    return "Basic " + hash;
+}
