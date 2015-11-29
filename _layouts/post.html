@@ -95,7 +95,11 @@ function generateCommnetPanel(comment)
     {
         output += '<div class="comment-avatar">';
         {
-            output += '<img src="' + comment.user.avatar_url + '"/>';
+            output += '<a href="' + comment.user.url + '">';
+            {
+                output += '<img src="' + comment.user.avatar_url + '"/>';
+            }
+            output += '</a>';
         }
         output += '</div>';
         output += '<div class="comment-text">';
