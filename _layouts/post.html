@@ -213,6 +213,12 @@ function setupAddComments()
     
 function setupPostComment()
 {
+    // focus on the username input field when credential form is displayed
+    $("#credDialog").on('shown.bs.modal', function(){
+        console.log("here");
+        $("#usernameField").focus();
+    });
+    
     $("#credForm").submit(function(event){
         event.preventDefault();
         
