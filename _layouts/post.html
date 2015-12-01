@@ -64,17 +64,31 @@ layout: default
                     <ul id="commentList" class="comment-list">
                     </ul>
                     
-                    <form id="addCommentForm" class="form-inline add-comment" role="form">
+                    <form id="addCommentForm" class="add-comment" role="form">
                         <!--
                         <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="A Github account is required"></i>
                         -->
                         <div class="form-group">
-                            <!--
-                            <input type="text" class="form-control" id="commentTextField" placeholder="Add a Comment" data-toggle="tooltip" data-placement="top" title="A Github account is required">
--->
-                            <textarea class="form-control" row="5" id="commentTextField"></textarea>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#rawTextField" aria-controls="commentTextField" role="tab" data-toggle="tab">Comment</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#markdownPreview" aria-controls="markdownPreview" role="tab" data-toggle="tab">Preview</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content preview-section">
+                                <div role="tabpanel" class="tab-pane active" id="rawTextField">
+                                    <textarea class="form-control" rows="7" id="commentTextField"></textarea>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="markdownPreview">
+                                    <!--
+                                    <textarea readonly class="form-control" rows="7" id="markdownPreviewText"></textarea>
+                                    -->
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success">Add</button>
                         </div>
-                        <button type="submit" class="btn btn-success">Add</button>
                     </form>
                 </div>
                 
@@ -83,7 +97,7 @@ layout: default
                 -->
                 <!-- Modal for Github Credentials -->
                 <div id="credDialog" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog"> 
                         <!-- Modal Content -->
                         <div class="modal-content">
                             <div class="modal-header">
