@@ -56,4 +56,21 @@
 .add-comment
 {
     margin-left: 20px;
+    width: 500px;
+}
+
+.preview-section
+{
+    margin-bottom: 60px;
+}
+
+#rawTextField
+{
+    height: 100px;
+}
+
+#markdownPreview
+{
+    height: 100px;
+    padding 10px;
 }
