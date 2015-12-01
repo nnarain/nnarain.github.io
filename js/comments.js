@@ -23,7 +23,7 @@ function getPostComments(issueNumber, callback)
                     var data = commentsData["" + i];
                     
                     var comment = {};
-                    comment["body"] = data.body;
+                    comment["body"] = getMarkdownPreview(data.body);
                     comment["date"] = data.created_at;
                     
                     comment["user"] = {

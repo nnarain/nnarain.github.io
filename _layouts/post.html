@@ -73,7 +73,7 @@ layout: default
                                 <li role="presentation" class="active">
                                     <a href="#rawTextField" aria-controls="commentTextField" role="tab" data-toggle="tab">Comment</a>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation" id="previewLink">
                                     <a href="#markdownPreview" aria-controls="markdownPreview" role="tab" data-toggle="tab">Preview</a>
                                 </li>
                             </ul>
@@ -243,6 +243,16 @@ function setupPostComment()
     });
 }
     
+function setupPreview()
+{
+    $("#previewLink").click(function(){
+        // get the markdown formatted text in the comment section and convert to html
+        var markdownContent = $("#commentTextField").val();
+        var htmlText = getMarkdownPreview(markdownContent);
+        $("#markdownPreview").html(htmlText);
+    });
+}
+    
 // if this page has a comment section
 {% if page.issue_number %}
 
@@ -253,6 +263,7 @@ $(document).ready(function(){
         generateCommentSection(data);
         setupAddComments();
         setupPostComment();
+        setupPreview();
     });
 
 });
