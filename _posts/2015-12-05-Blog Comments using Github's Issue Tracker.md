@@ -127,6 +127,8 @@ And that's it for the HTML! You should have something that looks like this
 **Comment Section Styling**
 
 ```css
+/* comments.css */
+
 
 /* section wrapper styling */
 .comment-section
@@ -196,5 +198,87 @@ And that's it for the HTML! You should have something that looks like this
 
 Most of this styling will become relevant in the next part of the tutorial when we generate the comment list!
 
+The last thing we're going to do for the HTML side of things is to setup some dialogs.
+
+**Modal for getting user credentials**
+
+I thought it would be cool if a reader could post a comment right from the blog page itself, instead of going to the issue tracker page. To do this we need to prompt the user for their Github username and password.
+
+<small>
+*I'm not sure what the conventions are for prompting users for private information, but I thought it would be cool. That's why I left the link to the issue tracker page.*
+</small>
+
+Modals are a nice way to prompt a user for, or to display, information without having the content always displayed somewhere in your page.
+
+General layout for a Bootstrap Modal is:
+
+```html
+
+<div id="..." class="modal fade" role="dialog">
+    <div class="modal-dialog"> 
+        <!-- Modal Content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Title</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Main Section -->
+            </div>
+        </div>
+    </div>
+</div>
+
+```
+
+In our case we want a form to get the users information.
+
+```html
+<!-- Modal for Github Credentials -->
+<div id="credDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog"> 
+        <!-- Modal Content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Enter Github Username and Password</h4>
+            </div>
+            <div class="modal-body">
+                <form id="credForm" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="usernameField" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="passwordField" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+Now this modal won't appear until we tell it to, but it should look something like this.
+
+![Image not found!](/assets/2015/12/05/cred-modal.png)
 
 
+Now optionally I wanted a way to prompt, who attempted to post a comment, if the comment field was empty. I created an additional modal for that, but it can be done in other ways as well.
+
+```html
+<!-- Modal no text in comment warning -->
+<div id="warningDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal Content -->
+        <div class="modal-content panel-warning">
+            <div class="modal-header panel-heading">
+                Comment is empty!
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+![Image not found!](/assets/2015/12/05/warning-modal.png)
+
+
+Everything is looking pretty good! In the next part we will be adding the JavaScript to get everthing going!
