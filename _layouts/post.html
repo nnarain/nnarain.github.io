@@ -62,34 +62,35 @@ layout: default
                     <h3>Comments</h4>
                     <h4>Click <a href="https://github.com/nnarain/nnarain.github.io/issues/{{page.issue_number}}">here</a> to view the issue tracker</h4>
                     <ul id="commentList" class="comment-list">
+                        <!-- Loaded comments go here -->
                     </ul>
                     
-                    <form id="addCommentForm" class="add-comment" role="form">
-                        <!--
-                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="A Github account is required"></i>
-                        -->
-                        <div class="form-group">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#rawTextField" aria-controls="commentTextField" role="tab" data-toggle="tab">Comment</a>
-                                </li>
-                                <li role="presentation" id="previewLink">
-                                    <a href="#markdownPreview" aria-controls="markdownPreview" role="tab" data-toggle="tab">Preview</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content preview-section">
-                                <div role="tabpanel" class="tab-pane active" id="rawTextField">
-                                    <textarea class="form-control" rows="7" id="commentTextField"></textarea>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="markdownPreview">
-                                    <!--
-                                    <textarea readonly class="form-control" rows="7" id="markdownPreviewText"></textarea>
-                                    -->
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-success">Add</button>
+                    <!-- Preview Section -->
+                    <!--
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#rawTextField" aria-controls="rawTextField" role="tab" data-toggle="tab">Comment</a>
+                        </li>
+                        <li role="presentation" id="previewLink">
+                            <a href="#markdownPreview" aria-controls="markdownPreview" role="tab" data-toggle="tab">Preview</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content preview-section">
+                        <div role="tabpanel" class="tab-pane active" id="rawTextField">
+                            <textarea class="form-control" rows="7" id="commentTextField"></textarea>
                         </div>
+                        <div role="tabpanel" class="tab-pane" id="markdownPreview">
+                        </div>
+                    </div>
+                    -->
+                    <form id="addCommentForm" class="form-inline">
+                        <div class="form-group">
+                            <textarea id="commentTextField" class="form-control" rows="3" cols="50"></textarea>
+                        </div>
+                        <button id="addCommentButton" type="submit" class="btn btn-success">Add</button>
                     </form>
+                    
+
                 </div>
                 
                 <!--
@@ -159,11 +160,11 @@ function generateCommentPanel(comment)
         output += '</div>';
         output += '<div class="comment-text">';
         {
-            output += '<p>';
+        //    output += '<p>';
             {
                 output += comment.body;
             }
-            output += '</p>';
+        //    output += '</p>';
             output += '<span class="date sub-text">' + comment.date.split('T')[0] + '</span>';
         }
         output += '</div>';
