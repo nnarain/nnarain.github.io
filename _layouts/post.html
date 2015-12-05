@@ -58,12 +58,78 @@ layout: default
                 </div>
                 -->
                 
-            <div id="commentSection" class="comment-section">
-                <h3>Comments</h4>
-                <h4>Click <a href="https://github.com/nnarain/nnarain.github.io/issues/{{page.issue_number}}">here</a> to leave a comment</h4>
-                <ul id="commentList" class="comment-list">
-                </ul>
-            </div>
+                <div id="commentSection" class="comment-section">
+                    <h3>Comments</h4>
+                    <h4>Click <a href="https://github.com/nnarain/nnarain.github.io/issues/{{page.issue_number}}">here</a> to view the issue tracker</h4>
+                    <ul id="commentList" class="comment-list">
+                        <!-- Loaded comments go here -->
+                    </ul>
+                    
+                    <!-- Preview Section -->
+                    <!--
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#rawTextField" aria-controls="rawTextField" role="tab" data-toggle="tab">Comment</a>
+                        </li>
+                        <li role="presentation" id="previewLink">
+                            <a href="#markdownPreview" aria-controls="markdownPreview" role="tab" data-toggle="tab">Preview</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content preview-section">
+                        <div role="tabpanel" class="tab-pane active" id="rawTextField">
+                            <textarea class="form-control" rows="7" id="commentTextField"></textarea>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="markdownPreview">
+                        </div>
+                    </div>
+                    -->
+                    <form id="addCommentForm" class="form-inline">
+                        <div class="form-group">
+                            <textarea id="commentTextField" class="form-control" rows="3" cols="50"></textarea>
+                        </div>
+                        <button id="addCommentButton" type="submit" class="btn btn-success">Add</button>
+                    </form>
+                    
+
+                </div>
+                
+                <!--
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#credDialog">Open Modal</button>
+                -->
+                <!-- Modal for Github Credentials -->
+                <div id="credDialog" class="modal fade" role="dialog">
+                    <div class="modal-dialog"> 
+                        <!-- Modal Content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4>Enter Github Username and Password</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="credForm" class="form-inline">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="usernameField" placeholder="Username">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="passwordField" placeholder="Password">
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modal no text in comment warning -->
+                <div id="warningDialog" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal Content -->
+                        <div class="modal-content panel-warning">
+                            <div class="modal-header panel-heading">
+                                Comment is empty!
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -94,11 +160,11 @@ function generateCommentPanel(comment)
         output += '</div>';
         output += '<div class="comment-text">';
         {
-            output += '<p>';
+        //    output += '<p>';
             {
                 output += comment.body;
             }
-            output += '</p>';
+        //    output += '</p>';
             output += '<span class="date sub-text">' + comment.date.split('T')[0] + '</span>';
         }
         output += '</div>';
@@ -126,14 +192,88 @@ function generateCommentSection(data)
     
     $("#commentList").html(output);
 }
-    
-{% if page.issue_number %}
-    $(document).ready(function(){
-        // get comment data
-        getPostComments("{{page.issue_number}}", function(data){
-            generateCommentSection(data);
-        });
+ 
+function setupAddComments()
+{
+    // disable the default action of the add comment form
+    $("#addCommentForm").submit(function(event){
+        event.preventDefault();
+        
+        var commentText = $("#commentTextField").val();
+        
+        if(commentText)
+        {
+            $("#credDialog").modal();
+        }
+        else
+        {
+            $("#warningDialog").modal();
+        }
     });
+}
+    
+function setupPostComment()
+{
+    // focus on the username input field when credential form is displayed
+    $("#credDialog").on('shown.bs.modal', function(){
+        console.log("here");
+        $("#usernameField").focus();
+    });
+    
+    $("#credForm").submit(function(event){
+        event.preventDefault();
+        
+        var username = $("#usernameField").val();
+        var password = $("#passwordField").val();
+        
+        var commentBody = $("#commentTextField").val();
+    
+        if(username && password && commentBody)
+        {
+            $.ajax({
+                type:"POST",
+                url: "https://api.github.com/repos/nnarain/nnarain.github.io/issues/{{page.issue_number}}/comments",
+                dataType: "json",
+                contentType:"application/json",
+                data:JSON.stringify({"body":commentBody}),
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Authorization", makeBasicAuth(username, password));
+                },
+                success:function(data){
+                    location.reload();
+                },
+                error: function(xhr, ajaxOptions, error){
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+    });
+}
+    
+function setupPreview()
+{
+    $("#previewLink").click(function(){
+        // get the markdown formatted text in the comment section and convert to html
+        var markdownContent = $("#commentTextField").val();
+        var htmlText = getMarkdownPreview(markdownContent);
+        $("#markdownPreview").html(htmlText);
+    });
+}
+    
+// if this page has a comment section
+{% if page.issue_number %}
+
+
+$(document).ready(function(){
+    // get comment data
+    getPostComments("{{page.issue_number}}", function(data){
+        generateCommentSection(data);
+        setupAddComments();
+        setupPostComment();
+        setupPreview();
+    });
+
+});
 {% endif %}
 
 </script>

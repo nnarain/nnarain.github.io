@@ -23,7 +23,7 @@ function getPostComments(issueNumber, callback)
                     var data = commentsData["" + i];
                     
                     var comment = {};
-                    comment["body"] = data.body;
+                    comment["body"] = getMarkdownPreview(data.body);
                     comment["date"] = data.created_at;
                     
                     comment["user"] = {
@@ -43,4 +43,12 @@ function getPostComments(issueNumber, callback)
             callback({"comments":[]});
         }
     });
+}
+
+function makeBasicAuth(username, password)
+{
+    var token = username + ":" + password;
+    var hash = btoa(token);
+    
+    return "Basic " + hash;
 }
