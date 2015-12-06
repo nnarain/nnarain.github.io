@@ -12,7 +12,7 @@ prev_post: 2015-12-05-Blog Comments using Github's Issue Tracker
 
 In the [first part]({% post_url 2015-12-05-Blog Comments using Github's Issue Tracker %}) of this tutorial we setup the layout for our comment section. In this part we will be adding the functionality to get and post comments.
 
-At the bottom of the _layout/post.html file, I added sound code that initializes the page when the document loads, we will be filling in those function in this tutorial.
+At the bottom of the _layout/post.html file, I added some code that initializes the page when the document loads, we will be filling in those function in this tutorial.
 
 ```javascript
 {% raw %}
@@ -64,7 +64,7 @@ Github has provided developer with an easy to use API for getting information fr
 
 To get comments from a particular issue, we can do an HTTP GET request on the following URL.
 
-    https://api.github.com/repos/:user/:repo/issues/:issuenumber
+    https://api.github.com/repos/yourusername/yourblogrepo/issues/:issuenumber
     
 After that its just a matter of extracting the information we need.
 
@@ -74,14 +74,14 @@ function getPostComments(issueNumber, callback)
 {
     // get the issue, specified by number, for the site page
     $.get("https://api.github.com/repos/:user/:repo/issues/" + issueNumber, function(issueData){
-        
+        ...
     });
 }
 ```
 
 We start by doing GET request for the issue information.
 
-Now we could be in the situation where that are no comments present in the tracker. We are going to check that this issue has comments first, then issue another GET request to get the comments.
+Now we could be in the situation where there are no comments present in the tracker. We are going to check that this issue has comments first, then do another GET request to get the comments.
 
 ```javascript
 function getPostComments(issueNumber, callback)
@@ -123,7 +123,7 @@ function getPostComments(issueNumber, callback)
         // get the issue's comments url
         var commentsUrl = issueData.comments_url;
         
-        // if the issuse has comments
+        // if the issue has comments
         if(issueData.comments != 0)
         {
             // get the comments
@@ -175,9 +175,9 @@ function toMarkdown(markdownText)
 }
 ```
 
-Above I extract that comment body, data, user, user avatar and user profile url from the comment data.
+Above I extract that comment body, data, user, user avatar and user profile url from the comment body.
 
-Also I added a function to convert the comment body to HTML from its Markdown format. For this I use Showdown JS.
+Also I added a function to convert the comment body to HTML from its Markdown format. For this I use [Showdown JS](https://github.com/showdownjs/showdown).
 
 That is actually all is takes to pull comments down from the issue tracker!
 
@@ -196,7 +196,7 @@ function generateCommentSection(data)
     
     for(var i = 0; i < len; ++i)
     {
-        var comment = comments["" + i];
+        var comment = comments[i];
         output += generateCommentListItem(comment);
     }
     
@@ -275,10 +275,10 @@ function setupPostComment(issueNumber)
 To post a comment to the issue tracker we need to do a HTTP POST request to Github's API. Two important things to note. 
 
 1. Our POST request needs to be authorized.
-2. We need to set our content and data type to json, that's what the Github API expects.
+2. We need to set our content and data type to a json string, that's what the Github API expects.
 
 
-Starting with number 1. In order to authorize the request we need to send a Authorization header before the post. This will take the form
+In order to authorize the request we need to send a Authorization header before the post. This will take the form
 
     Authorization: Basic <hash>
 
@@ -324,7 +324,7 @@ function setupPostComment(issueNumber)
         {
             $.ajax({
                 type:"POST",
-                url: "https://api.github.com/repos/:user/:repo/issues/" + issueNumber + "/comments",
+                url: "https://api.github.com/repos/yourusername/yourblogrepo/issues/" + issueNumber + "/comments",
                 dataType: "json",
                 contentType:"application/json",
                 data:JSON.stringify({"body":commentBody}),
