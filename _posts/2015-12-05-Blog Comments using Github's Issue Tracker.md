@@ -94,7 +94,7 @@ The HTML for the comment list is also simple.
 ...
 ```
 
-Lastly on the HTML side is the "Add Comment" form. A simple form consisting of a textarea and a button!
+Now for the "Add Comment" form. A simple form consisting of a textarea and a button!
 
 
 ```html
@@ -120,8 +120,7 @@ Lastly on the HTML side is the "Add Comment" form. A simple form consisting of a
 </form>
 ...
 ```
-
-And that's it for the HTML! You should have something that looks like this
+You should have something that looks like this
 
 ![Image not found!](/assets/2015/12/05/thumbnail.png)
 
@@ -209,7 +208,7 @@ I thought it would be cool if a reader could post a comment right from the blog 
 *I'm not sure what the conventions are for prompting users for private information, but I thought it would be cool. That's why I left the link to the issue tracker page.*
 </small>
 
-Modals are a nice way to prompt a user for, or to display, information without having the content always displayed somewhere in your page.
+Modals are a nice way to prompt a user for, or to display, information without having a form always displayed somewhere in your page.
 
 General layout for a Bootstrap Modal is:
 
@@ -220,16 +219,33 @@ General layout for a Bootstrap Modal is:
         <!-- Modal Content -->
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Title</h4>
+                <h4>Title of the modal</h4>
             </div>
             <div class="modal-body">
                 <!-- Main Section -->
+                Text in the body
             </div>
         </div>
     </div>
 </div>
 
 ```
+
+<div id="testModal" class="modal fade" role="dialog">
+    <div class="modal-dialog"> 
+        <!-- Modal Content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Title</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Main Section -->
+                Text in the body
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#testModal">Test it out!</button>
 
 In our case we want a form to get the users information.
 
@@ -258,12 +274,31 @@ In our case we want a form to get the users information.
 </div>
 ```
 
-Now this modal won't appear until we tell it to, but it should look something like this.
+<div id="testModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog"> 
+        <!-- Modal Content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Enter Github Username and Password</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#testModal2">Test it out!</button>
 
-![Image not found!](/assets/2015/12/05/cred-modal.png)
 
-
-Now optionally I wanted a way to prompt, who attempted to post a comment, if the comment field was empty. I created an additional modal for that, but it can be done in other ways as well.
+Now optionally I wanted a way to prompt a user, who attempted to post a comment, if the comment field was empty. I created an additional modal for that, but it can be done in other ways as well.
 
 ```html
 <!-- Modal no text in comment warning -->
@@ -279,7 +314,17 @@ Now optionally I wanted a way to prompt, who attempted to post a comment, if the
 </div>
 ```
 
-![Image not found!](/assets/2015/12/05/warning-modal.png)
+<div id="testModal3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal Content -->
+        <div class="modal-content panel-warning">
+            <div class="modal-header panel-heading">
+                Comment is empty!
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#testModal3">Test it out!</button>
 
 
 Everything is looking pretty good! In the next part we will be adding the JavaScript to get everthing going!
