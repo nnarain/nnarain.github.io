@@ -2,10 +2,11 @@
 layout: post
 title: Blog Comments using Github's Issue Tracker
 description: How to add a comment section to your blog site using Github's Issue Tracker
-tag: html css bootstrap jekyll github-api
+tag: html css bootstrap jekyll
 thumbnail: /assets/2015/12/05/thumbnail.png
 repo_url: http://github.com/nnarain/nnarain.github.io
 issue_number: 17
+next_post: 2015-12-05-Blog Comments using Github's Issue Tracker. Part 2
 ---
 
 If you, like me, are using Github Pages to host you blog site you know that there is no serve side scripting avaiable (no Ruby, no Python, no Java, no SQL!).
@@ -14,7 +15,7 @@ If you want to have comments enabled on your blog site, you'll need some third p
 
 In this post I'll be covering the HTML and CSS portion of the comment section, we'll be making one that looking exactly like the one at the bottom of the page.
 
-Quick note: I'm using Jekyll blogging tool and a lot of Bootstrap!
+Quick note: I'm using Jekyll blogging tool, a lot of Bootstrap and JQuery!
 
 **Creating the comment section in HTML**
 
