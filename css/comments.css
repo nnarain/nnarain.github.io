@@ -1,39 +1,46 @@
 
-/* V1
-.comment-section
-{
-    padding-top: 30px;
-}
-
-.comment-avatar
-{
-    padding-right: 5px;
-}
-
-*/
 
 .comment-section
 {
     padding: 10px;
-    border-top: 1px solid #DADADA;
     margin-top: 10px;
+    
+    border-top: 1px solid #DADADA;
 }
 
 .comment-list
 {
-    padding:0;
     list-style:none;
-/*    max-height:200px; */
-/*    overflow:auto; */
+    
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.comment-avatar
+{
+    width: 32px;
+    height: 100%;
+    float: left;
+}
+
+.comment-avatar a > img
+{
+    width: 100%;
+    border-radius: 50%;
 }
 
 .comment-list li 
 {
-    margin:0;
     margin-top:10px;
 }
 
 .comment-text p 
+{
+    margin:0;
+    padding-left: 10px;
+}
+
+.comment-text h1 
 {
     margin:0;
     padding-left: 10px;
@@ -52,15 +59,26 @@
     padding-left: 10px;
 }
 
-.comment-avatar
+.add-comment
 {
-    width: 32px;
-    height: 100%;
-    float: left;
+    margin-left: 20px;
+    /*width: 500px;*/
 }
 
-.comment-avatar a > img
+.preview-section
 {
-    width: 100%;
-    border-radius: 50%;
+    margin-bottom: 60px;
 }
+
+/*
+#rawTextField
+{
+    height: 100px;
+}
+
+#markdownPreview
+{
+    height: 100px;
+    padding 20px;
+}
+*/

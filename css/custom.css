@@ -29,7 +29,17 @@ pre
 {
     background-color: transparent;
     border: 0px;
+}
+
+pre>code {
+    white-space: pre;
     overflow-x: auto;
+}
+
+.hljs {
+    display: inline-block;
+    overflow-x: auto;
+    -webkit-text-size-adjust: none;
 }
 
 .post-sequence-bottom
