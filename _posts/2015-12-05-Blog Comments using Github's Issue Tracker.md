@@ -2,7 +2,7 @@
 layout: post
 title: Blog Comments using Github's Issue Tracker
 description: How to add a comment section to your blog site using Github's Issue Tracker
-tag: html css bootstrap jekyll
+tag: web html css bootstrap jekyll
 thumbnail: /assets/2015/12/05/thumbnail.png
 repo_url: http://github.com/nnarain/nnarain.github.io
 issue_number: 17
