@@ -17,26 +17,10 @@ layout: default
                     <div class="row">
                       {% if post.thumbnail %}
                       <div class="col-xs-6 col-md-3">
-                  
                           <div class="thumbnail">
-                              {% if post.repo_url %}
-                                <div class="caption">
-                                    <a href="{{post.repo_url}}">
-                                        <span class="label label-success"><i class="glyphicon glyphicon-globe"></i>  View Code</span>
-                                    </a>
-                                </div>
-                              {% endif %}
                             <a href="{{post.url}}"><img src="{{post.thumbnail}}"></a>
                           </div>
                       </div>
-                      {% else %}
-                        
-                        {% if post.repo_url %}
-                            <a href="{{post.repo_url}}" >
-                                <span class="label label-success"><i class="glyphicon glyphicon-globe"></i>  View Code</span>
-                            </a>
-                        {% endif %}
-                        
                       {% endif %}
 
                       <div class="col-md-9">
