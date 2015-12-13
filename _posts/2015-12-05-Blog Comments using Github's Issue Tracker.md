@@ -53,7 +53,7 @@ Next is setting up the Bootstrap grid. This isn't really to important, it can be
 The actual comment section is separated into 3 parts
 
 1. The header
-2. List where the comments are lists
+2. List where the comments are shown
 3. A form for submitting comments
 
 
@@ -231,7 +231,7 @@ General layout for a Bootstrap Modal is:
 
 ```
 
-<div id="testModal" class="modal fade" role="dialog">
+<div id="testModal1" class="modal fade" role="dialog">
     <div class="modal-dialog"> 
         <!-- Modal Content -->
         <div class="modal-content">
@@ -282,7 +282,7 @@ In our case we want a form to get the users information.
                 <h4>Enter Github Username and Password</h4>
             </div>
             <div class="modal-body">
-                <form class="form-inline">
+                <form id="form1" class="form-inline">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Username">
                     </div>
