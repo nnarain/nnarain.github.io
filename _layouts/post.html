@@ -12,7 +12,7 @@ layout: default
                     {{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}
                 </p>
                 {% if page.repo_url %}
-                    <a href="{{page.repo_url}}"><span class="label label-success"><i class="glyphicon glyphicon-globe"></i>  View Repository</span></a>
+                    <a href="{{page.repo_url}}"><span class="label label-success"><i class="glyphicon glyphicon-globe"></i>  View Code</span></a>
                     <br>
                 {% endif %}
                 
@@ -65,24 +65,7 @@ layout: default
                         <!-- Loaded comments go here -->
                     </ul>
                     
-                    <!-- Preview Section -->
-                    <!--
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#rawTextField" aria-controls="rawTextField" role="tab" data-toggle="tab">Comment</a>
-                        </li>
-                        <li role="presentation" id="previewLink">
-                            <a href="#markdownPreview" aria-controls="markdownPreview" role="tab" data-toggle="tab">Preview</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content preview-section">
-                        <div role="tabpanel" class="tab-pane active" id="rawTextField">
-                            <textarea class="form-control" rows="7" id="commentTextField"></textarea>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="markdownPreview">
-                        </div>
-                    </div>
-                    -->
+                    <!-- Add Comment Section -->
                     <form id="addCommentForm" class="form-inline">
                         <div class="form-group">
                             <textarea id="commentTextField" class="form-control" rows="3" cols="50"></textarea>
