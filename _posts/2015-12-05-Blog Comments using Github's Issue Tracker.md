@@ -245,7 +245,7 @@ General layout for a Bootstrap Modal is:
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#testModal">Test it out!</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#testModal1">Test it out!</button>
 
 In our case we want a form to get the users information.
 
