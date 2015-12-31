@@ -11,43 +11,81 @@ next_post:
 
 Quick update on the progress of my voxel engine.
 
-**Update 1**
+**Updates**
 
 - Moved from forward shading to deferred shading (which I started a blog post on!). 
 - Since deferred shading breaks up the lightng information into textures, I can select which texture is displayed to visualize the information
-
-For example below is the normal map of a generated terrain:
-
-![Image not found!](/assets/2015/07/23/terrain-normalmap.png)
-
-You can visually see where the normals are pointing (or atleast a general idea)
-
-**Update 2**
-
 - The cube meshes created now have per vertex normals
-
-![Image not found!](/assets/2015/07/23/terrain2.png)
-
-**Update 3**
-
 - Voxel Lighting
 
-![Image not found!](/assets/2015/07/23/terrain-multiple-lights.png)
+<div id="image-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#image-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#image-carousel" data-slide-to="1"></li>
+    <li data-target="#image-carousel" data-slide-to="2"></li>
+    <li data-target="#image-carousel" data-slide-to="3"></li>
+    <li data-target="#image-carousel" data-slide-to="4"></li>
+    <li data-target="#image-carousel" data-slide-to="5"></li>
+    <li data-target="#image-carousel" data-slide-to="6"></li>
+  </ol>
 
-The lights are propagated outwards to each adjacent block, using a breath-first search.
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="/assets/2015/07/23/terrain-normalmap.png" alt="...">
+      <div class="carousel-caption">
+        You can visually see where the normals are pointing (or atleast a general idea)
+      </div>
+    </div>
+    <div class="item">
+      <img src="/assets/2015/07/23/terrain2.png" alt="...">
+      <div class="carousel-caption">
+        The cube meshes created now have per vertex normals
+      </div>
+    </div>
+    <div class="item">
+      <img src="/assets/2015/07/23/terrain-multiple-lights.png" alt="...">
+      <div class="carousel-caption">
+        The lights are propagated outwards to each adjacent block, using a breath-first search.
+      </div>
+    </div>
+    <div class="item">
+      <img src="/assets/2015/07/23/terrain-multiple-lights-lightmap.png" alt="...">
+      <div class="carousel-caption">
+        Here's the light map texture.
+      </div>
+    </div>
+    <div class="item">
+      <img src="/assets/2015/07/23/terrain-per-face-lightning.png" alt="...">
+      <div class="carousel-caption">
+        Lighting is per face meaning light propagates up and around other blocks
+      </div>
+    </div>
+    <div class="item">
+      <img src="/assets/2015/07/23/terrain-per-face-lightning2.png" alt="...">
+      <div class="carousel-caption">
+        another example of per face lighting
+      </div>
+    </div>
+    <div class="item">
+      <img src="/assets/2015/07/23/terrain-per-face-lightning3.png" alt="...">
+      <div class="carousel-caption">
+        Same scene from another angle
+      </div>
+    </div>
+  </div>
 
-Here's the light map texture:
-
-![Image not found!](/assets/2015/07/23/terrain-multiple-lights-lightmap.png)
-
-- The lighting is also per face. Meaning it will wrap around corner and up walls.
-
-![Image not found!](/assets/2015/07/23/terrain-per-face-lightning.png)
-
-Another example, same scene from different angles:
-
-![Image not found!](/assets/2015/07/23/terrain-per-face-lightning2.png)
-![Image not found!](/assets/2015/07/23/terrain-per-face-lightning3.png)
+  <!-- Controls -->
+  <a class="left carousel-control" href="#image-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#image-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
 **TODO**
 
