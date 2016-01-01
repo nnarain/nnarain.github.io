@@ -13,13 +13,13 @@ If you, like me, are using Github Pages to host you blog site you know that ther
 
 If you want to have comments enabled on your blog site, you'll need some third party tool. There are options available on the net but the Github Issue Tracker has all the functionality you need!
 
-In this post I'll be covering the HTML and CSS portion of the comment section, we'll be making one that looking exactly like the one at the bottom of the page.
+In this post I'll be covering the HTML and CSS portion of the comment section, we'll be making one that looks exactly like the one at the bottom of the page.
 
-Quick note: I'm using Jekyll blogging tool, a lot of Bootstrap and JQuery!
+Quick note: I'm using Jekyll blogging tool, and a lot of Bootstrap and JQuery!
 
 **Creating the comment section in HTML**
 
-First off, each post is created with its unique issue ID. I do this using a Python script that creates the Github issue and then generate the post markdown file. In the Yaml front matter of the post I define the variable *issue_number* which can be used when creating the HTML for the comment section.
+First off, each post is created with its unique issue ID. I do this using a Python script that creates the Github issue and then generate the post markdown file. In the [Yaml front matter](http://jekyllrb.com/docs/frontmatter/) of the post I define the variable *issue_number* which can be used when creating the HTML for the comment section.
 
 ```html
 
