@@ -10,7 +10,7 @@ next_post:
 prev_post: 2015-12-05-Blog Comments using Github's Issue Tracker
 ---
 
-In the [first part]({% post_url 2015-12-05-Blog Comments using Github's Issue Tracker %}) of this tutorial we setup the layout for our comment section. In this part we will be adding the functionality to get and post comments.
+In the [previous part]({% post_url 2015-12-05-Blog Comments using Github's Issue Tracker %}) of this tutorial we setup the layout for our comment section. In this part we will be adding the functionality to get and post comments.
 
 At the bottom of the _layout/post.html file, I added some code that initializes the page when the document loads, we will be filling in those function in this tutorial.
 
@@ -111,7 +111,7 @@ function getPostComments(issueNumber, callback)
 }
 ```
 
-Now we can start filtering through the comment data and pick out what we want. This depends on your preference on what you want to display about the comment, for example the user, created date, edit date, etc. For more information refer to the official docs [here](https://developer.github.com/v3/issues/comments/).
+Now we can start filtering through the comment data and pick out what we want. This depends on what you want to display about the comment, for example the user, created date, edit date, etc. For more information refer to the official docs [here](https://developer.github.com/v3/issues/comments/).
 
 
 ```javascript
