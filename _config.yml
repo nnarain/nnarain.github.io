@@ -12,7 +12,7 @@ github_username:  nnarain
 youtube_username: nnaraindev
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 
 # page settings
 paginate: 5
