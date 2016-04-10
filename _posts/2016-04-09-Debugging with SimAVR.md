@@ -2,7 +2,7 @@
 layout: post
 title: Debugging with SimAVR
 description: Setup SimAVR CMake targets to debug AVR C programs!
-tag: avr c cmake
+tag: avr cmake c c++
 thumbnail: /assets/2016/04/09/simavr-thumb.png
 repo_url: https://github.com/nnarain/cmake-avr-template
 issue_number: 
@@ -20,7 +20,7 @@ You will need someway to visualize the output.
 
 **SimAVR**
 
-[SimAVR](https://github.com/buserror/simavr) is a tool to simulate AVR programs. In this post I will set up CMake targets for using for automating SimAVR.
+[SimAVR](https://github.com/buserror/simavr) is a tool to simulate AVR programs. We can use it to track changed on our microcontroller. In this post I will set up CMake targets for using for automating SimAVR.
 
 **Creating CMake Targets**
 
@@ -88,7 +88,7 @@ Setup cmake targets.
 
 ```
 
-We add a custom target that calls a custom command which launches simavr. Run SimAVR in the format:
+We add a custom target that calls a custom command which launches simavr. To run SimAVR:
 
 ```bash
 
@@ -105,6 +105,8 @@ In order to get port values and display them we need to add a special trace stru
 Here's an example trace source file.
 
 ```c++
+// project_atmega328p_vcd_trace.c
+
 #include <avr/io.h>
 #include <simavr/avr/avr_mcu_section.h>
 
@@ -267,6 +269,31 @@ add_avr_executable(project
 
 ```
 
+Simple blink program:
+
+```c++
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main()
+{
+	DDRB |= 0xFF;
+	PORTB = 0;
+
+	for(;;)
+	{
+		PORTB |= (1 << 5);
+		_delay_ms(1000);
+		PORTB &= ~(1 << 5);
+		_delay_ms(1000);
+	}
+
+	return 0;
+}
+
+```
+
 Run target then open trace file.
 
 ```bash
@@ -275,3 +302,4 @@ make sim-project
 gtkwave project_trace.vcd
 
 ```
+![Image not found](/assets/2016/04/09/screen.png)
