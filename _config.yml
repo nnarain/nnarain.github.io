@@ -1,7 +1,7 @@
 # Site settings
 title: Natesh's Dev Blog!
 email: nnaraindev@gmail.com
-description: > 
+description: >
     A place where I can drop code snippets and how-to's of various projects I'm working on.
     Anything from C to Assembler to Graphics to Web dev!
 baseurl: "" # the subpath of your site, e.g. /blog/
@@ -22,4 +22,4 @@ paginate_path: "/blog/page:num"
 highlight_theme: vs
 
 # gems
-gems: [jekyll-paginate]
+gems: [jekyll-paginate, jekyll-gist]
