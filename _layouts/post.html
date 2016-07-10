@@ -15,7 +15,7 @@ layout: default
                     <a href="{{page.repo_url}}"><span class="label label-success"><i class="glyphicon glyphicon-globe"></i>  View Code</span></a>
                     <br>
                 {% endif %}
-                
+
                 {% if page.prev_post %}
                     <a href="/{{page.prev_post | replace: '-', '/' | replace: ' ', '-'}}.html">
                         <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post | split: '-' | last}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
@@ -26,13 +26,13 @@ layout: default
                         <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post | split: '-' | last}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
                     </a>
                 {% endif %}
-                
+
             </header>
-            
+
             <article>
                 {{content}}
             </article>
-            
+
                 {% if page.prev_post %}
                     <a href="/{{page.prev_post | replace: '-', '/' | replace: ' ', '-'}}.html">
                         <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post | split: '-' | last}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
@@ -46,77 +46,13 @@ layout: default
         </div>
         <div class="col-xs-1 col-md-3"></div>
     </div>
-    
+
     <!-- Comment Section -->
-    {% if page.issue_number %}
-
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <!--
-                <div id="comment-section" class="comment-section">
-                </div>
-                -->
-                
-                <div id="commentSection" class="comment-section">
-                    <h3>Comments</h4>
-                    <h4>Click <a href="https://github.com/nnarain/nnarain.github.io/issues/{{page.issue_number}}">here</a> to view the issue tracker</h4>
-                    <ul id="commentList" class="comment-list">
-                        <!-- Loaded comments go here -->
-                    </ul>
-                    
-                    <!-- Add Comment Section -->
-                    <form id="addCommentForm" class="form-inline">
-                        <div class="form-group">
-                            <textarea id="commentTextField" class="form-control" rows="3" cols="50"></textarea>
-                        </div>
-                        <button id="addCommentButton" type="submit" class="btn btn-success">Add</button>
-                    </form>
-                    
-
-                </div>
-                
-                <!--
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#credDialog">Open Modal</button>
-                -->
-                <!-- Modal for Github Credentials -->
-                <div id="credDialog" class="modal fade" role="dialog">
-                    <div class="modal-dialog"> 
-                        <!-- Modal Content -->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4>Enter Github Username and Password</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form id="credForm" class="form-inline">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="usernameField" placeholder="Username">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="passwordField" placeholder="Password">
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Modal no text in comment warning -->
-                <div id="warningDialog" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal Content -->
-                        <div class="modal-content panel-warning">
-                            <div class="modal-header panel-heading">
-                                Comment is empty!
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-    {% endif %} 
+    <div class="col-xs-1 col-md-3"></div>
+    <div class="col-xs-10 col-md-6">
+        {% include disqus.html %}
+    </div>
+    <div class="col-xs-1 col-md-3"></div>
 </div>
 
 <script type="text/javascript">
@@ -125,7 +61,7 @@ $("#Search :input").prop("disabled", true);
 
 // enable tool tips
 $('[data-toggle="tooltip"]').tooltip();
-    
+
 // if this page has a comment section
 {% if page.issue_number %}
 
