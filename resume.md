@@ -33,10 +33,6 @@ Achievements
 * Built an embedded magnetic field meter (AVR platform) and used it to graph a magnetic field
 * A [simple opengl utility library](https://github.com/nnarain/sgl-wrapper) which provids and object oriented wrapper for OpenGL as well as math classes, model (wavefront) and image loading.
 
-Achievements to Come..
-
-* Planning to work more on my [Voxel Engine](https://github.com/nnarain/VoxelEngine/tree/develop). Might build again from the ground up!
-
 Future Projects
 
 * Game programming in Unity3D

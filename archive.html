@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+            <ul class="list-group">
+                {% for post in site.posts %}
+                    <li class="list-group-item">
+                        <ul class="archive-list-entry">
+                            <li>
+                                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+                            </li>
+                            <li>
+                                <a class="" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                            </li>
+                            <li>
+                                <small>
+                                    {{post.description}}
+                                </small>
+                            </li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-xs-3"></div>
+    </div>
+</div>

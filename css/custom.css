@@ -46,3 +46,7 @@ pre>code {
 {
     padding-bottom: 10px;
 }
+
+.archive-list-entry{
+    list-style-type: none;
+}
