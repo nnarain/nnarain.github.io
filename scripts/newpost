@@ -45,7 +45,6 @@ def main():
 		file.write("tag: %s\n" % (post_tags))
 		file.write("thumbnail: /assets/%s%s\n" % (date_path, post_thumb))
 		file.write("repo_url: \n")
-		file.write("issue_number: %s\n" % (issue_number))
 		file.write("---\n\n")
 
 	# create the date's asset folder

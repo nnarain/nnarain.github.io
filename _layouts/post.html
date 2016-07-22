@@ -62,20 +62,10 @@ $("#Search :input").prop("disabled", true);
 // enable tool tips
 $('[data-toggle="tooltip"]').tooltip();
 
-// if this page has a comment section
-{% if page.issue_number %}
-
-
 $(document).ready(function(){
-    // get comment data
-    getPostComments("{{page.issue_number}}", function(data){
-        generateCommentSection(data);
-        setupAddComments();
-        setupPostComment("{{page.issue_number}}");
-     //   setupPreview();
+    $('table').each(function(){
+        $(this).addClass('table table-striped table-bordered')
     });
-
 });
-{% endif %}
 
 </script>
