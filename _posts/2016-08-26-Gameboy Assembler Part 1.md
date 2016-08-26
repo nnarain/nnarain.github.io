@@ -5,6 +5,7 @@ description: Introduction to Gameboy Assembler
 tag: gameboy flex bison c++ assembly
 thumbnail: /assets/2016/08/26/assemblerflow.png
 repo_url: https://github.com/nnarain/gameboy-assembler
+next_post: 2016-08-26-Gameboy Assembler Part 2
 ---
 
 Recently I started working on a [Gameboy Emulator](https://github.com/nnarain/gameboy). I had attempted this before but I got stuck with a bug I couldn't work out. I realized that I really didn't have a good means for debugging the emulator.
