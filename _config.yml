@@ -18,7 +18,7 @@ kramdown:
   input: GFM
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
-  use_coderay: false
+  enable_coderay: false
 
 # page settings
 paginate: 5
