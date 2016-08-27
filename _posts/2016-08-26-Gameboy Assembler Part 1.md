@@ -18,7 +18,7 @@ In my case I need to run small Gameboy assembly program in the emulator and veri
 
 Example:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```c++
 // test program, jump to address $150
 std::vector<uint8_t> code = {
     0xC3,      // jp
@@ -26,13 +26,17 @@ std::vector<uint8_t> code = {
 };
 
 emualtor.run(code);
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```
 
 Not super intuitive not mention the [cartridge header](http://nnarain.github.io/2016/07/21/Gameboy-Specs.html) that needs to be included.
 
 What I would like is:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.asm}
+
+
+```assembly
+
 ; This is an assembly file to test stuff
         org $100
 
@@ -46,7 +50,7 @@ start:
         nop
         ld C, $10
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 This would be an actual assembly with a test case program.
 
