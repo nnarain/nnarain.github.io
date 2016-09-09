@@ -159,10 +159,14 @@ Include a diagram of the joypad matrix
 | $1A     | MBC5 + RAM               |
 | $1B     | MBC5 + RAM + BAT         |
 
-There are more types, however I will leave it heere for now.
+There are more types, however I will leave it here for now.
 
 ### Interrupt Vectors
 
-|  Name  |  Description  |  Vector  |
-| :----: | :-----------: | :------: |
-|        |               |          |
+|  Interrupt               |  Priority  |  Vector  |
+| :----------------------: | :--------: | :------: |
+| V-Blank                  | 1          | 0x0040   |
+| LCDC STAT                | 2          | 0x0048   |
+| Timer Overflow           | 3          | 0x0050   |
+| Serial Transfer Complete | 4          | 0x0058   |
+| Joypad                   | 5          | 0x0060   |
