@@ -5,6 +5,7 @@ description: Information on the Gameboy's LCD controller
 tag: gameboy
 thumbnail: /assets/2016/09/09/stat-register.png
 repo_url: https://github.com/nnarain/gameboy
+prev_post: 2016-07-21-Gameboy Specs
 ---
 
 References
