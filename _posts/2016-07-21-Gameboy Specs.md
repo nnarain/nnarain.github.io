@@ -5,6 +5,7 @@ description: Outline the specifications for the Gameboy's hardware
 tag: gameboy c++
 thumbnail:
 repo_url: https://github.com/nnarain/gameboy
+next_post: 2016-09-09-Gameboy LCD Controller
 ---
 
 On going write up of important information about the Gameboy system.
