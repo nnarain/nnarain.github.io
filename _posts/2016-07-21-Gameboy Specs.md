@@ -14,7 +14,7 @@ Hardware Specs
 --------------
 
 | CPU         | Z80                        |
-| Clock       | ~4.2 MHz                   |
+| Clock       | ~4.2 MHz -> 0.238 us       |
 | Work RAM    | 8 kB                       |
 | Resolution  | 160x144 (20x18 tiles)      |
 | Max Sprites | 40 per screen, 10 per line |
