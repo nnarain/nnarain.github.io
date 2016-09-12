@@ -1,11 +1,12 @@
 ---
 layout: post
-title: Gameboy LCD Controller
-description: Information on the Gameboy's LCD controller
+title: Gameboy Display Information
+description: Information on display the Gameboy's VRAM
 tag: gameboy
 thumbnail: /assets/2016/09/09/window-display.png
 repo_url: https://github.com/nnarain/gameboy
 prev_post: 2016-09-09-Gameboy LCD Controller
+next_post: 2016-09-11-Gameboy Emulator Project
 ---
 
 This post is a work in progress.
