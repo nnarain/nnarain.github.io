@@ -6,6 +6,7 @@ tag: gameboy
 thumbnail: /assets/2016/09/09/stat-register.png
 repo_url: https://github.com/nnarain/gameboy
 prev_post: 2016-07-21-Gameboy Specs
+next_post: 2016-09-10-Gameboy Display Information
 ---
 
 References
@@ -15,12 +16,6 @@ References
 
 [Pandocs](http://bgb.bircd.org/pandocs.htm)
 
-Display
--------
-
-![Image not found!](/assets/2016/09/09/window-display.png)
-
-Uses register `WX` and `WY` to set starting position of the window display.
 
 Screen Timing
 -------------
@@ -86,15 +81,6 @@ Mode 3:
 ![Image not found!](/assets/2016/09/09/display-mode-timing.png)
 
 Mode 0 is present between 201-207 clks, 2 about 77-83 clks, and 3 about 169-175 clks. A complete cycle through these states takes 456 clks. VBlank lasts 4560 clks. A complete screen refresh occurs every 70224 clks.)
-
-Scroll Registers
-------------------
-
-![Image not found!](/assets/2016/09/09/scroll-registers.png)
-
-
-Scrolls the background screen horizontally and vertically.
-
 
 LCDC Y-Coordinate Registers
 ---------------------------
