@@ -32,7 +32,7 @@ Gameboy CPU memory map overview
 | $FFFF           | [Interrupt Enable Flags](#interrupt-enable-flags) |
 | $FF80 - $FFFE   | High RAM                                          |
 | $FF00 - $FF7F   | [Hardware IO Registers](#hardware-io-registers)   |
-| $FEA0 - $FEFF   | Unuseable Memory                                  |
+| $FEA0 - $FEFF   | Unusable Memory                                   |
 | $FE00 - FE9F    | OAM (Object Attribute Memory)                     |
 | $E000 - $FDFF   | Echo RAM - Do not use                             |
 | $D000 - $DFFF   | Internal RAM Banks 1-7 switchable                 |
