@@ -2,70 +2,50 @@
 layout: default
 ---
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-1 col-md-3"></div>
-        <div class="col-xs-10 col-md-6">
-            <header class="post-header">
-                <h1 class="post-title">{{page.title}}</h1>
-                <p class="post-meta">
-                    {{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}
-                </p>
-                {% if page.repo_url %}
-                    <a href="{{page.repo_url}}"><span class="label label-success"><i class="glyphicon glyphicon-globe"></i>  View Code</span></a>
-                    <br>
+<div class="post-content well">
+<article class="content">
+    <div class="post">{{ content }}</div>
+    <hr />
+</article>
+<hr />
+{% assign hasSimilar = '' %}
+{% for post in site.posts  %}
+    {% assign postHasSimilar = false %}
+    {% for tag in post.categories %}
+        {% for thisTag in page.categories %}
+            {% if postHasSimilar == false and hasSimilar.size < 6 and post != page and tag == thisTag %}
+                {% if hasSimilar.size == 0 %}
+                <div class="panel-body">
+                <h4>Related Posts</h4>
+                <ul>
                 {% endif %}
-
-                {% if page.prev_post %}
-                    <a href="/{{page.prev_post | replace: '-', '/' | replace: ' ', '-'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post | split: '-' | last}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
-                    </a>
-                {% endif %}
-                {% if page.next_post %}
-                    <a href="/{{page.next_post | replace: '-', '/' | replace: ' ', '-'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post | split: '-' | last}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
-                    </a>
-                {% endif %}
-
-            </header>
-
-            <article>
-                {{content}}
-            </article>
-
-                {% if page.prev_post %}
-                    <a href="/{{page.prev_post | replace: '-', '/' | replace: ' ', '-'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.prev_post | split: '-' | last}}"><i class="glyphicon glyphicon-arrow-left"></i> Previous</span>
-                    </a>
-                {% endif %}
-                {% if page.next_post %}
-                    <a href="/{{page.next_post | replace: '-', '/' | replace: ' ', '-'}}.html">
-                        <span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="{{page.next_post | split: '-' | last}}">Next <i class="glyphicon glyphicon-arrow-right"></i></span>
-                    </a>
-                {% endif %}
-        </div>
-        <div class="col-xs-1 col-md-3"></div>
+                <li class="relatedPost">
+                    <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+                    {% if post.categories %}
+                        <small>(Categories: {% for category in post.categories %}<a href="/category/{{ category }}">{{ category }}</a>{% if forloop.last == false %}, {% endif %}{% endfor %})</small>
+                    {% endif %}
+                </li>
+                {% capture hasSimilar %}{{ hasSimilar }}*{% endcapture %}
+                {% assign postHasSimilar = true %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+{% if hasSimilar.size > 0 %}
+    </ul>
     </div>
+{% endif %}
 
-    <!-- Comment Section -->
-    <div class="col-xs-1 col-md-3"></div>
-    <div class="col-xs-10 col-md-6">
-        {% include disqus.html %}
-    </div>
-    <div class="col-xs-1 col-md-3"></div>
+<div class="PageNavigation">
+  {% if page.previous.url %}
+    <a class="prev pull-left" href="{{ page.previous.url }}">&laquo; {{ page.previous.title }}</a>
+  {% endif %}
+  {% if page.next.url %}
+    <a class="next pull-right" href="{{ page.next.url }}">{{ page.next.title }} &raquo;</a>
+  {% endif %}
 </div>
 
-<script type="text/javascript">
 
-$("#Search :input").prop("disabled", true);
-
-// enable tool tips
-$('[data-toggle="tooltip"]').tooltip();
-
-$(document).ready(function(){
-    $('table').each(function(){
-        $(this).addClass('table table-striped table-bordered')
-    });
-});
+</div>
 
 </script>

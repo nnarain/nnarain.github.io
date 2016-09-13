@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html>
-    
+
   {% include head.html %}
   <body>
 
-    {% include header.html %}
 
-    <div class="page-content">
+        <div class="container main outer">
+              <div class="row">
+                <div class="col-md-3 col-xs-12">
+                    Sidebar
+                </div>
+                <div class="col-md-9 col-xs-12 full">
+                  {{ content }}
+                  <div class="row">
+                    <div class="col-md-12 col-xs-12 footer">
+                        Footer
+                    </div>
+                  </div>
+                </div> <!-- end /.col-md-9 -->
+              </div> <!-- end /.row -->
+            </div>
 
-        {{ content }}
-
-    </div>
-
-    {% include footer.html %}
-      
-    <script type="text/javascript">
-        // enable tool tips
-        $('[data-toggle="tooltip"]').tooltip();
-        
-        $(document).ready(function(){
-            $('pre code').each(function(i, block) {
-                hljs.highlightBlock(block);
-            });
-        });
-    </script>
 
   </body>
 

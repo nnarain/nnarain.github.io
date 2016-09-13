@@ -2,128 +2,61 @@
 layout: default
 ---
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-md-7">
-        <div class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-10">
-              {% for post in paginator.posts %}
-                <div class="panel panel-default" data-tags="{{post.tags}}">
-
-                  <div class="panel-heading"><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></div>
-                  <div class="panel-body">
-
-                    <div class="row">
-                      {% if post.thumbnail %}
-                      <div class="col-xs-6 col-md-3">
-                          <div class="thumbnail">
-                            <a href="{{post.url}}"><img src="{{post.thumbnail}}"></a>
-                          </div>
-                      </div>
-                      {% endif %}
-
-                      <div class="col-md-9">
-                        <h2><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-                        {{post.description}}
-                      </div>
-                    </div>
-
-
-                  </div>
-                  <div class="panel-footer">
-                    <!--
-                    <b>Tags:</b>
-                    -->
-                    {% if post.tag %}
-                      {% assign ts = post.tag | split:&nbsp %}
-                      {% for t in ts %}
-                        <span class="label label-success tag">{{t}}</span>
-                      {% endfor %}
-                    {% endif %}
-                  </div>
-
-                </div>
-              {% endfor %}
-
-              <!-- Pagination links -->
-              <nav>
-                <ul class="pagination">
-                  <!-- Previous Arrow -->
-                  <li>
-                  {% if paginator.previous_page %}
-                    <a href="{{ paginator.previous_page_path }}" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  {% else %}
-                    <a href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  {% endif %}
-                  </li>
-
-                  <!-- Numbered links for pages -->
-                  {% for page in (1..paginator.total_pages)%}
-                  <li>
-                    {% if page == 1%}
-                    <a href="/">
-                      {{page}}
-                    </a>
-                    {% else %}
-                    <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">
-                      {{page}}
-                    </a>
-                    {%endif%}
-                  </li>
-                  {% endfor %}
-
-                  <!-- Next Arrow -->
-                  <li>
-                  {% if paginator.next_page %}
-                    <a href="{{ paginator.next_page_path }}" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  {% else %}
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  {% endif %}
-                  </li>
-                </ul>
-              </nav>
-
-              <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-            </div>
-            <div class="col-xs-1"></div>
+<div class="well">
+    <div class="list-group">
+      {% for post in paginator.posts %}
+      <div class="list-group-item">
+        <div class="row-action-primary">
+          <i class="fa fa-sticky-note"></i>
         </div>
-    </div>
-        <div class="hidden-xs hidden-sm col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading"><span class="post-meta">Github Activity</span></div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-6 col-md-3">
-                            <a href="https://github.com/{{site.github_username}}" class="thumbnail">
-                                <img id="avatarImg" src="" />
-                            </a>
-                        </div>
-                        <div class="col-xs-6 col-md-9">
-                            <div id="feedList" class="panel-group">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row-content">
+          <div class="least-content">{{ post.date | date_to_string }}</div>
+          <h4 class="list-group-item-heading"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h4>
+
+          <p class="list-group-item-text">{{ post.content | strip_html | truncatewords: 20 }}</p>
         </div>
-        <div class="hidden-xs hidden-sm col-md-1"></div>
+      </div>
+      <div class="list-group-separator"></div>
+      {% endfor %}
     </div>
-</div>
 
-<script type="text/javascript">
 
-    $(document).ready(function(){
-        setupFeed("{{site.github_username}}");
-        initPostThumbnails();
-    });
+    <!-- Pagination links -->
+    {% if paginator.total_pages > 1 %}
+    <ul class="pager">
+      {% if paginator.previous_page %}
+        <li class="previous">
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
+        </li>
+      {% else %}
+        <li class="previous disabled"><span aria-hidden="true">&laquo;</span></li>
+      {% endif %}
 
-</script>
+      <li><a href="/">First</a></li>
+
+      {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+          <li class="active">
+             <a>{{ page }}<span class="sr-only">(current)</span></a>
+          </li>
+        {% elsif page == 1 %}
+          <li><a href="/">{{ page }}</a></li>
+        {% else %}
+          <li>
+            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      <li><a href="/page{{ paginator.total_pages }}/">Last</a></li>
+
+      {% if paginator.next_page %}
+        <li class="next">
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a>
+        </li>
+      {% else %}
+        <li class="next disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+</div><!-- end #home -->
