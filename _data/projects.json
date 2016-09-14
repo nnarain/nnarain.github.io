@@ -2,7 +2,7 @@
 	{
 		"name": "Gameboy Emulator",
 		"image": "gameboy.gif",
-		"url": "/somewhere",
+		"url": "/projects/gameboy",
 		"repo": "https://github.com/nnarain/gameboy",
 		"date": "September 2016",
 		"tags": ["Gameboy","Emulator", "C++"]
