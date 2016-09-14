@@ -58,6 +58,9 @@ LCD Display RAM
 * There are 2 Background map data locations in the memory map. One at `$9800 - $98FF` the other at `$9C00 - $9FFF`
 * Selected using bit 3 in the LCDC control register.
 
+**Window Overlay**
+
+* Tiles can be drawn over the background tiles.
 
 Bringing it together
 --------------------
@@ -65,14 +68,28 @@ Bringing it together
 ![Image not found!](/assets/2016/09/10/scroll-display.png)
 
 
-  Character Composition
-  ---------------------
+**How to read tile patterns for background tile map**
 
-  * `8x8` dot composition
-  * `8x16` dot composition
-  * 4 shades of gray
-  * 40 OBJ characters can be displayed on screen. 10 per line.
-  * Display data for OBH characters is stored in OAM `$FE00 - $FE9F`
+1. Determine which memory range is being used for background map
+  * Either `$9800 - $98FF` or `$9C00 - $9FFF`.
+  * Selected using Bit 3 of LCDC control register
+2. Determine Character Data range
+  * Either `$8000 - $8FFF` (Range 1) or `$8800 - $97FF` (Range 2)
+  * Bit 4 of LCDC control register.
+3. Iterate through bytes in background tile map range that was determined (1)
+  * If Range 1 of Character Data is selected
+    * interpret byte from background map data as unsigned (0 - 255) and read tiles starting at `$8000`
+  * If Range 2 of Character Data is selected
+    * interpret byte as signed (-128 - 127) and read tiles staring at `$9000` 
+
+Character Composition
+---------------------
+
+* `8x8` dot composition
+* `8x16` dot composition
+* 4 shades of gray
+* 40 OBJ characters can be displayed on screen. 10 per line.
+* Display data for OBH characters is stored in OAM `$FE00 - $FE9F`
     * y-axis coordinate
     * x-axis coordinate
     * character code
