@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: Resume
 permalink: /resume/
 ---
@@ -15,7 +15,7 @@ Technical Skills
 * **Languages**: C, C++, Java, Python
 * Schematic Capture and PCB layout design using Altium
 * Applied object oriented principles and design patterns
-* Basic Web Development - HTML, Javascript, Ruby on Rails (I made this site with basic Bootstrap and jQuery)
+* Basic Web Development - HTML, Javascript, Ruby on Rails, NodeJS + Express
 * Designed digital logic circuits
 * Frameworks and APIs: Qt, Android
 * **Software Tools**: Microsoft Visual Studio, Eclipse, Git

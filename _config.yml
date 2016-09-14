@@ -1,4 +1,5 @@
 # Site settings
+author: Natesh Narain
 title: Natesh's Dev Blog!
 email: nnaraindev@gmail.com
 description: >
@@ -24,8 +25,7 @@ kramdown:
 paginate: 5
 paginate_path: "/blog/page:num"
 
-# code highlighting
-highlight_theme: vs
+enableTags: true
 
 # gems
 gems: [jekyll-paginate, jekyll-gist]

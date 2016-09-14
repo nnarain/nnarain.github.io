@@ -1,55 +1,11 @@
 ---
 layout: default
 ---
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-1 col-md-3"></div>
-        <div class="col-xs-10 col-md-6">
-            <header class="post-header">
-                <h1 class="post-title">{{page.title}}</h1>
-            </header>
-            
-            <div class="jumbotron">
-                {{content}}
-            </div>
-        </div>
-        <div class="col-xs-1 col-md-3"></div>
+<div class="well">
+    {% if page.subtitle %}
+    <h4 class="home-subtitle">{{ page.subtitle }}</h4>
+    {% endif %}
+    <div>
+    	{{ content }}
     </div>
 </div>
-
-<!--
-<div class="container-fluid">
-<div class="row">
-
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-    
-        <div class="post">
-
-          <header class="post-header">
-            <h1 class="post-title">{{ page.title }}</h1>
-          </header>
-
-          <div class="container">
-            <div class="jumbotron">
-                <article class="post-content">
-                    {{ content }}
-                </article>
-            </div>
-          </div>
-
-        </div>
-        
-    </div>
-    <div class="col-md-2"></div>
-    
-</div>
-</div>
--->
-
-<script type="text/javascript">
-
-$("#Search :input").prop("disabled", true);
-
-</script>
