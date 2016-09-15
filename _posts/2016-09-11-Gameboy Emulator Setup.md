@@ -39,7 +39,10 @@ They are:
 
 Below is how I setup the registers up in code.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```c++
+
+class CPU
+{
 public:
     union Register
     {
@@ -64,8 +67,9 @@ private:
     Register hl_;
     Register sp_;
     Register pc_;
+}
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 To make this code portable I flipped the `hi` and `lo` registers depending of endianness.
 
@@ -73,7 +77,7 @@ To make this code portable I flipped the `hi` and `lo` registers depending of en
 
 Take a look at a table of Gameboy Opcodes [here](http://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html). These are the instructions that will eventually be implemented.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```c++
 // cpu.h
 
 class CPU
@@ -88,9 +92,9 @@ private:
 
 };
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```c++
 // cpu.cpp
 
 void CPU::step()
@@ -130,7 +134,7 @@ void CPU::decode2(uint8_t opcode)
         ...
     }
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 **Memory Management Unit**
 

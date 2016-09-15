@@ -13,18 +13,18 @@ Recently had a bit of trouble setting up GTest with Visual Studio using CMake. S
 
 You will need to get a copy of googletest:
 
-```bash
+{% highlight bash %}
 git clone https://github.com/google/googletest.git
-```
+{% endhighlight %}
 
 **Build**
 
 Do an out of source build.
 
-```bash
+{% highlight bash %}
 mkdir build && cd build
-cmake .. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=<Installation Directory>
-```
+cmake .. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=<Installation Directory>t
+{% endhighlight %}
 
 Ok notice the `BUILD_SHARED_LIBS` option? The was the source of the issue when I initially tried this.
 
@@ -44,7 +44,7 @@ Ok so the hard part is over. Now to include GTest in the CMake project.
 
 Follow the instructions [here](https://cmake.org/cmake/help/v3.0/module/FindGTest.html).
 
-```cmake
+{% highlight cmake %}
 cmake_minimum_required(VERSION 2.8)
 
 project(gtest-test)
@@ -67,7 +67,8 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 add_test(MyTests ${PROJECT_NAME})
-```
+
+{% endhighlight %}
 
 Note: Threading library needed to be added.
 
