@@ -10,5 +10,9 @@
     {
         "icon": "fa-youtube",
         "link": "https://www.youtube.com/channel/UCVYy1Jiww7YAsgEFD2CSQSw"
+    },
+    {
+        "icon": "fa-envelope",
+        "link": "mailto:nnaraindev@gmail.com"
     }
 ]

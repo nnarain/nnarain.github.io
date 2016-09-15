@@ -20,5 +20,11 @@
     "url": "/resume",
     "icon": "fa-graduation-cap",
     "layout": "post"
-  }
+    },
+    {
+      "text": "Archive",
+      "url": "/archive",
+      "icon": "fa-bookmark",
+      "layout": "post"
+    }
 ]
