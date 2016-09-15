@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Debugging with SimAVR
+title: Visualizing with SimAVR
 description: Setup SimAVR CMake targets to debug AVR C programs!
 tag: avr cmake c c++
 thumbnail: /assets/2016/04/09/simavr-thumb.png
 repo_url: https://github.com/nnarain/cmake-avr-template
-issue_number: 
+issue_number:
 prev_post: 2016-03-29-AVR CMake Toolchain
 ---
 
@@ -147,7 +147,7 @@ include_directories(
 	${SIMAVR_INCLUDE_DIR}
 )
 
-# generate vcd trace file 
+# generate vcd trace file
 add_vcd_trace(project ${AVR_MCU} 16000000
 	"OUTPUT1,5,PORTB"
 	"OUTPUT2,6,PORTB"
@@ -202,7 +202,7 @@ macro(add_vcd_trace target_name mcu clock_speed)
 
 	endforeach(arg ${ARGN})
 
-	# remove semi-colons that delimit a cmake list 
+	# remove semi-colons that delimit a cmake list
 	string(REPLACE ";" " " trace_list ${trace_list})
 
 	...
