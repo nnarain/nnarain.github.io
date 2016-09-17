@@ -10,7 +10,7 @@
 	{
 		"name": "ESE Project Board",
 		"image": "board-layout.png",
-		"url": "#",
+		"url": "/projects/eseboard",
 		"repo": "https://github.com/nnarain/ESEPlatformController",
 		"date": "Febuary 2015",
 		"tags": ["Electronics", "C", "Embedded", "Altium"]
