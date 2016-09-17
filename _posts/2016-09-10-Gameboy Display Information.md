@@ -80,7 +80,7 @@ Bringing it together
   * If Range 1 of Character Data is selected
     * interpret byte from background map data as unsigned (0 - 255) and read tiles starting at `$8000`
   * If Range 2 of Character Data is selected
-    * interpret byte as signed (-128 - 127) and read tiles staring at `$9000` 
+    * interpret byte as signed (-128 - 127) and read tiles staring at `$9000`
 
 Character Composition
 ---------------------
@@ -88,9 +88,31 @@ Character Composition
 * `8x8` dot composition
 * `8x16` dot composition
 * 4 shades of gray
-* 40 OBJ characters can be displayed on screen. 10 per line.
+
+
+Object Attribute Memory
+-----------------------
+
+* Used for drawing sprites or objects (OBJ)
+* There can be up to 40 OBJs
+* OAM RAM `$FE00 - $FE9F`
+* 10 OBJs can be displayed on the same Y line
 * Display data for OBH characters is stored in OAM `$FE00 - $FE9F`
-    * y-axis coordinate
-    * x-axis coordinate
-    * character code
-    * attribute data
+    * y-axis coordinate (1 byte)
+    * x-axis coordinate (1 byte)
+    * character code - tile number (1 byte)
+    * attribute data (1 byte)
+
+![Image not found!](/assets/2016/09/10/oam-registers.png)
+
+DMA Transfer
+------------
+
+* DMA transfers `40x32` bits of data.
+* From RAM area `$8000 - $DFFF` to OAM `$FE00 - $FE9F`
+* In DMG mode, data cannot be transferred from ROM area `$0000 - $7FFF`
+* Transfer time is 160 us
+
+Example Routine for using DMA
+
+![Image not found!](/assets/2016/09/10/example-dma-routine.png)
