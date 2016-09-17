@@ -4,30 +4,20 @@ title: Archive
 permalink: /archive/
 ---
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-1 col-md-3"></div>
-        <div class="col-sm-10 col-md-6">
-            <ul class="list-group">
-                {% for post in site.posts %}
-                    <li class="list-group-item">
-                        <ul class="archive-list-entry">
-                            <li>
-                                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-                            </li>
-                            <li>
-                                <a class="" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                            </li>
-                            <li>
-                                <small>
-                                    {{post.description}}
-                                </small>
-                            </li>
-                        </ul>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="col-sm-1 col-md-3"></div>
-    </div>
-</div>
+{% for post in site.posts %}
+    <li class="list-group-item">
+        <ul class="archive-list-entry">
+            <li>
+                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+            </li>
+            <li>
+                <a class="" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </li>
+            <li>
+                <small>
+                    {{post.description}}
+                </small>
+            </li>
+        </ul>
+    </li>
+{% endfor %}
