@@ -113,6 +113,6 @@ DMA Transfer
 * In DMG mode, data cannot be transferred from ROM area `$0000 - $7FFF`
 * Transfer time is 160 us
 
-Example Routine for using DMA
+Example routine for using DMA
 
 ![Image not found!](/assets/2016/09/10/example-dma-routine.png)
