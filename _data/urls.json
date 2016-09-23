@@ -19,12 +19,12 @@
     "text": "Resume",
     "url": "/resume",
     "icon": "fa-graduation-cap",
-    "layout": "post"
+    "layout": "resume"
     },
     {
       "text": "Archive",
       "url": "/archive",
       "icon": "fa-bookmark",
-      "layout": "post"
+      "layout": "archive"
     }
 ]
