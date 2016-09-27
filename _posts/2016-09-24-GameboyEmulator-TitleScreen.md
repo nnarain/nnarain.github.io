@@ -15,7 +15,7 @@ Getting to the copyright screen was straight forward for the most part. There wa
 
 ![Image not found!](/assets/2016/09/24/copyright-screen.png)
 
-**Getting pasted the Copyright Screen**
+**Getting past the Copyright Screen**
 
 After getting to the Copyright screen nothing happened. I knew at this point it should move into the menu screen. So clearly there's a problem!
 
