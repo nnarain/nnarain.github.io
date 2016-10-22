@@ -19,7 +19,7 @@ The timer interrupt is causing issues for multiple games. The blow games are run
 Games!
 ------
 
-But hey thinks are going good!
+But hey things are going good!
 
 ![Image not found!](/assets/2016/10/22/minesweeper.gif)
 ![Image not found!](/assets/2016/10/22/mario.gif)
