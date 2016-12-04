@@ -8,9 +8,6 @@
 import os
 import datetime
 
-import requests
-import json
-
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
