@@ -32,6 +32,12 @@ bootstrap --with-python=python3.5
 bjam --with-python python-debugging=off threading=multi variant=debug link=static stage
 ```
 
+In `user-config.jam`
+
+```jam
+using python : 3.5 : C:\\Python35 : C:\\Python35\\include : C:\\Python35\\libs ;
+```
+
 The options specified above really matter (at least on Windows). Boost.Python is linked statically.
 
 Lastly it is important to define `BOOST_PYTHON_STATIC_LIB` to prevent boost from linking shared libraries by default.
