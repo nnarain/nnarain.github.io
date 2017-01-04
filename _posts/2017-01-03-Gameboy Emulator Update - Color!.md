@@ -13,7 +13,11 @@ Here's a look at color support for sprites:
 
 ![Image not found!](/assets/2017/01/03/poke1.gif)
 
-Exciting stuff! Of course support for color background tile map is next!
+Edit: And now with background color!
+
+![Image not found!](/assets/2017/01/03/poke2.gif)
+
+Exciting stuff!
 
 In other news. I've being working on the [Python bindings for GameboyCore](https://github.com/nnarain/gameboycore-python).
 
