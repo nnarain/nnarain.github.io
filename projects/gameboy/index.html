@@ -1,6 +1,21 @@
 ---
-layout: default
+layout: post
 title: Gameboy Emulator
 ---
 
-Gameboy Emulator Project Page!
+Repositories
+------------
+
+* [GameboyCore](https://github.com/nnarain/gameboycore)
+* [Dotrix](https://github.com/nnarain/dotrix)
+* [GameboyCore Python](https://github.com/nnarain/gameboycore-python)
+
+
+What is this?
+-------------
+
+This project is a gameboy emulator I has been working on. It emulates Gameboy CPU, grpahics and link port functionality. As well as partial color support.
+
+What makes [GameboyCore](https://github.com/nnarain/gameboycore) special is that it is a library! A dependency free C++11 library. There is no platform/API specific graphics or audio functionality coupled to the emulation code.
+The [GameboyCore](https://github.com/nnarain/gameboycore) exposes Graphics, Audio and Link port information through its API. This is done through a series of callback functions that call into the host system for the task of rendering and playing audio.
+This means that as long as your platform/environment has a valid C++11 compiler you have a working Gameboy Emulator!!
