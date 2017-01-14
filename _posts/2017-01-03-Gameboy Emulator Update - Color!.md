@@ -17,6 +17,10 @@ Edit: And now with background color!
 
 ![Image not found!](/assets/2017/01/03/poke2.gif)
 
+Edit: Just for fun
+
+![Image not found!](/assets/2017/01/03/pidgey.gif)
+
 Exciting stuff!
 
 In other news. I've being working on the [Python bindings for GameboyCore](https://github.com/nnarain/gameboycore-python).
