@@ -1,50 +1,33 @@
 ---
 layout: default
 ---
-<div class="post-content well">
-<article class="content">
-    <div class="post">{{ content }}</div>
-    <hr />
-    {% include share-page.html %}
-</article>
-<hr />
-{% assign hasSimilar = '' %}
-{% for post in site.posts  %}
-    {% assign postHasSimilar = false %}
-    {% for tag in post.categories %}
-        {% for thisTag in page.categories %}
-            {% if postHasSimilar == false and hasSimilar.size < 6 and post != page and tag == thisTag %}
-                {% if hasSimilar.size == 0 %}
-                <div class="panel-body">
-                <h4>Related Posts</h4>
-                <ul>
-                {% endif %}
-                <li class="relatedPost">
-                    <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
-                    {% if post.categories %}
-                        <small>(Categories: {% for category in post.categories %}<a href="/category/{{ category }}">{{ category }}</a>{% if forloop.last == false %}, {% endif %}{% endfor %})</small>
-                    {% endif %}
-                </li>
-                {% capture hasSimilar %}{{ hasSimilar }}*{% endcapture %}
-                {% assign postHasSimilar = true %}
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
-{% endfor %}
-{% if hasSimilar.size > 0 %}
-    </ul>
+<div class="row">
+    <div class="col s1"></div>
+    <div class="col s10">
+        <div class="card grey darken-4 z-depth-4">
+            <div class="card-content white-text">
+                {{content}}
+            </div>
+            <div class="card-action">
+                <div class="row">
+                    <div class="col s4">
+                        {% if page.previous.url %}
+                        <div align="center">
+                            <a href="{{page.previous.url}}" class="waves-effect waves-light btn">Previous</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col s4"></div>
+                    <div class="col s4">
+                        {% if page.next.url %}
+                        <div align="center">
+                            <a href="{{page.next.url}}" class="waves-effect waves-light btn">Next</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-{% endif %}
-
-<div class="PageNavigation">
-  {% if page.previous.url %}
-    <a class="prev pull-left" href="{{ page.previous.url }}">&laquo; {{ page.previous.title }}</a>
-  {% endif %}
-  {% if page.next.url %}
-    <a class="next pull-right" href="{{ page.next.url }}">{{ page.next.title }} &raquo;</a>
-  {% endif %}
-</div>
-
-{% include disqus.html %}
-
+    <div class="col s1"></div>
 </div>

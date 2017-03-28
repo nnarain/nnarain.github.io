@@ -6,3 +6,7 @@ $back-color: rgb(96, 125, 139);
 body{
     background-color: $back-color;
 }
+
+img{
+    max-width: 100%;
+}
