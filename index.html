@@ -19,7 +19,9 @@ title: Natesh's Dev Blog!!!
                 </p>
             </div>
             <div class="card-action">
-                <a href="">Read more</a>
+                {% for tag in post.tag %}
+                <div class="chip">{{tag | downcase}}</div>
+                {% endfor %}
             </div>
         </div>
         {% endfor %}
