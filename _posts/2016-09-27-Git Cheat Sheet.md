@@ -2,7 +2,7 @@
 layout: post
 title: Git Cheat Sheet
 description:
-tag:
+tag: ['Git']
 thumbnail: /assets/2016/09/27/
 repo_url:
 ---
