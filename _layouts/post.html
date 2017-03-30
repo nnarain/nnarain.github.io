@@ -6,6 +6,8 @@ layout: default
     <div class="col s10">
         <div class="card grey darken-4 z-depth-4">
             <div class="card-content white-text">
+                <h2>{{page.title}}</h2>
+                <br />
                 {{content}}
             </div>
             <div class="card-action">
@@ -26,6 +28,7 @@ layout: default
                         {% endif %}
                     </div>
                 </div>
+                {% include disqus.html %}
             </div>
         </div>
     </div>
