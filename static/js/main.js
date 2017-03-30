@@ -4,5 +4,7 @@
 		$('table').each(function(){
 			$(this).addClass('striped bordered highlight');
 		});
+
+		$(".button-collapse").sideNav();
 	});
 })(jQuery);
