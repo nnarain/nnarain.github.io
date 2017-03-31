@@ -23,10 +23,6 @@ title: Natesh's Dev Blog!!!
                     {% for tag in post.tag %}
                     <div class="chip grey darken-3 white-text">{{tag | downcase}}</div>
                     {% endfor %}
-
-                    <div class="waves-effect wave-light btn right">
-                        READ MORE
-                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -49,7 +45,7 @@ title: Natesh's Dev Blog!!!
 
                         {% for page in (1..paginator.total_pages) %}
                             {% if page == paginator.page %}
-                                <li class="active">
+                                <li class="active blue darken-4">
                                     <a>{{page}}<span class="sr-only">(current)</span></a>
                                 </li>
                             {% elsif page == 1 %}
