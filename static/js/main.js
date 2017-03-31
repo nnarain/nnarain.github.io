@@ -2,7 +2,7 @@
 	$(document).ready(function(){
 		// added bootstrap the tables
 		$('table').each(function(){
-			$(this).addClass('striped bordered highlight black-text');
+			$(this).addClass('table-background striped bordered black-text');
 		});
 
 		$(".sidemenu-trigger").sideNav();
