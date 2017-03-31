@@ -2,7 +2,7 @@
 layout: post
 title: First Post!!!
 description: Just trying it out!
-tag: greetings!
+tag: ["greetings!"]
 thumbnail: /assets/2015/01/17/helloworld.png
 ---
 

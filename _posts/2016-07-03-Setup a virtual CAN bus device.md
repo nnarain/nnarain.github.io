@@ -2,7 +2,7 @@
 layout: post
 title: Setup a virtual CAN bus device
 description: Use SocketCAN driver to setup a virtual CAN bus device on your linux system
-tag: socketcan can-bus linux
+tag: ["socketcan", "can bus", "linux"]
 thumbnail: /assets/2016/07/03/thumb.png
 repo_url:
 issue_number:

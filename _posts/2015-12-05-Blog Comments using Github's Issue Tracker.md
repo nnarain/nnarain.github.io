@@ -2,7 +2,7 @@
 layout: post
 title: Blog Comments using Github's Issue Tracker
 description: How to add a comment section to your blog site using Github's Issue Tracker
-tag: web html css bootstrap jekyll
+tag: ["web", "html", "css", "bootstrap", "jekyll"]
 thumbnail: /assets/2015/12/05/thumbnail.png
 repo_url: http://github.com/nnarain/nnarain.github.io
 issue_number: 17
@@ -85,7 +85,7 @@ The HTML for the comment list is also simple.
     {% raw %}
     <h4>Click <a href="https://github.com/yourusername/yourblogrepo/issues/{{page.issue_number}}">here</a> to view the issue tracker</h4>
     {% endraw %}
-    
+
     <ul id="commentList" class="comment-list">
         <!-- Loaded comments go here -->
     </ul>
@@ -105,7 +105,7 @@ Now for the "Add Comment" form. A simple form consisting of a textarea and a but
     {% raw %}
     <h4>Click <a href="https://github.com/yourusername/yourblogrepo/issues/{{page.issue_number}}">here</a> to view the issue tracker</h4>
     {% endraw %}
-    
+
     <ul id="commentList" class="comment-list">
         <!-- Loaded comments go here -->
     </ul>
@@ -135,7 +135,7 @@ You should have something that looks like this
 {
     padding: 10px;
     margin-top: 10px;
-    
+
     border-top: 1px solid #DADADA;
 }
 
@@ -143,17 +143,17 @@ You should have something that looks like this
 .comment-list
 {
     list-style:none;
-    
+
     max-height: 500px;
     overflow-y: auto;
 }
 
-.comment-list li 
+.comment-list li
 {
     margin-top:10px;
 }
 
-.comment-list li > div 
+.comment-list li > div
 {
     display:table-cell;
 }
@@ -173,20 +173,20 @@ You should have something that looks like this
 }
 
 /* Style for text in comment */
-.comment-text p 
+.comment-text p
 {
     margin:0;
     padding-left: 10px;
 }
 
-.comment-text h1 
+.comment-text h1
 {
     margin:0;
     padding-left: 10px;
 }
 
 /* Style used for text that appear under comment */
-.sub-text 
+.sub-text
 {
     color:#aaa;
     font-family:verdana;
@@ -215,7 +215,7 @@ General layout for a Bootstrap Modal is:
 ```html
 
 <div id="..." class="modal fade" role="dialog">
-    <div class="modal-dialog"> 
+    <div class="modal-dialog">
         <!-- Modal Content -->
         <div class="modal-content">
             <div class="modal-header">
@@ -232,7 +232,7 @@ General layout for a Bootstrap Modal is:
 ```
 
 <div id="testModal1" class="modal fade" role="dialog">
-    <div class="modal-dialog"> 
+    <div class="modal-dialog">
         <!-- Modal Content -->
         <div class="modal-content">
             <div class="modal-header">
@@ -252,7 +252,7 @@ In our case we want a form to get the users information.
 ```html
 <!-- Modal for Github Credentials -->
 <div id="credDialog" class="modal fade" role="dialog">
-    <div class="modal-dialog"> 
+    <div class="modal-dialog">
         <!-- Modal Content -->
         <div class="modal-content">
             <div class="modal-header">
@@ -275,7 +275,7 @@ In our case we want a form to get the users information.
 ```
 
 <div id="testModal2" class="modal fade" role="dialog">
-    <div class="modal-dialog"> 
+    <div class="modal-dialog">
         <!-- Modal Content -->
         <div class="modal-content">
             <div class="modal-header">

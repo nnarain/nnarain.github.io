@@ -2,7 +2,7 @@
 layout: post
 title: Deferred Shading with SGL
 description: Deferred Shading example using SGL
-tag: opengl c++
+tag: ["opengl", "c++"]
 thumbnail: /assets/2015/07/08/deferredshading1.png
 prev_post: 2015-05--03-SGL FPS Counter
 next_post:
@@ -107,7 +107,7 @@ Example::init()
 		_geometryPass.addAttribute("vPosition");
 		_geometryPass.addAttribute("vNormal");
 		_geometryPass.addAttribute("vTexCoord");
-		
+
 		// bind targets to their output locations
 		// order matters!
 		// i.e, outPosition is render target 0, outNormal is render target 1, etc
@@ -191,7 +191,7 @@ The depth buffer is required as we need to do depth testing.
 
 using namespace sgl;
 
-GBuffer::GBuffer() : 
+GBuffer::GBuffer() :
 	// initialize every texture as a texture 2d
 	_pos(Texture::Target::TEXTURE2D),
 	_texCoord(Texture::Target::TEXTURE2D),
@@ -225,7 +225,7 @@ void GBuffer::init(int width, int height)
 	// i.e. _pos texture will be added to the first render target (target 0), _normal to render target 1, etc.
 
 	// this is the same order as the frag outputs that were bound to the shader earlier.
-	
+
 	_fbo.addMRT(_pos);
 	_fbo.addMRT(_normal);
 	_fbo.addMRT(_texCoord);
@@ -376,7 +376,7 @@ void Example::geometryPass()
 
 {% endhighlight %}
 
-Wait a second?! Where is the code to render to multiple textures? 
+Wait a second?! Where is the code to render to multiple textures?
 
 It's right here:
 
@@ -411,7 +411,7 @@ uniform mat3 N;
 void main()
 {
 	gl_Position = MVP * vec4(vPosition, 1);
-	
+
 	fPosition = (M * vec4(vPosition, 1)).xyz;
 	fNormal   = N * vNormal;
 	fTexCoord = vTexCoord;
@@ -535,23 +535,23 @@ vec2 calcTexCoord();
 void main()
 {
 	vec2 texCoord = calcTexCoord();
-	
+
 	vec3 position   = texture(positionMap, texCoord).xyz;
 	vec3 normal     = texture(normalMap,   texCoord).xyz;
 	vec3 baseColor  = texture(diffuseMap,  texCoord).xyz;
-	
+
 	// ambient light
 	vec3 ambientColor = vec3(1,1,1) * 0.3;
-	
+
 	vec3 diffuseColor = vec3(0,0,0);
-	
+
 	float diffuseFactor = dot(normal, -vec3(-1,-1,-1));
-	
+
 	if(diffuseFactor > 0)
 	{
 		diffuseColor = vec3(1,1,1) * vec3(1,1,1) * 0.8 * diffuseFactor;
 	}
-	
+
 	fragColor = baseColor * (ambientColor + diffuseColor);
 }
 

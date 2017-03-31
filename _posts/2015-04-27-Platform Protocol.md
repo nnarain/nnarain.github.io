@@ -2,7 +2,7 @@
 layout: post
 title: Platform Protocol
 description: The protocol used to communicate with the Platform Controller
-tag: HCS12 embedded-systems java
+tag: ["HCS12", "embedded-systems", "java"]
 thumbnail: /assets/2015/04/27/thumb.png
 ---
 

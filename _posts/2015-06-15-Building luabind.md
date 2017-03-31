@@ -2,7 +2,7 @@
 layout: post
 title: Building luabind
 description: Notes of building luabind with Visual Studio 2013
-tag: c++ lua luabind visualstudio
+tag: ["c++", "lua", "luabind", "visualstudio"]
 thumbnail: /assets/2015/06/15/thumbnail.png
 ---
 
@@ -18,7 +18,7 @@ Requirements
 Compatibility
 -------------
 
-First thing to remember is lua libs and luabind libs need to be compiled with the same version of 
+First thing to remember is lua libs and luabind libs need to be compiled with the same version of
 Visual Studio. So the easiest thing to do is compile everything from source. There are lua binaries
 avaiable, however if using a version of VS above 2010 this won't be much help.
 
@@ -50,5 +50,4 @@ through Visual Studio
 * Set project output as static library
 * Compile sources
 
-And thats it. 
-
+And thats it.

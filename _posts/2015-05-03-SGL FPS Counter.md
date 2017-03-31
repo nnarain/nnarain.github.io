@@ -2,7 +2,7 @@
 layout: post
 title: SGL - Demo
 description: Simple textured cube with a FPS counter
-tag: opengl c++ programming
+tag: ["opengl", "c++", "programming"]
 thumbnail: /assets/2015/05/03/crate5.gif
 repo_url: https://github.com/nnarain/sgl-wrapper
 prev_post:
@@ -53,8 +53,8 @@ int main()
 	GLFWwindow* window = glfwCreateWindow(
 		SCREEN_WIDTH,
 		SCREEN_HEIGHT,
-		"SGL Example", 
-		NULL, 
+		"SGL Example",
+		NULL,
 		NULL
 	);
 
@@ -83,7 +83,7 @@ int main()
 
 First we create the opengl context window then initialize SGL. Initializing SGL initializes GLEW which is what SGL is built on. Also note that GLEW must be include before GLFW.
 
-Next we need to create the a class to house the update and render logic. 
+Next we need to create the a class to house the update and render logic.
 
 Typically I make a class with 3 function:
 
@@ -244,7 +244,7 @@ Example::init()
 	{
 		// load the model shader
 		_modelShader.loadFromFile(
-			"assets/basic.vert.glsl", 
+			"assets/basic.vert.glsl",
 			"assets/basic.frag.glsl"
 		);
 
@@ -252,7 +252,7 @@ Example::init()
 		_modelShader.addAttribute("vPosition", 3); // location = 0
 		_modelShader.addAttribute("vNormal",   3); // location = 1
 		_modelShader.addAttribute("vTexCoord", 2); // location = 2
-		
+
 		// link the shader
 		_modelShader.link();
 
@@ -268,7 +268,7 @@ Example::init()
 			Texture::Param::LINEAR
 		);
 		_crateTexture.parameter(
-			Texture::ParamName::MIN_FILTER, 
+			Texture::ParamName::MIN_FILTER,
 			Texture::Param::LINEAR
 		);
 
@@ -418,14 +418,14 @@ Example::init()
 
 		// load the text shader
 		_textShader.loadFromFile(
-			"assets/text.vert.glsl", 
+			"assets/text.vert.glsl",
 			"assets/text.frag.glsl"
 		);
 		_textShader.addAttribute("vPosition", 2);
 		_textShader.addAttribute("vTexCoord", 2);
 		_textShader.link();
 
-		// load the font file 
+		// load the font file
 		// and specify how many rows and columns it has
 		_font.init("assets/font2.DDS", 16, 16, false);
 
@@ -457,7 +457,7 @@ And to render the text:
 void MathTest::update(float delta)
 {
 	...
-	
+
 	// clear the old text
 	_fps.clear();
 	// add the new value with a formatted string

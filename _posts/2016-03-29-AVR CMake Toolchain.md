@@ -2,10 +2,10 @@
 layout: post
 title: AVR CMake Toolchain
 description: Creating a CMake toolchain file for AVR GCC
-tag: avr cmake c c++
+tag: ["avr", "cmake", "c", "c++"]
 thumbnail: /assets/2016/03/29/cmake_logo.png
 repo_url: https://github.com/nnarain/cmake-avr-template
-issue_number: 
+issue_number:
 next_post: 2016-04-09-Debugging with SimAVR
 ---
 
