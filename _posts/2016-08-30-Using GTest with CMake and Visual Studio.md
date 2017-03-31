@@ -2,7 +2,7 @@
 layout: post
 title: Using GTest with CMake and Visual Studio
 description: Setting GTest for use with Visual Usual Studio 2015
-tag: visual-studio cmake gtest
+tag: ["visual studio", "cmake", "gtest"]
 thumbnail:
 repo_url:
 ---

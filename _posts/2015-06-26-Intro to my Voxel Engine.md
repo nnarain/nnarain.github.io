@@ -2,10 +2,10 @@
 layout: post
 title: Intro to my Voxel Engine
 description: Introduction to my cubic voxel renderer
-tag: opengl c++ lua
+tag: ["opengl", "c++", "lua"]
 thumbnail: /assets/2015/06/26/voxelterrain.png
 repo_url: https://github.com/nnarain/VoxelEngine/tree/develop
-prev_post: 
+prev_post:
 next_post: 2015-07-23-Voxel Lighting!
 ---
 
@@ -80,17 +80,17 @@ function main()
 	while not window:shouldClose() do
 		-- poll user events
 		window:pollEvents()
-		
+
 		-- get the delta time
 		delta = timer:getElapsed()
-		
+
 		-- update game logic
 		update(delta)
-		
+
 		-- render
 		engine:render()
-		
-		-- 
+
+		--
 		window:swapBuffers()
 	end
 end
@@ -109,7 +109,7 @@ function updatePlayer(delta)
 	elseif window:isKeyPressed(Window.Key.S) then
 		player:advanceForward(-delta)
 	end
-	
+
 	-- update right \ left movement
 	if window:isKeyPressed(Window.Key.A) then
 		player:advanceRight(-delta)
@@ -121,17 +121,17 @@ end
 
 -- use a height map generating using a Noise class the create the terrain
 function generateTerrain(terrain, octaves)
-	
+
 	local x = terrain:getBlockX()
 	local z = terrain:getBlockZ()
-	
+
 	local heightMap = Noise(x, z)
 	heightMap:generate(octaves)
-	
-	for i = 0,x-1 do 
+
+	for i = 0,x-1 do
 		for k = 0,z-1 do
 			local h = math.floor(heightMap:at(i, k) * 20)
-			
+
 			for j = 0,h do
 				if j == h then
 					terrain:setBlock(i, j, k, 2)
@@ -141,7 +141,7 @@ function generateTerrain(terrain, octaves)
 					terrain:setBlock(i, j, k, 3)
 				end
 			end
-			
+
 		end
 	end
 end

@@ -2,11 +2,11 @@
 layout: post
 title: Standalone ASIO with Visual Studio 2015
 description: Notes for working with ASIO without Boost C++ using VS 2015
-tag: asio c++ boost visualstudio
-thumbnail: 
+tag: ["asio", "c++", "boost", "visualstudio"]
+thumbnail:
 ---
 
-ASIO is a C++ networking library included in Boost C++. 
+ASIO is a C++ networking library included in Boost C++.
 
 In its standard configuration ASIO relies heavily on Boost, however what if you don't want to have Boost as a dependency?
 

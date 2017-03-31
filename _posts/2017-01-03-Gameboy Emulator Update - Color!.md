@@ -2,7 +2,7 @@
 layout: post
 title: Gameboy Emulator Update - Color!
 description:
-tag:
+tag: ['Gameboy', 'Emulation']
 thumbnail: /assets/2017/01/03/
 repo_url:
 ---

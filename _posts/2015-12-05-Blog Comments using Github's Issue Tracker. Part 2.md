@@ -2,7 +2,7 @@
 layout: post
 title: Blog Comments using Github's Issue Tracker. Part2
 description: Adding Javascript to get and post comments to the issue tracker!
-tag: web html css bootstrap jekyll javascript jquery github-api
+tag: ["web", "html", "css", "bootstrap", "jekyll", "javascript", "jquery", "github-api"]
 thumbnail: /assets/2015/12/05/thumbnail.png
 repo_url: http://github.com/nnarain/nnarain.github.io
 issue_number: 18
@@ -35,13 +35,13 @@ First things first though. Remember those two modals we setup in Part 1? We need
 function setupAddComments()
 {
     $("#addCommentForm").submit(function(event){
-    
+
         // disable the default action of the form so we can add our own functionality
         event.preventDefault();
-        
+
         // get the text of the comment
         var commentText = $("#commentTextField").val();
-        
+
         // if there is text
         if(commentText)
         {
@@ -65,7 +65,7 @@ Github has provided developer with an easy to use API for getting information fr
 To get comments from a particular issue, we can do an HTTP GET request on the following URL.
 
     https://api.github.com/repos/yourusername/yourblogrepo/issues/:issuenumber
-    
+
 After that its just a matter of extracting the information we need.
 
 
@@ -88,10 +88,10 @@ function getPostComments(issueNumber, callback)
 {
     // get the issue, specified by number, for the site page
     $.get("https://api.github.com/repos/nnarain/nnarain.github.io/issues/" + issueNumber, function(issueData){
-        
+
         // get the issue's comments url
         var commentsUrl = issueData.comments_url;
-        
+
         // if the issuse has comments
         if(issueData.comments != 0)
         {
@@ -119,38 +119,38 @@ function getPostComments(issueNumber, callback)
 {
     // get the issue, specified by number, for the site page
     $.get("https://api.github.com/repos/nnarain/nnarain.github.io/issues/" + issueNumber, function(issueData){
-        
+
         // get the issue's comments url
         var commentsUrl = issueData.comments_url;
-        
+
         // if the issue has comments
         if(issueData.comments != 0)
         {
             // get the comments
             $.get(commentsUrl, function(commentsData){
-                
+
                 var ret = {"comments":[]};
-                
+
                 // for every comment object
                 var len = commentsData.length;
                 for(var i = 0; i < len; ++i)
                 {
                     var data = commentsData["" + i];
-                    
+
                     var comment = {};
                     comment["body"] = toMarkdown(data.body);
                     comment["date"] = data.created_at;
-                    
+
                     comment["user"] = {
                         "name"       : data.user.login,
                         "avatar_url" : data.user.avatar_url,
                         "url"        : "https://github.com/" + data.user.login
                     };
-                    
+
                     // add a comment to return
                     ret.comments.push(comment);
                 }
-                
+
                 callback(ret);
             });
         }
@@ -165,12 +165,12 @@ var converter = new showdown.Converter();
 function toMarkdown(markdownText)
 {
     var htmlText = "";
-    
+
     if(markdownText)
     {    
         htmlText = converter.makeHtml(markdownText);
     }
-    
+
     return htmlText;
 }
 ```
@@ -193,13 +193,13 @@ function generateCommentSection(data)
     var comments = data.comments;
     var len = comments.length;
     var output = '';
-    
+
     for(var i = 0; i < len; ++i)
     {
         var comment = comments[i];
         output += generateCommentListItem(comment);
     }
-    
+
     $("#commentList").html(output);
 }
 ```
@@ -210,7 +210,7 @@ function generateCommentSection(data)
 function generateCommentListItem(comment)
 {
     var output = '';
-    
+
     output += '<li>';
     {
         output += '<div class="comment-avatar">';
@@ -230,7 +230,7 @@ function generateCommentListItem(comment)
         output += '</div>';
     }
     output += '</li>';
-    
+
     return output;
 }
 ```
@@ -252,16 +252,16 @@ function setupPostComment(issueNumber)
     $("#credDialog").on('shown.bs.modal', function(){
         $("#usernameField").focus();
     });
-    
+
     // override the default form action
     $("#credForm").submit(function(event){
         event.preventDefault();
-        
+
         var username = $("#usernameField").val();
         var password = $("#passwordField").val();
-        
+
         var commentBody = $("#commentTextField").val();
-    
+
         // check that the username, password and comment body are not null
         if(username && password && commentBody)
         {
@@ -272,7 +272,7 @@ function setupPostComment(issueNumber)
 ...
 ```
 
-To post a comment to the issue tracker we need to do a HTTP POST request to Github's API. Two important things to note. 
+To post a comment to the issue tracker we need to do a HTTP POST request to Github's API. Two important things to note.
 
 1. Our POST request needs to be authorized.
 2. We need to set our content and data type to a json string, that's what the Github API expects.
@@ -293,7 +293,7 @@ function makeBasicAuth(username, password)
 {
     var token = username + ":" + password;
     var hash = btoa(token);
-    
+
     return "Basic " + hash;
 }
 
@@ -311,15 +311,15 @@ function setupPostComment(issueNumber)
     $("#credDialog").on('shown.bs.modal', function(){
         $("#usernameField").focus();
     });
-    
+
     $("#credForm").submit(function(event){
         event.preventDefault();
-        
+
         var username = $("#usernameField").val();
         var password = $("#passwordField").val();
-        
+
         var commentBody = $("#commentTextField").val();
-    
+
         if(username && password && commentBody)
         {
             $.ajax({
@@ -348,6 +348,3 @@ function setupPostComment(issueNumber)
 Notice the *beforeSend* function sends the Authorization header and a successful post will reload the page.
 
 That's it! You now have working comment system hosted in the Github issue tracker!
-
-
-

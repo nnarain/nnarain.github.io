@@ -1,0 +1,40 @@
+---
+---
+
+$back-color: rgb(96, 125, 139);
+
+body{
+    background-color: $back-color;
+}
+
+img{
+    max-width: 100%;
+}
+
+.pagination {
+    li {
+        a {
+            color: white;
+        }
+    }
+}
+
+.pagination {
+    li {
+        .active{
+
+        }
+    }
+}
+
+.side-nav {
+    li {
+        a {
+            color: white;
+        }
+    }
+}
+
+.table-background {
+    background: #F8F8F8
+}

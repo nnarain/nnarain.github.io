@@ -2,7 +2,9 @@
 	$(document).ready(function(){
 		// added bootstrap the tables
 		$('table').each(function(){
-			$(this).addClass('table table-striped table-bordered table-hover');
+			$(this).addClass('table-background striped bordered black-text');
 		});
+
+		$(".sidemenu-trigger").sideNav();
 	});
 })(jQuery);

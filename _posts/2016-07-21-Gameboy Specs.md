@@ -2,7 +2,7 @@
 layout: post
 title: Gameboy Hardware Specs and Memory Layout
 description: Outline the specifications for the Gameboy's hardware
-tag: gameboy c++
+tag: ["gameboy", "c++"]
 thumbnail:
 repo_url: https://github.com/nnarain/gameboy
 next_post: 2016-09-09-Gameboy LCD Controller
