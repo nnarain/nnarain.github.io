@@ -5,6 +5,6 @@
 			$(this).addClass('striped bordered highlight');
 		});
 
-		$(".button-collapse").sideNav();
+		$(".sidemenu-trigger").sideNav();
 	});
 })(jQuery);
