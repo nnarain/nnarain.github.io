@@ -2,3 +2,27 @@
 layout: default
 ---
 
+<div class="row">
+    <div class="col s1"></div>
+    <div class="col s10">
+        {% for i in site.data.projects %}
+            <div class="card sticky-action grey darken-4 z-depth-4">
+                <div class="card-image">
+                    <img class="activator" src="/static/projects/{{i.image}}" />
+                </div>
+                <div class="card-content white-text">
+                    <span class="card-title activator">{{i.name}}<i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title">{{i.name}}<i class="material-icons right">close</i></span>
+                </div>
+                <div class="card-action">
+                    {% for tag in i.tags %}
+                    <div class="chip grey darken-3 white-text">{{tag | downcase}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor%}
+    </div>
+    <div class="col s1"></div>
+</div>

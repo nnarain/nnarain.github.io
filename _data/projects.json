@@ -3,7 +3,7 @@
 		"name": "Gameboy Emulator",
 		"image": "gameboy.gif",
 		"url": "/projects/gameboy",
-		"repo": "https://github.com/nnarain/gameboy",
+		"repo": "https://github.com/nnarain/gameboycore",
 		"date": "September 2016",
 		"tags": ["Gameboy","Emulator", "C++"]
 	},
