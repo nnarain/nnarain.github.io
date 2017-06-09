@@ -13,19 +13,18 @@ The issue is that the Boost.Build system does not support building the current v
 
 Here's how to work around that.
 
-Build Boost with Visual Studio 2017
------------------------------------
+**Build Boost with Visual Studio 2017**
 
-1. Download and extract Boost. Currently I'm using Boost 1.64
-2. Navigate to Boost directory
+* Download and extract Boost. Currently I'm using Boost 1.64
+* Navigate to Boost directory
 
-3. Run bootstrap
+* Run bootstrap
 
 ```bash
     /> bootstrap
 ```
 
-4. Open `project-config.jam` and edit the file to the following
+* Open `project-config.jam` and edit the file to the following
 
 ```bash
 import option ;
@@ -37,14 +36,13 @@ option.set keep-going : false ;
 
 Ensure the path to `cl` matches what is on your system.
 
-5. Build Boost
+* Build Boost
 
 ```bash
     /> b2 toolset=msvc-14.0 address-model=32 architecture=x86 link=static threading=multi stage
 ```
 
-Optional: CMake
----------------
+**Optional: CMake**
 
 ```bash
     /> cd /path/to/project && mkdir build && cd build
