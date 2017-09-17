@@ -18,4 +18,16 @@ However Rust has all these things built in making it feel quite a bit smoother.
 
 I'm especially liking `cargo` and how integrated everything is. Adding dependencies is easy. Built in autodocs tool. And I also really like that unit testing is built in as well.
 
-To learn Rust I started with making a Chip8 Virtual Machine (Quartz) and I am currently working on a Chip8 assembler!
+To learn Rust I started with making a Chip8 Virtual Machine [Quartz](https://github.com/nnarain/quartz) and I am currently working on a Chip8 assembler [Silica](https://github.com/nnarain/silica)!
+
+
+<br>
+
+Some cool rust libraries I'd like to try out would be:
+* nom
+* rayon
+* serde
+* tokio
+
+I actually use nom to create lexers and parsers for my chip8 assembler!
+
