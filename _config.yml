@@ -14,6 +14,9 @@ github_url: https://github.com/nnarain
 youtube_username: nnaraindev
 youtube_url: https://www.youtube.com/channel/UCVYy1Jiww7YAsgEFD2CSQSw
 
+# analytics
+google_analytics: UA-107298548-1
+
 # Build settings
 markdown: kramdown
 kramdown:
