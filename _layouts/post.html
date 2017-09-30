@@ -7,6 +7,10 @@ layout: default
         <div class="card grey darken-4 z-depth-4">
             <div class="card-content white-text">
                 <h2>{{page.title}}</h2>
+                {% if page.repo_url %}
+                <a href="{{page.repo_url}}" class="btn green accent-4 waves-effects waves-light">view repo</a>
+                {% endif %}
+                <br />
                 <br />
                 {{content}}
             </div>
