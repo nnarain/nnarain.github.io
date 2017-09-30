@@ -145,7 +145,7 @@ Now there was a bit of an issue with this code as is. That is it was running ver
 
 The reason was that the frontend is calling `retro_run` at a constant frame rate but the core was not producing enough scanlines per frame.
 
-The solution was basically add a simple control system for the cpu steps. The process is, get number of scanlines produced in the last frame and do an error calculation with the target scanlines per frame.
+The solution was pretty simple. Add a scanline counter that increments every time the gpu callback is called. Then simply run the core until the correct number of scanlines is produced for a single frame.
 
 Add a new constant and some variables.
 
@@ -178,16 +178,16 @@ And in the `retro_run` function do the error calculation.
 void retro_run(void)
 {
 
-	// update the core
-	core.update(steps);
+	// run the core until it produces 144 scanlines which is the content of one frame
+	while (scanline_counter < SCANLINES_PER_FRAME)
+	{
+		// update the core
+		core.update(steps);
+	}
 
-	// perform a simple error calculation to adjust the number of cpu steps required to compute 144 scanlines every frame
-	auto scanline_error = SCANLINES_PER_FRAME - scanline_counter;
-	steps += scanline_error;
 	scanline_counter = 0;
 
-	// send the current frame buffer to frontend
-	video_cb(framebuffer, DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_WIDTH * sizeof(short));
+	// ...
 }
 
 ```
@@ -329,12 +329,13 @@ void retro_reset(void)
 void retro_run(void)
 {
 
-	// update the core
-	core.update(steps);
+	// run the core until it produces 144 scanlines which is the content of one frame
+	while (scanline_counter < SCANLINES_PER_FRAME)
+	{
+		// update the core
+		core.update(steps);
+	}
 
-	// perform a simple error calculation to adjust the number of cpu steps required to compute 144 scanlines every frame
-	auto scanline_error = SCANLINES_PER_FRAME - scanline_counter;
-	steps += scanline_error;
 	scanline_counter = 0;
 
 	// send the current frame buffer to frontend
@@ -449,3 +450,6 @@ unsigned retro_get_region(void)
 ```
 
 ![Image not found!](/assets/2017/07/13/cap.gif)
+
+
+Edit: At this point I've added user input and audio (more update to date than this example). To see the full source click the repo link at the top of the page!
