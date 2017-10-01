@@ -1,12 +1,21 @@
+# Author
+author:
+  name: Natesh Narain
+  email: nnaraindev@gmail.com
+  url: nnarain.github.io
+
 # Site settings
-author: Natesh Narain
 title: Natesh's Dev Blog!
-email: nnaraindev@gmail.com
 description: >
     A place where I can drop code snippets and how-to's of various projects I'm working on.
     Anything from C to Assembler to Graphics to Web dev!
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://nnarain.github.io" # the base hostname & protocol for your site
+
+# Assets
+sass:
+  sass_dir: _sass
+  style: :compressed
 
 # social media
 github_username:  nnarain

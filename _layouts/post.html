@@ -1,40 +1,33 @@
 ---
 layout: default
 ---
-<div class="row">
-    <div class="col s1"></div>
-    <div class="col s10">
-        <div class="card grey darken-4 z-depth-4">
-            <div class="card-content white-text">
-                <h2>{{page.title}}</h2>
-                {% if page.repo_url %}
-                <a href="{{page.repo_url}}" class="btn green accent-4 waves-effects waves-light">view repo</a>
-                {% endif %}
-                <br />
-                <br />
-                {{content}}
-            </div>
-            <div class="card-action">
-                <div class="row">
-                    <div class="col s4">
-                        {% if page.previous.url %}
-                        <div align="center">
-                            <a href="{{page.previous.url}}" class="waves-effect waves-light btn green accent-4">Previous</a>
-                        </div>
-                        {% endif %}
-                    </div>
-                    <div class="col s4"></div>
-                    <div class="col s4">
-                        {% if page.next.url %}
-                        <div align="center">
-                            <a href="{{page.next.url}}" class="waves-effect waves-light btn green accent-4">Next</a>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                {% include disqus.html %}
-            </div>
-        </div>
-    </div>
-    <div class="col s1"></div>
+
+<div class="post">
+  <div class="post-info">
+    <span>Written by&nbsp;</span>{{ page.author }}
+
+    {% if page.date %}
+      <br>
+      <span>on&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time>
+    {% endif %}
+  </div>
+
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-line"></div>
+
+  {{ content }}
+
 </div>
+
+<div class="pagination">
+  {% if page.next.url %}
+    <a href="{{ page.previous.url | prepend: site.url }}" class="left arrow">&#8592;</a>
+  {% endif %}
+  {% if page.previous.url %}
+    <a href="{{ page.next.url | prepend: site.url }}" class="right arrow">&#8594;</a>
+  {% endif %}
+
+  <a href="#" class="top">Top</a>
+</div>
+
+{% include disqus.html %}

@@ -1,40 +1,13 @@
 ---
+# Use a comment to ensure Jekyll reads the file to be transformed into CSS later
+# only main files contain this front matter, not partials.
 ---
 
-$back-color: rgb(96, 125, 139);
-
-body{
-    background-color: $back-color;
-}
-
-img{
-    max-width: 100%;
-}
-
-.pagination {
-    li {
-        a {
-            color: white;
-        }
-    }
-}
-
-.pagination {
-    li {
-        .active{
-
-        }
-    }
-}
-
-.side-nav {
-    li {
-        a {
-            color: white;
-        }
-    }
-}
-
-.table-background {
-    background: #F8F8F8
-}
+@import 'variables';
+@import 'base';
+@import 'code';
+@import 'post';
+@import 'syntax';
+@import 'layout';
+@import 'pagination';
+@import 'catalogue';
