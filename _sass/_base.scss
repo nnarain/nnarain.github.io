@@ -63,3 +63,8 @@ img {
 td {
   vertical-align: top;
 }
+
+table {
+  @extend %table;
+  @extend %table-bordered;
+}
