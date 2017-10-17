@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Rust Programming Language
+title: Rust
 description:
 tag: ['Rust']
 thumbnail: /assets/2017/08/11/
