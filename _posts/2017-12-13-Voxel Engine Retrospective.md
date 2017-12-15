@@ -19,9 +19,9 @@ Small reflection on the `voxel engine` I worked on a few years ago and future pr
 The Goal
 --------
 
-I find procedurally generated content to be extremely interesting. And one of the major pulls to use it is the ability to generate a whole world randomly. You can generate something that even you hadn't thought of. And as a hobbyist who isn't particularly good making art assets its very appealing.
+I find procedurally generated content to be extremely interesting and one of the major pulls to use it is the ability to generate a whole world randomly. As a hobbyist who isn't particularly good making art assets.. its very appealing.
 
-So the goal of my voxel engine was to generate procedural terrain and allow users to write scripts to make build a game in the procedural world.
+So the goal of my voxel engine was to generate procedural terrain and allow users to write scripts to build a game in the procedural world.
 
 Problems
 ---------
