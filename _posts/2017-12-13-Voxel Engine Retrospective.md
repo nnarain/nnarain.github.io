@@ -60,7 +60,7 @@ I want to build procedural worlds.
 
 You get the idea.
 
-So my new plan is to create is pretty much the old plan except keeping past mistakes in mind.
+So my new plan is pretty much the old plan except keeping past mistakes in mind.
 
 Work in segments. All the above can be worked on indepently and there is a lot to learn for each topic.
 Make small projects to enforce individual concepts.
