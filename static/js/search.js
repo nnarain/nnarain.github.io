@@ -50,8 +50,7 @@ function displaySearchResults(results, store) {
 
                     var tags = item.tags.split(' ');
                     tags.forEach(function(element) {
-                        console.log(element);
-                        str += "<div class=\"badge badge-secondary\">";
+                        str += "<div class=\"badge badge-secondary tag\">";
                         str += element.toLowerCase();
                         str += "</div>";
                     });
