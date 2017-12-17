@@ -36,7 +36,14 @@ h6 {
 
 a {
   color: $blue;
-  text-decoration: none;
+  text-decoration: none !important;
+
+  &:hover {
+    color: inherit;
+  }
+  &:focus {
+    color: inherit;
+  }
 }
 
 blockquote {
@@ -67,4 +74,8 @@ td {
 table {
   @extend %table;
   @extend %table-bordered;
+}
+
+.nohighlight {
+  text-decoration: none;
 }
