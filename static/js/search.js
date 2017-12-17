@@ -21,7 +21,6 @@ function displaySearchResults(results, store) {
         for(var i = 0; i < results.length; i++)
         {
             var item = store[results[i].ref];
-            console.log(item);
 
             str += "<a href=\"" + item.url + "\" class=\"catalogue-item\">";
             {
@@ -31,7 +30,7 @@ function displaySearchResults(results, store) {
                     {
                         str += "datetime=\"" + item.date + "\" ";
                         str += "class=\"catalogue-time\"";
-                        str += ">" + item.date;
+                        str += ">" + item.date_str;
                     }
                     str += "</time>";
 
@@ -47,7 +46,15 @@ function displaySearchResults(results, store) {
                         var max_len = Math.min(item.content.length, 80);
                         str += item.content.substring(0, max_len);
                     }
-                    str += "</p>"
+                    str += "</p>";
+
+                    var tags = item.tags.split(' ');
+                    tags.forEach(function(element) {
+                        console.log(element);
+                        str += "<div class=\"badge badge-secondary\">";
+                        str += element.toLowerCase();
+                        str += "</div>";
+                    });
                 }
                 str += "</div>";
             }

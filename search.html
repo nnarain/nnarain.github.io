@@ -21,7 +21,8 @@ title: Search
                 "tags": "{{post.tag | join: ' '}}",
                 "content": {{ post.content | strip_html | strip_newlines | jsonify }},
                 "url": "{{post.url | xml_escape}}",
-                "date": "{{post.date}}"
+                "date": "{{post.date}}",
+                "date_str": "{{post.date | date: '%B %d, %Y' }}"
             },
         {% endfor %}
     };
