@@ -1,0 +1,35 @@
+---
+layout: default
+title: Search
+---
+
+<div align="center">
+    <form action="/search.html" method="get" class="searchbox">
+        <input type="text" id="search-box" name="query" />
+        <input type="submit" value="search" />
+    </form>
+</div>
+
+<div id="search-results" class="catalogue">
+
+</div>
+
+<script>
+    window.store = {
+        {% for post in site.posts %}
+            "{{ post.url | slugify }}": {
+                "title": "{{ post.title | xml_escape }}",
+                "tags": "{{post.tag | join: ' '}}",
+                "content": {{ post.content | strip_html | strip_newlines | jsonify }},
+                "url": "{{post.url | xml_escape}}",
+                "date": "{{post.date}}",
+                "date_str": "{{post.date | date: '%B %d, %Y' }}"
+            },
+        {% endfor %}
+    };
+
+</script>
+
+<script type="text/javascript" src="{{ site.baseurl }}/static/js/lunr.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/static/js/search.js"></script>
+
