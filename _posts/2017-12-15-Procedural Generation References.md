@@ -2,7 +2,7 @@
 layout: post
 title: Procedural Generation References
 description: 
-tag: ['procedural generation']
+tag: ['pcg']
 thumbnail: /assets/2017/12/15/
 repo_url: 
 ---
