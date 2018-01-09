@@ -151,8 +151,9 @@ So we can add something like:
 
 To check if the chunks is in the camera view frustum we check if the top four corners of the chunk are in the frustum.
 To check if the point is in the frustum:
-    1. Convert point to viewport corrdinates 
-    2. Check if the  x and y of the point is in range [0,1]
+
+* Convert point to viewport corrdinates 
+* Check if the  x and y of the point is in range [0,1]
 
 I use a margin value to apply a buffer for loading chunks on the edge of the view frustum.
 
@@ -203,5 +204,79 @@ I use a margin value to apply a buffer for loading chunks on the edge of the vie
 Loading Chunks
 --------------
 
+Chunks are loaded using the `ChunkLoader` script. Its purpose is to queue chunks using `ThreadPool`. We queue chunks for loading when they are created.
 
+
+```c#
+    private void UpdateVisibleChunks(Vector3 playerPosition)
+    {
+        ...
+            // check if the current chunk is in the chunk list
+            if (chunkList.ContainsKey(p))
+            {
+                // the chunk already exists, ensure it is enabled
+                var chunk = chunkList[p];
+                chunk.gameObject.SetActive(true);
+            }
+            else
+            {
+                // the chunk does not exist yet, create it
+                var chunk = CreateChunk(p.x, p.z);
+                chunkList.Add(p, chunk);
+
+                chunkLoader.Load(chunk);
+            }
+        ...
+    }
+```
+
+
+Removing Chunks
+---------------
+
+Only the chunks infront and immediately around the player need to be active. We can check the chunks distance to the player and use a few parameters to determine if the chunk should be set inactive or destroyed.
+
+
+```c#
+private void RemoveFarChunks(Vector3 playerPosition)
+{
+    List<Vector3Int> toRemove = new List<Vector3Int>();
+
+    // iterate over chunks in the dictionary
+    foreach (var pair in chunkList)
+    {
+        var chunk = pair.Value;
+        var chunkPosition = GetWorldPositionFromChunkPosition(pair.Key);
+
+        // calculate distance between player and chunk
+        var distanceToChunk = (playerPosition - chunkPosition).magnitude;
+
+        // check if the chunk is not in the view frustum
+        if (!IsChunkInFrustum(chunkPosition))
+        {
+            // if the distance is greater than the distance to which the chunk should be inactive, but not removed
+            if (distanceToChunk >= distanceToInactive)
+            {
+                // set the chunk to inactive
+                chunk.gameObject.SetActive(false);
+            }
+
+            // if the distance is grater tan the distance to which the chunk shoould be destroyed
+            if (distanceToChunk >= distanceToDestroy)
+            {
+                // set the chunk for removal from the list
+                toRemove.Add(pair.Key);
+                // and destroy the gamebobject
+                Destroy(chunk);
+            }
+        }
+    }
+
+    // remove destroyed chunks from the list
+    foreach (var key in toRemove)
+    {
+        chunkList.Remove(key);
+    }
+}
+```
 
