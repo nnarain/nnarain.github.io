@@ -280,3 +280,7 @@ private void RemoveFarChunks(Vector3 playerPosition)
 }
 ```
 
+Parameters
+----------
+
+![Image not found!](/assets/2018/01/04/chunkmanager.PNG)
