@@ -39,7 +39,7 @@ If I want to build a game why not use an actual game engine?!
 Future
 ------
 
-I want to build procedural worlds.
+Procedural generation is interesting and I would like to explore what you can do with it.
 
 * 2D maps
 * 3D infinite terrain
