@@ -56,7 +56,7 @@ Running:
 
 Neato. It works. So now just to add it to GSheets.
 
-First you need to create a event handler and configure it to be an `On Edit` trigger.
+In the script editor, first you need to create a event handler and configure it to be an `On Edit` trigger.
 
 ![Image not found!](/assets/2018/04/05/trigger.png)
 
@@ -82,7 +82,7 @@ An HTTP POST can be done using `UrlFetchApp.fetch`.
   var res = UrlFetchApp.fetch(api, options);
 ```
 
-The content type is `application/x-www-form-urlencoded` be default.
+The content type is `application/x-www-form-urlencoded` by default.
 
 The entire function:
 
