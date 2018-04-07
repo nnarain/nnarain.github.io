@@ -51,7 +51,7 @@ Future Projects
 
 I'll probably work on a NES and GBA emulator at some point in the future.
 
-Currently I have started an NES project in Rust. I like Rust for a few reasons (though I'm a beginner rust programmer). Rust is a systems programming language but feels high level. It has lots of goodies built right into the language: memory ownership, unit tests, integration tests, benchmarks, docs and a good build system.
+Currently I have started an NES project in Rust. I do like Rust but I wonder if I should continue doing things in C++ just for a sake of improving in that direction. Hm.
 
 Before I get into the nitty gritty of a new emulator I'd like to build some tooling around it. 
 
