@@ -17,8 +17,12 @@ The program loads parameters from a `yaml` file and allows adjusting of those va
 
 The biggest problem with the procedural world project is that I can't quick iterate over different values. I shouldn't have that problem with this tool.
 
+![Image not found!](/assets/2018/04/14/cap2.png)
+
+My experience with `FastNoise` so far has been really good and luckly there is a C# implementation of it. I'll will probably add it to my unity project and get rid of the inidiviual noise classes.
+
 Future additions to this tool
 
 * multithreaded generation of the texture
-* move generation logic to scripts
+* move generation logic to scripts (lua)
 
