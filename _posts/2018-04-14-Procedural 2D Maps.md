@@ -15,11 +15,32 @@ Above is a tool I've made using `FastNoise`, `SFML` and `ImGui`. I'm going to us
 
 The program loads parameters from a `yaml` file and allows adjusting of those values in the parameter window. When the parameters are updated the map display is regenerated with the new parameters.
 
-The biggest problem with the procedural world project is that I can't quick iterate over different values. I shouldn't have that problem with this tool.
+For example:
+
+```yaml
+FastNoise:
+  noise:
+    noise_type: cubic_fractal
+    fractal_type: fbm
+    interp_type: quintic
+    seed: -1026
+    frequency: 0.02
+    octaves: 5
+    gain: 0.577
+    lacunarity: 1.833
+    celluar_distance: euclidean
+    cellular_return: distance2add
+    cellular_jitter: 0.1
+```
+
+You can also select to view any number of user defined layers. For example you could have a layers showing elevation, moisture and temperature.
 
 ![Image not found!](/assets/2018/04/14/cap2.png)
 
+The above screenshot shows a "Land Mask" layer which indicates where land and water are located.
+
 My experience with `FastNoise` so far has been really good and luckly there is a C# implementation of it. I'll will probably add it to my unity project and get rid of the inidiviual noise classes.
+
 
 Future additions to this tool
 
