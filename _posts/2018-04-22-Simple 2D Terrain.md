@@ -63,3 +63,11 @@ And in the final layer I wanted to show elevation using moutain ranges. So we en
 
 One problem is determining temperature in infinite terrain. It would mean that temperature would only be tied to elevation since there is no far north and south regions. Meaning you can't have low cold areas.
 
+**Edit**
+
+Well randomly place temperature might not be too bad after a little experiementation. I also added snow caps, ice over water and sandy shores.
+
+
+![Image not found!](/assets/2018/04/22/Terrain2Final.png)
+
+
