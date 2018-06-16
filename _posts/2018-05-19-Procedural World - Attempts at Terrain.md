@@ -43,3 +43,6 @@ This terrain uses 5 noise maps with different frequencies and amplitudes. I foun
 
 At this point I'm going back to chunk management to improve loading chunks. I really should just be able to drop the player into the world and have them be completely unaware of the loading/generation/unloading that is going on.
 
+Edit:
+
+![Image not found!](/assets/2018/05/19/mountain4.png)
