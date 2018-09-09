@@ -5,9 +5,6 @@ tag: ['home-automation', 'python', 'raspberry-pi']
 repo_url: 
 ---
 
-From video games, to my phone or my PC. I enjoy customization and having control over the things I'm interacting with. And since I always have a side project going on, home automation is the perfect addition to my hobbies.
-
-
 Now.. I don't exactly have a home to automate.. I'm working on that.. But there was something I wanted to try out recently. That is an RGB LED backlight for my desk. The LED strip is about a meter long and fits across my desk. It's set to the typical animated rainbow pattern everybody know from the arduino neopixel example.
 
 It's easy enough to get this working on my raspberry pi but I wanted to tie it into home assistant as well.
