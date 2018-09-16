@@ -11,7 +11,7 @@ Recently I started using ASIO for local network communication, so I figured I'd 
 
 It's very straight forward, so I figured I'd write up a simple example.
 
-For setting up ASIO with Visual Studio check my recent post [here]({% post_url 2015-11-3-Building ASIO Standalone with Visual Studio 2015 %}).
+For setting up ASIO with Visual Studio check my recent post [here]({% post_url 2015-11-03-Building ASIO Standalone with Visual Studio 2015 %}).
 
 
 ```c++
