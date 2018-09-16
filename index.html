@@ -18,7 +18,7 @@ title: Home
       </div>
     </a>
     {% for tag in post.tag %}
-      <div onclick="location.href='/search.html?query={{tag|downcase}}';" class="badge badge-secondary">{{tag | downcase}}</div>
+      <div onclick="location.href='/search?query={{tag|downcase}}';" class="badge badge-secondary">{{tag | downcase}}</div>
     {% endfor %}
   </div>
   {% endfor %}
