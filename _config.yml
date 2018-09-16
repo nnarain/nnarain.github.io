@@ -48,5 +48,5 @@ paginate_path: "/blog/page:num"
 enableTags: true
 tagarray: []
 
-# gems
-gems: [jekyll-paginate, jekyll-gist]
+# plugins
+plugins: [jekyll-paginate, jekyll-gist]
