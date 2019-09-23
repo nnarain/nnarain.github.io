@@ -25,6 +25,8 @@ Ok. So that I know the core pieces I need to build my application. I need to fig
 * The WS2812B needs 5V, meaning I need two voltage sources on the board (5V and 3.3V)
 * The 3.3V ESP device needs to interface with the 5V light strip circuit. So level shifting the data signal is required.
 
+The following schematic was created in KiCAD.
+
 **Power supply**
 
 For the power supply I was planning on using a common 5V USB phone charger. The power input to the device is then simply a Micro-USB breakout.
@@ -84,11 +86,66 @@ When the input voltage is 0 V the gate voltage is pulled LOW, resulting in a gat
 Simple 3 pin connector for the LED strip.
 
 
-**PCB Layout**
+Prototyping
+-----------
+
+![Image not found](/assets/2019/08/05/breadboard.jpg)
+
+1. USB input
+2. 3.3V linear regulator
+3. FTDI breakout (for programming over serial)
+4. The ESP-01 device
+5. Buttons to reset and enter flashing mode
+6. Level shifting circuit
+7. Output represened by an LED
+
+Firmware
+--------
+
+The next thing to do is to write to firmware and test it out on the breadboarded circuit.
+
+**Scope**
+
+Ok, so what exactly does the firmware need to do? I need it to connect to my home network, and be commandable by my home automation system.
+
+This means that is needs to connect to WiFi, connect to the MQTT broker on my server and except JSON light commands (specified [here](https://www.home-assistant.io/components/light.mqtt/)).
+
+Also, the device has to support persistant configuration for WIFI network, MQTT broker, number of LEDs on the strip, etc. This is so that it can recover from a power cycle.
+
+Technically this information could be hard coded by that's not good practice.
+
+Since the device needs to be configured before it can connect to the WiFi network, I am using an AT command interface to configure the device over the serial port.
+
+For example to configure the WiFi the following can be sent over the serial port.
+
+```bash
+AT+WIFI-MyWifi,MyWifiPassword
+```
+
+MQTT Config:
+
+```bash
+AT+MQTT-192.168.0.10,1883,/home/lights/esplight
+```
+
+Setting the LED count:
+
+```bash
+AT+LEDS-60
+```
+
+All the firmware was tested on the breadboard before ordering the PCB.
+
+PCB
+---
+
+**Layout**
 
 ![Image not found](/assets/2019/08/05/pcb-layout.png)
 
-The ESP-01 is going to sit in a 4x2 socket, so it if elevated slightly, leaving room for the MOSFET and resistors.
+The ESP-01 is going to sit in a 4x2 socket, so it if elevated slightly, leaving room for the MOSFET and resistors to sit in the footprint of the ESP-01.
+
+Also, due to the higher current going through the 5V rails I decided to make traces wider.
 
 ![Image not found](/assets/2019/08/05/3d.png)
 
@@ -96,8 +153,32 @@ In the future I'd probably spend more time on the 3D model especially if it was 
 
 Also I'd like to make a logo for myself I can stick in a kicad library and throw on my future boards.
 
-Firmware
---------
+**Board Fabrication**
 
+I decided to go with [OSH Park](https://oshpark.com/). Getting the PCBs fabricated is incredibly easy apparently (not just with OSH Park but other companies as well). All I had to do was export my KiCAD files, generate the gerber files (drill files) and upload a zip to OSH park.
 
+You do need to remember to check the design constrainsts of the manufacturer who to producing the boards. These boards are very simple so I didn't have to change any of the KiCAD defaults.
 
+Here is the preview from the OSH site.
+
+![Image not found](/assets/2019/08/05/pcb-layout-osh.png)
+
+And the finished boards. Time from submission to delivery was 3 weeks (what OSH park estimated it would be).
+
+Very cool and extremely satisfying to have an actual PCB.
+
+![Image not found](/assets/2019/08/05/pcbs.jpg)
+
+**Board Assembly**
+
+Assembling the board is straight forward. Just need to solder in the components. I've always found making connectors a little fussy, but at the end of the day, not to bad!
+
+![Image not found](/assets/2019/08/05/assembled.jpg)
+
+![Image not found](/assets/2019/08/05/yay.jpg)
+
+Future
+------
+
+* Having a board printed was surprisingly cheap. So I'll definitively doing a PCB for any electronics project down the line
+* I was thinking about creating a programmer for the ESP-01 (Buttons for reset and flash, maybe onboard FTDI.). And make it a surface mount board to practice in that area.
