@@ -8,9 +8,8 @@ author:
 title: Natesh's Dev Blog!
 description: >
     A place where I can drop code snippets and how-to's of various projects I'm working on.
-    Anything from C to Assembler to Graphics to Web dev!
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://nnarain.github.io" # the base hostname & protocol for your site
+url: "https://nnarain.github.io" # the base hostname & protocol for your site
 
 collections:
   learn:
@@ -27,9 +26,6 @@ github_username:  nnarain
 github_url: https://github.com/nnarain
 youtube_username: nnaraindev
 youtube_url: https://www.youtube.com/channel/UCVYy1Jiww7YAsgEFD2CSQSw
-
-# analytics
-google_analytics: UA-107298548-1
 
 # Build settings
 markdown: kramdown
