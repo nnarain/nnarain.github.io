@@ -231,7 +231,36 @@ Clearing `nestest` should clear the way to working on the PPU.
 Generating Picture Output
 -------------------------
 
-I'm not going to go into details about how I implemented the PPU since I just implemented what the wiki said. But I do want to emphasize the use of unit testing here too. In `GameboyCore` I didn't have *any* graphics tests, so unit testing the PPU was a big step up.
+I'm not going to go into details about how I implemented the PPU since this is already well documented in the nesdev wiki. But there are a couple key points to address:
+
+**Scroll using v and t registers**
+
+Games like `Donkey Kong` only use a single nametable and do not do any complicated scrolling. If you were to just render the first nametable you would probably just the right output with or without taking scroll into account. However, the internal registers `v` and `t` must be implemented to achieve for complicated graphical effects.
+
+This was a fun bug while implementing correct scrolling with `v` and `t` internal registers.
+
+![Image not found](/assets/2020/04/15/bug1.gif)
+
+Fixed:
+
+![Image not found](/assets/2020/04/15/demo2.gif)
+
+**Nametables**
+
+For whatever reason I found this kind of tricky. What is important to remember is that is actually 4k of memory for nametables however the mirroring type defines how that is accessed.
+
+If the cartridge has four screen mode enabled, mirroring is disabled (meaning all four nametable can be used by the game). If the mirroring type is set to either `Horizontal` or `Vertical`, logically only 2 nametables are in use: The first 0k offset into the nametable buffer and the second 1k offset.
+
+For example in `Vertical` mirroring mode:
+
+Addresses: $2000-$23FF and $2800-$2BFF map to the same nametable (the first logical table).
+Addresses: $2400-$27FF and $2C00-$2FFF map the same nametable (the second logical table).
+
+This is important for games like "The Legend of Zelda" that do some fancy nametable manipulation to implement scrolling through the map.
+
+**Testing**
+
+Also I'd like to emphasize the use of unit testing here too. In `GameboyCore` I didn't have *any* graphics tests, so unit testing the PPU was a big step up.
 
 For each test I'd configure the PPU through the memory mapped IO and run it for the necessary amount of clock ticks to generate the desired pixel.
 
@@ -279,26 +308,75 @@ fn render_one_pixel() {
     assert_eq!(color, helpers::color_to_pixel(COLOR_INDEX_TO_RGB[0x01]), "Color was: RGB{:?}", color);
 }
 ```
+Some final results:
 
-This was a fun one while implementing correct scrolling with `v` and `t` internal registers.
-
-
-![Image not found](/assets/2020/04/15/bug1.gif)
-
-And suddenly results!
-
-![Image not found](/assets/2020/04/15/demo2.gif)
 ![Image not found](/assets/2020/04/15/demo1.gif)
 
-The NES really is so well documented you just have to follow the wiki.
+
+Audio Output
+------------
+
+The APU is composed of 5 sound channels: 2 Pulse channels, a triangle channel, a noise channel and the DMC channel (sample playback unit). There is also a frame sequencer (aka frame counter) that manages clocking the individual units.
+
+Each sound channel, along with the frame sequencer, implements the `Clockable` trait and  is clocked accordingly in the APU's `tick` function. For example each tick of the Pulse channel advances the square waveform it generates. This approach allows each sound channel to be developed independently and unit tests before mixing the final outputs.
+
+Final APU output is mixed using the linear approximation method.
+
+Now this results in 1 audio sample per APU tick. That is 895,000 samples in a second. This is much higher than a typical computers audio playback rate! Meaning the generated audio from the APU needs to be down sampled into playable audio for the host system.
+
+This is easily done by sampling the APU audio using the ratio between the APU output rate and the host system audio rate.
+
+For example:
+
+```
+host rate = 44100
+apu rate = 895000
+
+ratio = apu rate / host rate
+      = ~20
+```
+
+Therefore if you were to sample every 20 values from the APU audio stream you would have successfully down sampled the audio to the host playback rate.
+
+I added a down sampling helper class to `nescore` to do this:
+
+```rust
+#[derive(Debug)]
+pub struct DownSampler {
+    buffer: Vec<Sample>,
+    rate: usize,
+}
+
+impl DownSampler {
+    pub fn new(buffer: Vec<Sample>, input_rate: f32, output_rate: f32) -> Self {
+        DownSampler {
+            buffer,
+            rate: (input_rate / output_rate) as usize,
+        }
+    }
+}
+
+impl IntoIterator for DownSampler {
+    type Item = Sample;
+    type IntoIter = std::iter::StepBy<std::vec::IntoIter<Sample>>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.buffer.into_iter().step_by(self.rate)
+    }
+}
+```
+
+This is probably the easiest down sampling method. You could also average the samples in a given window.
 
 Future Work
 -----------
 
+Edited: Oct 12, 2020
+
 I still have several things to complete with this emulator:
 
-* Audio is a must
-* Performance optimizations and refractoring CPU/PPU/APU synchronization
+* ~~Audio is a must~~
+* Performance optimizations and refactoring CPU/PPU/APU synchronization
 * Instruction timing
 
 Also I'd like to put together an actual web assembly demo and host it on Github Pages.
