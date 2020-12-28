@@ -42,22 +42,3 @@ title: Home
     <span class="next ">Next</span>
   {% endif %}
 </div>
-<!-- 
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.url }}" class="left arrow">&#8592;</a>
-  {% endif %}
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.url }}" class="right arrow">&#8594;</a>
-  {% endif %}
-
-  <span>
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        {{page}}
-      {% else %}
-        <a href="{{site.paginate_path | prepend: site.base_url | replace: '//', '/' | replace: ':num', page }}">{{page}}</a>
-      {% endif %}
-    {% endfor %}
-  </span>
-</div> -->
