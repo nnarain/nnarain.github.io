@@ -1098,3 +1098,12 @@ Re-using the `gazebo.launch` from above. Pass the world file as a launch file ar
     </include>
 </launch>
 ```
+
+```
+roslaunch create_gazebo maze.launch
+```
+
+Ready to start navigation.
+
+![image not found!](/assets/2021/01/03/robot-in-maze.png)
+
