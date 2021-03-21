@@ -9,6 +9,8 @@ repo_url: https://github.com/nnarain/keypad-prototype
 
 I've been intrigued by DIY keyboards recently so figured I'd put a little prototype together. This is a keypad based on and Arduino Pro Micro.
 
+(The keys I bought were kind of cheap and broke while I was doing soldering re-work. That's why the imagine above is missing 2 keys)
+
 Design
 ------
 
