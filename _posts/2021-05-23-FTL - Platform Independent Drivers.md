@@ -1,7 +1,7 @@
 ---
 layout: post
 title: FTL - Platform Independent Drivers
-tag: ['firmware']
+tag: ['firmware', 'c++']
 repo_url: https://github.com/nnarain/ftl
 ---
 
