@@ -4,7 +4,7 @@ title: Gameboy Emulator GPU
 description:
 tag: ['Gameboy', 'Emulator', 'C++']
 thumbnail: /assets/2016/10/29/
-repo_url: https://github.com/nnarain/gameboy
+repo: nnarain/gameboycore
 ---
 
 Updates

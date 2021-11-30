@@ -2,7 +2,7 @@
 layout: post
 title: ESP-01 Light Controller
 tag: ["esp8266", "esp01", "arduino", "kicad", "homeautomation"]
-repo_url: https://github.com/nnarain/esp-light-controller
+repo: nnarain/esp-light-controller
 ---
 
 This project is an ESP8266 based light strip controller to be used as controllable accent lights for my house.

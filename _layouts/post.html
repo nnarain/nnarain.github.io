@@ -19,6 +19,10 @@ layout: default
 
 </div>
 
+{% if page.repo %}
+<div class="repo-card" data-repo="{{ page.repo }}"></div>
+{% endif %}
+
 <div class="pagination">
   {% if page.next.url %}
     <a href="{{ page.previous.url | prepend: site.url }}" class="left arrow">&#8592;</a>
@@ -29,3 +33,5 @@ layout: default
 
   <a href="#" class="top">Top</a>
 </div>
+
+<script type="text/javascript" src="{{ site.baseurl }}/static/js/repocard.js"></script>

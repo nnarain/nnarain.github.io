@@ -4,7 +4,7 @@ title: Emulator Update - Android!
 description:
 tag: ['C++', 'Java', 'Android']
 thumbnail: /assets/2017/03/12/
-repo_url: https://github.com/nnarain/dotrix-android
+repo: nnarain/dotrix-android
 ---
 
 Here's a recording of GameboyCore running inside of an Android emulator. It's running surprising fast..

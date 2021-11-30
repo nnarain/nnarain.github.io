@@ -4,7 +4,7 @@ title: First look at writing a Genetic Algorithm
 description: Implementing a genetic algorithm from http://www.ai-junkie.com/ga/intro/gat3.html
 tag: ["python", "ai", "genetic algorithms"]
 thumbnail: /assets/2016/07/09/thumb.jpg
-repo_url:
+repo:
 issue_number:
 ---
 

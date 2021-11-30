@@ -4,7 +4,7 @@ title: Gameboy Link Port Info
 description:
 tag: ['gameboy', 'emulator']
 thumbnail: /assets/2016/12/04/
-repo_url: https://github.com/nnarain/gameboycore
+repo: nnarain/gameboycore
 ---
 
 Gameboy Link Port Information

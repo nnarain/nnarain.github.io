@@ -4,7 +4,7 @@ title: Gameboy Display Information
 description: Information on display the Gameboy's VRAM
 tag: ["gameboy"]
 thumbnail: /assets/2016/09/09/window-display.png
-repo_url: https://github.com/nnarain/gameboy
+repo: nnarain/gameboycore
 prev_post: 2016-09-09-Gameboy LCD Controller
 next_post: 2016-09-11-Gameboy Emulator Project
 ---

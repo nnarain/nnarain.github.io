@@ -4,7 +4,7 @@ title: Added ImGui to GameboyCore Example
 description: Added ImGui to GameboyCore Example
 tag: ['Gameboy', 'Emulator', 'Gui']
 thumbnail: /assets/2017/07/08/
-repo_url: https://github.com/nnarain/gameboycore
+repo: nnarain/gameboycore
 ---
 
 Playing around with ImGui and tried adding it to the GameboyCore example.

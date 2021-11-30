@@ -2,7 +2,7 @@
 layout: post
 title: Rosserial on Embedded Rust
 tag: ['rust', 'rosserial', 'ros', 'embedded']
-repo_url: https://github.com/nnarain/rosserial-rs
+repo: nnarain/rosserial-rs
 ---
 
 A few months back we had a hackday at work, where we got the opportunity to work on something of interest to us.

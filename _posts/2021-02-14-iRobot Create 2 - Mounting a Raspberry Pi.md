@@ -2,7 +2,7 @@
 layout: post
 title: iRobot Create 2 - Mounting a Raspberry Pi
 tag: ['irobot', 'create2', 'robotics', 'openscad', 'raspberry-pi']
-repo_url: https://github.com/nnarain/create-attachments
+repo: nnarain/create-attachments
 ---
 
 In my [previous post]({% post_url 2021-01-06-iRobot Create 2 - Navigation %}) I setup navigation on the iRobot Create 2 in Gazebo. Now it's time to get this running on the real thing!

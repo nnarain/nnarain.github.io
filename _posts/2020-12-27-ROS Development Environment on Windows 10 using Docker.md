@@ -2,7 +2,7 @@
 layout: post
 title: ROS Development Environment on Windows 10 using Docker
 tag: ['ros', 'docker']
-repo_url: https://github.com/nnarain/docker-ros
+repo: nnarain/docker-ros
 ---
 
 Recently I got my hands on a [iRobot Create 2](https://store.irobot.com/default/create-programmable-programmable-robot-irobot-create-2/RC65099.html) from work and have been spending some of my time recently setting it up with ROS.

@@ -4,7 +4,7 @@ title: Simple ASIO Serial Example
 description: Simple example of using ASIO for serial port communication using Visual Studio 2015
 tag: ["asio", "c++", "serial-port", "visualstudio"]
 thumbnail:
-repo_url:
+repo:
 ---
 
 Recently I started using ASIO for local network communication, so I figured I'd get going with the serial port functions as well.

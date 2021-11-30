@@ -4,7 +4,7 @@ title: Gameboy Joypad Information
 description: Information on the Gameboy's Joypad
 tag: ['Gameboy']
 thumbnail: /assets/2016/10/01/
-repo_url: https://github.com/nnarain/gameboy
+repo: nnarain/gameboycore
 ---
 
 Joypad Register

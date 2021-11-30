@@ -4,7 +4,7 @@ title: Chip8 Assembler - Code Generator
 description: 
 tag: ['chip8', 'assembler']
 thumbnail: /assets/2017/11/17/
-repo_url: https://github.com/nnarain/silica
+repo: nnarain/silica
 ---
 
 In the last post `expressions` were created by grouping tokens together. Now its time to generate Chip8 opcodes from the expressions.

@@ -4,7 +4,7 @@ title: Gameboy Sound Information
 description:
 tag: ["Gameboy", "Emulator"]
 thumbnail: /assets/2016/11/04/
-repo_url: https://github.com/nnarain/gameboy
+repo: nnarain/gameboy
 ---
 
 Four types of Sound generators:

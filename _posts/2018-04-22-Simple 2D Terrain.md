@@ -2,7 +2,7 @@
 layout: post
 title: Simple 2D Terrain
 tag: ['pcg', 'sfml', 'imgui', 'c++']
-repo_url: https://github.com/nnarain/mapgen
+repo: nnarain/mapgen
 ---
 
 Been spending some more time working on 2D map generation using the tool from the [previous]({% post_url 2018-04-14-Procedural 2D Maps %}) post. I ended up with the following terrain map.

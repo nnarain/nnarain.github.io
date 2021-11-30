@@ -4,7 +4,7 @@ title: HCS12 MSCAN AppNote
 description: Freescale AppNote for using MSCAN on the HCS12
 tag: ["c", "hcs12", "can", "code-warrior"]
 thumbnail:
-repo_url:
+repo:
 issue_number:
 ---
 

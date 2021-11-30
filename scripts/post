@@ -33,7 +33,7 @@ def create_draft(title):
 		file.write("layout: post\n")
 		file.write("title: "  + title + "\n")
 		file.write("tag: []\n")
-		file.write("repo_url: \n")
+		file.write("repo: \n")
 		file.write("---\n\n")
 
 	create_assets_folders()

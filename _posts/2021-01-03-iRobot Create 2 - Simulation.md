@@ -2,7 +2,7 @@
 layout: post
 title: iRobot Create 2 - Simulation
 tag: ['irobot', 'create2', 'ros', 'robotics', 'simulation']
-repo_url: https://github.com/nnarain/create_simulator
+repo: nnarain/create_simulator
 ---
 
 In my [previous post]({% post_url 2020-12-27-ROS Development Environment on Windows 10 using Docker %}) I mentioned that I was starting to experiment with an iRobot Create 2. With the development environment setup the next step is setting up Gazebo simulations.

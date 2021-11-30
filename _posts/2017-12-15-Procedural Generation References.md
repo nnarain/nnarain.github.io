@@ -4,7 +4,7 @@ title: Procedural Generation References
 description: 
 tag: ['pcg']
 thumbnail: /assets/2017/12/15/
-repo_url: 
+repo: 
 ---
 
 Some references for learning procedural generation. Could range from tutorial, articles, academic papers or videos.

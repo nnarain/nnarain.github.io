@@ -4,7 +4,7 @@ title: Using GTest with CMake and Visual Studio
 description: Setting GTest for use with Visual Usual Studio 2015
 tag: ["visual studio", "cmake", "gtest"]
 thumbnail:
-repo_url:
+repo:
 ---
 
 Recently had a bit of trouble setting up GTest with Visual Studio using CMake. Simple fix but just wanted to write it down!

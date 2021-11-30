@@ -2,7 +2,7 @@
 layout: post
 title: Improvements to Desktop Backlight!
 tag: ['home-automation', 'python', 'raspberry-pi', 'mqtt']
-repo_url: https://github.com/nnarain/backlight.py
+repo: nnarain/backlight
 ---
 
 To make better use of Home Assistant's wide variety of components, I removed the REST commands in exchange for `MQTT` compatibility.

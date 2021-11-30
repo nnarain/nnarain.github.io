@@ -2,7 +2,7 @@
 layout: post
 title: ESP-01 Programmer
 tag: ["kicad", "esp-01", "esp8266"]
-repo_url: https://github.com/nnarain/esp01-flasher
+repo: nnarain/esp01-flasher
 ---
 
 To accompany my ESP-01 light controllers I decided to design and build an ESP-01 programmer board. The intent is to have a easy way to flash new firmware onto my light controllers (without having to keep the flashing circuit breadboarded) and experiment with assembling a surface mount board.

@@ -4,7 +4,7 @@ title: Config issues with Qt and Visual Studio
 description: Notes on issues with Qt and Visual Studio
 tag: ['qt', 'visual studio']
 thumbnail: /assets/2017/11/10/
-repo_url: 
+repo: 
 ---
 
 A recent Windows 10 update manage to break my Visual Studio installation and also my Qt installation.. Forcing me to reinstall and face some configuration issuses. 

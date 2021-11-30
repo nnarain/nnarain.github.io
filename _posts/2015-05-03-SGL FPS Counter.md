@@ -4,7 +4,7 @@ title: SGL - Demo
 description: Simple textured cube with a FPS counter
 tag: ["opengl", "c++", "programming"]
 thumbnail: /assets/2015/05/03/crate5.gif
-repo_url: https://github.com/nnarain/sgl-wrapper
+repo: nnarain/sgl-wrapper
 prev_post:
 next_post: 2015-07-08-Deferred Shading with SGL
 ---

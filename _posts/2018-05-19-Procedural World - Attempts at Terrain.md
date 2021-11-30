@@ -2,7 +2,7 @@
 layout: post
 title: Procedural World - Attempts at Terrain
 tag: ['pcg', 'unity']
-repo_url: https://github.com/nnarain/World
+repo: nnarain/World
 ---
 
 For the last little while I have been attempting to generate some nice looking terrain. I've been finding with somewhat difficult as it is hard to understand exactly how to space everything out. Though I have slowly started to gain some understanding and techniques for how to do this.

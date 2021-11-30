@@ -4,7 +4,7 @@ title: Building Boost with Visual Studio 2017
 description:
 tag: ['Boost']
 thumbnail: /assets/2017/06/09/
-repo_url:
+repo:
 ---
 
 So I feel like I make a lot of posts about how to build Boost... Anyways..

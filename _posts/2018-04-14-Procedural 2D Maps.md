@@ -2,7 +2,7 @@
 layout: post
 title: Procedural 2D Maps
 tag: ['pcg', 'sfml', 'imgui', 'c++']
-repo_url: https://github.com/nnarain/mapgen
+repo: nnarain/mapgen
 ---
 
 I've been having trouble working on my procedural world project. I can get some have decent terrain but biomes are difficult to implement. They end up just not looking quite right.

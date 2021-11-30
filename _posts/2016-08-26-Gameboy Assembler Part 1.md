@@ -4,7 +4,7 @@ title: Gameboy Assembler Part 1
 description: Introduction to Gameboy Assembler
 tag: ["gameboy", "flex", "bison", "c++", "assembly"]
 thumbnail: /assets/2016/08/26/assemblerflow.png
-repo_url: https://github.com/nnarain/gameboy-assembler
+repo: nnarain/gameboy-assembler
 next_post: 2016-08-26-Gameboy Assembler Part 2
 ---
 

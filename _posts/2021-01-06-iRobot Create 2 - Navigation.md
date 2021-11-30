@@ -2,7 +2,7 @@
 layout: post
 title: iRobot Create 2 - Navigation
 tag: ['irobot', 'create2', 'ros', 'robotics', 'simulation', 'navigation']
-repo_url: https://github.com/nnarain/create_navigation
+repo: nnarain/create_navigation
 ---
 
 In my [previous post]({% post_url 2021-01-03-iRobot Create 2 - Simulation %}) I setup the iRobot Create 2's sensors in Gazebo. The following is how I used those sensors with the ROS navigation stack to map and navigate the a maze.

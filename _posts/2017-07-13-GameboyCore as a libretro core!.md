@@ -4,7 +4,7 @@ title: GameboyCore as a libretro core!
 description: Gameboy as a libretro core
 tag: ['Gameboy', 'Emulation']
 thumbnail: /assets/2017/07/13/
-repo_url: https://github.com/nnarain/gameboycore-retro
+repo: nnarain/gameboycore-retro
 ---
 
 [RetroArch](http://www.retroarch.com/) is a frontend for emulators and game engines. It allows anyone to develop a `core` which can be loaded by the frontend and use to emulate a particular platform.

@@ -2,7 +2,7 @@
 layout: post
 title: GameboyCore Python - PyBind11
 tag: ['gameboycore', 'python', 'c++', 'pybind11', 'emulator']
-repo_url: https://github.com/nnarain/gameboycore-python
+repo: nnarain/gameboycore-python
 ---
 
 Recently an old issue with `GameboyCore Python` [popped up](https://github.com/nnarain/gameboycore-python/issues/19) again where users were having problems opening ROMs files.

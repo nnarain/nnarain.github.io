@@ -4,7 +4,7 @@ title: Tetris Title Screen
 description: Getting to the Gameboy title screen
 tag: ["Gameboy", "C++"]
 thumbnail: /assets/2016/09/24/
-repo_url:
+repo:
 ---
 
 Gameboy Emulator Progress Update:

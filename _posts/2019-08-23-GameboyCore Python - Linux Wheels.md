@@ -2,7 +2,7 @@
 layout: post
 title: GameboyCore Python - Linux Wheels
 tag: ['python', 'gameboycore', 'pip']
-repo_url: https://github.com/nnarain/gameboycore-python
+repo: nnarain/gameboycore-python
 ---
 
 Unforunately it is not very straight forward to upload pre-compiled wheel files to PyPi. This is due to Linux system often having a large diversity of install system libraries with varying versions.

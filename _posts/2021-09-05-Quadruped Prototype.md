@@ -2,7 +2,7 @@
 layout: post
 title: Quadruped Prototype
 tag: ['robotics', '3dprinting', 'embedded', 'rust']
-repo_url: https://github.com/nnarain/quadruped_prototype
+repo: nnarain/quadruped_prototype
 ---
 
 The last month or two I've been working on a quadruped robot prototype. I've not got it walking *yet*, but here is the overall progress so far.

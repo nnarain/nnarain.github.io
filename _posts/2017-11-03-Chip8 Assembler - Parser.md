@@ -4,7 +4,7 @@ title: Chip8 Assembler - Parser
 description: 
 tag: ['chip8', 'assembler']
 thumbnail: /assets/2017/11/03/
-repo_url: http://github.com/nnarain/silica
+repo: nnarain/silica
 ---
 
 The parser will turn the generated tokens into Expressions. Expressions are meaningful groupings of Tokens.

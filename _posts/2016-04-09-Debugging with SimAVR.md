@@ -4,7 +4,7 @@ title: Visualizing with SimAVR
 description: Setup SimAVR CMake targets to debug AVR C programs!
 tag: ["avr", "cmake", "c", "c++"]
 thumbnail: /assets/2016/04/09/simavr-thumb.png
-repo_url: https://github.com/nnarain/cmake-avr-template
+repo: nnarain/cmake-avr-template
 issue_number:
 prev_post: 2016-03-29-AVR CMake Toolchain
 ---

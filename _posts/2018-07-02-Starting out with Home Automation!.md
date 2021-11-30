@@ -2,7 +2,7 @@
 layout: post
 title: Starting out with Home Automation!
 tag: ['home-automation', 'python', 'raspberry-pi']
-repo_url: 
+repo: 
 ---
 
 Now.. I don't exactly have a home to automate.. I'm working on that.. But there was something I wanted to try out recently. That is an RGB LED backlight for my desk. The LED strip is about a meter long and fits across my desk. It's set to the typical animated rainbow pattern everybody know from the arduino neopixel example.

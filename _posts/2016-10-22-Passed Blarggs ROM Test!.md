@@ -4,7 +4,7 @@ title: Passed Blarggs ROM Test!
 description:
 tag: ["Gameboy", "Emulator", "Assembly"]
 thumbnail: /assets/2016/10/22/
-repo_url: https://github.com/nnarain/gameboy.git
+repo: nnarain/gameboycore
 ---
 
 Successfully passed the `cpu_instrs.gb` ROM tests. This is really just the first stage of tests but it verifies I have working CPU emulation! Here's the output!
