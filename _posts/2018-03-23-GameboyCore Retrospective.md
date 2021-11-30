@@ -2,7 +2,7 @@
 layout: post
 title: GameboyCore Retrospective
 tag: ['emulator', 'gameboy']
-repo_url: 
+repo: 
 ---
 
 Small reflection on the GameboyCore projects and future projects.

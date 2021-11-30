@@ -2,7 +2,7 @@
 layout: post
 title: A Little Automation with GSheet and App Script
 tag: ['app-script', 'gsheet']
-repo_url: 
+repo: 
 ---
 
 I've looking at getting my own place recently and have started by making a spreadsheet to determine exactly how much money I have to work with.

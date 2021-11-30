@@ -4,7 +4,7 @@ title: Gameboy Emulator Update - Link Port
 description:
 tag: ['gameboy', 'emulator']
 thumbnail: /assets/2016/12/11/
-repo_url: https://github.com/nnarain/gameboycore
+repo: nnarain/gameboycore
 ---
 
 This weekend I completed link port emulation for my [GameboyCore](https://github.com/nnarain/gameboycore) library.

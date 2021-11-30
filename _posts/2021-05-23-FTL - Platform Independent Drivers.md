@@ -2,7 +2,7 @@
 layout: post
 title: FTL - Platform Independent Drivers
 tag: ['firmware', 'c++']
-repo_url: https://github.com/nnarain/ftl
+repo: nnarain/ftl
 ---
 
 When it comes to writing drivers I find that I often see code on the internet isn't all that modular or portable. It may be written for a specific micro-controller with no real way to unit test or reuse in another project. The exception here would be platforms supported by Arduino, but what if you don't want to build you project in a sketch?

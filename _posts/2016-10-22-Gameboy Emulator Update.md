@@ -4,7 +4,7 @@ title: Gameboy Emulator - Progress and issues
 description:
 tag: ["Gameboy", "Emulator"]
 thumbnail: /assets/2016/10/22/
-repo_url: https://github.com/nnarain/gameboy
+repo: nnarain/gameboy
 ---
 
 Testing with Test ROMS

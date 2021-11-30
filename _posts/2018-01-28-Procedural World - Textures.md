@@ -4,7 +4,7 @@ title: Procedural World - Textures
 description: 
 tag: ['unity', 'pcg', 'shaders']
 thumbnail: /assets/2018/01/28/
-repo_url: https://github.com/nnarain/World
+repo: nnarain/World
 ---
 
 I'm getting to the point of adding more detail into the world. Up to this point blocks only have a single color and of course this isn't very flexible.

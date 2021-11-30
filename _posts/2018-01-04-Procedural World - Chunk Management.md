@@ -4,7 +4,7 @@ title: Procedural World - Chunk Management
 description: 
 tag: ['unity', 'c#', 'pcg']
 thumbnail: /assets/2018/01/04/
-repo_url: https://github.com/nnarain/World.git
+repo: nnarain/World.git
 ---
 
 In this post I will be going over how chunks are managed in my procedural world project.

@@ -4,7 +4,7 @@ title: Building Boost.Python
 description:
 tag: ['boost', 'python', 'c++']
 thumbnail: /assets/2016/12/03/
-repo_url:
+repo:
 ---
 
 

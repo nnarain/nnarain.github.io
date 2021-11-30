@@ -2,7 +2,7 @@
 layout: post
 title: Learning CAD and 3D Printing
 tag: ['3dprinting', 'ender3', 'cad']
-repo_url: 
+repo: 
 ---
 
 In my quest to make cool stuff, I decided to buy myself an Ender 3 Pro 3D printer. There are all sorts of cool projects on https://www.thingiverse.com to print, but I'm personally more interested in what I can make myself.

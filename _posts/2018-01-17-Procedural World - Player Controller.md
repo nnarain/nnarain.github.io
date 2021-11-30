@@ -4,7 +4,7 @@ title: Procedural World - Player Controller
 description: 
 tag: ['unity', 'c#', 'pcg']
 thumbnail: /assets/2018/01/17/
-repo_url: https://github.com/nnarain/World.git
+repo: nnarain/World.git
 ---
 
 Collision

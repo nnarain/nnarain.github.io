@@ -4,7 +4,7 @@ title: Procedural World - Water
 description: 
 tag: ['unity', 'pcg', 'shaders']
 thumbnail: /assets/2018/02/11/
-repo_url: https://github.com/nnarain/World
+repo: nnarain/World
 ---
 
 In this post I'll be going over a simple water material I made for my procedural world project.

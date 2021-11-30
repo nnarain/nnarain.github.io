@@ -4,7 +4,7 @@ title: Procedural World - Mesh Optimization
 description: 
 tag: ['unity', 'c#', 'pcg']
 thumbnail: /assets/2018/01/07/
-repo_url: https://github.com/nnarain/World.git
+repo: nnarain/World.git
 ---
 
 Better Naive Block Meshing

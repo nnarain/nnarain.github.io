@@ -2,7 +2,7 @@
 layout: post
 title: Prototype Macro Keypad
 tag: ['arduino', 'keyboard', 'keypad']
-repo_url: https://github.com/nnarain/keypad-prototype
+repo: nnarain/keypad-prototype
 ---
 
 ![image not found!](/assets/2021/03/20/board.jpg)

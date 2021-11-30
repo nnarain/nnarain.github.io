@@ -2,7 +2,7 @@
 layout: post
 title: Smart Home Setup
 tag: ['smarthome', 'home-automation', 'docker']
-repo_url: 
+repo: 
 ---
 
 Recently I've been messing around a lot with self hosted software and home automation. Got a couple of smart plugs, a Google Home Mini and a started tinkering.

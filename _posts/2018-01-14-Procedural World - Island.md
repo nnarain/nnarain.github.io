@@ -4,7 +4,7 @@ title: Procedural World - Island
 description: 
 tag: ['unity', 'c#', 'pcg']
 thumbnail: /assets/2018/01/14/
-repo_url: https://github.com/nnarain/World.git
+repo: nnarain/World.git
 ---
 
 Humble Beginnings!

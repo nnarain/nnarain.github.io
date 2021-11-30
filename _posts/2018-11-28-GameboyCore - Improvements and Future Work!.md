@@ -2,7 +2,7 @@
 layout: post
 title: GameboyCore - Improvements and Future Work!
 tag: ['gameboycore', 'emulator']
-repo_url: https://github.com/nnarain/gameboycore
+repo: nnarain/gameboycore
 ---
 
 Taking a bit of a break of procedural generation shenanigans.

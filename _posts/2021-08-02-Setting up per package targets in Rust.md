@@ -2,7 +2,7 @@
 layout: post
 title: Setting up per package targets in Rust
 tag: ['rust', 'cargo', 'embedded']
-repo_url: 
+repo: 
 ---
 
 In a lot of the current embedded Rust examples the target architecture is specified in `.cargo/config.toml` in the `build` section:

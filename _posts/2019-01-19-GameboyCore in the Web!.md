@@ -2,7 +2,7 @@
 layout: post
 title: GameboyCore in the Web!
 tag: ['gameboy', 'emulation']
-repo_url: https://github.com/nnarain/gameboycore-web
+repo: nnarain/gameboycore-web
 ---
 
 Happy new year!

@@ -2,7 +2,7 @@
 layout: post
 title: nescore - NES Emulator written in Rust
 tag: ['nes', 'emulator', 'rust']
-repo_url: https://github.com/nnarain/nescore
+repo: nnarain/nescore
 ---
 
 ![Image not found](/assets/2020/04/15/banner.png)

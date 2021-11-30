@@ -2,7 +2,7 @@
 layout: post
 title: Procedural 2D Maps with Lua scripts
 tag: ['pcg', 'lua']
-repo_url: https://github.com/nnarain/mapgen
+repo: nnarain/mapgen
 ---
 
 Recently adding Lua scripting to my `mapgen` tool. Which allows the generation logic to be moved outside of the main program.

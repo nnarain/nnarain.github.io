@@ -4,7 +4,7 @@ title: Chip8 Assembler - Lexer
 description: 
 tag: ['chip8', 'assembler']
 thumbnail: /assets/2017/10/16/
-repo_url: https://github.com/nnarain/silcia
+repo: nnarain/silcia
 ---
 
 

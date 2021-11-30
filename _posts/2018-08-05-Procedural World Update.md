@@ -2,7 +2,7 @@
 layout: post
 title: Procedural World Update and Changes
 tag: ['pcg']
-repo_url: http://github.com/nnarain/World
+repo: nnarain/World
 ---
 
 

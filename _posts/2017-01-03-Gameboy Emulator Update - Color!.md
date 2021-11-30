@@ -4,7 +4,7 @@ title: Gameboy Emulator Update - Color!
 description:
 tag: ['Gameboy', 'Emulation']
 thumbnail: /assets/2017/01/03/
-repo_url:
+repo:
 ---
 
 After taking a little break for the holidays decided to start working on color support for my Gameboy Emulator library.

@@ -4,7 +4,7 @@ title: Chip8 Assembler - Introduction
 description: 
 tag: ['rust', 'nom', 'assembly']
 thumbnail: /assets/2017/09/30/
-repo_url: https://github.com/nnarain/silica
+repo: nnarain/silica
 ---
 
 Introduction

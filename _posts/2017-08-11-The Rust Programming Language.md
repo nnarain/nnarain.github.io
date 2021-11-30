@@ -4,7 +4,7 @@ title: Rust
 description:
 tag: ['Rust']
 thumbnail: /assets/2017/08/11/
-repo_url:
+repo:
 ---
 
 Recently I have been playing around with the Rust Programming and I got to say I am really liking it.

@@ -4,7 +4,7 @@ title: Blog Comments using Github's Issue Tracker. Part2
 description: Adding Javascript to get and post comments to the issue tracker!
 tag: ["web", "html", "css", "bootstrap", "jekyll", "javascript", "jquery", "github-api"]
 thumbnail: /assets/2015/12/05/thumbnail.png
-repo_url: http://github.com/nnarain/nnarain.github.io
+repo: nnarain/nnarain.github.io
 issue_number: 18
 next_post:
 prev_post: 2015-12-05-Blog Comments using Github's Issue Tracker

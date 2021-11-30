@@ -4,7 +4,7 @@ title: Gameboy Emulator Setup
 description: Setting the CPU and MMU
 tag: ["gameboy", "c++"]
 thumbnail:
-repo_url: https://github.com/nnarain/gameboy
+repo: nnarain/gameboycore
 prev_post: 2016-09-11-Gameboy Emulator Project
 ---
 

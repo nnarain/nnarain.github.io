@@ -4,7 +4,7 @@ title: Blog Comments using Github's Issue Tracker
 description: How to add a comment section to your blog site using Github's Issue Tracker
 tag: ["web", "html", "css", "bootstrap", "jekyll"]
 thumbnail: /assets/2015/12/05/thumbnail.png
-repo_url: http://github.com/nnarain/nnarain.github.io
+repo: nnarain/nnarain.github.io
 issue_number: 17
 next_post: 2015-12-05-Blog Comments using Github's Issue Tracker. Part 2
 ---

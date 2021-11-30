@@ -2,7 +2,7 @@
 layout: post
 title: SSD1306 OLED Display Driver using I2C
 tag: ['embedded', 'i2c', 'displays', 'oled', 'ssd1306']
-repo_url: https://github.com/nnarain/ftl
+repo: nnarain/ftl
 ---
 
 Recently I've been working on a new firmware library and have been writing drivers for various components. One is particular was the `SSD1306` OLED display. As popular as they are, I didn't find many references for how they work, mostly just "Use X arduino library".

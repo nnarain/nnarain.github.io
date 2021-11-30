@@ -4,7 +4,7 @@ title: GameboyCore Python Example
 description:
 tag: ['python', 'gameboy', 'emulator']
 thumbnail: /assets/2017/04/15/
-repo_url:
+repo:
 ---
 
 ```python
