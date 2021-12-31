@@ -12,7 +12,22 @@ permalink: /search/
 </div>
 
 <div id="search-results" class="catalogue">
+</div>
 
+<div>
+    {% assign all_tags = site.posts | map: "tag" | join: "," | downcase | split: "," | uniq | sort %}
+    
+    {% for current_tag in all_tags %}
+        <strong>{{current_tag}}</strong>
+        <ul>
+            {% for post in site.posts %}
+                {% assign post_tags = post.tag | join: "," | downcase | split: "," %}
+                {% if post_tags contains current_tag %}
+                    <li><a href="{{post.url}}">{{post.title}}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endfor %}
 </div>
 
 <script>
