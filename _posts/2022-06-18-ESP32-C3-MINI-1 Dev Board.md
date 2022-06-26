@@ -51,7 +51,7 @@ I can use the dev board to detect an MPU-6050 and read the value of the WHO_AM_I
 
 So I suspect the issue is the Rust HAL code at the moment.
 
-Either way, the board functional!
+Either way, the board is functional!
 
 Edit: Turns out the example just needed some error handling. Below the Rust I2C example is working!
 
