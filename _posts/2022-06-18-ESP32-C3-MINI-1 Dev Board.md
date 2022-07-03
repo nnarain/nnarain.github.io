@@ -49,7 +49,7 @@ I've run the official Espressif example and that seems to work. For example the 
 
 I can use the dev board to detect an MPU-6050 and read the value of the WHO_AM_I register.
 
-So I suspect the issue is the Rust HAL code at the moment.
+Requires more investigation.
 
 Either way, the board is functional!
 
