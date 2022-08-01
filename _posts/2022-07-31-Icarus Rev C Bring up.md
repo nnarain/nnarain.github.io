@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Icarus Rev C Bring up
-tag: ['rust', 'embedded', 'flight-controller']
+tag: ['rust', 'embedded', 'flight-controller', 'esp', 'esp32', 'esp32c3', 'firmware']
 repo: nnarain/icarus-firmware
 ---
 
