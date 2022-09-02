@@ -5,7 +5,7 @@ tag: ['rust', 'embedded', 'flight-controller', 'esp', 'esp32', 'esp32c3', 'firmw
 repo: nnarain/icarus-firmware
 ---
 
-In my [previous post]({% post_url 2022-07-31-Icarus Rev C Bring up %}) I showed my new revision of Icarus. In this post I'll be going over the basic firmware bring up.
+In my [previous post]({% post_url 2022-07-16-Icarus Rev C %}) I showed my new revision of Icarus. In this post I'll be going over the basic firmware bring up.
 
 # ESP32-C3 Firmware
 
