@@ -56,7 +56,7 @@ board_build.partitions = ${esp32.default_partitions}
 
 **Results**
 
-![image not found!](/assets/2022/09/23/fan-tach.png)
+![image not found!](/assets/2022/09/23/connected.jpg)
 
 **Rev E**
 
