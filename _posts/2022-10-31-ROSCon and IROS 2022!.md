@@ -9,7 +9,7 @@ repo:
 
 This year I had the amazing opportunity to attend both ROScon and IROS in Kyoto Japan! As someone that hasn't been to a conference before (or traveling in general), this was quite the experience.
 
-Now I usually do not talk about work on this blog, but this is a notably exception.
+Now I usually do not talk about work on this blog, but this is a notable exception.
 
 This post will contain some context on what I do at work, some interesting things I learned at ROSCon and things I'd like to do in the future.
 
