@@ -15,6 +15,9 @@ collections:
   learn:
     output: true
     permalink: /:collection/:name
+  makes:
+    output: true
+    permalink: /:collection/:name
 
 # Assets
 sass:
