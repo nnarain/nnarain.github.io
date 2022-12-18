@@ -1,0 +1,18 @@
+---
+layout: default
+title: Makes
+permalink: /makes/
+---
+
+<br />
+
+<div class="make-grid">
+  {% for make in site.makes %}
+  <div class="card" style="width: auto;">
+      <img src="{{ make.thumbnail }}" alt="thumbnail" class=".card-image" />
+      <div class="card-container">
+        <a href="{{ make.url }}"><h4><b>{{ make.name }}</b></h4></a>
+      </div>
+  </div>
+  {% endfor %}
+</div>
