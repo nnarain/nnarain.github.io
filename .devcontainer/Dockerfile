@@ -1,6 +1,6 @@
 # https://carlos.mendible.com/2020/01/10/vs-code-remote-containers-jekyll/
 
-FROM debian:latest
+FROM ubuntu:latest
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,15 +18,16 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Install vim, git, process tools, lsb-release
-    && apt-get install -y \
-        git \
+    && apt-get install -y git \
     #
     # Install ruby
     && apt-get install -y \
         make \
-		build-essential \
-		ruby \
+        build-essential \
+        ruby \
         ruby-dev \
+    # Install libraries
+    && apt-get install -y zlib1g-dev \
     #
     # Install jekyll
     && gem install \
@@ -43,7 +44,7 @@ RUN apt-get update \
     #
     # Create output directory
     && mkdir /srv/jekyll \
-    && chown vscode /srv/jekyll
+    && chown vscode /srv/jekyll \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
