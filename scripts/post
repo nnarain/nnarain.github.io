@@ -11,60 +11,73 @@ import datetime
 from argparse import ArgumentParser
 
 POSTS_DIR = '_posts'
+MAKES_DIR = '_makes'
 
 parser = ArgumentParser()
-parser.add_argument('command', choices=['draft', 'publish'])
+parser.add_argument('command', choices=['draft', 'publish', 'make'])
 parser.add_argument('title')
 
 args = parser.parse_args()
 
 def main():
-	if args.command == 'draft':
-		create_draft(args.title)
-	elif args.command == 'publish':
-		publish_post(args.title)
+    if args.command == 'draft':
+        create_draft(args.title)
+    elif args.command == 'publish':
+        publish_post(args.title)
+    elif args.command == 'make':
+        create_make(args.title)
 
 def create_draft(title):
-	filename = get_file_name(title)
+    filename = get_file_name(title)
 
-	# create the post file and add the yaml front matter
-	with open(os.path.join(POSTS_DIR, filename), 'w') as file:
-		file.write("---\n")
-		file.write("layout: post\n")
-		file.write("title: "  + title + "\n")
-		file.write("tag: []\n")
-		file.write("repo: \n")
-		file.write("---\n\n")
+    # create the post file and add the yaml front matter
+    with open(os.path.join(POSTS_DIR, filename), 'w') as file:
+        file.write("---\n")
+        file.write("layout: post\n")
+        file.write("title: "  + title + "\n")
+        file.write("tag: []\n")
+        file.write("repo: \n")
+        file.write("---\n\n")
 
-	create_assets_folders()
+    create_assets_folders()
+
+def create_make(title):
+    with open(os.path.join(MAKES_DIR, title, '.md'), 'w') as file:
+        file.write("---\n")
+        file.write("layout: makes\n")
+        file.write("name: "  + title + "\n")
+        file.write("thumbnail: ")
+        file.write("---\n\n")
+
+    create_assets_folders()
 
 def publish_post(filename):
-	if os.path.isfile(filename):
-		#os.rename(filename, post_name)
-		title, _ = os.path.splitext(filename.split('-')[-1])
-		postname = os.path.join(POSTS_DIR, get_file_name(title))
-		os.rename(filename, postname)
+    if os.path.isfile(filename):
+        #os.rename(filename, post_name)
+        title, _ = os.path.splitext(filename.split('-')[-1])
+        postname = os.path.join(POSTS_DIR, get_file_name(title))
+        os.rename(filename, postname)
 
 def get_file_name(name):
-	date_string = get_date_string()
-	return date_string + name + '.md'
+    date_string = get_date_string()
+    return date_string + name + '.md'
 
 def get_date_string():
-	date = datetime.datetime.now()
-	date_string = "%d-%02d-%02d-" % (date.year, date.month, date.day)
-	return date_string
+    date = datetime.datetime.now()
+    date_string = "%d-%02d-%02d-" % (date.year, date.month, date.day)
+    return date_string
 
 def create_assets_folders():
-	# create the date's asset folder
-	date = datetime.datetime.now()
-	date_array = [str(date.year), "%02d" % (date.month), "%02d" % (date.day)]
+    # create the date's asset folder
+    date = datetime.datetime.now()
+    date_array = [str(date.year), "%02d" % (date.month), "%02d" % (date.day)]
 
-	path = 'assets/'
+    path = 'assets/'
 
-	for e in date_array:
-		path = path + e + "/"
-		if not os.path.exists(path):
-			os.mkdir(path)
+    for e in date_array:
+        path = path + e + "/"
+        if not os.path.exists(path):
+            os.mkdir(path)
 # run
 if __name__ == '__main__':
-	main()
+    main()
