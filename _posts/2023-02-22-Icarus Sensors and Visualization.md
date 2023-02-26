@@ -92,7 +92,7 @@ fn update_sensors_system(mut channels: ResMut<Channels>, mut sensors: ResMut<Sen
 
 A ringbuffer is used to store sensor data (also added as a bevy resource). A system is used to move data from the channels to the ringbuffer.
 
-Now that the data is in the system it can be plotted. `egui`'s collecting library is surprisingly good:
+Now that the data is in the system it can be plotted. `egui`'s plotting library is surprisingly good:
 
 ```rust
 fn ui_system(mut ctx: ResMut<EguiContext>, sensors: Res<Sensors>) {
