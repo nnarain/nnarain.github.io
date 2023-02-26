@@ -4,7 +4,7 @@ name: Honorblade from the Stormlight Archive
 thumbnail: /assets/2023/02/25/honorblade.jpg
 ---
 
-An Honorblade from the "Stormlight Archive" by Brandon Sanderson.
+An Honorblade from "The Stormlight Archive" by Brandon Sanderson.
 
 STLs: https://www.printables.com/model/301465-jezriens-honorblade
 
