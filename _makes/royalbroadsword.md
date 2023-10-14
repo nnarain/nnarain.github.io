@@ -2,6 +2,7 @@
 layout: makes
 name: Royal Broadsword from Breath of the Wild
 thumbnail: /assets/2022/12/makes/wallmount-sword.jpg
+date: "2022-12-01"
 ---
 
 Finally made a wall mount for the Royal Broadsword!

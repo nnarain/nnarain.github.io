@@ -1,0 +1,25 @@
+---
+layout: post
+---
+
+{{content}}
+
+Check out all makes <a href="{{ '/makes' | prepend: site.url }}">here!</a>
+
+<hr>
+
+<div class="make-grid">
+{% for make in site.makes %}
+    {% capture make_date %}{{ make.date | date: '%Y-%m' }}{% endcapture %}
+    {% capture page_date %}{{ page.date | date: '%Y-%m' }}{% endcapture %}
+
+    {% if page_date == make_date %}
+        <div class="card" style="width: auto;">
+            <img src="{{ make.thumbnail }}" alt="thumbnail" class=".card-image" />
+            <div class="card-container">
+            <a href="{{ make.url }}"><h4><b>{{ make.name }}</b></h4></a>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+</div>

@@ -2,6 +2,7 @@
 layout: makes
 name: Honorblade from the Stormlight Archive
 thumbnail: /assets/2023/02/25/wall-mount.jpg
+date: "2023-02-25"
 ---
 
 An Honorblade from "The Stormlight Archive" by Brandon Sanderson.
