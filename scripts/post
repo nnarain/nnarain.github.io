@@ -5,6 +5,7 @@
 #
 # @author Natesh Narain
 
+import re
 import os
 import datetime
 
@@ -12,6 +13,8 @@ from argparse import ArgumentParser
 
 POSTS_DIR = '_posts'
 MAKES_DIR = '_makes'
+
+MONTHLY_MAKES_TITLE = 'Makes of the Month'
 
 parser = ArgumentParser()
 parser.add_argument('command', choices=['draft', 'publish', 'make'])
@@ -31,7 +34,7 @@ def create_draft(title):
     filename = get_file_name(title)
 
     # create the post file and add the yaml front matter
-    with open(os.path.join(POSTS_DIR, filename), 'w') as file:
+    with open(os.path.join(POSTS_DIR, filename), 'w+') as file:
         file.write("---\n")
         file.write("layout: post\n")
         file.write("title: "  + title + "\n")
@@ -42,14 +45,37 @@ def create_draft(title):
     create_assets_folders()
 
 def create_make(title):
-    with open(os.path.join(MAKES_DIR, title, '.md'), 'w') as file:
+    with open(os.path.join(MAKES_DIR, title + '.md', ), 'w+') as file:
         file.write("---\n")
         file.write("layout: makes\n")
         file.write("name: "  + title + "\n")
-        file.write("thumbnail: ")
+        file.write("thumbnail: \n")
+        file.write("date: " + get_date_string() + "\n")
         file.write("---\n\n")
 
+    date = datetime.datetime.now()
+    date_string = '%d-%02d' % (date.year, date.month)
+
+    make_posts = find_make_posts()
+
+    print(f'{date_string} -> {make_posts}')
+
+    if date_string not in make_posts:
+        create_draft('Makes of the Month')
+
     create_assets_folders()
+
+def find_make_posts():
+    posts = []
+
+    for post in os.listdir(POSTS_DIR):
+        if os.path.isfile(os.path.join(POSTS_DIR, post)):
+            post_name = os.path.basename(post)
+            if 'Makes' in post_name:
+                match = re.search('(\d+-\d+)-\d+-\w+', post_name)
+                posts.append(match.group(1))
+
+    return posts
 
 def publish_post(filename):
     if os.path.isfile(filename):
