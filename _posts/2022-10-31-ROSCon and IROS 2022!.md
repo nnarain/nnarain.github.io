@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ROSCon and IROS 2022!
+title: ROSCon and IROS 2022, Kyoto!
 tag: ["roscon", 'iros', 'conference']
 repo: 
 ---
