@@ -6,7 +6,7 @@ tag: ["electronics"]
 thumbnail: /assets/2015/09/21/thumbnail.jpg
 ---
 
-Decided I needed to get my fire fighting robot up here!
+Decided I needed to get my fire fighting robot up here (Highschool computer tech project from 2013)!
 
 ![Image not found!](/assets/2015/09/21/thumbnail.jpg)
 
