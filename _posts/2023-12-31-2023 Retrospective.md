@@ -9,7 +9,7 @@ This is an extra small retrospective on the past year. What was good, what was b
 
 **The Bad**
 
-More or less summed up in my [last blog post]({% post_url 2023-11-28-The Burnout Post %}). But I think that was a lessoned learn and can be applied to the next year.
+More or less summed up in my [last blog post]({% post_url 2023-11-28-The Burnout Post %}). But I think that was a lessoned learned and can be applied to the next year.
 
 **The Good**
 
@@ -19,6 +19,5 @@ A new Neptune 3 Pro 3D printer to replace my Ender 3 Pro which was causing me a 
 
 **Next Year**
 
-I mainly want to work on Icarus as that is a project several years in the making. I want something that fly. And more large 3D printer projects.
+I mainly want to work on Icarus as that is a project several years in the making. I want something that can fly. And more large 3D printer projects.
 
-Though mainly I'll be doing everything with a better sense of balance.
