@@ -30,13 +30,13 @@ def main():
     elif args.command == 'make':
         create_make(args.title)
 
-def create_draft(title):
+def create_draft(title, layout='post'):
     filename = get_file_name(title)
 
     # create the post file and add the yaml front matter
     with open(os.path.join(POSTS_DIR, filename), 'w+') as file:
         file.write("---\n")
-        file.write("layout: post\n")
+        file.write(f"layout: {layout}\n")
         file.write("title: "  + title + "\n")
         file.write("tag: []\n")
         file.write("repo: \n")
