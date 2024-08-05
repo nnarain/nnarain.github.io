@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Icarus Rev E - Firmware Bringup
-tag: ['icarus', 'electronics', 'drones']
+tag: ['icarus', 'electronics', 'drones', 'rust', 'embedded']
 repo: nnarain/icarus-firmware
 ---
 
