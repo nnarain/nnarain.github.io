@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ROSCon 2023, New Orleans!
-tag: ["roscon", 'conference']
+tag: ["roscon", 'robotics', 'conference']
 repo: 
 ---
 
