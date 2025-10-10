@@ -7,3 +7,6 @@ Gemfile.lock
 
 # drafts
 drafts/*
+
+# Generated resume files (can be regenerated)
+resume.html
