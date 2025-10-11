@@ -1,55 +1,51 @@
 # JSON Resume Integration
 
-This repository now includes [JSON Resume](https://jsonresume.org/) integration for generating professional resumes.
+This repository includes [JSON Resume](https://jsonresume.org/) integration for generating professional resumes.
 
 ## Files
 
 - **`resume.json`** - The JSON Resume data file containing your professional information
-- **`docker/resume/Dockerfile`** - Docker container for running JSON Resume CLI tools
-- **`docker/resume/README.md`** - Detailed instructions for using the Docker container
-- **`scripts/resume.sh`** - Helper script to easily build and use the resume generator
+- **`scripts/resume.sh`** - Helper script to easily manage resume operations
+- **`.devcontainer/Dockerfile`** - VSCode dev container with resume-cli pre-installed
 
 ## Quick Start
 
-### Option 1: Using Docker (Recommended)
+### Option 1: Using VSCode Dev Container (Recommended)
 
-1. Build the Docker image:
-   ```bash
-   ./scripts/resume.sh build
-   ```
+The VSCode dev container comes with resume-cli pre-installed, making it the easiest option.
 
-2. Generate HTML resume:
+1. Open the repository in VSCode with the Dev Containers extension
+2. VSCode will prompt to reopen in container - click "Reopen in Container"
+3. Once inside the container, use the helper script:
+
    ```bash
+   # Validate your resume
+   ./scripts/resume.sh validate
+   
+   # Export to HTML
    ./scripts/resume.sh export resume.html
-   ```
-
-3. Preview your resume locally:
-   ```bash
+   
+   # Preview locally
    ./scripts/resume.sh serve
    ```
    Then open http://localhost:4000
 
 ### Option 2: Using npm directly
 
-If you have Node.js installed:
+If you have Node.js installed locally:
 
 1. Install resume-cli globally:
    ```bash
    npm install -g resume-cli
    ```
 
-2. Validate your resume:
+2. Use the helper script or resume-cli directly:
    ```bash
-   resume validate
-   ```
-
-3. Export to HTML:
-   ```bash
+   # Using the helper script
+   ./scripts/resume.sh export resume.html
+   
+   # Or use resume-cli directly
    resume export resume.html
-   ```
-
-4. Preview locally:
-   ```bash
    resume serve
    ```
 
@@ -87,7 +83,7 @@ Browse all themes at: https://jsonresume.org/themes/
 
 To make your resume available on your GitHub Pages site:
 
-1. Generate the HTML: `resume export resume.html`
+1. Generate the HTML: `./scripts/resume.sh export resume.html`
 2. Commit and push the generated `resume.html`
 3. Access it at: `https://yourusername.github.io/resume.html`
 

@@ -18,7 +18,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Install vim, git, process tools, lsb-release
-    && apt-get install -y git \
+    && apt-get install -y git curl \
     #
     # Install ruby
     && apt-get install -y \
@@ -29,10 +29,17 @@ RUN apt-get update \
     # Install libraries
     && apt-get install -y zlib1g-dev \
     #
+    # Install Node.js (for JSON Resume)
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    #
     # Install jekyll
     && gem install \
         bundler \
         jekyll \
+    #
+    # Install resume-cli globally
+    && npm install -g resume-cli \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
