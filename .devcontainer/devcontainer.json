@@ -1,16 +1,50 @@
 {
+    "name": "Jekyll Site Development",
     "build": {
         "dockerfile": "Dockerfile"
     },
 
-    "containerUser": "vscode",
-
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
     "workspaceFolder": "/workspace",
 
-    // "postCreateCommand": [
-    //     "bundle install"
-    // ],
+    "postCreateCommand": [
+        "bundle install"
+    ],
 
-    "forwardPorts": [4000, 35729]
+    "forwardPorts": [4000, 35729],
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bradlc.vscode-tailwindcss",
+                "yzhang.markdown-all-in-one",
+                "davidanson.vscode-markdownlint",
+                "ms-vscode.vscode-json",
+                "redhat.vscode-yaml",
+                "formulahendry.auto-rename-tag",
+                "ms-vscode.live-server",
+                "gera2ld.markmap-vscode"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "files.associations": {
+                    "*.md": "markdown"
+                },
+                "markdown.preview.fontSize": 14,
+                "editor.wordWrap": "on",
+                "editor.minimap.enabled": false,
+                "files.exclude": {
+                    "_site": true,
+                    ".sass-cache": true,
+                    ".jekyll-cache": true,
+                    ".jekyll-metadata": true
+                }
+            }
+        }
+    },
+
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    }
 }
