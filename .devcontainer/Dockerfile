@@ -50,8 +50,12 @@ RUN apt-get update \
         bundler \
         jekyll \
     #
-    # Install resume-cli globally
+    # Install resume-cli globally and popular themes
     && npm install -g resume-cli \
+    && npm install -g jsonresume-theme-elegant \
+    && npm install -g jsonresume-theme-class \
+    && npm install -g jsonresume-theme-flat \
+    && npm install -g jsonresume-theme-kendall \
     #
     #
     # Create output directory
