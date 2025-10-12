@@ -2,13 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Natesh Narain",
-    "label": "Software Developer",
-    "image": "",
-    "email": "nnaraindev@gmail.com",
+    "label": "Senior Software Developer",
+    "image": "/static/socials/profile.jpg",
+    "email": "nnarain101@gmail.com",
     "url": "https://nnarain.github.io",
     "summary": "Software developer specializing in autonomous robotics systems with expertise in system software, firmware development, and digital electronics design. Passionate about building embedded systems and creating innovative solutions for complex technical challenges.",
     "location": {
       "countryCode": "CA",
+      "city": "Kitchener",
       "region": "Ontario"
     },
     "profiles": [
@@ -18,28 +19,48 @@
         "url": "https://github.com/nnarain"
       },
       {
-        "network": "YouTube",
-        "username": "nnaraindev",
-        "url": "https://www.youtube.com/channel/UCVYy1Jiww7YAsgEFD2CSQSw"
+        "network": "LinkedIn",
+        "username": "natesh-narain",
+        "url": "https://www.linkedin.com/in/natesh-narain/"
       }
     ]
   },
   "work": [
     {
-      "name": "Autonomous Robotics Company",
-      "position": "Software Developer",
-      "startDate": "2017",
-      "summary": "Developing software solutions for autonomous robots, focusing on system-level programming and embedded systems integration.",
+      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Aquisition)",
+      "position": "Senior Software Developer (Vehicle Platform)",
+      "startDate": "2021-01",
+      "endDate": "",
+      "summary": "Senior member of the Vehicle Platform Software Team focusing on rapidly improving software capabilities to accommodate an expanding portfolio of vehicles. Led multiple team initiatives to enabling integrating the OTTO software stack on third-party OEM vehicles.",
       "highlights": [
-        "Designed and implemented software for autonomous robot control systems",
-        "Developed firmware for embedded systems in robotics applications",
-        "Collaborated on system architecture and software design decisions"
+        "Planned, designed and implemented a configurable system for integrating multiple fieldbus technologies (CAN, CANopen, J1939, Modbus, EtherNet/IP) into autonomous control stack",
+        "Successfully integrated OEM robots from basic drive-by-wire functionality to full stack autonomous control under tight deadlines",
+        "Built diagnostic components and tools for debugging and postmortem analysis",
+        "Identified gaps in the OTTO software stack and prioritized necessary changes to support OEM vehicle integrations",
+        "Developed solutions with minimal guidance to meet expanding vehicle portfolio requirements",
+        "Applied a broad knowledge of the OTTO software stack to coordianate cross-team efforts and deliver high-quality solutions"
+      ]
+    },
+    {
+      "name": "Clearpath Inc (Industrial Robotics Division, OTTO Motors)",
+      "position": "Software Developer (Vehicle OS)",
+      "startDate": "2017-09",
+      "endDate": "2021-01",
+      "summary": "Designed and implemented software architecture spanning multiple parts of Clearpath's software stack including Fleet Manager and individual robot systems. Maintained key systems for logging, diagnostics, configuration, and robot-to-factory interfacing.",
+      "highlights": [
+        "Developed ROS drivers in C++ and Python for robotic systems",
+        "Implemented embedded software for ARM processors using FreeRTOS",
+        "Built embedded ROS (rosserial) integration systems",
+        "Maintained Fleet Manager REST API, backend web servers (Django), and PostgreSQL databases",
+        "Designed and implemented PLC gateway system enabling seamless robot-to-factory communication through industrial protocols",
+        "Built comprehensive diagnostics and ROS bagging pipeline providing advanced system triage and debugging capabilities",
+        "Developed robot configuration pipeline supporting deployment-specific parameter management and fleet customization"
       ]
     }
   ],
   "education": [
     {
-      "institution": "University",
+      "institution": "Conestoga College",
       "area": "Electronic Systems Engineering",
       "studyType": "Bachelor of Engineering",
       "endDate": "2017",
@@ -54,7 +75,7 @@
       "keywords": [
         "C",
         "C++",
-        "Java",
+        "Rust",
         "Python"
       ]
     },
@@ -72,7 +93,7 @@
       "name": "Hardware Design",
       "level": "Intermediate",
       "keywords": [
-        "Altium Designer",
+        "KiCAD",
         "Schematic Capture",
         "PCB Layout",
         "Digital Logic Circuits"
@@ -92,12 +113,137 @@
       "name": "Frameworks & APIs",
       "level": "Intermediate",
       "keywords": [
-        "Qt",
-        "Android"
+        "ROS",
+        "ROS 2"
       ]
     }
   ],
   "projects": [
+    {
+      "name": "GameboyCore (Gameboy/Gameboy Color Emulator)",
+      "description": "Comprehensive multi-platform Gameboy emulator library with full system emulation, extensive testing, and multiple language bindings",
+      "highlights": [
+        "Implemented complete Sharp LR35902 CPU emulation with cycle-accurate timing and comprehensive instruction set",
+        "Built GPU/PPU emulation supporting sprites, backgrounds, scrolling, and full Gameboy Color palette system",
+        "Developed APU with 4-channel audio synthesis and proper waveform generation",
+        "Created LibRetro core enabling integration with RetroArch emulation frontend",
+        "Built Python bindings using PyBind11 for scripting and AI/bot development",
+        "Implemented WebAssembly port using Emscripten for browser-based emulation",
+        "Designed modular architecture with callback-based rendering system for platform independence",
+        "Achieved compatibility with MBC1/MBC3/MBC5 cartridge mappers and link cable emulation",
+        "Established comprehensive test suite using Google Test with CPU instruction validation"
+      ],
+      "keywords": [
+        "Emulation",
+        "C++",
+        "Systems Programming",
+        "PyBind11",
+        "WebAssembly",
+        "LibRetro",
+        "Sharp LR35902",
+        "GPU/PPU",
+        "APU",
+        "Cross-platform"
+      ],
+      "url": "https://github.com/nnarain/gameboycore",
+      "roles": [
+        "Developer",
+        "Architect"
+      ]
+    },
+    {
+      "name": "nescore (NES Emulator)",
+      "description": "Advanced NES emulator library written in Rust with comprehensive system emulation, extensive testing framework, and cross-platform compatibility",
+      "highlights": [
+        "Implemented complete 6502 CPU emulation with precise instruction timing and comprehensive opcode support",
+        "Built sophisticated PPU with nametable mirroring, scroll registers (v/t), sprite rendering, and background graphics",
+        "Developed 5-channel APU system with pulse waves, triangle, noise, and DMC sample playback with audio downsampling",
+        "Designed modular trait-based architecture using IoAccess and Clockable interfaces for component decoupling",
+        "Created comprehensive unit testing framework with mock bus system for isolated CPU instruction validation",
+        "Integrated nestest ROM automation for validation of official and unofficial 6502 opcodes",
+        "Implemented INES/NES2.0 cartridge format support with memory mapper abstraction",
+        "Built functional programming approach with builder patterns and data flow emphasis",
+        "Achieved cross-platform compatibility targeting desktop SDL2, LibRetro cores, and WebAssembly"
+      ],
+      "keywords": [
+        "Emulation",
+        "Rust",
+        "Systems Programming", 
+        "6502 CPU",
+        "PPU",
+        "APU", 
+        "INES Format",
+        "Memory Mappers",
+        "Cross-platform",
+        "WebAssembly"
+      ],
+      "url": "https://github.com/nnarain/nescore",
+      "roles": [
+        "Developer",
+        "Architect"
+      ]
+    },
+    {
+      "name": "World (Procedural Terrain Engine)",
+      "description": "Comprehensive voxel-based procedural world generation system built in Unity with advanced terrain algorithms, biome systems, and infinite chunk management",
+      "highlights": [
+        "Implemented infinite terrain generation using sophisticated chunk management with graph-based neighbor tracking",
+        "Developed multi-layered noise-based terrain system combining 2D height maps and 3D density functions for overhangs and caves",
+        "Created advanced biome generation using Whittaker diagram classification with temperature, moisture, and elevation mapping",
+        "Built efficient voxel mesh optimization with greedy meshing algorithms for performance in large-scale terrain",
+        "Designed modular field generator architecture supporting multiple terrain types (islands, continents, mountains)",
+        "Implemented real-time terrain modification with raycast-based block placement and removal systems",
+        "Developed multithreaded chunk loading system using ThreadPool for seamless world streaming",
+        "Created procedural feature generation including beaches, snow caps, vegetation placement, and geological formations",
+        "Built complementary 2D map prototyping tools using libnoise, SFML, and ImGui for rapid terrain iteration"
+      ],
+      "keywords": [
+        "Unity",
+        "C#",
+        "Procedural Generation",
+        "Voxel Engine",
+        "Chunk Management",
+        "Perlin Noise",
+        "Biome Systems",
+        "3D Graphics",
+        "Mesh Optimization",
+        "Multithreading"
+      ],
+      "url": "https://github.com/nnarain/World",
+      "roles": [
+        "Developer",
+        "Technical Designer"
+      ]
+    },
+    {
+      "name": "Icarus Flight Controller",
+      "description": "Multi-revision custom flight controller designed for drone and robotics applications with comprehensive sensor fusion and wireless control capabilities",
+      "highlights": [
+        "Designed and built multiple PCB revisions (Rev A through Rev E) with STM32F302/STM32F405 and ESP32-C3 MCUs",
+        "Implemented sensor fusion algorithms using IMU, magnetometer, and barometer data for state estimation",
+        "Developed PID control systems for pitch, roll, and yaw control with motor mixing algorithms",
+        "Created wireless communication system using Bluetooth LE and dedicated gamepad RC stack",
+        "Built firmware in both C++ and Rust using Embassy async framework for embedded systems",
+        "Designed modular stackable PCB architecture for expandable robotics platform"
+      ],
+      "keywords": [
+        "Flight Controller",
+        "Embedded Systems",
+        "PCB Design",
+        "Rust",
+        "C++",
+        "STM32",
+        "ESP32",
+        "Sensor Fusion",
+        "PID Control",
+        "Bluetooth LE"
+      ],
+      "url": "https://github.com/nnarain/icarus",
+      "roles": [
+        "Designer",
+        "Developer"
+      ]
+    },
     {
       "name": "HCS12 Embedded Robot Controller",
       "description": "Designed, built, and programmed a functional embedded system to control a robot platform from scratch",
@@ -114,42 +260,6 @@
       "url": "https://github.com/nnarain/ESEPlatformController",
       "roles": [
         "Designer",
-        "Developer"
-      ]
-    },
-    {
-      "name": "Gameboy/Gameboy Color Emulator",
-      "description": "Developed a complete emulator for the Gameboy and Gameboy Color gaming systems",
-      "highlights": [
-        "Implemented CPU emulation and instruction set",
-        "Graphics and audio system emulation",
-        "Cross-platform compatibility"
-      ],
-      "keywords": [
-        "Emulation",
-        "C++",
-        "Systems Programming"
-      ],
-      "url": "https://github.com/nnarain/gameboycore",
-      "roles": [
-        "Developer"
-      ]
-    },
-    {
-      "name": "Simple OpenGL Utility Library",
-      "description": "Created an object-oriented wrapper library for OpenGL with math classes, model loading (Wavefront), and image loading capabilities",
-      "highlights": [
-        "Object-oriented OpenGL wrapper design",
-        "3D math library implementation",
-        "Model and texture loading utilities"
-      ],
-      "keywords": [
-        "OpenGL",
-        "C++",
-        "Graphics Programming"
-      ],
-      "url": "https://github.com/nnarain/sgl-wrapper",
-      "roles": [
         "Developer"
       ]
     }
