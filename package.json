@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "jsonresume-theme-elegant": "^1.16.1"
+    "jsonresume-theme-elegant": "^1.16.1",
+    "jsonresume-theme-kendall": "^0.2.0"
   }
 }
