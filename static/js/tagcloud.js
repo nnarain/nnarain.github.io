@@ -1,5 +1,5 @@
-// Tag Cloud Visualization using D3.js force-directed graph
-// Similar to Obsidian's node graph
+// Tag Cloud Visualization using Canvas and vanilla JavaScript
+// A simpler implementation that doesn't require external libraries
 
 class TagCloud {
     constructor(containerId, posts) {
@@ -7,10 +7,14 @@ class TagCloud {
         this.posts = posts;
         this.width = 800;
         this.height = 600;
-        this.svg = null;
-        this.simulation = null;
+        this.canvas = null;
+        this.ctx = null;
         this.nodes = [];
         this.links = [];
+        this.hoveredNode = null;
+        this.isDragging = false;
+        this.draggedNode = null;
+        this.animationFrame = null;
     }
 
     // Extract tags and create nodes/links from posts
@@ -38,7 +42,11 @@ class TagCloud {
         this.nodes = Array.from(tagMap.entries()).map(([tag, count]) => ({
             id: tag,
             count: count,
-            radius: Math.max(15, Math.min(40, 15 + count * 2))
+            radius: Math.max(15, Math.min(40, 15 + count * 2)),
+            x: Math.random() * (this.width - 100) + 50,
+            y: Math.random() * (this.height - 100) + 50,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2
         }));
 
         // Create links between tags that share posts
@@ -57,8 +65,8 @@ class TagCloud {
                 
                 if (commonPosts.size > 0) {
                     links.push({
-                        source: tag1,
-                        target: tag2,
+                        source: this.nodes.find(n => n.id === tag1),
+                        target: this.nodes.find(n => n.id === tag2),
                         strength: commonPosts.size
                     });
                 }
@@ -75,148 +83,224 @@ class TagCloud {
         const container = document.getElementById(this.containerId);
         container.innerHTML = ''; // Clear existing content
         
-        // Create SVG
-        this.svg = d3.select(`#${this.containerId}`)
-            .append('svg')
-            .attr('width', '100%')
-            .attr('height', this.height)
-            .attr('viewBox', [0, 0, this.width, this.height])
-            .style('background', '#1e1e1e')
-            .style('border-radius', '8px');
-
-        // Add zoom behavior
-        const g = this.svg.append('g');
+        // Create canvas
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        this.canvas.style.width = '100%';
+        this.canvas.style.height = this.height + 'px';
+        this.canvas.style.borderRadius = '8px';
+        this.canvas.style.background = '#1e1e1e';
+        this.canvas.style.cursor = 'pointer';
         
-        this.svg.call(d3.zoom()
-            .scaleExtent([0.5, 3])
-            .on('zoom', (event) => {
-                g.attr('transform', event.transform);
-            }));
+        container.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
 
-        // Create force simulation
-        this.simulation = d3.forceSimulation(this.nodes)
-            .force('link', d3.forceLink(this.links)
-                .id(d => d.id)
-                .distance(d => Math.max(80, 150 - d.strength * 10))
-                .strength(d => Math.min(0.5, d.strength * 0.1)))
-            .force('charge', d3.forceManyBody().strength(-300))
-            .force('center', d3.forceCenter(this.width / 2, this.height / 2))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 5));
+        // Setup event listeners
+        this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this));
+        this.canvas.addEventListener('mousedown', this.onMouseDown.bind(this));
+        this.canvas.addEventListener('mouseup', this.onMouseUp.bind(this));
+        this.canvas.addEventListener('click', this.onClick.bind(this));
 
-        // Draw links
-        const link = g.append('g')
-            .attr('class', 'links')
-            .selectAll('line')
-            .data(this.links)
-            .enter().append('line')
-            .attr('stroke', '#4a4a4a')
-            .attr('stroke-opacity', 0.6)
-            .attr('stroke-width', d => Math.sqrt(d.strength));
-
-        // Draw nodes
-        const node = g.append('g')
-            .attr('class', 'nodes')
-            .selectAll('g')
-            .data(this.nodes)
-            .enter().append('g')
-            .call(this.drag(this.simulation));
-
-        // Add circles to nodes
-        node.append('circle')
-            .attr('r', d => d.radius)
-            .attr('fill', '#3a86ff')
-            .attr('stroke', '#8ecae6')
-            .attr('stroke-width', 2)
-            .style('cursor', 'pointer')
-            .on('mouseover', function(event, d) {
-                d3.select(this)
-                    .transition()
-                    .duration(200)
-                    .attr('fill', '#fb5607')
-                    .attr('r', d.radius * 1.2);
-            })
-            .on('mouseout', function(event, d) {
-                d3.select(this)
-                    .transition()
-                    .duration(200)
-                    .attr('fill', '#3a86ff')
-                    .attr('r', d.radius);
-            })
-            .on('click', (event, d) => {
-                // Navigate to search with tag
-                window.location.href = `/search?query=${d.id}`;
-            });
-
-        // Add labels to nodes
-        node.append('text')
-            .text(d => d.id)
-            .attr('x', 0)
-            .attr('y', 0)
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .attr('fill', 'white')
-            .attr('font-size', d => Math.max(10, Math.min(16, 8 + d.count)))
-            .attr('font-family', 'sans-serif')
-            .style('pointer-events', 'none')
-            .style('user-select', 'none');
-
-        // Add count badges
-        node.append('text')
-            .text(d => d.count)
-            .attr('x', d => d.radius * 0.7)
-            .attr('y', d => -d.radius * 0.7)
-            .attr('fill', '#ffbe0b')
-            .attr('font-size', '10px')
-            .attr('font-weight', 'bold')
-            .attr('font-family', 'sans-serif')
-            .style('pointer-events', 'none')
-            .style('user-select', 'none');
-
-        // Update positions on simulation tick
-        this.simulation.on('tick', () => {
-            link
-                .attr('x1', d => d.source.x)
-                .attr('y1', d => d.source.y)
-                .attr('x2', d => d.target.x)
-                .attr('y2', d => d.target.y);
-
-            node
-                .attr('transform', d => `translate(${d.x},${d.y})`);
-        });
+        // Start animation
+        this.animate();
     }
 
-    // Drag behavior
-    drag(simulation) {
-        function dragstarted(event, d) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
+    // Force simulation step
+    simulateForces() {
+        const damping = 0.8;
+        const centerForce = 0.01;
+        const linkForce = 0.005;
+        const repelForce = 500;
+
+        // Apply forces to nodes
+        for (let i = 0; i < this.nodes.length; i++) {
+            const node = this.nodes[i];
+            
+            if (node === this.draggedNode) continue;
+
+            // Center force
+            const centerX = this.width / 2;
+            const centerY = this.height / 2;
+            node.vx += (centerX - node.x) * centerForce;
+            node.vy += (centerY - node.y) * centerForce;
+
+            // Repel force from other nodes
+            for (let j = 0; j < this.nodes.length; j++) {
+                if (i === j) continue;
+                const other = this.nodes[j];
+                const dx = other.x - node.x;
+                const dy = other.y - node.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 150 && dist > 0) {
+                    const force = repelForce / (dist * dist);
+                    node.vx -= (dx / dist) * force;
+                    node.vy -= (dy / dist) * force;
+                }
+            }
         }
 
-        function dragged(event, d) {
-            d.fx = event.x;
-            d.fy = event.y;
+        // Apply link forces
+        for (const link of this.links) {
+            const dx = link.target.x - link.source.x;
+            const dy = link.target.y - link.source.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const force = (dist - 100) * linkForce * link.strength * 0.1;
+            
+            if (!link.source.isDragging) {
+                link.source.vx += (dx / dist) * force;
+                link.source.vy += (dy / dist) * force;
+            }
+            if (!link.target.isDragging) {
+                link.target.vx -= (dx / dist) * force;
+                link.target.vy -= (dy / dist) * force;
+            }
         }
 
-        function dragended(event, d) {
-            if (!event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-        }
+        // Update positions
+        for (const node of this.nodes) {
+            if (node === this.draggedNode) continue;
 
-        return d3.drag()
-            .on('start', dragstarted)
-            .on('drag', dragged)
-            .on('end', dragended);
+            node.vx *= damping;
+            node.vy *= damping;
+            node.x += node.vx;
+            node.y += node.vy;
+
+            // Boundary collision
+            if (node.x < node.radius) {
+                node.x = node.radius;
+                node.vx *= -0.5;
+            }
+            if (node.x > this.width - node.radius) {
+                node.x = this.width - node.radius;
+                node.vx *= -0.5;
+            }
+            if (node.y < node.radius) {
+                node.y = node.radius;
+                node.vy *= -0.5;
+            }
+            if (node.y > this.height - node.radius) {
+                node.y = this.height - node.radius;
+                node.vy *= -0.5;
+            }
+        }
+    }
+
+    // Animation loop
+    animate() {
+        this.simulateForces();
+        this.draw();
+        this.animationFrame = requestAnimationFrame(this.animate.bind(this));
+    }
+
+    // Draw the visualization
+    draw() {
+        // Clear canvas
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        // Draw links
+        this.ctx.strokeStyle = '#4a4a4a';
+        this.ctx.globalAlpha = 0.6;
+        for (const link of this.links) {
+            this.ctx.beginPath();
+            this.ctx.lineWidth = Math.sqrt(link.strength);
+            this.ctx.moveTo(link.source.x, link.source.y);
+            this.ctx.lineTo(link.target.x, link.target.y);
+            this.ctx.stroke();
+        }
+        this.ctx.globalAlpha = 1.0;
+
+        // Draw nodes
+        for (const node of this.nodes) {
+            const isHovered = node === this.hoveredNode;
+            const radius = isHovered ? node.radius * 1.2 : node.radius;
+
+            // Node circle
+            this.ctx.beginPath();
+            this.ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+            this.ctx.fillStyle = isHovered ? '#fb5607' : '#3a86ff';
+            this.ctx.fill();
+            this.ctx.strokeStyle = '#8ecae6';
+            this.ctx.lineWidth = 2;
+            this.ctx.stroke();
+
+            // Node label
+            this.ctx.fillStyle = 'white';
+            this.ctx.font = `${Math.max(10, Math.min(16, 8 + node.count))}px sans-serif`;
+            this.ctx.textAlign = 'center';
+            this.ctx.textBaseline = 'middle';
+            this.ctx.fillText(node.id, node.x, node.y);
+
+            // Count badge
+            this.ctx.fillStyle = '#ffbe0b';
+            this.ctx.font = 'bold 10px sans-serif';
+            this.ctx.fillText(node.count, node.x + radius * 0.7, node.y - radius * 0.7);
+        }
+    }
+
+    // Find node at position
+    findNodeAt(x, y) {
+        const rect = this.canvas.getBoundingClientRect();
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        const canvasX = (x - rect.left) * scaleX;
+        const canvasY = (y - rect.top) * scaleY;
+
+        for (const node of this.nodes) {
+            const dx = canvasX - node.x;
+            const dy = canvasY - node.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < node.radius) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    // Event handlers
+    onMouseMove(e) {
+        const node = this.findNodeAt(e.clientX, e.clientY);
+        this.hoveredNode = node;
+        this.canvas.style.cursor = node ? 'pointer' : 'default';
+
+        if (this.isDragging && this.draggedNode) {
+            const rect = this.canvas.getBoundingClientRect();
+            const scaleX = this.canvas.width / rect.width;
+            const scaleY = this.canvas.height / rect.height;
+            this.draggedNode.x = (e.clientX - rect.left) * scaleX;
+            this.draggedNode.y = (e.clientY - rect.top) * scaleY;
+            this.draggedNode.vx = 0;
+            this.draggedNode.vy = 0;
+        }
+    }
+
+    onMouseDown(e) {
+        const node = this.findNodeAt(e.clientX, e.clientY);
+        if (node) {
+            this.isDragging = true;
+            this.draggedNode = node;
+        }
+    }
+
+    onMouseUp(e) {
+        this.isDragging = false;
+        this.draggedNode = null;
+    }
+
+    onClick(e) {
+        const node = this.findNodeAt(e.clientX, e.clientY);
+        if (node && !this.isDragging) {
+            window.location.href = `/search?query=${node.id}`;
+        }
     }
 
     // Destroy the visualization
     destroy() {
-        if (this.simulation) {
-            this.simulation.stop();
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
         }
-        if (this.svg) {
-            this.svg.remove();
+        if (this.canvas) {
+            this.canvas.remove();
         }
     }
 }
