@@ -11,10 +11,14 @@ class TagCloud {
         this.ctx = null;
         this.nodes = [];
         this.links = [];
+        this.allNodes = [];
+        this.allLinks = [];
         this.hoveredNode = null;
         this.isDragging = false;
         this.draggedNode = null;
         this.animationFrame = null;
+        this.selectedNode = null;
+        this.isFiltered = false;
     }
 
     // Extract tags and create nodes/links from posts
@@ -74,6 +78,9 @@ class TagCloud {
         }
         
         this.links = links;
+        // Store original data for filtering
+        this.allNodes = [...this.nodes];
+        this.allLinks = [...this.links];
     }
 
     // Initialize the visualization
@@ -96,6 +103,9 @@ class TagCloud {
         container.appendChild(this.canvas);
         this.ctx = this.canvas.getContext('2d');
 
+        // Add instructions
+        this.addInstructions(container);
+
         // Setup event listeners
         this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this));
         this.canvas.addEventListener('mousedown', this.onMouseDown.bind(this));
@@ -106,11 +116,80 @@ class TagCloud {
         this.animate();
     }
 
+    // Add instruction text
+    addInstructions(container) {
+        const instructions = document.createElement('div');
+        instructions.style.textAlign = 'center';
+        instructions.style.marginTop = '10px';
+        instructions.style.fontSize = '0.9rem';
+        instructions.style.color = '#7f8c8d';
+        // instructions.innerHTML = 'Click on a tag to see only related tags • Click selected tag again to show all';
+        container.appendChild(instructions);
+    }
+
+    // Filter to show only connected tags
+    filterToConnectedTags(centerNode) {
+        this.selectedNode = centerNode;
+        this.isFiltered = true;
+        
+        // Find all nodes connected to the center node
+        const connectedNodes = new Set([centerNode]);
+        const connectedLinks = [];
+        
+        for (const link of this.allLinks) {
+            if (link.source === centerNode || link.target === centerNode) {
+                connectedNodes.add(link.source);
+                connectedNodes.add(link.target);
+                connectedLinks.push(link);
+            }
+        }
+        
+        // Update visible nodes and links
+        this.nodes = Array.from(connectedNodes);
+        this.links = connectedLinks;
+        
+        // Reposition nodes around the center
+        this.repositionFilteredNodes(centerNode);
+    }
+    
+    // Reset to show all tags
+    resetFilter() {
+        this.selectedNode = null;
+        this.isFiltered = false;
+        this.nodes = [...this.allNodes];
+        this.links = [...this.allLinks];
+    }
+    
+    // Reposition filtered nodes in a circle around the center node
+    repositionFilteredNodes(centerNode) {
+        const centerX = this.width / 2;
+        const centerY = this.height / 2;
+        const radius = 150;
+        
+        // Place center node at center
+        centerNode.x = centerX;
+        centerNode.y = centerY;
+        centerNode.vx = 0;
+        centerNode.vy = 0;
+        
+        // Arrange other nodes in a circle
+        const otherNodes = this.nodes.filter(n => n !== centerNode);
+        const angleStep = (2 * Math.PI) / otherNodes.length;
+        
+        otherNodes.forEach((node, index) => {
+            const angle = index * angleStep;
+            node.x = centerX + Math.cos(angle) * radius;
+            node.y = centerY + Math.sin(angle) * radius;
+            node.vx = 0;
+            node.vy = 0;
+        });
+    }
+
     // Force simulation step
     simulateForces() {
         const damping = 0.8;
         const centerForce = 0.01;
-        const linkForce = 0.005;
+        const linkForce = 0.002;
         const repelForce = 500;
 
         // Apply forces to nodes
@@ -145,7 +224,7 @@ class TagCloud {
             const dx = link.target.x - link.source.x;
             const dy = link.target.y - link.source.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const force = (dist - 100) * linkForce * link.strength * 0.1;
+            const force = (dist - 120) * linkForce * link.strength * 0.05;
             
             if (!link.source.isDragging) {
                 link.source.vx += (dx / dist) * force;
@@ -213,15 +292,24 @@ class TagCloud {
         // Draw nodes
         for (const node of this.nodes) {
             const isHovered = node === this.hoveredNode;
+            const isSelected = node === this.selectedNode;
             const radius = isHovered ? node.radius * 1.2 : node.radius;
 
             // Node circle
             this.ctx.beginPath();
             this.ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-            this.ctx.fillStyle = isHovered ? '#fb5607' : '#3a86ff';
+            
+            if (isSelected) {
+                this.ctx.fillStyle = '#ff6b35'; // Orange for selected node
+            } else if (isHovered) {
+                this.ctx.fillStyle = '#fb5607'; // Red for hovered node
+            } else {
+                this.ctx.fillStyle = '#3a86ff'; // Blue for normal nodes
+            }
+            
             this.ctx.fill();
-            this.ctx.strokeStyle = '#8ecae6';
-            this.ctx.lineWidth = 2;
+            this.ctx.strokeStyle = isSelected ? '#ff6b35' : '#8ecae6';
+            this.ctx.lineWidth = isSelected ? 3 : 2;
             this.ctx.stroke();
 
             // Node label
@@ -290,7 +378,16 @@ class TagCloud {
     onClick(e) {
         const node = this.findNodeAt(e.clientX, e.clientY);
         if (node && !this.isDragging) {
-            window.location.href = `/search?query=${node.id}`;
+            if (this.isFiltered && node === this.selectedNode) {
+                // Double-click on selected node resets the filter
+                this.resetFilter();
+            } else if (this.isFiltered) {
+                // Navigate to search for the clicked tag
+                window.location.href = `/search?query=${node.id}`;
+            } else {
+                // Filter to show only connected tags
+                this.filterToConnectedTags(node);
+            }
         }
     }
 

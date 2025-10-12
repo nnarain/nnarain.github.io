@@ -128,7 +128,22 @@
     transition: all 0.3s ease;
     display: block;
     text-decoration: none;
-    color: inherit;
+    color: #2c3e50;
+}
+
+#search-results .catalogue-item h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+#search-results .catalogue-item p {
+    color: #666666;
+    margin-bottom: 0.5rem;
+}
+
+#search-results .catalogue-item .post-meta {
+    color: #7f8c8d;
+    font-size: 0.9rem;
 }
 
 #search-results .catalogue-item:hover {
@@ -278,41 +293,4 @@
     }
 }
 
-/* Dark mode support (optional) */
-@media (prefers-color-scheme: dark) {
-    .search-header h1 {
-        color: #e0e0e0;
-    }
-    
-    .search-header p,
-    .tag-cloud-section p {
-        color: #b0b0b0;
-    }
-    
-    .tag-cloud-section,
-    .tag-list-section {
-        background: #2c2c2c;
-    }
-    
-    .tag-cloud-section h2,
-    .tag-list-section h2 {
-        color: #e0e0e0;
-    }
-    
-    #search-results .catalogue-item {
-        background: #2c2c2c;
-        color: #e0e0e0;
-    }
-    
-    .tag-group h3 {
-        color: #8ecae6;
-    }
-    
-    .tag-group ul li a {
-        color: #e0e0e0;
-    }
-    
-    .tag-group ul li a:hover {
-        color: #8ecae6;
-    }
-}
+/* Force light theme - removed dark mode overrides */
