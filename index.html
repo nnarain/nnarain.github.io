@@ -6,7 +6,7 @@ title: Home
 <div class="catalogue">
   {% for post in paginator.posts %}
   <div class="catalogue-item">
-    <a href="{{ post.url | prepend: site.url }}" class="nohighlight">
+    <a href="{{ post.url | relative_url }}" class="nohighlight">
       <div>
         <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%B %d, %Y" }}</time>
         <h1 class="catalogue-title">{{ post.title }}</h1>
@@ -18,7 +18,7 @@ title: Home
       </div>
     </a>
     {% for tag in post.tag %}
-      <div onclick="location.href='/search?query={{tag|downcase}}';" class="badge badge-secondary">{{tag | downcase}}</div>
+      <div onclick="location.href='{{ "/search" | relative_url }}?query={{tag|downcase}}';" class="badge badge-secondary">{{tag | downcase}}</div>
     {% endfor %}
   </div>
   {% endfor %}

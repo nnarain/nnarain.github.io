@@ -57,16 +57,38 @@ export_html() {
     echo "Exporting resume to $output_file..."
     cd "$REPO_ROOT"
     
+    # Export to a temporary file first
+    local temp_file="temp_resume.html"
+    
     if [ -n "$theme" ]; then
         echo "Using theme: $theme"
         install_theme "$theme"
-        resume export "$output_file" -t "$theme"
+        resume export "$temp_file" -t "$theme"
     else
         echo "Using default theme"
-        resume export "$output_file"
+        resume export "$temp_file"
     fi
     
-    echo "Resume exported to $output_file"
+    # Add Jekyll front matter and content
+    echo "Adding Jekyll front matter for permalink support..."
+    cat > "$output_file" << 'EOF'
+---
+layout: default
+title: Resume
+permalink: /resume/
+---
+
+EOF
+    
+    # For Jekyll integration, we need the complete HTML content
+    # Since the theme generates a complete standalone page, we'll include it all
+    # The Jekyll layout will handle the overall page structure
+    cat "$temp_file" >> "$output_file"
+    
+    # Clean up temp file
+    rm -f "$temp_file"
+    
+    echo "Resume exported to $output_file with Jekyll front matter"
 }
 
 # Serve resume locally
@@ -102,7 +124,8 @@ usage() {
     echo "Usage: $0 [command]"
     echo ""
     echo "Commands:"
-    echo "  export [file] [theme]  Export resume to HTML (default: resume.html)"
+    echo "  export [file] [theme]  Export resume to HTML with Jekyll front matter (default: resume.html)"
+    echo "                         Generated file will be accessible at /resume/ permalink"
     echo "  serve [theme]          Serve resume locally on port 4000"
     echo "  validate               Validate resume.json against schema"
     echo "  help                   Show this help message"
