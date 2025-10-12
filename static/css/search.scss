@@ -1,0 +1,318 @@
+---
+---
+
+/* Modern Search Page Styles */
+
+.search-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.search-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.search-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.search-header p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+.searchbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.searchbox input[type="text"] {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.searchbox input[type="text"]:focus {
+    border-color: #3a86ff;
+    box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+}
+
+.searchbox input[type="submit"] {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #3a86ff 0%, #8ecae6 100%);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.searchbox input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(58, 134, 255, 0.4);
+}
+
+/* Tag Cloud Section */
+.tag-cloud-section {
+    margin-bottom: 3rem;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tag-cloud-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.tag-cloud-section p {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+}
+
+#tag-cloud-container {
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tag-cloud-loading {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Search Results Section */
+.search-results-section {
+    margin-bottom: 3rem;
+}
+
+.search-results-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+#search-results {
+    min-height: 200px;
+}
+
+#search-results .catalogue-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+#search-results .catalogue-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Tag List Section */
+.tag-list-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tag-list-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tag-group {
+    margin-bottom: 2rem;
+}
+
+.tag-group h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #3a86ff;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tag-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tag-group ul li {
+    padding: 0.5rem 0;
+}
+
+.tag-group ul li a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.tag-group ul li a:hover {
+    color: #3a86ff;
+}
+
+/* Badge styling */
+.badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    margin: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.badge-secondary {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.badge-secondary:hover {
+    background-color: #3a86ff;
+    color: white;
+    cursor: pointer;
+}
+
+/* Legend for tag cloud */
+.tag-cloud-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.legend-circle.large {
+    background-color: #3a86ff;
+    width: 20px;
+    height: 20px;
+}
+
+.legend-circle.small {
+    background-color: #3a86ff;
+    width: 12px;
+    height: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-header h1 {
+        font-size: 2rem;
+    }
+    
+    .searchbox {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .searchbox input[type="text"] {
+        width: 100%;
+    }
+    
+    .searchbox input[type="submit"] {
+        width: 100%;
+    }
+    
+    .tag-cloud-section,
+    .tag-list-section {
+        padding: 1rem;
+    }
+    
+    #tag-cloud-container {
+        min-height: 400px;
+    }
+    
+    .tag-cloud-legend {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    .search-header h1 {
+        color: #e0e0e0;
+    }
+    
+    .search-header p,
+    .tag-cloud-section p {
+        color: #b0b0b0;
+    }
+    
+    .tag-cloud-section,
+    .tag-list-section {
+        background: #2c2c2c;
+    }
+    
+    .tag-cloud-section h2,
+    .tag-list-section h2 {
+        color: #e0e0e0;
+    }
+    
+    #search-results .catalogue-item {
+        background: #2c2c2c;
+        color: #e0e0e0;
+    }
+    
+    .tag-group h3 {
+        color: #8ecae6;
+    }
+    
+    .tag-group ul li a {
+        color: #e0e0e0;
+    }
+    
+    .tag-group ul li a:hover {
+        color: #8ecae6;
+    }
+}

@@ -4,30 +4,63 @@ title: Search
 permalink: /search/
 ---
 
-<div align="center">
-    <form action="/search" method="get" class="searchbox">
-        <input type="text" id="search-box" name="query" />
-        <input type="submit" value="search" />
-    </form>
-</div>
+<link rel="stylesheet" href="{{ site.baseurl }}/static/css/search.css">
 
-<div id="search-results" class="catalogue">
-</div>
+<div class="search-container">
+    <div class="search-header">
+        <h1>Search & Explore</h1>
+        <p>Search posts or explore tags visually</p>
+    </div>
 
-<div>
-    {% assign all_tags = site.posts | map: "tag" | join: "," | downcase | split: "," | uniq | sort %}
-    
-    {% for current_tag in all_tags %}
-        <strong>{{current_tag}}</strong>
-        <ul>
-            {% for post in site.posts %}
-                {% assign post_tags = post.tag | join: "," | downcase | split: "," %}
-                {% if post_tags contains current_tag %}
-                    <li><a href="{{post.url}}">{{post.title}}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endfor %}
+    <div align="center">
+        <form action="/search" method="get" class="searchbox">
+            <input type="text" id="search-box" name="query" placeholder="Search posts..." />
+            <input type="submit" value="Search" />
+        </form>
+    </div>
+
+    <div class="tag-cloud-section">
+        <h2>Tag Cloud</h2>
+        <p>Interactive visualization of blog tags. Click on a tag to filter posts.</p>
+        <div id="tag-cloud-container">
+            <div class="tag-cloud-loading">Loading tag cloud...</div>
+        </div>
+        <div class="tag-cloud-legend">
+            <div class="legend-item">
+                <div class="legend-circle large"></div>
+                <span>More posts</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-circle small"></div>
+                <span>Fewer posts</span>
+            </div>
+            <div class="legend-item">
+                <span>Lines connect related tags</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-results" class="catalogue search-results-section">
+    </div>
+
+    <div class="tag-list-section">
+        <h2>Browse by Tag</h2>
+        {% assign all_tags = site.posts | map: "tag" | join: "," | downcase | split: "," | uniq | sort %}
+        
+        {% for current_tag in all_tags %}
+            <div class="tag-group">
+                <h3>{{current_tag}}</h3>
+                <ul>
+                    {% for post in site.posts %}
+                        {% assign post_tags = post.tag | join: "," | downcase | split: "," %}
+                        {% if post_tags contains current_tag %}
+                            <li><a href="{{post.url}}">{{post.title}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 <script>
@@ -46,6 +79,8 @@ permalink: /search/
 
 </script>
 
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script type="text/javascript" src="{{ site.baseurl }}/static/js/lunr.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/static/js/tagcloud.js"></script>
 <script type="text/javascript" src="{{ site.baseurl }}/static/js/search.js"></script>
 
