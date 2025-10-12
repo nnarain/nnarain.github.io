@@ -73,7 +73,6 @@ export_html() {
     echo "Adding Jekyll front matter for permalink support..."
     cat > "$output_file" << 'EOF'
 ---
-layout: default
 title: Resume
 permalink: /resume/
 ---
