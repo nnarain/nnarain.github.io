@@ -1,0 +1,187 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Natesh Narain",
+    "label": "Software Developer",
+    "image": "",
+    "email": "nnaraindev@gmail.com",
+    "url": "https://nnarain.github.io",
+    "summary": "Software developer specializing in autonomous robotics systems with expertise in system software, firmware development, and digital electronics design. Passionate about building embedded systems and creating innovative solutions for complex technical challenges.",
+    "location": {
+      "countryCode": "CA",
+      "region": "Ontario"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "nnarain",
+        "url": "https://github.com/nnarain"
+      },
+      {
+        "network": "YouTube",
+        "username": "nnaraindev",
+        "url": "https://www.youtube.com/channel/UCVYy1Jiww7YAsgEFD2CSQSw"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Autonomous Robotics Company",
+      "position": "Software Developer",
+      "startDate": "2017",
+      "summary": "Developing software solutions for autonomous robots, focusing on system-level programming and embedded systems integration.",
+      "highlights": [
+        "Designed and implemented software for autonomous robot control systems",
+        "Developed firmware for embedded systems in robotics applications",
+        "Collaborated on system architecture and software design decisions"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University",
+      "area": "Electronic Systems Engineering",
+      "studyType": "Bachelor of Engineering",
+      "endDate": "2017",
+      "score": "",
+      "courses": []
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming Languages",
+      "level": "Advanced",
+      "keywords": [
+        "C",
+        "C++",
+        "Java",
+        "Python"
+      ]
+    },
+    {
+      "name": "Web Development",
+      "level": "Intermediate",
+      "keywords": [
+        "HTML",
+        "JavaScript",
+        "NodeJS",
+        "Express"
+      ]
+    },
+    {
+      "name": "Hardware Design",
+      "level": "Intermediate",
+      "keywords": [
+        "Altium Designer",
+        "Schematic Capture",
+        "PCB Layout",
+        "Digital Logic Circuits"
+      ]
+    },
+    {
+      "name": "Software Tools",
+      "level": "Advanced",
+      "keywords": [
+        "Git",
+        "CMake",
+        "Microsoft Visual Studio",
+        "Eclipse"
+      ]
+    },
+    {
+      "name": "Frameworks & APIs",
+      "level": "Intermediate",
+      "keywords": [
+        "Qt",
+        "Android"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "HCS12 Embedded Robot Controller",
+      "description": "Designed, built, and programmed a functional embedded system to control a robot platform from scratch",
+      "highlights": [
+        "Custom PCB design and schematic capture",
+        "Board assembly and bring-up procedures",
+        "Firmware development for robot control"
+      ],
+      "keywords": [
+        "Embedded Systems",
+        "PCB Design",
+        "Firmware"
+      ],
+      "url": "https://github.com/nnarain/ESEPlatformController",
+      "roles": [
+        "Designer",
+        "Developer"
+      ]
+    },
+    {
+      "name": "Gameboy/Gameboy Color Emulator",
+      "description": "Developed a complete emulator for the Gameboy and Gameboy Color gaming systems",
+      "highlights": [
+        "Implemented CPU emulation and instruction set",
+        "Graphics and audio system emulation",
+        "Cross-platform compatibility"
+      ],
+      "keywords": [
+        "Emulation",
+        "C++",
+        "Systems Programming"
+      ],
+      "url": "https://github.com/nnarain/gameboycore",
+      "roles": [
+        "Developer"
+      ]
+    },
+    {
+      "name": "Simple OpenGL Utility Library",
+      "description": "Created an object-oriented wrapper library for OpenGL with math classes, model loading (Wavefront), and image loading capabilities",
+      "highlights": [
+        "Object-oriented OpenGL wrapper design",
+        "3D math library implementation",
+        "Model and texture loading utilities"
+      ],
+      "keywords": [
+        "OpenGL",
+        "C++",
+        "Graphics Programming"
+      ],
+      "url": "https://github.com/nnarain/sgl-wrapper",
+      "roles": [
+        "Developer"
+      ]
+    }
+  ],
+  "interests": [
+    {
+      "name": "Programming",
+      "keywords": [
+        "Side Projects",
+        "Open Source",
+        "System Software"
+      ]
+    },
+    {
+      "name": "Electronics",
+      "keywords": [
+        "Embedded Systems",
+        "PCB Design",
+        "Digital Logic"
+      ]
+    },
+    {
+      "name": "Robotics",
+      "keywords": [
+        "Autonomous Systems",
+        "Control Systems"
+      ]
+    }
+  ],
+  "meta": {
+    "canonical": "https://raw.githubusercontent.com/nnarain/nnarain.github.io/master/resume.json",
+    "version": "v1.0.0",
+    "lastModified": "2025-10-10T00:00:00.000Z"
+  }
+}
