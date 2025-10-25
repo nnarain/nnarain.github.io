@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Natesh Narain",
-    "label": "Senior Software Developer",
+    "label": "Staff Software Developer",
     "image": "/static/socials/profile.jpg",
     "email": "nnarain101@gmail.com",
     "url": "https://nnarain.github.io",
@@ -28,9 +28,22 @@
   "work": [
     {
       "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Aquisition)",
+      "position": "Staff Software Developer (Vehicle Platform)",
+      "startDate": "2024-01",
+      "summary": "Staff member of the Vehicle Platform Software Team, leading technical initiatives and architecture decisions to advance autonomous vehicle capabilities. Providing technical leadership across multiple vehicle integration projects and mentoring team members on complex system software challenges.",
+      "highlights": [
+        "Led architectural design decisions for vehicle platform software integrations",
+        "Mentored team members on complex embedded systems and fieldbus technologies",
+        "Drove cross-functional technical initiatives to expand vehicle platform capabilities",
+        "Provided technical leadership for OEM vehicle integration projects",
+        "Defined technical standards and best practices for the Vehicle Platform team"
+      ]
+    },
+    {
+      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Aquisition)",
       "position": "Senior Software Developer (Vehicle Platform)",
       "startDate": "2021-01",
-      "endDate": "",
+      "endDate": "2024-01",
       "summary": "Senior member of the Vehicle Platform Software Team focusing on rapidly improving software capabilities to accommodate an expanding portfolio of vehicles. Led multiple team initiatives to enabling integrating the OTTO software stack on third-party OEM vehicles.",
       "highlights": [
         "Planned, designed and implemented a configurable system for integrating multiple fieldbus technologies (CAN, CANopen, J1939, Modbus, EtherNet/IP) into autonomous control stack",
@@ -292,6 +305,6 @@
   "meta": {
     "canonical": "https://raw.githubusercontent.com/nnarain/nnarain.github.io/master/resume.json",
     "version": "v1.0.0",
-    "lastModified": "2025-10-10T00:00:00.000Z"
+    "lastModified": "2025-10-25T00:55:00.000Z"
   }
 }
