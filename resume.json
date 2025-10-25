@@ -27,7 +27,7 @@
   },
   "work": [
     {
-      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Aquisition)",
+      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Acquisition)",
       "position": "Staff Software Developer (Vehicle Platform)",
       "startDate": "2024-01",
       "summary": "Staff member of the Vehicle Platform Software Team, leading technical initiatives and architecture decisions to advance autonomous vehicle capabilities. Providing technical leadership across multiple vehicle integration projects and mentoring team members on complex system software challenges.",
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Aquisition)",
+      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Acquisition)",
       "position": "Senior Software Developer (Vehicle Platform)",
       "startDate": "2021-01",
       "endDate": "2024-01",
@@ -51,7 +51,7 @@
         "Built diagnostic components and tools for debugging and postmortem analysis",
         "Identified gaps in the OTTO software stack and prioritized necessary changes to support OEM vehicle integrations",
         "Developed solutions with minimal guidance to meet expanding vehicle portfolio requirements",
-        "Applied a broad knowledge of the OTTO software stack to coordianate cross-team efforts and deliver high-quality solutions"
+        "Applied a broad knowledge of the OTTO software stack to coordinate cross-team efforts and deliver high-quality solutions"
       ]
     },
     {
