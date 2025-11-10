@@ -50,7 +50,7 @@ $text_size: 13px;
 
     span.tags {
 
-        @include borderbtm( #888 );
+        @include borderbtm( #22c55e );
         @include margins(0 5px);
         font-size: ($heading_size / 2);
 
