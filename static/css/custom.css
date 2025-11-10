@@ -1,0 +1,40 @@
+/* Custom CSS for minimal overrides and additional styling */
+
+/* Dark mode specific styles for syntax highlighting */
+.dark pre {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+.dark code {
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Custom scrollbar for dark mode */
+.dark::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dark::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 5px;
+}
+
+.dark::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Preserve link decoration behavior */
+a {
+  text-decoration: none !important;
+}

@@ -1,7 +1,7 @@
 ---
 ---
 
-/* Modern Search Page Styles */
+/* Modern Search Page Styles with Dark Mode Support */
 
 .search-container {
     max-width: 1200px;
@@ -21,9 +21,17 @@
     margin-bottom: 0.5rem;
 }
 
+.dark .search-header h1 {
+    color: #e5e7eb;
+}
+
 .search-header p {
     color: #7f8c8d;
     font-size: 1.1rem;
+}
+
+.dark .search-header p {
+    color: #9ca3af;
 }
 
 .searchbox {
@@ -43,6 +51,14 @@
     border-radius: 25px;
     outline: none;
     transition: all 0.3s ease;
+    background-color: white;
+    color: #2c3e50;
+}
+
+.dark .searchbox input[type="text"] {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
 }
 
 .searchbox input[type="text"]:focus {
@@ -76,6 +92,11 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.dark .tag-cloud-section {
+    background: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .tag-cloud-section h2 {
     font-size: 1.8rem;
     font-weight: 600;
@@ -84,10 +105,18 @@
     text-align: center;
 }
 
+.dark .tag-cloud-section h2 {
+    color: #e5e7eb;
+}
+
 .tag-cloud-section p {
     text-align: center;
     color: #7f8c8d;
     margin-bottom: 1.5rem;
+}
+
+.dark .tag-cloud-section p {
+    color: #9ca3af;
 }
 
 #tag-cloud-container {
@@ -103,6 +132,10 @@
     font-style: italic;
 }
 
+.dark .tag-cloud-loading {
+    color: #9ca3af;
+}
+
 /* Search Results Section */
 .search-results-section {
     margin-bottom: 3rem;
@@ -113,6 +146,10 @@
     font-weight: 600;
     color: #2c3e50;
     margin-bottom: 1.5rem;
+}
+
+.dark .search-results-section h2 {
+    color: #e5e7eb;
 }
 
 #search-results {
@@ -131,9 +168,19 @@
     color: #2c3e50;
 }
 
+.dark #search-results .catalogue-item {
+    background: #1f2937;
+    color: #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 #search-results .catalogue-item h3 {
     color: #2c3e50;
     margin-bottom: 0.5rem;
+}
+
+.dark #search-results .catalogue-item h3 {
+    color: #e5e7eb;
 }
 
 #search-results .catalogue-item p {
@@ -141,14 +188,26 @@
     margin-bottom: 0.5rem;
 }
 
+.dark #search-results .catalogue-item p {
+    color: #d1d5db;
+}
+
 #search-results .catalogue-item .post-meta {
     color: #7f8c8d;
     font-size: 0.9rem;
 }
 
+.dark #search-results .catalogue-item .post-meta {
+    color: #9ca3af;
+}
+
 #search-results .catalogue-item:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
+}
+
+.dark #search-results .catalogue-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Tag List Section */
@@ -159,12 +218,21 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.dark .tag-list-section {
+    background: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .tag-list-section h2 {
     font-size: 1.8rem;
     font-weight: 600;
     color: #2c3e50;
     margin-bottom: 1.5rem;
     text-align: center;
+}
+
+.dark .tag-list-section h2 {
+    color: #e5e7eb;
 }
 
 .tag-group {
@@ -178,6 +246,10 @@
     margin-bottom: 0.75rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #e0e0e0;
+}
+
+.dark .tag-group h3 {
+    border-bottom-color: #4b5563;
 }
 
 .tag-group ul {
@@ -194,6 +266,10 @@
     color: #2c3e50;
     text-decoration: none;
     transition: color 0.2s ease;
+}
+
+.dark .tag-group ul li a {
+    color: #d1d5db;
 }
 
 .tag-group ul li a:hover {
@@ -216,6 +292,11 @@
     color: #495057;
 }
 
+.dark .badge-secondary {
+    background-color: #374151;
+    color: #d1d5db;
+}
+
 .badge-secondary:hover {
     background-color: #3a86ff;
     color: white;
@@ -233,6 +314,11 @@
     border-radius: 8px;
     font-size: 0.9rem;
     color: #6c757d;
+}
+
+.dark .tag-cloud-legend {
+    background: #374151;
+    color: #9ca3af;
 }
 
 .legend-item {
@@ -292,5 +378,3 @@
         gap: 0.5rem;
     }
 }
-
-/* Force light theme - removed dark mode overrides */

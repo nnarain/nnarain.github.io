@@ -1,24 +1,33 @@
 
+<!-- Tailwind CSS via CDN (Play CDN for static deployment) -->
+<script src="https://cdn.tailwindcss.com"></script>
 
+<!-- Tailwind Configuration -->
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          primary: '#4a9ae1',
+        },
+        fontFamily: {
+          serif: ['Libre Baskerville', 'Times New Roman', 'Times', 'serif'],
+          sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
 
-
-<!-- Material Design CSS -->
-<!--
-
-
--->
-<!-- syntax highlighting CSS -->
-<!--
-<link rel="stylesheet" href="{{ site.baseurl }}/static/css/syntax.css">
--->
-
-<!-- Bootstrap -->
-<link rel="stylesheet" href="{{ site.baseurl }}/static/css/bootstrap.min.css">
-<link rel="stylesheet" href="{{ site.baseurl }}/static/css/bootstrap-theme.min.css">
-
-<!-- Custom CSS -->
-<link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.css">
 <!-- Custom Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" type="text/css">
+
 <!-- FontAwesome icons -->
 <link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+<!-- Syntax Highlighting CSS -->
+<link rel="stylesheet" href="{{ site.baseurl }}/static/css/syntax.css">
+
+<!-- Custom CSS overrides -->
+<link rel="stylesheet" href="{{ site.baseurl }}/static/css/custom.css">
