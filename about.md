@@ -4,8 +4,10 @@ title: About
 permalink: /about/
 ---
 
-About
-=====
+<div class="py-12" markdown="1">
+<div class="prose prose-lg dark:prose-invert max-w-none mx-auto" markdown="1">
+
+# About
 
 Hi!
 
@@ -39,3 +41,6 @@ Most posts are project updates where I elaborate on problems I solved, interesti
 ## Resume
 
 Want to learn more about my professional experience? Check out my [resume](/resume/).
+
+</div>
+</div>
