@@ -9,3 +9,5 @@ Gemfile.lock
 drafts/*
 
 node_modules/
+vendor/bundle/
+.bundle/

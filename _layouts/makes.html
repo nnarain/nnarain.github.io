@@ -2,7 +2,21 @@
 layout: default
 ---
 
-<h1 class="post-title">{{ page.name }}</h1>
-<div class="post-line"></div>
+<div class="py-12">
+  <h1 class="text-5xl font-sans font-bold text-gray-800 dark:text-gray-200 text-center mb-4">{{ page.name }}</h1>
+  <div class="w-16 h-1 bg-gray-800 dark:bg-gray-200 mx-auto mb-8"></div>
 
-{{ content }}
+  <div class="prose prose-lg dark:prose-invert max-w-none">
+    {{ content }}
+  </div>
+</div>
+
+<style>
+  /* Additional prose styles for makes layout */
+  .prose img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+    border-radius: 0.5rem;
+  }
+</style>

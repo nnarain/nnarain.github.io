@@ -6,12 +6,13 @@ permalink: /makes/
 
 <br />
 
-<div class="make-grid">
+<!-- Makes Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
   {% for make in site.makes %}
-  <div class="card" style="width: auto;">
-      <img src="{{ make.thumbnail }}" alt="thumbnail" class=".card-image" />
-      <div class="card-container">
-        <a href="{{ make.url }}"><h4><b>{{ make.name }}</b></h4></a>
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1">
+      <img src="{{ make.thumbnail }}" alt="thumbnail" class="w-full h-48 object-cover" />
+      <div class="p-4">
+        <a href="{{ make.url }}" class="text-xl font-sans font-bold text-gray-800 dark:text-gray-200 hover:text-primary transition-colors duration-200"><h4>{{ make.name }}</h4></a>
       </div>
   </div>
   {% endfor %}

@@ -3,42 +3,51 @@ layout: default
 title: Home
 ---
 
-<div class="catalogue">
+<!-- Blog Post Catalogue -->
+<div class="py-8">
   {% for post in paginator.posts %}
-  <div class="catalogue-item">
-    <a href="{{ post.url | relative_url }}" class="nohighlight">
+  <div class="border-b border-gray-200 dark:border-gray-700 py-6 group">
+    <a href="{{ post.url | relative_url }}" class="block hover:no-underline">
       <div>
-        <time datetime="{{ post.date }}" class="catalogue-time">{{ post.date | date: "%B %d, %Y" }}</time>
-        <h1 class="catalogue-title">{{ post.title }}</h1>
-        <div class="catalogue-line"></div>
+        <time datetime="{{ post.date }}" class="text-gray-500 dark:text-gray-400 text-sm tracking-wide">{{ post.date | date: "%B %d, %Y" }}</time>
+        <h1 class="text-3xl font-sans font-bold text-gray-800 dark:text-gray-200 my-2 group-hover:text-primary transition-colors duration-200">{{ post.title }}</h1>
+        <div class="h-1 w-8 bg-gray-800 dark:bg-gray-200 group-hover:w-20 transition-all duration-300"></div>
 
-        <p>
+        <p class="mt-4 text-gray-700 dark:text-gray-300">
           {{ post.content | truncatewords: 30 | strip_html }}
         </p>
       </div>
     </a>
-    {% for tag in post.tag %}
-      <div onclick="location.href='{{ "/search" | relative_url }}?query={{tag|downcase}}';" class="badge badge-secondary">{{tag | downcase}}</div>
-    {% endfor %}
+    <div class="mt-3 flex flex-wrap gap-2">
+      {% for tag in post.tag %}
+        <div onclick="location.href='{{ "/search" | relative_url }}?query={{tag|downcase}}';" class="cursor-pointer px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">{{tag | downcase}}</div>
+      {% endfor %}
+    </div>
   </div>
   {% endfor %}
 </div>
 
-<!-- Pagination links -->
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="left arrow">
-      Previous
-    </a>
-  {% else %}
-    <span class="previous">Previous</span>
-  {% endif %}
-  <span class="page_number ">
-    Page: {{ paginator.page }} of {{ paginator.total_pages }}
+<!-- Pagination -->
+<div class="flex items-center justify-between py-8">
+  <div class="flex-1">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}" class="text-primary hover:underline">
+        ← Previous
+      </a>
+    {% else %}
+      <span class="text-gray-400 dark:text-gray-600">Previous</span>
+    {% endif %}
+  </div>
+  
+  <span class="text-gray-600 dark:text-gray-400">
+    Page {{ paginator.page }} of {{ paginator.total_pages }}
   </span>
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="right arrow">Next</a>
-  {% else %}
-    <span class="next ">Next</span>
-  {% endif %}
+  
+  <div class="flex-1 text-right">
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}" class="text-primary hover:underline">Next →</a>
+    {% else %}
+      <span class="text-gray-400 dark:text-gray-600">Next</span>
+    {% endif %}
+  </div>
 </div>

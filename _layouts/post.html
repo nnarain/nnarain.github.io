@@ -2,20 +2,26 @@
 layout: default
 ---
 
-<div class="post">
-  <div class="post-info">
-    <span>Written by&nbsp;</span>{{ site.author.name }}
+<div class="py-12">
+  <!-- Post Header -->
+  <div class="text-center mb-8">
+    <div class="text-gray-500 dark:text-gray-400 text-sm mb-2">
+      <span>Written by&nbsp;</span>{{ site.author.name }}
 
-    {% if page.date %}
-      <br>
-      <span>on&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time>
-    {% endif %}
+      {% if page.date %}
+        <br>
+        <span>on&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time>
+      {% endif %}
+    </div>
+
+    <h1 class="text-5xl font-sans font-bold text-gray-800 dark:text-gray-200 my-4">{{ page.title }}</h1>
+    <div class="w-16 h-1 bg-gray-800 dark:bg-gray-200 mx-auto"></div>
   </div>
 
-  <h1 class="post-title">{{ page.title }}</h1>
-  <div class="post-line"></div>
-
-  {{ content }}
+  <!-- Post Content -->
+  <div class="prose prose-lg dark:prose-invert max-w-none">
+    {{ content }}
+  </div>
 
 </div>
 
@@ -25,15 +31,132 @@ layout: default
 
 <br>
 
-<div class="pagination">
-  {% if page.next.url %}
-    <a href="{{ page.previous.url | prepend: site.url }}" class="left arrow">&#8592;</a>
-  {% endif %}
-  {% if page.previous.url %}
-    <a href="{{ page.next.url | prepend: site.url }}" class="right arrow">&#8594;</a>
-  {% endif %}
-
-  <a href="#" class="top">Top</a>
+<!-- Post Navigation -->
+<div class="flex items-center justify-between py-8 border-t border-gray-200 dark:border-gray-700">
+  <div class="flex-1">
+    {% if page.next.url %}
+      <a href="{{ page.previous.url | prepend: site.url }}" class="text-primary hover:underline">← Previous</a>
+    {% endif %}
+  </div>
+  
+  <a href="#" class="text-primary hover:underline">Top</a>
+  
+  <div class="flex-1 text-right">
+    {% if page.previous.url %}
+      <a href="{{ page.next.url | prepend: site.url }}" class="text-primary hover:underline">Next →</a>
+    {% endif %}
+  </div>
 </div>
 
 <script type="text/javascript" src="{{ site.baseurl }}/static/js/repocard.js"></script>
+
+<style>
+  /* Prose styles for post content */
+  .prose {
+    color: #374151;
+  }
+  
+  .dark .prose {
+    color: #d1d5db;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    color: #1f2937;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .dark .prose h1, .dark .prose h2, .dark .prose h3, .dark .prose h4, .dark .prose h5, .dark .prose h6 {
+    color: #e5e7eb;
+  }
+  
+  .prose p {
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+  
+  .prose a {
+    color: #22c55e;
+    text-decoration: none;
+  }
+  
+  .prose a:hover {
+    text-decoration: underline;
+  }
+  
+  .prose img {
+    display: block;
+    margin: 1rem 0;
+    max-width: 100%;
+  }
+  
+  .prose blockquote {
+    border-left: 0.25rem solid #e5e5e5;
+    color: #979797;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+  }
+  
+  .dark .prose blockquote {
+    border-left-color: #4b5563;
+    color: #9ca3af;
+  }
+  
+  .prose code {
+    background-color: #f3f4f6;
+    color: #bf616a;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+  
+  .dark .prose code {
+    background-color: #1f2937;
+    color: #f87171;
+  }
+  
+  .prose pre {
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  
+  .dark .prose pre {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .prose pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+  }
+  
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  
+  .prose th, .prose td {
+    border: 1px solid #e5e5e5;
+    padding: 0.5rem;
+  }
+  
+  .dark .prose th, .dark .prose td {
+    border-color: #4b5563;
+  }
+  
+  .prose th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+  }
+  
+  .dark .prose th {
+    background-color: #374151;
+  }
+</style>
