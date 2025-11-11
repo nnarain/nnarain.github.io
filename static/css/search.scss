@@ -288,18 +288,18 @@
 }
 
 .badge-secondary {
-    background-color: #e9ecef;
-    color: #495057;
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
 }
 
 .dark .badge-secondary {
-    background-color: #374151;
-    color: #d1d5db;
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
 }
 
 .badge-secondary:hover {
-    background-color: #3a86ff;
-    color: white;
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
     cursor: pointer;
 }
 

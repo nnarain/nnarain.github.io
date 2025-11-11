@@ -20,7 +20,7 @@ title: Home
     </a>
     <div class="mt-3 flex flex-wrap gap-2">
       {% for tag in post.tag %}
-        <div onclick="location.href='{{ "/search" | relative_url }}?query={{tag|downcase}}';" class="cursor-pointer px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">{{tag | downcase}}</div>
+        <div onclick="location.href='{{ "/search" | relative_url }}?query={{tag|downcase}}';" class="cursor-pointer px-3 py-1 bg-primary/10 dark:bg-primary/20 text-primary hover:bg-primary/20 dark:hover:bg-primary/30 rounded-full text-sm transition-colors duration-200">{{tag | downcase}}</div>
       {% endfor %}
     </div>
   </div>
