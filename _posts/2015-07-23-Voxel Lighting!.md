@@ -7,6 +7,7 @@ thumbnail: /assets/2015/07/23/terrain-multiple-lights-lightmap.png
 repo: nnarain/VoxelEngine
 prev_post: 2015-06-26-Intro to my Voxel Engine
 next_post:
+project_id: voxel-engine
 ---
 
 Quick update on the progress of my voxel engine.

@@ -3,6 +3,7 @@ layout: post
 title: Icarus Rev E - Firmware Bringup, Part 2
 tag: ['icarus', 'electronics', 'rust', 'firmware', 'embedded']
 repo: nnarain/icarus
+project_id: icarus-fc
 ---
 
 I've been slowly working away on the firmware for the Rev E of Icarus. I'm basically back to where I was with the Rev D version, written in C++. I should be able to start testing PIDs again soon!

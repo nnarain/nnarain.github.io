@@ -3,6 +3,7 @@ layout: post
 title: Drone assembly and initial testing
 tag: ['drone', 'electronics', 'icarus']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 Not a lot of progress this month but I did get the drone assembled and electronics wired up.

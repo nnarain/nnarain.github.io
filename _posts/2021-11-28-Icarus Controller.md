@@ -3,6 +3,7 @@ layout: post
 title: Icarus Controller
 tag: ['electronics', 'robotics', 'flight-controller', 'drone']
 repo: nnarain/icarus
+project_id: icarus-fc
 ---
 
 It's been many years since I've done a project like this. Not since my [HCS12 Controller]({% post_url 2015-03-27-Board Bring Up %}) back in college. While Arduino is great, something about buying a board off-the-shelf just isn't the same as doing it DIY. Though this way can be much more time consuming, prone to errors and *expensive*, it is much more satisfying.

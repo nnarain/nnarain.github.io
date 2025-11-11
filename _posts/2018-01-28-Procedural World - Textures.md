@@ -5,6 +5,7 @@ description:
 tag: ['unity', 'pcg', 'shaders']
 thumbnail: /assets/2018/01/28/
 repo: nnarain/World
+project_id: world-procgen
 ---
 
 I'm getting to the point of adding more detail into the world. Up to this point blocks only have a single color and of course this isn't very flexible.

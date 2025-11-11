@@ -5,6 +5,7 @@ description:
 tag: ['unity', 'c#', 'pcg']
 thumbnail: /assets/2018/01/04/
 repo: nnarain/World.git
+project_id: world-procgen
 ---
 
 In this post I will be going over how chunks are managed in my procedural world project.

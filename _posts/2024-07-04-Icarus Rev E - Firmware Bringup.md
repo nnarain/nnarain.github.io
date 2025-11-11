@@ -3,6 +3,7 @@ layout: post
 title: Icarus Rev E - Firmware Bringup
 tag: ['icarus', 'electronics', 'drone', 'rust', 'embedded']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 Quick update on the new icarus controller.

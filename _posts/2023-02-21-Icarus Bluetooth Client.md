@@ -3,6 +3,7 @@ layout: post
 title: Icarus Bluetooth Client
 tag: ['flight-controller', 'ble', 'arduino', 'rust', 'embedded', 'esp32-c3', 'esp32', 'bluetooth']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 The [Rev C]({% post_url 2022-07-16-Icarus Rev C %}) design of Icarus uses an ESP32-C3 MCU which supports Bluetooth. I chose Bluetooth as I thought it would make a decent option for a primarily indoor drone application. It also helps with sending sensor and log data back wirelessly for debugging.

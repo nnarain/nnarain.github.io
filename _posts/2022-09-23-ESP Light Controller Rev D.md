@@ -3,6 +3,7 @@ layout: post
 title: Helios Light Controller Rev D
 tag: ['esp32', 'kicad', 'wled', 'leds', 'led-controller']
 repo: nnarain/esp-light-controller
+project_id: helios-light-controller
 ---
 
 A few months back I re-design my [light controller using an ESP32]({% post_url 2022-05-19-ESP32 Light Controller %}). It worked out pretty good, but not quite ready to use. In the last few weeks I've fixed the hardware bugs and added some new functionality.

@@ -3,6 +3,7 @@ layout: post
 title: Icarus - Application Firmware Setup
 tag: ['rust', 'embedded', 'electronics', 'rtos']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 Since the initial [bring up]({% post_url 2021-11-29-Icarus Bringup %}) of the board I've tested the PWM and IMU. Time to setup the actual framework for building the application firmware.

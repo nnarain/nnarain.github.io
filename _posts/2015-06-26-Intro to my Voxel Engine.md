@@ -7,6 +7,7 @@ thumbnail: /assets/2015/06/26/voxelterrain.png
 repo: nnarain/VoxelEngine/tree/develop
 prev_post:
 next_post: 2015-07-23-Voxel Lighting!
+project_id: voxel-engine
 ---
 
 I don't really have a name for this project, so I have just been calling it "Voxel Engine" ...

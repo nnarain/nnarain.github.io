@@ -5,6 +5,7 @@ description:
 tag: ['unity', 'pcg', 'shaders']
 thumbnail: /assets/2018/02/11/
 repo: nnarain/World
+project_id: world-procgen
 ---
 
 In this post I'll be going over a simple water material I made for my procedural world project.

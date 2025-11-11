@@ -3,6 +3,7 @@ layout: post
 title: Icarus Rev C Bring up
 tag: ['rust', 'embedded', 'flight-controller', 'esp32', 'esp32-c3', 'firmware']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 In my [previous post]({% post_url 2022-07-16-Icarus Rev C %}) I showed my new revision of Icarus. In this post I'll be going over the basic firmware bring up.

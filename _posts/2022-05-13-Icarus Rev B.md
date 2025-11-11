@@ -3,6 +3,7 @@ layout: post
 title: Icarus Rev B
 tag: ['electronics']
 repo: nnarain/icarus
+project_id: icarus-fc
 ---
 
 Forgot to make a post about the Rev B of Icarus (I did this a few months ago). This is primarily about reducing the size of the PCB and fixing some mistakes in the Rev A board.

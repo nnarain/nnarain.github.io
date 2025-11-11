@@ -3,6 +3,7 @@ layout: post
 title: Icarus Rev C
 tag: ['electronics', 'kicad', 'embedded', 'flight-controller', 'drone']
 repo: nnarain/icarus
+project_id: icarus-fc
 ---
 
 Well it wasn't that long ago I posted about the [Rev B]({% post_url 2022-05-13-Icarus Rev B %}) version of Icarus, so let's go over a little timeline of what these projects are for and why I'm at where I am now...

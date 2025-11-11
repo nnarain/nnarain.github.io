@@ -3,6 +3,7 @@ layout: post
 title: Icarus PID Tuning
 tag: ['flight-controller', 'pid', 'electronics']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 I feel like I should do a whole post on burnout.. But not today!

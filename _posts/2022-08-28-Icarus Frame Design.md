@@ -3,6 +3,7 @@ layout: post
 title: Icarus Frame Design
 tag: ['flight-controller', 'drone', 'microquad', 'openscad']
 repo: nnarain/icarus
+project_id: icarus-fc
 ---
 
 So my next step in developing the flight controller is to strap it to a frame and exercise the motors.
