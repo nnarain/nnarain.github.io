@@ -75,15 +75,48 @@ title: Home
       chart: {
         type: 'bar',
         height: 160,
-        sparkline: { enabled: true }
+        toolbar: {
+          show: false
+        }
       },
       series: [{
+        name: 'Posts',
         data: [1, 0, 3, 2, 5, 2, 4, 1, 0, 2, 3, 1]
       }],
       xaxis: {
-        categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        labels: {
+          style: {
+            fontSize: '10px'
+          }
+        }
       },
-      colors: ['#22c55e']
+      yaxis: {
+        labels: {
+          style: {
+            fontSize: '10px'
+          }
+        }
+      },
+      colors: ['#22c55e'],
+      plotOptions: {
+        bar: {
+          borderRadius: 2,
+          columnWidth: '70%'
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      grid: {
+        show: true,
+        borderColor: '#e5e7eb',
+        strokeDashArray: 3,
+        padding: {
+          left: 10,
+          right: 10
+        }
+      }
     };
     
     const chart = new ApexCharts(document.querySelector("#post-frequency"), options);
