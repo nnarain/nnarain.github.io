@@ -5,6 +5,7 @@ description: Introduction to my Gameboy Emulator project!
 tag: ["gameboy", "c++", "embedded"]
 thumbnail: /assets/2016/09/11/tileset.gif
 repo: nnarain/gameboycore
+project_id: gameboy-emulator
 next_post: 2016-09-11-Gameboy Emulator Setup
 prev_post: 2016-09-10-Gameboy Display Information
 ---
