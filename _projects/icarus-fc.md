@@ -6,7 +6,7 @@ description: A custom-designed flight controller for micro quadcopters. Features
 date: 2021-11-28
 tags: ["Drone", "Flight Controller", "Electronics", "STM32", "Rust", "Embedded"]
 images:
-  - /static/projects/icarus-fc.png
+  - /static/projects/placeholder.jpg
 project_id: icarus-fc
 order: 4
 ---
