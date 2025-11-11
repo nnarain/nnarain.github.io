@@ -2,6 +2,9 @@
 layout: default
 ---
 
+<!-- Reading Progress Bar -->
+<div id="reading-progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-primary to-green-400 transition-all duration-150 ease-out z-50" style="width: 0%"></div>
+
 <div class="py-12">
   <!-- Post Header -->
   <div class="text-center mb-8">
@@ -162,3 +165,29 @@ layout: default
     background-color: #374151;
   }
 </style>
+
+<!-- Reading Progress Bar Script -->
+<script>
+  // Update reading progress bar based on scroll position
+  function updateReadingProgress() {
+    const progressBar = document.getElementById('reading-progress-bar');
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Calculate the percentage of page scrolled
+    const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+    
+    // Update the progress bar width
+    progressBar.style.width = scrollPercentage + '%';
+  }
+  
+  // Update on scroll
+  window.addEventListener('scroll', updateReadingProgress, { passive: true });
+  
+  // Update on page load
+  window.addEventListener('load', updateReadingProgress);
+  
+  // Update on resize
+  window.addEventListener('resize', updateReadingProgress);
+</script>
