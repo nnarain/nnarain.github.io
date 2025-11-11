@@ -6,7 +6,7 @@ description: A 3D procedural world generation project built with Unity. Features
 date: 2017-12-27
 tags: ["Unity", "Procedural Generation", "C#", "Graphics", "Terrain"]
 images:
-  - /static/projects/placeholder.jpg
+  - /assets/2018/01/14/gen1.gif
 project_id: world-procgen
 order: 6
 ---

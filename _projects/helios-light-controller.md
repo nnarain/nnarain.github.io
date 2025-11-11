@@ -6,7 +6,7 @@ description: An ESP32-based LED controller board with WLED firmware support. Fea
 date: 2019-08-05
 tags: ["ESP32", "LED Controller", "Electronics", "KiCad", "WLED"]
 images:
-  - /static/projects/placeholder.jpg
+  - /assets/2022/09/23/reve.png
 project_id: helios-light-controller
 order: 7
 ---

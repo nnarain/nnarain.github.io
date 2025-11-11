@@ -7,6 +7,9 @@ date: 2015-06-26
 tags: ["Voxel", "OpenGL", "C++", "Lua", "Graphics"]
 images:
   - /assets/2015/06/26/voxelterrain.png
+  - /assets/2015/07/23/terrain-multiple-lights.png
+  - /assets/2015/07/23/terrain-multiple-lights-lightmap.png
+  - /assets/2015/07/23/terrain-per-face-lightning3.png
 project_id: voxel-engine
 order: 5
 ---
