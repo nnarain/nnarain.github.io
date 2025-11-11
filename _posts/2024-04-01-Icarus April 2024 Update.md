@@ -3,6 +3,7 @@ layout: post
 title: Icarus April 2024 Update
 tag: ['icarus']
 repo: nnarain/gamepad-rc-firmware
+project_id: icarus-fc
 ---
 
 Been a while since I did an Icarus update and wanted to close off the long weekend with a blog post.

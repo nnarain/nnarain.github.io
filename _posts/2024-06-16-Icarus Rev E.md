@@ -3,6 +3,7 @@ layout: post
 title: Icarus Rev E
 tag: ['icarus', 'flight-controller', 'electronics']
 repo: nnarain/icarus
+project_id: icarus-fc
 ---
 
 Mentioned in my [last icarus update]({% post_url 2024-04-01-Icarus April 2024 Update %}) I had issues running the flight controllers PID loop and the bluepad library for talking to the controller.

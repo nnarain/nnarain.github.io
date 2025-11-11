@@ -3,6 +3,7 @@ layout: post
 title: Icarus Bringup
 tag: ['electronics', 'firmware', 'rust']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 In my [previous post]({% post_url 2021-11-28-Icarus Controller %}) I showed the design for my own controller board. In this post I'll go over the basic bring up.

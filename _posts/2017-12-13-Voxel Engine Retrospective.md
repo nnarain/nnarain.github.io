@@ -5,6 +5,7 @@ description:
 tag: ['voxels', 'voxel-engine', '3d']
 thumbnail: /assets/2017/12/13/
 repo: 
+project_id: voxel-engine
 ---
 
 Small reflection on the `voxel engine` I worked on a few years ago and future projects.

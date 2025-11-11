@@ -3,6 +3,7 @@ layout: post
 title: Icarus Sensors and Visualization
 tag: ['flight-controller', 'ble', 'rust', 'embedded', 'esp32-c3', 'esp32', 'bluetooth']
 repo: nnarain/icarus-desktop
+project_id: icarus-fc
 ---
 
 This post will cover visualizing sensor data collected over Bluetooth from the controller.

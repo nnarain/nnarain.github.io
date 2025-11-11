@@ -3,6 +3,7 @@ layout: post
 title: Procedural World - New Chunk Management
 tag: ['pcg', 'unity']
 repo: nnarain/World
+project_id: world-procgen
 ---
 
 Recently I improved chunk loading in my procedural world project. To be honest the way I was loading chunks before was rather.. bad. I used a breath-first search to search all the chunk neighbors and spiraled out from the players current position, until the player's view area was filled. So this isn't bad on the initial load. However, what about when the player moves? You could re-run the search everytime the player moved a threshold distance but if the threshold is too small you are wasting cycles finding chunks that are already loaded. You could find a search location some distance ahead of where the player is currently heading, but then you end up with gaps where chunks are missed.

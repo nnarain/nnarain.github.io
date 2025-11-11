@@ -3,6 +3,7 @@ layout: post
 title: ESP-01 Light Controller
 tag: ["esp8266", "esp01", "arduino", "kicad", "homeautomation"]
 repo: nnarain/esp-light-controller
+project_id: helios-light-controller
 ---
 
 This project is an ESP8266 based light strip controller to be used as controllable accent lights for my house.

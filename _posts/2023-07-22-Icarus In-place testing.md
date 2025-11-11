@@ -3,6 +3,7 @@ layout: post
 title: Icarus In-place testing
 tag: ['icarus', 'flight-controller']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 Unfortunately in recent weeks I've not had much time for personal projects. I've been trying to get back into it.

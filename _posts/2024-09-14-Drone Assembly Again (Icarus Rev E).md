@@ -3,6 +3,7 @@ layout: post
 title: Drone Assembly.. Again (Icarus Rev E)
 tag: ['icarus', 'drone', 'electronics', 'rust', 'embedded']
 repo: nnarain/icarus-firmware
+project_id: icarus-fc
 ---
 
 I have been slow and steadily working on the next drone build using [Icarus Rev E]({% post_url 2024-06-16-Icarus Rev E %}) and the[ Gamepad RC stack]({% post_url 2024-08-05-Gamepad RC Stack %}). Finally getting back to where I was with the C++ based firmware.
