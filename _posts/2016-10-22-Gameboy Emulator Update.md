@@ -5,6 +5,7 @@ description:
 tag: ["Gameboy", "Emulator"]
 thumbnail: /assets/2016/10/22/
 repo: nnarain/gameboy
+project_id: gameboy-emulator
 ---
 
 Testing with Test ROMS
