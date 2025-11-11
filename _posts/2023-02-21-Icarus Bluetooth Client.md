@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Icarus Bluetooth Client
-tag: ['flight-controller', 'ble', 'arduino', 'rust', 'embedded', 'esp32c3', 'esp32', 'bluetooth']
+tag: ['flight-controller', 'ble', 'arduino', 'rust', 'embedded', 'esp32-c3', 'esp32', 'bluetooth']
 repo: nnarain/icarus-firmware
 ---
 

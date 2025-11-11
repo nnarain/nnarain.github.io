@@ -2,7 +2,7 @@
 layout: post
 title: Emulator Update - Android!
 description:
-tag: ['C++', 'Java', 'Android']
+tag: ['c++', 'Java', 'Android']
 thumbnail: /assets/2017/03/12/
 repo: nnarain/dotrix-android
 ---

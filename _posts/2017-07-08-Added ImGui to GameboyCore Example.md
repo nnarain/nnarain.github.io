@@ -2,7 +2,7 @@
 layout: post
 title: Added ImGui to GameboyCore Example
 description: Added ImGui to GameboyCore Example
-tag: ['Gameboy', 'Emulator', 'Gui']
+tag: ['gameboy', 'emulator', 'Gui']
 thumbnail: /assets/2017/07/08/
 repo: nnarain/gameboycore
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: Chip8 Assembler - Code Generator
 description: 
-tag: ['chip8', 'assembler']
+tag: ['chip8', 'assembly']
 thumbnail: /assets/2017/11/17/
 repo: nnarain/silica
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: Chip8 Assembler - Parser
 description: 
-tag: ['chip8', 'assembler']
+tag: ['chip8', 'assembly']
 thumbnail: /assets/2017/11/03/
 repo: nnarain/silica
 ---

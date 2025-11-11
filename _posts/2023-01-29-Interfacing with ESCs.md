@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Interfacing with ESCs
-tag: ['drone', 'electronics', 'embedded', 'esp32', 'esp32c3']
+tag: ['drone', 'electronics', 'embedded', 'esp32', 'esp32-c3']
 repo:
 ---
 

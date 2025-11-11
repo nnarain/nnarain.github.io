@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Controlling a Dynamixel AX-12A with a Raspberry Pi and ROS 2
-tag: ['raspberrypi', 'dynamixel', 'ros2', 'ros', 'servo']
+tag: ['raspberry-pi', 'dynamixel', 'ros2', 'ros', 'servo']
 repo: 
 ---
 

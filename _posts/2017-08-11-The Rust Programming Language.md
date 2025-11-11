@@ -2,7 +2,7 @@
 layout: post
 title: Rust
 description:
-tag: ['Rust']
+tag: ['rust']
 thumbnail: /assets/2017/08/11/
 repo:
 ---
