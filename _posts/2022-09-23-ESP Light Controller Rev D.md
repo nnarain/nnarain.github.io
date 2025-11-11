@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Helios Light Controller Rev D
-tag: ['esp', 'esp32', 'kicad', 'wled', 'leds', 'led-controller']
+tag: ['esp32', 'kicad', 'wled', 'leds', 'led-controller']
 repo: nnarain/esp-light-controller
 ---
 

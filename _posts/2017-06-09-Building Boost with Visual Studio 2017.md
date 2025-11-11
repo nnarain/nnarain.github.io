@@ -2,7 +2,7 @@
 layout: post
 title: Building Boost with Visual Studio 2017
 description:
-tag: ['Boost']
+tag: ['boost']
 thumbnail: /assets/2017/06/09/
 repo:
 ---

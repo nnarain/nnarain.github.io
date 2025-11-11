@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Smart Home Setup
-tag: ['smarthome', 'home-automation', 'docker']
+tag: ['home-automation', 'docker']
 repo: 
 ---
 

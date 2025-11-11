@@ -2,7 +2,7 @@
 layout: post
 title: Playing Tetris!
 description: Gameboy Emulator Update
-tag: ['Gameboy', 'Emulator']
+tag: ['gameboy', 'emulator']
 thumbnail: /assets/2016/10/08/
 repo: nnarain/gameboycore
 ---

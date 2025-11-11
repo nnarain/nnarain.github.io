@@ -2,7 +2,7 @@
 layout: post
 title: GameboyCore as a libretro core!
 description: Gameboy as a libretro core
-tag: ['Gameboy', 'Emulation']
+tag: ['gameboy', 'emulator']
 thumbnail: /assets/2017/07/13/
 repo: nnarain/gameboycore-retro
 ---

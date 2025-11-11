@@ -2,7 +2,7 @@
 layout: post
 title: Gameboy Emulator GPU
 description:
-tag: ['Gameboy', 'Emulator', 'C++']
+tag: ['gameboy', 'emulator', 'c++']
 thumbnail: /assets/2016/10/29/
 repo: nnarain/gameboycore
 ---

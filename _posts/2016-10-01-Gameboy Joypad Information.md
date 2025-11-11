@@ -2,7 +2,7 @@
 layout: post
 title: Gameboy Joypad Information
 description: Information on the Gameboy's Joypad
-tag: ['Gameboy']
+tag: ['gameboy']
 thumbnail: /assets/2016/10/01/
 repo: nnarain/gameboycore
 ---

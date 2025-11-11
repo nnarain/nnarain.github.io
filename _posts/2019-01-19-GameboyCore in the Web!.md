@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GameboyCore in the Web!
-tag: ['gameboy', 'emulation']
+tag: ['gameboy', 'emulator']
 repo: nnarain/gameboycore-web
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ESP32 Light Controller
-tag: ['electronics', 'wled', 'home-automation', 'esp', 'esp32']
+tag: ['electronics', 'wled', 'home-automation', 'esp32']
 repo: nnarain/esp-light-controller
 ---
 
