@@ -30,7 +30,15 @@ permalink: /search/
     <!-- Tags Section -->
     <div class="mb-8">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl font-serif text-gray-900 dark:text-gray-100">Filter by Tag</h2>
+            <button 
+                id="tags-toggle" 
+                class="flex items-center gap-2 text-xl font-serif text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+            >
+                <span>Filter by Tag</span>
+                <svg id="tags-toggle-icon" class="w-5 h-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
             <button 
                 id="clear-filters" 
                 class="px-4 py-2 text-sm font-sans text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-all duration-300 opacity-0 pointer-events-none"
@@ -38,7 +46,7 @@ permalink: /search/
                 Clear Filters
             </button>
         </div>
-        <div id="tags-container" class="flex flex-wrap gap-2">
+        <div id="tags-container" class="flex flex-wrap gap-2 overflow-hidden transition-all duration-300" style="max-height: 0;">
             <!-- Tags will be dynamically inserted here -->
         </div>
     </div>
@@ -81,6 +89,8 @@ permalink: /search/
     let fuse = null;
     let activeTags = new Set();
     let currentSearchTerm = '';
+    let allTags = [];
+    let tagsExpanded = false;
     
     const searchInput = document.getElementById('search-input');
     const tagsContainer = document.getElementById('tags-container');
@@ -89,6 +99,8 @@ permalink: /search/
     const loading = document.getElementById('loading');
     const clearFiltersBtn = document.getElementById('clear-filters');
     const resultsCount = document.getElementById('results-count');
+    const tagsToggle = document.getElementById('tags-toggle');
+    const tagsToggleIcon = document.getElementById('tags-toggle-icon');
     
     // Fuse.js configuration
     const fuseOptions = {
@@ -111,7 +123,10 @@ permalink: /search/
             // Initialize Fuse.js
             fuse = new Fuse(posts, fuseOptions);
             
-            // Extract and render tags
+            // Extract and store all tags
+            allTags = extractTags();
+            
+            // Render tags (collapsed by default)
             renderTags();
             
             // Show all posts initially
@@ -149,27 +164,88 @@ permalink: /search/
         return Array.from(tagsSet).sort();
     }
     
+    // Get relevant tags based on search results
+    function getRelevantTags(searchResults) {
+        const tagsSet = new Set();
+        searchResults.forEach(post => {
+            if (Array.isArray(post.tags)) {
+                post.tags.forEach(tag => {
+                    if (tag && tag.trim()) {
+                        tagsSet.add(tag.toLowerCase().trim());
+                    }
+                });
+            }
+        });
+        return Array.from(tagsSet).sort();
+    }
+    
     // Render tag buttons
-    function renderTags() {
-        const tags = extractTags();
-        tagsContainer.innerHTML = tags.map(tag => `
+    function renderTags(tagsToShow = null) {
+        const tags = tagsToShow || allTags;
+        tagsContainer.innerHTML = tags.map(tag => {
+            const isActive = activeTags.has(tag);
+            const activeClasses = isActive 
+                ? 'border-blue-500 dark:border-blue-400 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-semibold'
+                : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300';
+            
+            return `
             <button 
                 class="tag-btn px-4 py-2 text-sm font-sans rounded-lg border-2 transition-all duration-300
-                       bg-white dark:bg-gray-800 
-                       border-gray-300 dark:border-gray-600 
-                       text-gray-700 dark:text-gray-300
+                       ${activeClasses}
                        hover:border-blue-500 dark:hover:border-blue-400
                        hover:bg-blue-50 dark:hover:bg-blue-900/20"
                 data-tag="${tag}"
             >
                 ${tag}
             </button>
-        `).join('');
+        `}).join('');
         
         // Add click handlers
         document.querySelectorAll('.tag-btn').forEach(btn => {
             btn.addEventListener('click', () => toggleTag(btn));
         });
+    }
+    
+    // Toggle tags section expand/collapse
+    function toggleTagsSection(expand = null) {
+        if (expand !== null) {
+            tagsExpanded = expand;
+        } else {
+            tagsExpanded = !tagsExpanded;
+        }
+        
+        if (tagsExpanded) {
+            tagsContainer.style.maxHeight = tagsContainer.scrollHeight + 'px';
+            tagsToggleIcon.style.transform = 'rotate(180deg)';
+        } else {
+            tagsContainer.style.maxHeight = '0';
+            tagsToggleIcon.style.transform = 'rotate(0deg)';
+        }
+    }
+    
+    // Update tags visibility based on search
+    function updateTagsVisibility() {
+        if (currentSearchTerm) {
+            // Show only relevant tags when searching
+            const searchResults = fuse.search(currentSearchTerm);
+            const results = searchResults.map(result => result.item);
+            const relevantTags = getRelevantTags(results);
+            
+            renderTags(relevantTags);
+            
+            // Auto-expand tags if there are relevant tags
+            if (relevantTags.length > 0) {
+                toggleTagsSection(true);
+            }
+        } else {
+            // Show all tags when not searching
+            renderTags(allTags);
+            
+            // Keep current expanded state
+            if (tagsExpanded) {
+                tagsContainer.style.maxHeight = tagsContainer.scrollHeight + 'px';
+            }
+        }
     }
     
     // Toggle tag filter
@@ -215,6 +291,10 @@ permalink: /search/
         
         updateClearButton();
         displayResults(posts);
+        
+        // Collapse tags and show all tags
+        toggleTagsSection(false);
+        renderTags(allTags);
     });
     
     // Perform search
@@ -309,7 +389,13 @@ permalink: /search/
             currentSearchTerm = e.target.value.trim();
             updateClearButton();
             performSearch();
+            updateTagsVisibility();
         }, 300);
+    });
+    
+    // Tags toggle handler
+    tagsToggle.addEventListener('click', () => {
+        toggleTagsSection();
     });
     
     // Initialize
