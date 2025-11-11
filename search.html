@@ -4,82 +4,340 @@ title: Search
 permalink: /search/
 ---
 
-<link rel="stylesheet" href="{{ site.baseurl }}/static/css/search.css">
-
-<div class="search-container">
-    <div class="search-header">
-        <h1>Search & Explore</h1>
-        <p>Search posts or explore tags visually</p>
+<div class="py-8 min-h-screen">
+    <!-- Page Header -->
+    <div class="mb-8">
+        <h1 class="text-4xl font-serif text-gray-900 dark:text-gray-100 mb-3">Search & Explore</h1>
+        <p class="text-gray-600 dark:text-gray-400">Search posts or filter by tags</p>
     </div>
 
-    <div align="center">
-        <form action="/search" method="get" class="searchbox">
-            <input type="text" id="search-box" name="query" placeholder="Search posts..." />
-            <input type="submit" value="Search" />
-        </form>
-    </div>
-
-    <div class="tag-cloud-section">
-        <h2>Tag Cloud</h2>
-        <p>Interactive visualization of blog tags. Click on a tag to filter posts.</p>
-        <div id="tag-cloud-container">
-            <div class="tag-cloud-loading">Loading tag cloud...</div>
-        </div>
-        <div class="tag-cloud-legend">
-            <div class="legend-item">
-                <div class="legend-circle large"></div>
-                <span>More posts</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-circle small"></div>
-                <span>Fewer posts</span>
-            </div>
-            <div class="legend-item">
-                <span>Lines connect related tags</span>
-            </div>
+    <!-- Search Input -->
+    <div class="mb-8">
+        <div class="relative">
+            <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Search posts by title, content, or tags..." 
+                class="w-full px-4 py-3 pr-10 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300"
+                autocomplete="off"
+            />
+            <svg class="absolute right-3 top-3.5 w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
         </div>
     </div>
 
-    <div id="search-results" class="catalogue search-results-section">
+    <!-- Tags Section -->
+    <div class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-serif text-gray-900 dark:text-gray-100">Filter by Tag</h2>
+            <button 
+                id="clear-filters" 
+                class="px-4 py-2 text-sm font-sans text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-all duration-300 opacity-0 pointer-events-none"
+            >
+                Clear Filters
+            </button>
+        </div>
+        <div id="tags-container" class="flex flex-wrap gap-2">
+            <!-- Tags will be dynamically inserted here -->
+        </div>
     </div>
 
-    <div class="tag-list-section">
-        <h2>Browse by Tag</h2>
-        {% assign all_tags = site.posts | map: "tag" | join: "," | downcase | split: "," | uniq | sort %}
-        
-        {% for current_tag in all_tags %}
-            <div class="tag-group">
-                <h3>{{current_tag}}</h3>
-                <ul>
-                    {% for post in site.posts %}
-                        {% assign post_tags = post.tag | join: "," | downcase | split: "," %}
-                        {% if post_tags contains current_tag %}
-                            <li><a href="{{post.url}}">{{post.title}}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endfor %}
+    <!-- Results Count -->
+    <div id="results-count" class="mb-4 text-sm text-gray-600 dark:text-gray-400 opacity-0 transition-opacity duration-300">
+        <!-- Results count will be inserted here -->
+    </div>
+
+    <!-- Search Results -->
+    <div id="search-results" class="grid gap-6">
+        <!-- Results will be dynamically inserted here -->
+    </div>
+
+    <!-- No Results Message -->
+    <div id="no-results" class="hidden text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <p class="text-gray-600 dark:text-gray-400 text-lg">No posts found matching your search.</p>
+        <p class="text-gray-500 dark:text-gray-500 text-sm mt-2">Try adjusting your search terms or filters.</p>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
+        <p class="text-gray-600 dark:text-gray-400 mt-4">Loading posts...</p>
     </div>
 </div>
 
-<script>
-    window.store = {
-        {% for post in site.posts %}
-            "{{ post.url | slugify }}": {
-                "title": "{{ post.title | xml_escape }}",
-                "tags": "{{post.tag | join: ' '}}",
-                "content": {{ post.content | strip_html | strip_newlines | jsonify }},
-                "url": "{{post.url | xml_escape}}",
-                "date": "{{post.date}}",
-                "date_str": "{{post.date | date: '%B %d, %Y' }}"
-            },
-        {% endfor %}
-    };
+<!-- Fuse.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
+<!-- Search functionality -->
+<script>
+(function() {
+    'use strict';
+    
+    let posts = [];
+    let fuse = null;
+    let activeTags = new Set();
+    let currentSearchTerm = '';
+    
+    const searchInput = document.getElementById('search-input');
+    const tagsContainer = document.getElementById('tags-container');
+    const searchResults = document.getElementById('search-results');
+    const noResults = document.getElementById('no-results');
+    const loading = document.getElementById('loading');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    const resultsCount = document.getElementById('results-count');
+    
+    // Fuse.js configuration
+    const fuseOptions = {
+        keys: [
+            { name: 'title', weight: 2 },
+            { name: 'content', weight: 1 },
+            { name: 'tags', weight: 1.5 }
+        ],
+        threshold: 0.3,
+        ignoreLocation: true,
+        minMatchCharLength: 2
+    };
+    
+    // Load search data
+    async function loadSearchData() {
+        try {
+            const response = await fetch('{{ site.baseurl }}/search.json');
+            posts = await response.json();
+            
+            // Initialize Fuse.js
+            fuse = new Fuse(posts, fuseOptions);
+            
+            // Extract and render tags
+            renderTags();
+            
+            // Show all posts initially
+            displayResults(posts);
+            
+            // Hide loading
+            loading.classList.add('hidden');
+            
+            // Check for URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query');
+            if (query) {
+                searchInput.value = query;
+                currentSearchTerm = query;
+                performSearch();
+            }
+        } catch (error) {
+            console.error('Error loading search data:', error);
+            loading.innerHTML = '<p class="text-red-600 dark:text-red-400">Error loading search data. Please refresh the page.</p>';
+        }
+    }
+    
+    // Extract unique tags from posts
+    function extractTags() {
+        const tagsSet = new Set();
+        posts.forEach(post => {
+            if (Array.isArray(post.tags)) {
+                post.tags.forEach(tag => {
+                    if (tag && tag.trim()) {
+                        tagsSet.add(tag.toLowerCase().trim());
+                    }
+                });
+            }
+        });
+        return Array.from(tagsSet).sort();
+    }
+    
+    // Render tag buttons
+    function renderTags() {
+        const tags = extractTags();
+        tagsContainer.innerHTML = tags.map(tag => `
+            <button 
+                class="tag-btn px-4 py-2 text-sm font-sans rounded-lg border-2 transition-all duration-300
+                       bg-white dark:bg-gray-800 
+                       border-gray-300 dark:border-gray-600 
+                       text-gray-700 dark:text-gray-300
+                       hover:border-blue-500 dark:hover:border-blue-400
+                       hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                data-tag="${tag}"
+            >
+                ${tag}
+            </button>
+        `).join('');
+        
+        // Add click handlers
+        document.querySelectorAll('.tag-btn').forEach(btn => {
+            btn.addEventListener('click', () => toggleTag(btn));
+        });
+    }
+    
+    // Toggle tag filter
+    function toggleTag(btn) {
+        const tag = btn.dataset.tag;
+        
+        if (activeTags.has(tag)) {
+            activeTags.delete(tag);
+            btn.classList.remove('border-blue-500', 'dark:border-blue-400', 'bg-blue-100', 'dark:bg-blue-900', 'text-blue-700', 'dark:text-blue-300', 'font-semibold');
+            btn.classList.add('border-gray-300', 'dark:border-gray-600', 'bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+        } else {
+            activeTags.add(tag);
+            btn.classList.add('border-blue-500', 'dark:border-blue-400', 'bg-blue-100', 'dark:bg-blue-900', 'text-blue-700', 'dark:text-blue-300', 'font-semibold');
+            btn.classList.remove('border-gray-300', 'dark:border-gray-600', 'bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+        }
+        
+        updateClearButton();
+        performSearch();
+    }
+    
+    // Update clear button visibility
+    function updateClearButton() {
+        if (activeTags.size > 0 || currentSearchTerm) {
+            clearFiltersBtn.classList.remove('opacity-0', 'pointer-events-none');
+            clearFiltersBtn.classList.add('opacity-100');
+        } else {
+            clearFiltersBtn.classList.add('opacity-0', 'pointer-events-none');
+            clearFiltersBtn.classList.remove('opacity-100');
+        }
+    }
+    
+    // Clear all filters
+    clearFiltersBtn.addEventListener('click', () => {
+        activeTags.clear();
+        currentSearchTerm = '';
+        searchInput.value = '';
+        
+        // Reset all tag buttons
+        document.querySelectorAll('.tag-btn').forEach(btn => {
+            btn.classList.remove('border-blue-500', 'dark:border-blue-400', 'bg-blue-100', 'dark:bg-blue-900', 'text-blue-700', 'dark:text-blue-300', 'font-semibold');
+            btn.classList.add('border-gray-300', 'dark:border-gray-600', 'bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+        });
+        
+        updateClearButton();
+        displayResults(posts);
+    });
+    
+    // Perform search
+    function performSearch() {
+        let results = posts;
+        
+        // Apply text search if there's a search term
+        if (currentSearchTerm) {
+            const fuseResults = fuse.search(currentSearchTerm);
+            results = fuseResults.map(result => result.item);
+        }
+        
+        // Apply tag filter
+        if (activeTags.size > 0) {
+            results = results.filter(post => {
+                if (!Array.isArray(post.tags)) return false;
+                const postTags = post.tags.map(t => t.toLowerCase().trim());
+                return Array.from(activeTags).some(tag => postTags.includes(tag));
+            });
+        }
+        
+        displayResults(results);
+    }
+    
+    // Display search results
+    function displayResults(results) {
+        if (results.length === 0) {
+            searchResults.innerHTML = '';
+            noResults.classList.remove('hidden');
+            resultsCount.classList.add('opacity-0');
+        } else {
+            noResults.classList.add('hidden');
+            resultsCount.classList.remove('opacity-0');
+            resultsCount.textContent = `${results.length} post${results.length === 1 ? '' : 's'} found`;
+            
+            searchResults.innerHTML = results.map(post => {
+                const tags = Array.isArray(post.tags) ? post.tags : [];
+                const excerpt = post.excerpt || post.content.substring(0, 150) + '...';
+                
+                return `
+                    <article class="post-card opacity-0 transition-all duration-300 
+                                    bg-white dark:bg-gray-800 
+                                    border border-gray-200 dark:border-gray-700 
+                                    rounded-lg p-6 
+                                    hover:shadow-lg hover:-translate-y-1
+                                    animate-fade-in">
+                        <a href="${post.url}" class="block group">
+                            <div class="flex items-center justify-between mb-3">
+                                <time class="text-sm text-gray-500 dark:text-gray-400">${post.date}</time>
+                            </div>
+                            <h3 class="text-xl font-serif text-gray-900 dark:text-gray-100 mb-3 
+                                       group-hover:text-blue-600 dark:group-hover:text-blue-400 
+                                       transition-colors duration-200">
+                                ${post.title}
+                            </h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
+                                ${excerpt}
+                            </p>
+                            ${tags.length > 0 ? `
+                                <div class="flex flex-wrap gap-2">
+                                    ${tags.map(tag => `
+                                        <span class="px-2 py-1 text-xs font-sans rounded 
+                                                     bg-gray-100 dark:bg-gray-700 
+                                                     text-gray-700 dark:text-gray-300">
+                                            ${tag}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </a>
+                    </article>
+                `;
+            }).join('');
+            
+            // Trigger fade-in animation
+            setTimeout(() => {
+                document.querySelectorAll('.post-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.remove('opacity-0');
+                        card.classList.add('opacity-100');
+                    }, index * 50);
+                });
+            }, 10);
+        }
+    }
+    
+    // Search input handler with debounce
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            currentSearchTerm = e.target.value.trim();
+            updateClearButton();
+            performSearch();
+        }, 300);
+    });
+    
+    // Initialize
+    loadSearchData();
+})();
 </script>
 
-<script type="text/javascript" src="{{ site.baseurl }}/static/js/lunr.js"></script>
-<script type="text/javascript" src="{{ site.baseurl }}/static/js/tagcloud.js"></script>
-<script type="text/javascript" src="{{ site.baseurl }}/static/js/search.js"></script>
+<style>
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+</style>
 
