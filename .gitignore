@@ -12,3 +12,4 @@ node_modules/
 vendor/bundle/
 .bundle/
 preview-demo.html
+preview-spacing.html
