@@ -36,7 +36,7 @@ layout: default
   <div class="mb-12">
     <div id="project-carousel" class="relative bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden" style="max-height: 600px;">
       {% for image in page.images %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
+      <div class="carousel-item {% if forloop.first %}active{% endif %}" style="position: {% if forloop.first %}relative{% else %}absolute{% endif %}; top: 0; left: 0; width: 100%; opacity: {% if forloop.first %}1{% else %}0{% endif %}; transition: opacity 0.5s ease-in-out;">
         <img src="{{ image | relative_url }}" alt="{{ page.name }}" class="w-full h-auto mx-auto" style="max-height: 600px; object-fit: contain;">
       </div>
       {% endfor %}
@@ -109,15 +109,24 @@ layout: default
   let currentIndex = 0;
 
   function showSlide(index) {
-    // Hide all items
-    items.forEach(item => item.style.display = 'none');
+    // Fade out all items
+    items.forEach((item, i) => {
+      if (i === index) {
+        item.style.opacity = '1';
+        item.style.position = 'relative';
+        item.style.zIndex = '1';
+      } else {
+        item.style.opacity = '0';
+        item.style.position = 'absolute';
+        item.style.zIndex = '0';
+      }
+    });
+    
+    // Update indicators
     indicators.forEach(ind => {
       ind.classList.remove('active', 'bg-white');
       ind.classList.add('bg-white/50');
     });
-
-    // Show current item
-    items[index].style.display = 'block';
     indicators[index].classList.add('active', 'bg-white');
     indicators[index].classList.remove('bg-white/50');
     currentIndex = index;
