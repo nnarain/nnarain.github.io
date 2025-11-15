@@ -65,5 +65,175 @@ I primarily use this blog as a place to document and share the projects I'm work
 
 Most posts are project updates where I elaborate on problems I solved, interesting solutions I came up with, or new technologies I'm exploring.
 
+## Tag Distribution
+
+Here's a visualization of the topics I write about most frequently:
+
 </div>
 </div>
+
+<!-- Tag Visualization Chart -->
+<div class="py-12">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+    <div id="tag-chart"></div>
+  </div>
+</div>
+
+<script>
+  // Compute tag counts using Jekyll Liquid
+  {% assign tag_counts = "" | split: "" %}
+  {% assign tag_names = "" | split: "" %}
+  
+  {% comment %} Collect all tags and count them {% endcomment %}
+  {% assign all_tags = site.posts | map: "tag" | join: "," | split: "," %}
+  {% assign unique_tags = all_tags | uniq | sort %}
+  
+  {% for tag in unique_tags %}
+    {% if tag != "" %}
+      {% assign count = 0 %}
+      {% for post in site.posts %}
+        {% if post.tag contains tag %}
+          {% assign count = count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      {% assign tag_names = tag_names | push: tag %}
+      {% assign tag_counts = tag_counts | push: count %}
+    {% endif %}
+  {% endfor %}
+  
+  // Prepare data for ApexCharts
+  const tagNames = [
+    {% for tag in tag_names %}
+      "{{ tag }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+  
+  const tagCounts = [
+    {% for count in tag_counts %}
+      {{ count }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+  
+  // Create data array with tag names and counts, then sort by count
+  const tagData = tagNames.map((name, index) => ({
+    name: name,
+    count: tagCounts[index]
+  })).sort((a, b) => b.count - a.count);
+  
+  // Extract sorted names and counts
+  const sortedTagNames = tagData.map(item => item.name);
+  const sortedTagCounts = tagData.map(item => item.count);
+  
+  // ApexCharts configuration
+  const options = {
+    series: [{
+      name: 'Posts',
+      data: sortedTagCounts
+    }],
+    chart: {
+      type: 'bar',
+      height: Math.max(400, sortedTagNames.length * 30),
+      toolbar: {
+        show: false
+      },
+      background: 'transparent'
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 4,
+        horizontal: true,
+        distributed: false,
+        dataLabels: {
+          position: 'right'
+        }
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        colors: ['#1f2937']
+      },
+      offsetX: 30
+    },
+    xaxis: {
+      categories: sortedTagNames,
+      labels: {
+        style: {
+          colors: document.documentElement.classList.contains('dark') ? '#d1d5db' : '#4b5563'
+        }
+      },
+      title: {
+        text: 'Number of Posts',
+        style: {
+          color: document.documentElement.classList.contains('dark') ? '#d1d5db' : '#4b5563'
+        }
+      }
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: document.documentElement.classList.contains('dark') ? '#d1d5db' : '#4b5563'
+        }
+      }
+    },
+    colors: ['#3b82f6'],
+    theme: {
+      mode: document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+    },
+    grid: {
+      borderColor: document.documentElement.classList.contains('dark') ? '#374151' : '#e5e7eb'
+    },
+    tooltip: {
+      theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+      y: {
+        formatter: function(val) {
+          return val + " post" + (val !== 1 ? "s" : "");
+        }
+      }
+    }
+  };
+  
+  // Render the chart
+  const chart = new ApexCharts(document.querySelector("#tag-chart"), options);
+  chart.render();
+  
+  // Update chart theme when dark mode is toggled
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', function() {
+      setTimeout(() => {
+        const isDark = document.documentElement.classList.contains('dark');
+        chart.updateOptions({
+          theme: {
+            mode: isDark ? 'dark' : 'light'
+          },
+          xaxis: {
+            labels: {
+              style: {
+                colors: isDark ? '#d1d5db' : '#4b5563'
+              }
+            },
+            title: {
+              style: {
+                color: isDark ? '#d1d5db' : '#4b5563'
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                colors: isDark ? '#d1d5db' : '#4b5563'
+              }
+            }
+          },
+          grid: {
+            borderColor: isDark ? '#374151' : '#e5e7eb'
+          },
+          tooltip: {
+            theme: isDark ? 'dark' : 'light'
+          }
+        });
+      }, 100);
+    });
+  }
+</script>
