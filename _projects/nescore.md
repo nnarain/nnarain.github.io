@@ -6,7 +6,8 @@ description: A NES emulator written in Rust. Features accurate CPU and PPU emula
 date: 2020-04-15
 tags: ["NES", "Emulator", "Rust"]
 images:
-  - /assets/2020/04/15/banner.png
+  - /assets/2020/04/15/demo2.gif
+  - /assets/2020/04/15/demo1.gif
 project_id: nescore
 order: 3
 ---
