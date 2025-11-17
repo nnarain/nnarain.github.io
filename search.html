@@ -92,20 +92,35 @@ permalink: /search/
 <div id="graph-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 transition-opacity duration-300">
     <div class="h-full w-full flex flex-col">
         <!-- Modal Header -->
-        <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
-            <div>
-                <h2 class="text-2xl font-serif text-gray-900 dark:text-gray-100">Post Network Graph</h2>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Explore posts by their tag relationships. Scroll to zoom, drag to pan.</p>
+        <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-serif text-gray-900 dark:text-gray-100">Post Network Graph</h2>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Explore posts by their tag relationships. Scroll to zoom, drag to pan.</p>
+                </div>
+                <button 
+                    id="close-graph-modal" 
+                    class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200"
+                    aria-label="Close graph view"
+                >
+                    <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            <button 
-                id="close-graph-modal" 
-                class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200"
-                aria-label="Close graph view"
-            >
-                <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <!-- Graph Search Bar -->
+            <div class="relative">
+                <input 
+                    type="text" 
+                    id="graph-search-input" 
+                    placeholder="Filter by tag (e.g., rust, python)..." 
+                    class="w-full px-4 py-2 pr-10 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300"
+                    autocomplete="off"
+                />
+                <svg class="absolute right-3 top-2.5 w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-            </button>
+            </div>
         </div>
         
         <!-- Graph Container -->
@@ -480,10 +495,13 @@ permalink: /search/
     const graphViewBtn = document.getElementById('graph-view-btn');
     const closeGraphModal = document.getElementById('close-graph-modal');
     const graphContainer = document.getElementById('graph-container');
+    const graphSearchInput = document.getElementById('graph-search-input');
     
     let graphData = null;
+    let fullGraphData = null; // Store unfiltered data
     let simulation = null;
     let svg = null;
+    let currentGraphSearchTerm = '';
     
     // Open graph modal
     graphViewBtn.addEventListener('click', () => {
@@ -496,6 +514,9 @@ permalink: /search/
     // Close graph modal
     closeGraphModal.addEventListener('click', () => {
         graphModal.classList.add('hidden');
+        // Reset search when closing
+        graphSearchInput.value = '';
+        currentGraphSearchTerm = '';
     });
     
     // Close on escape key
@@ -505,6 +526,77 @@ permalink: /search/
         }
     });
     
+    // Graph search input handler with debounce
+    let graphSearchTimeout;
+    graphSearchInput.addEventListener('input', (e) => {
+        clearTimeout(graphSearchTimeout);
+        graphSearchTimeout = setTimeout(() => {
+            currentGraphSearchTerm = e.target.value.trim().toLowerCase();
+            filterAndRenderGraph();
+        }, 300);
+    });
+    
+    // Filter graph data based on search term
+    function filterGraphData(data, searchTerm) {
+        if (!searchTerm) {
+            return data; // Return full data if no search term
+        }
+        
+        const filteredNodes = [];
+        const filteredLinks = [];
+        const matchingTagIds = new Set();
+        const connectedPostIds = new Set();
+        
+        // Find matching tag nodes
+        data.nodes.forEach(node => {
+            if (node.type === 'tag' && node.label.toLowerCase().includes(searchTerm)) {
+                matchingTagIds.add(node.id);
+                filteredNodes.push(node);
+            }
+        });
+        
+        // Find posts connected to matching tags
+        data.links.forEach(link => {
+            if (matchingTagIds.has(link.target) || matchingTagIds.has(link.source)) {
+                const postId = link.source.startsWith ? 
+                    (link.source.startsWith('post-') ? link.source : link.target) :
+                    (link.source.id && link.source.id.startsWith('post-') ? link.source.id : link.target.id);
+                connectedPostIds.add(postId);
+            }
+        });
+        
+        // Add connected post nodes
+        data.nodes.forEach(node => {
+            if (node.type === 'post' && connectedPostIds.has(node.id)) {
+                filteredNodes.push(node);
+            }
+        });
+        
+        // Add links between filtered nodes
+        const filteredNodeIds = new Set(filteredNodes.map(n => n.id));
+        data.links.forEach(link => {
+            const sourceId = link.source.id || link.source;
+            const targetId = link.target.id || link.target;
+            if (filteredNodeIds.has(sourceId) && filteredNodeIds.has(targetId)) {
+                filteredLinks.push({
+                    source: sourceId,
+                    target: targetId,
+                    value: link.value
+                });
+            }
+        });
+        
+        return { nodes: filteredNodes, links: filteredLinks };
+    }
+    
+    // Filter and re-render the graph
+    function filterAndRenderGraph() {
+        if (!fullGraphData) return;
+        
+        const filteredData = filterGraphData(fullGraphData, currentGraphSearchTerm);
+        renderGraph(filteredData);
+    }
+    
     // Initialize the force-directed graph
     async function initializeGraph() {
         try {
@@ -513,7 +605,8 @@ permalink: /search/
             const posts = await response.json();
             
             // Build graph data
-            graphData = buildGraphData(posts);
+            fullGraphData = buildGraphData(posts);
+            graphData = fullGraphData;
             
             // Render the graph
             renderGraph(graphData);
