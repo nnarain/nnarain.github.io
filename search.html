@@ -39,12 +39,23 @@ permalink: /search/
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
-            <button 
-                id="clear-filters" 
-                class="px-4 py-2 text-sm font-sans text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-all duration-300 opacity-0 pointer-events-none"
-            >
-                Clear Filters
-            </button>
+            <div class="flex gap-2">
+                <button 
+                    id="graph-view-btn" 
+                    class="px-4 py-2 text-sm font-sans text-white bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-600 rounded-lg transition-all duration-300 flex items-center gap-2"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                    </svg>
+                    Graph View
+                </button>
+                <button 
+                    id="clear-filters" 
+                    class="px-4 py-2 text-sm font-sans text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-all duration-300 opacity-0 pointer-events-none"
+                >
+                    Clear Filters
+                </button>
+            </div>
         </div>
         <div id="tags-container" class="flex flex-wrap gap-2 overflow-hidden transition-all duration-300" style="max-height: 0;">
             <!-- Tags will be dynamically inserted here -->
@@ -76,6 +87,63 @@ permalink: /search/
         <p class="text-gray-600 dark:text-gray-400 mt-4">Loading posts...</p>
     </div>
 </div>
+
+<!-- Graph View Modal -->
+<div id="graph-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 transition-opacity duration-300">
+    <div class="h-full w-full flex flex-col">
+        <!-- Modal Header -->
+        <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-serif text-gray-900 dark:text-gray-100">Post Network Graph</h2>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Explore posts by their tag relationships. Scroll to zoom, drag to pan.</p>
+            </div>
+            <button 
+                id="close-graph-modal" 
+                class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200"
+                aria-label="Close graph view"
+            >
+                <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Graph Container -->
+        <div class="flex-1 bg-white dark:bg-gray-900 relative overflow-hidden">
+            <div id="graph-container" class="w-full h-full"></div>
+            
+            <!-- Legend -->
+            <div class="absolute bottom-4 left-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700">
+                <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">Legend</h3>
+                <div class="flex flex-col gap-2 text-xs text-gray-700 dark:text-gray-300">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+                        <span>Post</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                        <span>Tag</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-0.5 bg-gray-400"></div>
+                        <span>Connection</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 border border-gray-200 dark:border-gray-700 max-w-xs">
+                <p class="text-xs text-gray-700 dark:text-gray-300">
+                    <span class="font-semibold">Click</span> on a post node to open the post. 
+                    <span class="font-semibold">Drag</span> nodes to reposition them.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- D3.js from CDN for force-directed graph -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
 
 <!-- Fuse.js from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
@@ -400,6 +468,273 @@ permalink: /search/
     
     // Initialize
     loadSearchData();
+})();
+</script>
+
+<!-- Graph visualization functionality -->
+<script>
+(function() {
+    'use strict';
+    
+    const graphModal = document.getElementById('graph-modal');
+    const graphViewBtn = document.getElementById('graph-view-btn');
+    const closeGraphModal = document.getElementById('close-graph-modal');
+    const graphContainer = document.getElementById('graph-container');
+    
+    let graphData = null;
+    let simulation = null;
+    let svg = null;
+    
+    // Open graph modal
+    graphViewBtn.addEventListener('click', () => {
+        graphModal.classList.remove('hidden');
+        if (!graphData) {
+            initializeGraph();
+        }
+    });
+    
+    // Close graph modal
+    closeGraphModal.addEventListener('click', () => {
+        graphModal.classList.add('hidden');
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !graphModal.classList.contains('hidden')) {
+            graphModal.classList.add('hidden');
+        }
+    });
+    
+    // Initialize the force-directed graph
+    async function initializeGraph() {
+        try {
+            // Fetch posts data
+            const response = await fetch('{{ site.baseurl }}/search.json');
+            const posts = await response.json();
+            
+            // Build graph data
+            graphData = buildGraphData(posts);
+            
+            // Render the graph
+            renderGraph(graphData);
+        } catch (error) {
+            console.error('Error initializing graph:', error);
+        }
+    }
+    
+    // Build graph data structure from posts
+    function buildGraphData(posts) {
+        const nodes = [];
+        const links = [];
+        const tagMap = new Map();
+        
+        // Create tag nodes
+        const allTags = new Set();
+        posts.forEach(post => {
+            if (Array.isArray(post.tags)) {
+                post.tags.forEach(tag => {
+                    if (tag && tag.trim()) {
+                        allTags.add(tag.toLowerCase().trim());
+                    }
+                });
+            }
+        });
+        
+        allTags.forEach(tag => {
+            const tagNode = {
+                id: `tag-${tag}`,
+                label: tag,
+                type: 'tag',
+                group: 'tag'
+            };
+            nodes.push(tagNode);
+            tagMap.set(tag, tagNode);
+        });
+        
+        // Create post nodes and links
+        posts.forEach(post => {
+            const postNode = {
+                id: `post-${post.url}`,
+                label: post.title,
+                type: 'post',
+                url: post.url,
+                date: post.date,
+                group: 'post'
+            };
+            nodes.push(postNode);
+            
+            // Create links between post and its tags
+            if (Array.isArray(post.tags)) {
+                post.tags.forEach(tag => {
+                    if (tag && tag.trim()) {
+                        const normalizedTag = tag.toLowerCase().trim();
+                        links.push({
+                            source: postNode.id,
+                            target: `tag-${normalizedTag}`,
+                            value: 1
+                        });
+                    }
+                });
+            }
+        });
+        
+        return { nodes, links };
+    }
+    
+    // Render the force-directed graph using D3.js
+    function renderGraph(data) {
+        // Clear previous graph
+        graphContainer.innerHTML = '';
+        
+        const width = graphContainer.clientWidth;
+        const height = graphContainer.clientHeight;
+        
+        // Create SVG
+        svg = d3.select('#graph-container')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('class', 'graph-svg');
+        
+        // Create a group for zoom/pan
+        const g = svg.append('g');
+        
+        // Define zoom behavior
+        const zoom = d3.zoom()
+            .scaleExtent([0.1, 4])
+            .on('zoom', (event) => {
+                g.attr('transform', event.transform);
+            });
+        
+        svg.call(zoom);
+        
+        // Create force simulation
+        simulation = d3.forceSimulation(data.nodes)
+            .force('link', d3.forceLink(data.links)
+                .id(d => d.id)
+                .distance(100))
+            .force('charge', d3.forceManyBody()
+                .strength(-300))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(30));
+        
+        // Create links
+        const link = g.append('g')
+            .selectAll('line')
+            .data(data.links)
+            .join('line')
+            .attr('class', 'graph-link')
+            .attr('stroke', getComputedStyle(document.documentElement).getPropertyValue('--link-color') || '#94a3b8')
+            .attr('stroke-opacity', 0.6)
+            .attr('stroke-width', 1.5);
+        
+        // Create nodes
+        const node = g.append('g')
+            .selectAll('g')
+            .data(data.nodes)
+            .join('g')
+            .attr('class', 'graph-node')
+            .call(d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended));
+        
+        // Add circles to nodes
+        node.append('circle')
+            .attr('r', d => d.type === 'post' ? 8 : 6)
+            .attr('fill', d => d.type === 'post' ? '#3b82f6' : '#10b981')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', d => d.type === 'post' ? 'pointer' : 'default');
+        
+        // Add labels to nodes
+        node.append('text')
+            .text(d => d.label)
+            .attr('x', 12)
+            .attr('y', 4)
+            .attr('class', 'graph-label')
+            .attr('font-size', d => d.type === 'post' ? '12px' : '10px')
+            .attr('font-weight', d => d.type === 'post' ? '600' : '400')
+            .attr('fill', getComputedStyle(document.documentElement).getPropertyValue('--text-color') || '#374151')
+            .style('pointer-events', 'none')
+            .style('user-select', 'none');
+        
+        // Add click handler for post nodes
+        node.on('click', (event, d) => {
+            if (d.type === 'post') {
+                window.location.href = d.url;
+            }
+        });
+        
+        // Add hover effect
+        node.on('mouseenter', function(event, d) {
+            d3.select(this).select('circle')
+                .transition()
+                .duration(200)
+                .attr('r', d.type === 'post' ? 10 : 8);
+        });
+        
+        node.on('mouseleave', function(event, d) {
+            d3.select(this).select('circle')
+                .transition()
+                .duration(200)
+                .attr('r', d.type === 'post' ? 8 : 6);
+        });
+        
+        // Update positions on simulation tick
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+            
+            node
+                .attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+        
+        // Drag functions
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    }
+    
+    // Update graph colors when theme changes
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            setTimeout(() => {
+                if (svg && !graphModal.classList.contains('hidden')) {
+                    updateGraphColors();
+                }
+            }, 50);
+        });
+    }
+    
+    function updateGraphColors() {
+        const isDark = document.documentElement.classList.contains('dark');
+        const textColor = isDark ? '#e5e7eb' : '#374151';
+        const linkColor = isDark ? '#64748b' : '#94a3b8';
+        
+        svg.selectAll('.graph-label')
+            .attr('fill', textColor);
+        
+        svg.selectAll('.graph-link')
+            .attr('stroke', linkColor);
+    }
 })();
 </script>
 
