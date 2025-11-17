@@ -557,11 +557,18 @@ permalink: /search/
         
         // Find posts connected to matching tags
         data.links.forEach(link => {
-            if (matchingTagIds.has(link.target) || matchingTagIds.has(link.source)) {
-                const postId = link.source.startsWith ? 
-                    (link.source.startsWith('post-') ? link.source : link.target) :
-                    (link.source.id && link.source.id.startsWith('post-') ? link.source.id : link.target.id);
-                connectedPostIds.add(postId);
+            const sourceId = link.source.id || link.source;
+            const targetId = link.target.id || link.target;
+            
+            // Check if either end of the link is a matching tag
+            if (matchingTagIds.has(sourceId) || matchingTagIds.has(targetId)) {
+                // The post is whichever node starts with 'post-'
+                if (typeof sourceId === 'string' && sourceId.startsWith('post-')) {
+                    connectedPostIds.add(sourceId);
+                }
+                if (typeof targetId === 'string' && targetId.startsWith('post-')) {
+                    connectedPostIds.add(targetId);
+                }
             }
         });
         
