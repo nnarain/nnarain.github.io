@@ -113,7 +113,7 @@ permalink: /search/
                 <input 
                     type="text" 
                     id="graph-search-input" 
-                    placeholder="Filter by tag (e.g., rust, python)..." 
+                    placeholder="Filter by tags (e.g., rust, python, gameboy)..." 
                     class="w-full px-4 py-2 pr-10 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300"
                     autocomplete="off"
                 />
@@ -536,46 +536,74 @@ permalink: /search/
         }, 300);
     });
     
-    // Filter graph data based on search term
+    // Filter graph data based on search term (supports multiple comma-separated tags)
     function filterGraphData(data, searchTerm) {
         if (!searchTerm) {
             return data; // Return full data if no search term
         }
         
+        // Split by comma and trim each tag
+        const searchTerms = searchTerm.split(',').map(t => t.trim()).filter(t => t.length > 0);
+        
+        // Color palette for different search terms
+        const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#ef4444'];
+        
         const filteredNodes = [];
         const filteredLinks = [];
-        const matchingTagIds = new Set();
+        const matchingTagIds = new Map(); // Map tag ID to search term index
+        const postToTags = new Map(); // Map post ID to array of tag IDs
         const connectedPostIds = new Set();
         
-        // Find matching tag nodes
+        // Find matching tag nodes (match any of the search terms)
         data.nodes.forEach(node => {
-            if (node.type === 'tag' && node.label.toLowerCase().includes(searchTerm)) {
-                matchingTagIds.add(node.id);
-                filteredNodes.push(node);
+            if (node.type === 'tag') {
+                const tagLabel = node.label.toLowerCase();
+                // Find which search term(s) this tag matches
+                searchTerms.forEach((term, index) => {
+                    if (tagLabel.includes(term)) {
+                        matchingTagIds.set(node.id, index);
+                        const nodeWithColor = { ...node, colorIndex: index };
+                        filteredNodes.push(nodeWithColor);
+                    }
+                });
             }
         });
         
-        // Find posts connected to matching tags
+        // Find posts connected to matching tags and track which tags they connect to
         data.links.forEach(link => {
             const sourceId = link.source.id || link.source;
             const targetId = link.target.id || link.target;
             
             // Check if either end of the link is a matching tag
             if (matchingTagIds.has(sourceId) || matchingTagIds.has(targetId)) {
-                // The post is whichever node starts with 'post-'
-                if (typeof sourceId === 'string' && sourceId.startsWith('post-')) {
-                    connectedPostIds.add(sourceId);
-                }
-                if (typeof targetId === 'string' && targetId.startsWith('post-')) {
-                    connectedPostIds.add(targetId);
+                const tagId = matchingTagIds.has(sourceId) ? sourceId : targetId;
+                const postId = typeof sourceId === 'string' && sourceId.startsWith('post-') ? sourceId :
+                               typeof targetId === 'string' && targetId.startsWith('post-') ? targetId : null;
+                
+                if (postId) {
+                    connectedPostIds.add(postId);
+                    if (!postToTags.has(postId)) {
+                        postToTags.set(postId, []);
+                    }
+                    postToTags.get(postId).push(tagId);
                 }
             }
         });
         
-        // Add connected post nodes
+        // Add connected post nodes with color based on their tags
         data.nodes.forEach(node => {
             if (node.type === 'post' && connectedPostIds.has(node.id)) {
-                filteredNodes.push(node);
+                const connectedTags = postToTags.get(node.id) || [];
+                const tagIndices = connectedTags.map(tagId => matchingTagIds.get(tagId));
+                
+                // If multiple tags, determine overlap count
+                const uniqueIndices = [...new Set(tagIndices)];
+                const nodeWithColor = { 
+                    ...node, 
+                    colorIndices: uniqueIndices,
+                    isOverlap: uniqueIndices.length > 1
+                };
+                filteredNodes.push(nodeWithColor);
             }
         });
         
@@ -593,7 +621,7 @@ permalink: /search/
             }
         });
         
-        return { nodes: filteredNodes, links: filteredLinks };
+        return { nodes: filteredNodes, links: filteredLinks, colors };
     }
     
     // Filter and re-render the graph
@@ -742,7 +770,22 @@ permalink: /search/
         // Add circles to nodes
         node.append('circle')
             .attr('r', d => d.type === 'post' ? 8 : 6)
-            .attr('fill', d => d.type === 'post' ? '#3b82f6' : '#10b981')
+            .attr('fill', d => {
+                if (d.type === 'tag') {
+                    // Tags are always green
+                    return '#10b981';
+                } else if (d.type === 'post') {
+                    if (d.isOverlap) {
+                        // Posts connected to multiple searched tags get a special color (orange)
+                        return '#f59e0b';
+                    } else if (d.colorIndices && d.colorIndices.length > 0) {
+                        // Use the color of the single tag it's connected to
+                        return data.colors ? data.colors[d.colorIndices[0] % data.colors.length] : '#3b82f6';
+                    }
+                    return '#3b82f6';
+                }
+                return '#3b82f6';
+            })
             .attr('stroke', '#fff')
             .attr('stroke-width', 2)
             .style('cursor', d => d.type === 'post' ? 'pointer' : 'default');
