@@ -7,9 +7,18 @@ layout: null
       "title": {{ post.title | jsonify }},
       "url": {{ post.url | jsonify }},
       "tags": {{ post.tag | jsonify }},
+      "project_id": {{ post.project_id | jsonify }},
       "excerpt": {{ post.excerpt | strip_html | strip_newlines | jsonify }},
       "content": {{ post.content | strip_html | strip_newlines | jsonify }},
-      "date": {{ post.date | date: "%B %d, %Y" | jsonify }}
+      "date": {{ post.date | date: "%B %d, %Y" | jsonify }},
+      "backlinks": [
+        {% for backlink in post.backlinks %}
+          {
+            "url": {{ backlink.url | jsonify }},
+            "title": {{ backlink.title | jsonify }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
