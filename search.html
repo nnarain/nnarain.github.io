@@ -113,7 +113,7 @@ permalink: /search/
                 <input 
                     type="text" 
                     id="graph-search-input" 
-                    placeholder="Filter by tags (e.g., rust, python, gameboy)..." 
+                    placeholder="Filter by tags or projects (e.g., rust, python, icarus-fc)..." 
                     class="w-full px-4 py-2 pr-10 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300"
                     autocomplete="off"
                 />
@@ -126,6 +126,34 @@ permalink: /search/
         <!-- Graph Container -->
         <div class="flex-1 bg-white dark:bg-gray-900 relative overflow-hidden">
             <div id="graph-container" class="w-full h-full"></div>
+            
+            <!-- Force Controls -->
+            <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700" style="min-width: 220px;">
+                <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">Force Controls</h3>
+                <div class="flex flex-col gap-3 text-xs text-gray-700 dark:text-gray-300">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label for="link-distance-slider">Link Distance</label>
+                            <span id="link-distance-value" class="font-semibold">100</span>
+                        </div>
+                        <input type="range" id="link-distance-slider" min="50" max="300" value="100" step="10" class="w-full h-1 bg-gray-300 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider" />
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label for="charge-strength-slider">Repulsion</label>
+                            <span id="charge-strength-value" class="font-semibold">-300</span>
+                        </div>
+                        <input type="range" id="charge-strength-slider" min="-1000" max="-50" value="-300" step="50" class="w-full h-1 bg-gray-300 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider" />
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label for="collision-radius-slider">Collision</label>
+                            <span id="collision-radius-value" class="font-semibold">30</span>
+                        </div>
+                        <input type="range" id="collision-radius-slider" min="10" max="80" value="30" step="5" class="w-full h-1 bg-gray-300 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider" />
+                    </div>
+                </div>
+            </div>
             
             <!-- Legend -->
             <div class="absolute bottom-4 left-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700">
@@ -140,8 +168,18 @@ permalink: /search/
                         <span>Tag</span>
                     </div>
                     <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded-full bg-purple-500"></div>
+                        <span>Project</span>
+                    </div>
+                    <div class="flex items-center gap-2">
                         <div class="w-8 h-0.5 bg-gray-400"></div>
                         <span>Connection</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg width="32" height="2" class="flex-shrink-0">
+                            <line x1="0" y1="1" x2="32" y2="1" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,5"/>
+                        </svg>
+                        <span>Backlink</span>
                     </div>
                 </div>
             </div>
@@ -503,6 +541,13 @@ permalink: /search/
     let svg = null;
     let currentGraphSearchTerm = '';
     
+    // Force parameters
+    let forceParams = {
+        linkDistance: 100,
+        chargeStrength: -300,
+        collisionRadius: 30
+    };
+    
     // Open graph modal
     graphViewBtn.addEventListener('click', () => {
         graphModal.classList.remove('hidden');
@@ -536,31 +581,78 @@ permalink: /search/
         }, 300);
     });
     
-    // Filter graph data based on search term (supports multiple comma-separated tags)
+    // Force control sliders
+    function setupForceControls() {
+        const linkDistanceSlider = document.getElementById('link-distance-slider');
+        const chargeStrengthSlider = document.getElementById('charge-strength-slider');
+        const collisionRadiusSlider = document.getElementById('collision-radius-slider');
+        
+        const linkDistanceValue = document.getElementById('link-distance-value');
+        const chargeStrengthValue = document.getElementById('charge-strength-value');
+        const collisionRadiusValue = document.getElementById('collision-radius-value');
+        
+        if (linkDistanceSlider) {
+            linkDistanceSlider.addEventListener('input', (e) => {
+                forceParams.linkDistance = parseInt(e.target.value);
+                linkDistanceValue.textContent = forceParams.linkDistance;
+                updateSimulationForces();
+            });
+        }
+        
+        if (chargeStrengthSlider) {
+            chargeStrengthSlider.addEventListener('input', (e) => {
+                forceParams.chargeStrength = parseInt(e.target.value);
+                chargeStrengthValue.textContent = forceParams.chargeStrength;
+                updateSimulationForces();
+            });
+        }
+        
+        if (collisionRadiusSlider) {
+            collisionRadiusSlider.addEventListener('input', (e) => {
+                forceParams.collisionRadius = parseInt(e.target.value);
+                collisionRadiusValue.textContent = forceParams.collisionRadius;
+                updateSimulationForces();
+            });
+        }
+    }
+    
+    // Update simulation forces dynamically
+    function updateSimulationForces() {
+        if (!simulation) return;
+        
+        simulation
+            .force('link').distance(forceParams.linkDistance)
+            .force('charge').strength(forceParams.chargeStrength)
+            .force('collision').radius(forceParams.collisionRadius);
+        
+        simulation.alpha(0.3).restart();
+    }
+    
+    // Filter graph data based on search term (supports multiple comma-separated tags and projects)
     function filterGraphData(data, searchTerm) {
         if (!searchTerm) {
             return data; // Return full data if no search term
         }
         
-        // Split by comma and trim each tag
+        // Split by comma and trim each tag/project
         const searchTerms = searchTerm.split(',').map(t => t.trim()).filter(t => t.length > 0);
         
-        // Color palette for different search terms
-        const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#ef4444'];
+        // Color palette for different search terms (excluding purple #8b5cf6 which is reserved for projects)
+        const colors = ['#3b82f6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#ef4444', '#a855f7'];
         
         const filteredNodes = [];
         const filteredLinks = [];
-        const matchingTagIds = new Map(); // Map tag ID to search term index
-        const postToTags = new Map(); // Map post ID to array of tag IDs
+        const matchingTagIds = new Map(); // Map tag/project ID to search term index
+        const postToTags = new Map(); // Map post ID to array of tag/project IDs
         const connectedPostIds = new Set();
         
-        // Find matching tag nodes (match any of the search terms)
+        // Find matching tag and project nodes (match any of the search terms)
         data.nodes.forEach(node => {
-            if (node.type === 'tag') {
-                const tagLabel = node.label.toLowerCase();
-                // Find which search term(s) this tag matches
+            if (node.type === 'tag' || node.type === 'project') {
+                const label = node.label.toLowerCase();
+                // Find which search term(s) this tag/project matches
                 searchTerms.forEach((term, index) => {
-                    if (tagLabel.includes(term)) {
+                    if (label.includes(term)) {
                         matchingTagIds.set(node.id, index);
                         const nodeWithColor = { ...node, colorIndex: index };
                         filteredNodes.push(nodeWithColor);
@@ -569,12 +661,12 @@ permalink: /search/
             }
         });
         
-        // Find posts connected to matching tags and track which tags they connect to
+        // Find posts connected to matching tags/projects and track which tags/projects they connect to
         data.links.forEach(link => {
             const sourceId = link.source.id || link.source;
             const targetId = link.target.id || link.target;
             
-            // Check if either end of the link is a matching tag
+            // Check if either end of the link is a matching tag or project
             if (matchingTagIds.has(sourceId) || matchingTagIds.has(targetId)) {
                 const tagId = matchingTagIds.has(sourceId) ? sourceId : targetId;
                 const postId = typeof sourceId === 'string' && sourceId.startsWith('post-') ? sourceId :
@@ -616,7 +708,8 @@ permalink: /search/
                 filteredLinks.push({
                     source: sourceId,
                     target: targetId,
-                    value: link.value
+                    value: link.value,
+                    type: link.type
                 });
             }
         });
@@ -655,9 +748,12 @@ permalink: /search/
         const nodes = [];
         const links = [];
         const tagMap = new Map();
+        const projectMap = new Map();
         
         // Create tag nodes
         const allTags = new Set();
+        const allProjects = new Set();
+        
         posts.forEach(post => {
             if (Array.isArray(post.tags)) {
                 post.tags.forEach(tag => {
@@ -665,6 +761,10 @@ permalink: /search/
                         allTags.add(tag.toLowerCase().trim());
                     }
                 });
+            }
+            // Collect all project IDs
+            if (post.project_id && post.project_id.trim()) {
+                allProjects.add(post.project_id.trim());
             }
         });
         
@@ -677,6 +777,18 @@ permalink: /search/
             };
             nodes.push(tagNode);
             tagMap.set(tag, tagNode);
+        });
+        
+        // Create project nodes
+        allProjects.forEach(project => {
+            const projectNode = {
+                id: `project-${project}`,
+                label: project,
+                type: 'project',
+                group: 'project'
+            };
+            nodes.push(projectNode);
+            projectMap.set(project, projectNode);
         });
         
         // Create post nodes and links
@@ -699,7 +811,32 @@ permalink: /search/
                         links.push({
                             source: postNode.id,
                             target: `tag-${normalizedTag}`,
-                            value: 1
+                            value: 1,
+                            type: 'tag'
+                        });
+                    }
+                });
+            }
+            
+            // Create link between post and its project
+            if (post.project_id && post.project_id.trim()) {
+                links.push({
+                    source: postNode.id,
+                    target: `project-${post.project_id.trim()}`,
+                    value: 1,
+                    type: 'project'
+                });
+            }
+            
+            // Create backlink connections (dashed lines)
+            if (Array.isArray(post.backlinks)) {
+                post.backlinks.forEach(backlink => {
+                    if (backlink.url) {
+                        links.push({
+                            source: postNode.id,
+                            target: `post-${backlink.url}`,
+                            value: 1,
+                            type: 'backlink'
                         });
                     }
                 });
@@ -740,11 +877,14 @@ permalink: /search/
         simulation = d3.forceSimulation(data.nodes)
             .force('link', d3.forceLink(data.links)
                 .id(d => d.id)
-                .distance(100))
+                .distance(forceParams.linkDistance))
             .force('charge', d3.forceManyBody()
-                .strength(-300))
+                .strength(forceParams.chargeStrength))
             .force('center', d3.forceCenter(width / 2, height / 2))
-            .force('collision', d3.forceCollide().radius(30));
+            .force('collision', d3.forceCollide().radius(forceParams.collisionRadius));
+        
+        // Setup force controls on first render
+        setupForceControls();
         
         // Create links
         const link = g.append('g')
@@ -754,7 +894,8 @@ permalink: /search/
             .attr('class', 'graph-link')
             .attr('stroke', getComputedStyle(document.documentElement).getPropertyValue('--link-color') || '#94a3b8')
             .attr('stroke-opacity', 0.6)
-            .attr('stroke-width', 1.5);
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', d => d.type === 'backlink' ? '5,5' : 'none');
         
         // Create nodes
         const node = g.append('g')
@@ -774,6 +915,9 @@ permalink: /search/
                 if (d.type === 'tag') {
                     // Tags are always green
                     return '#10b981';
+                } else if (d.type === 'project') {
+                    // Projects are purple
+                    return '#8b5cf6';
                 } else if (d.type === 'post') {
                     if (d.isOverlap) {
                         // Posts connected to multiple searched tags get a special color (orange)
