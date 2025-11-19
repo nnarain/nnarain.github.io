@@ -183,41 +183,50 @@
                     const postsContainer = document.getElementById('posts-container');
                     const existingYears = new Set();
                     
-                    // Track existing years to avoid duplicates
+                    // Track existing years to avoid duplicate year headers
                     document.querySelectorAll('.year-section').forEach(section => {
                         existingYears.add(section.dataset.year);
                     });
 
-                    // Append new content
-                    let elementsToAdd = [];
-                    let currentYearSection = null;
-                    
-                    yearSections.forEach((section, index) => {
+                    // Build a map of year sections to their posts in the new page
+                    const yearToPostsMap = new Map();
+                    yearSections.forEach(section => {
                         const year = section.dataset.year;
-                        
+                        yearToPostsMap.set(year, {
+                            section: section,
+                            posts: []
+                        });
+                    });
+                    
+                    // Associate posts with their year sections
+                    posts.forEach(post => {
+                        const year = post.dataset.year;
+                        if (yearToPostsMap.has(year)) {
+                            yearToPostsMap.get(year).posts.push(post);
+                        }
+                    });
+
+                    // Append new content in the correct order
+                    yearToPostsMap.forEach((data, year) => {
                         // Only add year section if it doesn't exist
                         if (!existingYears.has(year)) {
-                            elementsToAdd.push(section.cloneNode(true));
+                            postsContainer.appendChild(data.section.cloneNode(true));
                             existingYears.add(year);
                             this.years.add(year);
-                            currentYearSection = year;
                         }
                         
-                        // Add posts for this year
-                        posts.forEach(post => {
-                            if (post.dataset.year === year) {
-                                elementsToAdd.push(post.cloneNode(true));
-                            }
+                        // Add all posts for this year
+                        data.posts.forEach(post => {
+                            postsContainer.appendChild(post.cloneNode(true));
                         });
                     });
 
-                    // Append all elements
-                    elementsToAdd.forEach(el => {
-                        postsContainer.appendChild(el);
-                    });
-
                     // Update timeline if new years were added
-                    if (currentYearSection && !document.querySelector(`[data-year="${currentYearSection}"]`)) {
+                    const timelineNeedsUpdate = Array.from(this.years).some(year => {
+                        return !document.querySelector(`#timeline-sidebar .timeline-year[data-year="${year}"]`);
+                    });
+                    
+                    if (timelineNeedsUpdate) {
                         this.updateTimeline();
                     }
 
