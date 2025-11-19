@@ -1,0 +1,263 @@
+(function() {
+    'use strict';
+
+    // Timeline and Infinite Scroll Module
+    const TimelineManager = {
+        years: new Set(),
+        activeYear: null,
+        observers: [],
+        
+        init() {
+            this.collectYears();
+            this.buildTimeline();
+            this.setupScrollObserver();
+            this.setupInfiniteScroll();
+        },
+
+        // Collect all years from posts
+        collectYears() {
+            const yearSections = document.querySelectorAll('.year-section');
+            yearSections.forEach(section => {
+                const year = section.dataset.year;
+                if (year) {
+                    this.years.add(year);
+                }
+            });
+        },
+
+        // Build the timeline sidebar
+        buildTimeline() {
+            const sidebar = document.querySelector('#timeline-sidebar nav');
+            if (!sidebar) return;
+
+            // Sort years in descending order (newest first)
+            const sortedYears = Array.from(this.years).sort((a, b) => b - a);
+
+            sortedYears.forEach(year => {
+                const button = document.createElement('button');
+                button.className = 'timeline-year text-gray-400 dark:text-gray-600 hover:text-primary dark:hover:text-primary font-sans text-lg transition-all duration-200 text-left px-2 py-1 rounded';
+                button.textContent = year;
+                button.dataset.year = year;
+                button.setAttribute('aria-label', `Jump to ${year}`);
+                
+                // Click handler to scroll to year
+                button.addEventListener('click', () => {
+                    const yearSection = document.getElementById(`year-${year}`);
+                    if (yearSection) {
+                        const yOffset = -100; // Offset for sticky header
+                        const y = yearSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                });
+
+                sidebar.appendChild(button);
+            });
+        },
+
+        // Setup IntersectionObserver for year highlighting
+        setupScrollObserver() {
+            const yearSections = document.querySelectorAll('.year-section');
+            
+            // Observer with rootMargin to trigger when section is ~30% from top
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.highlightYear(entry.target.dataset.year);
+                    }
+                });
+            }, {
+                rootMargin: '-30% 0px -70% 0px',
+                threshold: 0
+            });
+
+            yearSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            this.observers.push(observer);
+        },
+
+        // Highlight active year in timeline
+        highlightYear(year) {
+            if (this.activeYear === year) return;
+            
+            this.activeYear = year;
+            const buttons = document.querySelectorAll('.timeline-year');
+            
+            buttons.forEach(button => {
+                if (button.dataset.year === year) {
+                    button.classList.remove('text-gray-400', 'dark:text-gray-600');
+                    button.classList.add('text-primary', 'font-bold', 'scale-110');
+                } else {
+                    button.classList.add('text-gray-400', 'dark:text-gray-600');
+                    button.classList.remove('text-primary', 'font-bold', 'scale-110');
+                }
+            });
+        },
+
+        // Setup infinite scroll functionality
+        setupInfiniteScroll() {
+            const paginationData = document.getElementById('pagination-data');
+            if (!paginationData) return;
+
+            let isLoading = false;
+            let hasMore = true;
+            let currentPage = parseInt(paginationData.dataset.currentPage);
+            const totalPages = parseInt(paginationData.dataset.totalPages);
+
+            // Check if there are more pages
+            hasMore = currentPage < totalPages;
+
+            if (!hasMore) return; // No more pages to load
+
+            // Sentinel element for intersection observer
+            const sentinel = document.createElement('div');
+            sentinel.id = 'infinite-scroll-sentinel';
+            sentinel.className = 'h-1';
+            document.getElementById('posts-container').after(sentinel);
+
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            // Infinite scroll observer
+            const infiniteScrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isLoading && hasMore) {
+                        this.loadNextPage(currentPage + 1, (success, newPage) => {
+                            isLoading = false;
+                            if (success) {
+                                currentPage = newPage;
+                                hasMore = currentPage < totalPages;
+                                
+                                if (!hasMore) {
+                                    infiniteScrollObserver.disconnect();
+                                    sentinel.remove();
+                                }
+                            }
+                        });
+                        isLoading = true;
+                        loadingIndicator.classList.remove('hidden');
+                    }
+                });
+            }, {
+                rootMargin: '200px'
+            });
+
+            infiniteScrollObserver.observe(sentinel);
+            this.observers.push(infiniteScrollObserver);
+        },
+
+        // Load next page of posts
+        loadNextPage(page, callback) {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            
+            // Construct next page URL
+            let nextPageUrl;
+            if (page === 2) {
+                nextPageUrl = '/blog/page2';
+            } else {
+                nextPageUrl = `/blog/page${page}`;
+            }
+
+            fetch(nextPageUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load page');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Extract posts from the loaded page
+                    const newPostsContainer = doc.getElementById('posts-container');
+                    if (!newPostsContainer) {
+                        callback(false);
+                        return;
+                    }
+
+                    // Get all year sections and posts
+                    const yearSections = newPostsContainer.querySelectorAll('.year-section');
+                    const posts = newPostsContainer.querySelectorAll('.post-item');
+                    
+                    const postsContainer = document.getElementById('posts-container');
+                    const existingYears = new Set();
+                    
+                    // Track existing years to avoid duplicates
+                    document.querySelectorAll('.year-section').forEach(section => {
+                        existingYears.add(section.dataset.year);
+                    });
+
+                    // Append new content
+                    let elementsToAdd = [];
+                    let currentYearSection = null;
+                    
+                    yearSections.forEach((section, index) => {
+                        const year = section.dataset.year;
+                        
+                        // Only add year section if it doesn't exist
+                        if (!existingYears.has(year)) {
+                            elementsToAdd.push(section.cloneNode(true));
+                            existingYears.add(year);
+                            this.years.add(year);
+                            currentYearSection = year;
+                        }
+                        
+                        // Add posts for this year
+                        posts.forEach(post => {
+                            if (post.dataset.year === year) {
+                                elementsToAdd.push(post.cloneNode(true));
+                            }
+                        });
+                    });
+
+                    // Append all elements
+                    elementsToAdd.forEach(el => {
+                        postsContainer.appendChild(el);
+                    });
+
+                    // Update timeline if new years were added
+                    if (currentYearSection && !document.querySelector(`[data-year="${currentYearSection}"]`)) {
+                        this.updateTimeline();
+                    }
+
+                    // Re-setup observers for new year sections
+                    this.setupScrollObserver();
+
+                    loadingIndicator.classList.add('hidden');
+                    callback(true, page);
+                })
+                .catch(error => {
+                    console.error('Error loading next page:', error);
+                    loadingIndicator.classList.add('hidden');
+                    callback(false);
+                });
+        },
+
+        // Update timeline with new years
+        updateTimeline() {
+            const sidebar = document.querySelector('#timeline-sidebar nav');
+            if (!sidebar) return;
+
+            // Clear and rebuild
+            sidebar.innerHTML = '';
+            this.buildTimeline();
+        },
+
+        // Cleanup
+        destroy() {
+            this.observers.forEach(observer => observer.disconnect());
+            this.observers = [];
+        }
+    };
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => TimelineManager.init());
+    } else {
+        TimelineManager.init();
+    }
+
+    // Expose for debugging if needed
+    window.TimelineManager = TimelineManager;
+})();
