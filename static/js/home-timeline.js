@@ -7,12 +7,30 @@
         activeYear: null,
         observers: [],
         intersectingYears: new Set(),
+        postCounts: new Map(),
         
         init() {
+            this.loadPostCounts();
             this.collectYears();
+            this.collectAllYears();
             this.buildTimeline();
             this.setupScrollObserver();
             this.setupInfiniteScroll();
+        },
+
+        // Load precomputed post counts
+        loadPostCounts() {
+            const postCountData = document.getElementById('post-count-data');
+            if (postCountData) {
+                try {
+                    const counts = JSON.parse(postCountData.textContent);
+                    Object.entries(counts).forEach(([year, count]) => {
+                        this.postCounts.set(year, count);
+                    });
+                } catch (e) {
+                    console.error('Failed to load post counts:', e);
+                }
+            }
         },
 
         // Collect all years from posts
@@ -26,20 +44,39 @@
             });
         },
 
+        // Collect all years from precomputed post counts
+        collectAllYears() {
+            this.postCounts.forEach((count, year) => {
+                this.years.add(year);
+            });
+        },
+
         // Build the timeline sidebar
         buildTimeline() {
             const sidebar = document.querySelector('#timeline-sidebar nav');
             if (!sidebar) return;
 
+            // Use precomputed post counts
+            const maxCount = Math.max(...this.postCounts.values(), 1);
+
             // Sort years in descending order (newest first)
             const sortedYears = Array.from(this.years).sort((a, b) => b - a);
 
             sortedYears.forEach(year => {
+                const postCount = this.postCounts.get(year) || 0;
+                const barWidth = maxCount > 0 ? (postCount / maxCount) * 100 : 0;
+
+                // Container for year entry
+                const container = document.createElement('div');
+                container.className = 'timeline-entry mb-3';
+                container.dataset.year = year;
+
+                // Year button
                 const button = document.createElement('button');
-                button.className = 'timeline-year text-gray-400 dark:text-gray-600 hover:text-primary dark:hover:text-primary font-sans text-lg transition-all duration-200 text-left px-2 py-1 rounded';
+                button.className = 'timeline-year text-gray-400 dark:text-gray-600 hover:text-primary dark:hover:text-primary font-sans text-lg transition-all duration-200 text-left px-2 py-1 rounded w-full';
                 button.textContent = year;
                 button.dataset.year = year;
-                button.setAttribute('aria-label', `Jump to ${year}`);
+                button.setAttribute('aria-label', `Jump to ${year} (${postCount} posts)`);
                 
                 // Click handler to scroll to year
                 button.addEventListener('click', () => {
@@ -51,7 +88,19 @@
                     }
                 });
 
-                sidebar.appendChild(button);
+                // Bar indicator
+                const barContainer = document.createElement('div');
+                barContainer.className = 'timeline-bar-container mt-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden';
+                
+                const bar = document.createElement('div');
+                bar.className = 'timeline-bar h-full bg-gray-300 dark:bg-gray-700 transition-all duration-300 rounded-full';
+                bar.style.width = `${barWidth}%`;
+                bar.dataset.year = year;
+
+                barContainer.appendChild(bar);
+                container.appendChild(button);
+                container.appendChild(barContainer);
+                sidebar.appendChild(container);
             });
         },
 
@@ -113,6 +162,7 @@
             
             this.activeYear = year;
             const buttons = document.querySelectorAll('.timeline-year');
+            const bars = document.querySelectorAll('.timeline-bar');
             
             buttons.forEach(button => {
                 if (button.dataset.year === year) {
@@ -121,6 +171,16 @@
                 } else {
                     button.classList.add('text-gray-400', 'dark:text-gray-600');
                     button.classList.remove('text-primary', 'font-bold', 'scale-110');
+                }
+            });
+
+            bars.forEach(bar => {
+                if (bar.dataset.year === year) {
+                    bar.classList.remove('bg-gray-300', 'dark:bg-gray-700');
+                    bar.classList.add('bg-primary');
+                } else {
+                    bar.classList.add('bg-gray-300', 'dark:bg-gray-700');
+                    bar.classList.remove('bg-primary');
                 }
             });
         },

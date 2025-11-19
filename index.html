@@ -59,3 +59,13 @@ title: Home
      data-next-page-path="{% if paginator.next_page %}{{ paginator.next_page_path }}{% endif %}"
      class="hidden">
 </div>
+
+<!-- Post Count Data (precomputed from all posts) -->
+<script id="post-count-data" type="application/json">
+{
+  {% assign all_years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  {% for year_group in all_years %}
+    "{{ year_group.name }}": {{ year_group.items.size }}{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+}
+</script>
