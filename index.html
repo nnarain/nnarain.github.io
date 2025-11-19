@@ -11,8 +11,12 @@ title: Home
     
     {% if post_year != current_year %}
       {% assign current_year = post_year %}
-      <div id="year-{{ post_year }}" class="year-section" data-year="{{ post_year }}">
-        <h2 class="text-4xl font-sans font-bold text-gray-800 dark:text-gray-200 mb-6 mt-8 first:mt-0">{{ post_year }}</h2>
+      <div id="year-{{ post_year }}" class="year-section relative my-12 first:mt-0" data-year="{{ post_year }}">
+        <div class="flex items-center gap-4">
+          <h2 class="text-5xl font-sans font-extrabold text-gray-800 dark:text-gray-200 tracking-tight">{{ post_year }}</h2>
+          <div class="flex-1 h-px bg-gradient-to-r from-gray-300 dark:from-gray-700 to-transparent"></div>
+        </div>
+        <div class="mt-2 h-1 w-16 bg-primary rounded-full"></div>
       </div>
     {% endif %}
     

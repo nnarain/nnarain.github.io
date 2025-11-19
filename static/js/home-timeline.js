@@ -6,6 +6,7 @@
         years: new Set(),
         activeYear: null,
         observers: [],
+        intersectingYears: new Set(),
         
         init() {
             this.collectYears();
@@ -56,25 +57,54 @@
 
         // Setup IntersectionObserver for year highlighting
         setupScrollObserver() {
+            // Disconnect any existing year observers
+            if (this.yearObserver) {
+                this.yearObserver.disconnect();
+            }
+            
             const yearSections = document.querySelectorAll('.year-section');
             
-            // Observer with rootMargin to trigger when section is ~30% from top
-            const observer = new IntersectionObserver((entries) => {
+            // Observer to detect which year sections are visible
+            this.yearObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    const year = entry.target.dataset.year;
                     if (entry.isIntersecting) {
-                        this.highlightYear(entry.target.dataset.year);
+                        this.intersectingYears.add(year);
+                    } else {
+                        this.intersectingYears.delete(year);
                     }
                 });
+                
+                // Find the year section closest to the top of the viewport
+                if (this.intersectingYears.size > 0) {
+                    let closestYear = null;
+                    let closestDistance = Infinity;
+                    
+                    // Check all year sections to find which one is closest to top
+                    yearSections.forEach(section => {
+                        const year = section.dataset.year;
+                        if (this.intersectingYears.has(year)) {
+                            const rect = section.getBoundingClientRect();
+                            const distance = Math.abs(rect.top);
+                            if (distance < closestDistance) {
+                                closestDistance = distance;
+                                closestYear = year;
+                            }
+                        }
+                    });
+                    
+                    if (closestYear) {
+                        this.highlightYear(closestYear);
+                    }
+                }
             }, {
-                rootMargin: '-30% 0px -70% 0px',
+                rootMargin: '-10% 0px -50% 0px',
                 threshold: 0
             });
 
             yearSections.forEach(section => {
-                observer.observe(section);
+                this.yearObserver.observe(section);
             });
-
-            this.observers.push(observer);
         },
 
         // Highlight active year in timeline
@@ -255,6 +285,9 @@
 
         // Cleanup
         destroy() {
+            if (this.yearObserver) {
+                this.yearObserver.disconnect();
+            }
             this.observers.forEach(observer => observer.disconnect());
             this.observers = [];
         }
