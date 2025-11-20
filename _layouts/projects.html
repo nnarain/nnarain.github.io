@@ -75,6 +75,19 @@ layout: default
     {{ content }}
   </div>
 
+  <!-- Tag Distribution Chart -->
+  {% if page.project_id %}
+  {% assign related_posts = site.posts | where: "project_id", page.project_id %}
+  {% if related_posts.size > 0 %}
+  <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+    <h2 class="text-3xl font-sans font-bold text-gray-800 dark:text-gray-200 mb-6">Tag Distribution</h2>
+    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+      <div id="tag-radar-chart"></div>
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}
+
   <!-- Related Posts -->
   {% if page.project_id %}
   <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
@@ -97,6 +110,183 @@ layout: default
   </div>
   {% endif %}
 </div>
+
+{% if page.project_id %}
+{% assign related_posts = site.posts | where: "project_id", page.project_id %}
+{% if related_posts.size > 0 %}
+<script>
+  // Tag Distribution Radar Chart
+  function initTagRadarChart() {
+    // Ensure ApexCharts is loaded
+    if (typeof ApexCharts === 'undefined') {
+      console.error('ApexCharts is not loaded, retrying...');
+      setTimeout(initTagRadarChart, 100);
+      return;
+    }
+    
+    // Aggregate tags from all related posts
+    const tagCounts = {};
+    const posts = [
+      {% for post in related_posts %}
+      {
+        tags: [{% for tag in post.tag %}"{{ tag }}"{% unless forloop.last %}, {% endunless %}{% endfor %}]
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+
+    // Count tag occurrences
+    posts.forEach(post => {
+      post.tags.forEach(tag => {
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    });
+
+    // Prepare data for radar chart
+    const tags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+    const counts = tags.map(tag => tagCounts[tag]);
+
+    // Get theme
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    const textColor = isDarkMode ? '#e5e7eb' : '#374151';
+    const gridColor = isDarkMode ? '#374151' : '#e5e7eb';
+
+    // Render radar chart
+    const options = {
+      series: [{
+        name: 'Post Count',
+        data: counts
+      }],
+      chart: {
+        height: 400,
+        type: 'radar',
+        background: 'transparent',
+        toolbar: {
+          show: false
+        }
+      },
+      xaxis: {
+        categories: tags,
+        labels: {
+          style: {
+            colors: tags.map(() => textColor),
+            fontSize: '12px'
+          }
+        }
+      },
+      yaxis: {
+        show: true,
+        labels: {
+          style: {
+            colors: textColor
+          }
+        }
+      },
+      plotOptions: {
+        radar: {
+          polygons: {
+            strokeColors: gridColor,
+            strokeWidth: 1,
+            connectorColors: gridColor,
+            fill: {
+              colors: [isDarkMode ? '#1f2937' : '#f9fafb', isDarkMode ? '#111827' : '#ffffff']
+            }
+          }
+        }
+      },
+      colors: ['#3b82f6'],
+      markers: {
+        size: 4,
+        colors: ['#3b82f6'],
+        strokeColors: '#fff',
+        strokeWidth: 2,
+      },
+      fill: {
+        opacity: 0.2
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ['#3b82f6'],
+      },
+      legend: {
+        show: true,
+        labels: {
+          colors: textColor
+        }
+      },
+      tooltip: {
+        theme: isDarkMode ? 'dark' : 'light',
+        y: {
+          formatter: function(value) {
+            return value + ' post' + (value !== 1 ? 's' : '');
+          }
+        }
+      }
+    };
+
+    const chart = new ApexCharts(document.querySelector('#tag-radar-chart'), options);
+    chart.render();
+
+    // Update chart on theme change
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+          const isDarkMode = document.documentElement.classList.contains('dark');
+          chart.updateOptions({
+            xaxis: {
+              categories: tags,
+              labels: {
+                style: {
+                  colors: tags.map(() => isDarkMode ? '#e5e7eb' : '#374151'),
+                  fontSize: '12px'
+                }
+              }
+            },
+            yaxis: {
+              show: true,
+              labels: {
+                style: {
+                  colors: isDarkMode ? '#e5e7eb' : '#374151'
+                }
+              }
+            },
+            plotOptions: {
+              radar: {
+                polygons: {
+                  strokeColors: isDarkMode ? '#374151' : '#e5e7eb',
+                  strokeWidth: 1,
+                  connectorColors: isDarkMode ? '#374151' : '#e5e7eb',
+                  fill: {
+                    colors: [isDarkMode ? '#1f2937' : '#f9fafb', isDarkMode ? '#111827' : '#ffffff']
+                  }
+                }
+              }
+            },
+            legend: {
+              show: true,
+              labels: {
+                colors: isDarkMode ? '#e5e7eb' : '#374151'
+              }
+            },
+            tooltip: {
+              theme: isDarkMode ? 'dark' : 'light'
+            }
+          });
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTagRadarChart);
+  } else {
+    initTagRadarChart();
+  }
+</script>
+{% endif %}
+{% endif %}
 
 {% if page.images.size > 1 %}
 <script>
