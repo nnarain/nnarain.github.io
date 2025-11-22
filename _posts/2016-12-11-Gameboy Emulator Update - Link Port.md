@@ -4,6 +4,7 @@ title: Gameboy Emulator Update - Link Port
 description:
 tag: ['gameboy', 'emulator']
 thumbnail: /assets/2016/12/11/
+project_id: gameboy-emulator
 repo: nnarain/gameboycore
 ---
 

@@ -4,6 +4,7 @@ title: Emulator Update - Android!
 description:
 tag: ['c++', 'Java', 'Android']
 thumbnail: /assets/2017/03/12/
+project_id: gameboy-emulator
 repo: nnarain/dotrix-android
 ---
 

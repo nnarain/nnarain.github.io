@@ -4,6 +4,7 @@ title: Gameboy Emulator Update - GUI!
 description:
 tag: ["Gameboy", "Emulator"]
 thumbnail: /assets/2016/11/21/
+project_id: gameboy-emulator
 repo: nnarain/gameboycore
 ---
 

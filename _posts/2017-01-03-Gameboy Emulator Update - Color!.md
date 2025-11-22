@@ -4,6 +4,7 @@ title: Gameboy Emulator Update - Color!
 description:
 tag: ['gameboy', 'emulator']
 thumbnail: /assets/2017/01/03/
+project_id: gameboy-emulator
 repo:
 ---
 

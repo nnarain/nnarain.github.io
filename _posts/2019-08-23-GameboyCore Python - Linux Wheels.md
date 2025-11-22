@@ -3,6 +3,7 @@ layout: post
 title: GameboyCore Python - Linux Wheels
 tag: ['python', 'gameboycore', 'pip']
 repo: nnarain/gameboycore-python
+project_id: gameboy-emulator
 ---
 
 Unforunately it is not very straight forward to upload pre-compiled wheel files to PyPi. This is due to Linux system often having a large diversity of install system libraries with varying versions.

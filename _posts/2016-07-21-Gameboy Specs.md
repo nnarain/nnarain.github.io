@@ -5,6 +5,7 @@ description: Outline the specifications for the Gameboy's hardware
 tag: ["gameboy", "c++"]
 thumbnail:
 repo: nnarain/gameboycore
+project_id: gameboy-emulator
 next_post: 2016-09-09-Gameboy LCD Controller
 ---
 

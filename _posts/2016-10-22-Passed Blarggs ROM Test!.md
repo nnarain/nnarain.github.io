@@ -4,6 +4,7 @@ title: Passed Blarggs ROM Test!
 description:
 tag: ["Gameboy", "Emulator", "Assembly"]
 thumbnail: /assets/2016/10/22/
+project_id: gameboy-emulator
 repo: nnarain/gameboycore
 ---
 

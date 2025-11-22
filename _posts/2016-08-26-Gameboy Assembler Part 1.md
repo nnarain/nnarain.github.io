@@ -5,6 +5,7 @@ description: Introduction to Gameboy Assembler
 tag: ["gameboy", "flex", "bison", "c++", "assembly"]
 thumbnail: /assets/2016/08/26/assemblerflow.png
 repo: nnarain/gameboy-assembler
+project_id: gameboy-emulator
 next_post: 2016-08-26-Gameboy Assembler Part 2
 ---
 

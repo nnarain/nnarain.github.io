@@ -2,7 +2,8 @@
 layout: post
 title: GameboyCore Retrospective
 tag: ['emulator', 'gameboy']
-repo: 
+repo: nnarain/gameboycore
+project_id: gameboy-emulator
 ---
 
 Small reflection on the GameboyCore projects and future projects.

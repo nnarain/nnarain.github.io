@@ -3,8 +3,8 @@ layout: post
 title: Tetris Title Screen
 description: Getting to the Gameboy title screen
 tag: ["Gameboy", "C++"]
-thumbnail: /assets/2016/09/24/
-repo:
+project_id: gameboy-emulator
+repo: nnarain/gameboycore
 ---
 
 Gameboy Emulator Progress Update:

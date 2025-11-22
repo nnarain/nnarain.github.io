@@ -4,6 +4,7 @@ title: Gameboy Emulator GPU
 description:
 tag: ['gameboy', 'emulator', 'c++']
 thumbnail: /assets/2016/10/29/
+project_id: gameboy-emulator
 repo: nnarain/gameboycore
 ---
 

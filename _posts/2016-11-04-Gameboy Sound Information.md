@@ -4,6 +4,7 @@ title: Gameboy Sound Information
 description:
 tag: ["Gameboy", "Emulator"]
 thumbnail: /assets/2016/11/04/
+project_id: gameboy-emulator
 repo: nnarain/gameboy
 ---
 

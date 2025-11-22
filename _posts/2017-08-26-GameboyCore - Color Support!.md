@@ -4,6 +4,7 @@ title: GameboyCore - Audio and Full Color Support!
 description: 
 tag: ['gameboy', 'emulator']
 thumbnail: /assets/2017/08/26/
+project_id: gameboy-emulator
 repo: nnarain/gameboycore
 ---
 

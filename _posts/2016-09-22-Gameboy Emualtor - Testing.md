@@ -4,6 +4,7 @@ title: Gameboy Emualtor - Testing
 description: writing tests for my emulator
 tag: [Gameboy, C++]
 thumbnail: /assets/2016/09/22/
+project_id: gameboy-emulator
 repo: nnarain/gameboycore
 ---
 
