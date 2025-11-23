@@ -75,15 +75,13 @@ layout: default
     {{ content }}
   </div>
 
-  <!-- Tag Distribution Chart -->
+  <!-- Posts Over Time Chart -->
   {% if page.project_id %}
   {% assign related_posts = site.posts | where: "project_id", page.project_id %}
   {% if related_posts.size > 0 %}
-  <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-    <h2 class="text-3xl font-sans font-bold text-gray-800 dark:text-gray-200 mb-6">Tag Distribution</h2>
-    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
-      <div id="tag-radar-chart"></div>
-    </div>
+  <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+    <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">Project Timeline</h3>
+    <div id="posts-timeline-chart" class="mb-2"></div>
   </div>
   {% endif %}
   {% endif %}
@@ -91,22 +89,45 @@ layout: default
   <!-- Related Posts -->
   {% if page.project_id %}
   <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-    <h2 class="text-3xl font-sans font-bold text-gray-800 dark:text-gray-200 mb-6">Related Posts</h2>
-    <div class="space-y-4">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-3xl font-sans font-bold text-gray-800 dark:text-gray-200">Project Posts</h2>
       {% assign related_posts = site.posts | where: "project_id", page.project_id %}
       {% if related_posts.size > 0 %}
-        {% for post in related_posts limit:5 %}
-        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
-          <a href="{{ post.url | relative_url }}" class="block hover:no-underline group">
-            <time datetime="{{ post.date }}" class="text-gray-500 dark:text-gray-400 text-sm">{{ post.date | date: "%B %d, %Y" }}</time>
-            <h3 class="text-xl font-sans font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary transition-colors duration-200">{{ post.title }}</h3>
-          </a>
-        </div>
-        {% endfor %}
-      {% else %}
-        <p class="text-gray-600 dark:text-gray-400">No related posts yet.</p>
+      <span class="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">{{ related_posts.size }} post{% if related_posts.size != 1 %}s{% endif %}</span>
       {% endif %}
     </div>
+    
+    {% if related_posts.size > 0 %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {% for post in related_posts %}
+      <a href="{{ post.url | relative_url }}" class="group block bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary hover:shadow-lg transition-all duration-200">
+        <time datetime="{{ post.date }}" class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+          {{ post.date | date: "%b %d, %Y" }}
+        </time>
+        <h3 class="mt-2 text-lg font-sans font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary transition-colors duration-200 line-clamp-2">
+          {{ post.title }}
+        </h3>
+        {% if post.tag and post.tag.size > 0 %}
+        <div class="mt-3 flex flex-wrap gap-1">
+          {% for tag in post.tag limit:3 %}
+          <span class="inline-block px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded">{{ tag }}</span>
+          {% endfor %}
+          {% if post.tag.size > 3 %}
+          <span class="inline-block px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400">+{{ post.tag.size | minus: 3 }}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+      <svg class="w-12 h-12 mx-auto text-gray-400 dark:text-gray-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
+      <p class="text-gray-600 dark:text-gray-400">No related posts yet.</p>
+    </div>
+    {% endif %}
   </div>
   {% endif %}
 </div>
@@ -115,116 +136,196 @@ layout: default
 {% assign related_posts = site.posts | where: "project_id", page.project_id %}
 {% if related_posts.size > 0 %}
 <script>
-  // Tag Distribution Radar Chart
-  function initTagRadarChart() {
+  // GitHub-style Timeline Chart
+  function initPostsTimelineChart() {
     // Ensure ApexCharts is loaded
     if (typeof ApexCharts === 'undefined') {
       console.error('ApexCharts is not loaded, retrying...');
-      setTimeout(initTagRadarChart, 100);
+      setTimeout(initPostsTimelineChart, 100);
       return;
     }
     
-    // Aggregate tags from all related posts
-    const tagCounts = {};
-    const posts = [
+    // Get all blog posts to determine the full timeline
+    const allBlogPosts = [
+      {% for post in site.posts %}
+      new Date("{{ post.date | date: '%Y-%m-%d' }}"){% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+    
+    // Get project posts
+    const projectPosts = [
       {% for post in related_posts %}
       {
-        tags: [{% for tag in post.tag %}"{{ tag }}"{% unless forloop.last %}, {% endunless %}{% endfor %}]
+        date: new Date("{{ post.date | date: '%Y-%m-%d' }}"),
+        title: "{{ post.title | escape }}"
       }{% unless forloop.last %},{% endunless %}
       {% endfor %}
     ];
 
-    // Count tag occurrences
-    posts.forEach(post => {
-      post.tags.forEach(tag => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-      });
+    // Find min and max dates across all blog posts
+    const minDate = new Date(Math.min(...allBlogPosts));
+    const maxDate = new Date(Math.max(...allBlogPosts));
+    
+    // Generate monthly bins spanning entire blog history
+    const months = [];
+    let current = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
+    const end = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
+    
+    while (current <= end) {
+      months.push(current.toISOString().substring(0, 7));
+      current.setMonth(current.getMonth() + 1);
+    }
+
+    // Group project posts by month
+    const postsByMonth = {};
+    projectPosts.forEach(post => {
+      const monthKey = post.date.toISOString().substring(0, 7);
+      if (!postsByMonth[monthKey]) {
+        postsByMonth[monthKey] = {
+          count: 0,
+          titles: []
+        };
+      }
+      postsByMonth[monthKey].count++;
+      postsByMonth[monthKey].titles.push(post.title);
     });
 
-    // Prepare data for radar chart
-    const tags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
-    const counts = tags.map(tag => tagCounts[tag]);
+    // Create data array with all months (0 for no posts)
+    const data = months.map(month => ({
+      x: month,
+      y: postsByMonth[month] ? postsByMonth[month].count : 0,
+      titles: postsByMonth[month] ? postsByMonth[month].titles : []
+    }));
 
     // Get theme
     const isDarkMode = document.documentElement.classList.contains('dark');
-    const textColor = isDarkMode ? '#e5e7eb' : '#374151';
-    const gridColor = isDarkMode ? '#374151' : '#e5e7eb';
+    const bgColor = isDarkMode ? '#0d1117' : '#ebedf0';
+    const activeColor = '#22c55e'; // Primary theme color
+    const textColor = isDarkMode ? '#9ca3af' : '#6b7280';
 
-    // Render radar chart
+    // Render minimal heatmap-style chart
     const options = {
       series: [{
-        name: 'Post Count',
-        data: counts
+        name: 'Posts',
+        data: data.map(d => ({ x: d.x, y: d.y }))
       }],
       chart: {
-        height: 400,
-        type: 'radar',
+        height: 80,
+        type: 'bar',
         background: 'transparent',
         toolbar: {
           show: false
-        }
-      },
-      xaxis: {
-        categories: tags,
-        labels: {
-          style: {
-            colors: tags.map(() => textColor),
-            fontSize: '12px'
-          }
-        }
-      },
-      yaxis: {
-        show: true,
-        labels: {
-          style: {
-            colors: textColor
-          }
+        },
+        sparkline: {
+          enabled: false
         }
       },
       plotOptions: {
-        radar: {
-          polygons: {
-            strokeColors: gridColor,
-            strokeWidth: 1,
-            connectorColors: gridColor,
-            fill: {
-              colors: [isDarkMode ? '#1f2937' : '#f9fafb', isDarkMode ? '#111827' : '#ffffff']
-            }
+        bar: {
+          borderRadius: 2,
+          columnWidth: '95%',
+          distributed: false,
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 0,
+              color: bgColor
+            }],
+            backgroundBarColors: [],
+            backgroundBarOpacity: 0,
           }
         }
       },
-      colors: ['#3b82f6'],
-      markers: {
-        size: 4,
-        colors: ['#3b82f6'],
-        strokeColors: '#fff',
-        strokeWidth: 2,
-      },
-      fill: {
-        opacity: 0.2
-      },
-      stroke: {
-        show: true,
-        width: 2,
-        colors: ['#3b82f6'],
+      dataLabels: {
+        enabled: false
       },
       legend: {
-        show: true,
+        show: false
+      },
+      xaxis: {
+        type: 'category',
+        categories: data.map(d => d.x),
         labels: {
-          colors: textColor
+          show: true,
+          rotate: 0,
+          style: {
+            colors: textColor,
+            fontSize: '10px'
+          },
+          formatter: function(value, timestamp, opts) {
+            // Only show years
+            const date = new Date(value + '-01');
+            const month = date.getMonth();
+            // Show label only for January
+            if (month === 0) {
+              return date.getFullYear();
+            }
+            return '';
+          }
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        crosshairs: {
+          show: false
+        },
+        tooltip: {
+          enabled: false
         }
       },
+      yaxis: {
+        show: false,
+        max: Math.max(...data.map(d => d.y)) || 1
+      },
+      grid: {
+        show: false,
+        padding: {
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0
+        }
+      },
+      colors: [activeColor],
       tooltip: {
+        enabled: true,
         theme: isDarkMode ? 'dark' : 'light',
-        y: {
+        x: {
           formatter: function(value) {
-            return value + ' post' + (value !== 1 ? 's' : '');
+            const date = new Date(value + '-01');
+            return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+          }
+        },
+        y: {
+          formatter: function(value, { dataPointIndex }) {
+            if (value === 0) return 'No posts';
+            const posts = data[dataPointIndex].titles;
+            return value + ' post' + (value !== 1 ? 's' : '') + (posts.length > 0 ? ':\n' + posts.join('\n') : '');
+          }
+        },
+        style: {
+          fontSize: '12px'
+        }
+      },
+      states: {
+        hover: {
+          filter: {
+            type: 'darken',
+            value: 0.15
+          }
+        },
+        active: {
+          filter: {
+            type: 'none'
           }
         }
       }
     };
 
-    const chart = new ApexCharts(document.querySelector('#tag-radar-chart'), options);
+    const chart = new ApexCharts(document.querySelector('#posts-timeline-chart'), options);
     chart.render();
 
     // Update chart on theme change
@@ -232,40 +333,26 @@ layout: default
       mutations.forEach(function(mutation) {
         if (mutation.attributeName === 'class') {
           const isDarkMode = document.documentElement.classList.contains('dark');
+          const bgColor = isDarkMode ? '#0d1117' : '#ebedf0';
+          const textColor = isDarkMode ? '#9ca3af' : '#6b7280';
+          
           chart.updateOptions({
-            xaxis: {
-              categories: tags,
-              labels: {
-                style: {
-                  colors: tags.map(() => isDarkMode ? '#e5e7eb' : '#374151'),
-                  fontSize: '12px'
-                }
-              }
-            },
-            yaxis: {
-              show: true,
-              labels: {
-                style: {
-                  colors: isDarkMode ? '#e5e7eb' : '#374151'
-                }
-              }
-            },
             plotOptions: {
-              radar: {
-                polygons: {
-                  strokeColors: isDarkMode ? '#374151' : '#e5e7eb',
-                  strokeWidth: 1,
-                  connectorColors: isDarkMode ? '#374151' : '#e5e7eb',
-                  fill: {
-                    colors: [isDarkMode ? '#1f2937' : '#f9fafb', isDarkMode ? '#111827' : '#ffffff']
-                  }
+              bar: {
+                colors: {
+                  ranges: [{
+                    from: 0,
+                    to: 0,
+                    color: bgColor
+                  }]
                 }
               }
             },
-            legend: {
-              show: true,
+            xaxis: {
               labels: {
-                colors: isDarkMode ? '#e5e7eb' : '#374151'
+                style: {
+                  colors: textColor
+                }
               }
             },
             tooltip: {
@@ -280,9 +367,9 @@ layout: default
   
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTagRadarChart);
+    document.addEventListener('DOMContentLoaded', initPostsTimelineChart);
   } else {
-    initTagRadarChart();
+    initPostsTimelineChart();
   }
 </script>
 {% endif %}

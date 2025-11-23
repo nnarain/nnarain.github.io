@@ -5,6 +5,7 @@ description: Getting the Board in working order
 tag: ["HCS12", "embedded-systems", "electronics"]
 thumbnail: /assets/2015/03/27/board-2.jpg
 repo: nnarain/ESEPlatformController
+project_id: ese-board
 prev_post: 2015-03-18-Board Assembly!!!
 next_post:
 ---

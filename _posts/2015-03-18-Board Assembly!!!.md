@@ -4,6 +4,7 @@ title: Board Assembly!!!
 description: Board in back from the manufractuer. Time to put it together!!!
 tag: ["HCS12", "embedded-systems", "electronics"]
 thumbnail: /assets/2015/03/18/cpu.jpg
+project_id: ese-board
 prev_post: 2015-02-28-HCS12 Board Complete!
 next_post: 2015-03-27-Board Bring Up
 ---
