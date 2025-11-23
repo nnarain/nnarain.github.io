@@ -37,7 +37,7 @@ This allows the workflow to deploy directly to GitHub Pages without needing to p
 The following custom plugins are enabled and will run during the build:
 - **backlinks_generator.rb**: Automatically generates bidirectional links between posts
 
-For more information about the backlinks feature, see [docs/BACKLINKS.md](docs/BACKLINKS.md).
+For more information about the backlinks feature, see [BACKLINKS.md](BACKLINKS.md).
 
 ## Manual Deployment
 
