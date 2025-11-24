@@ -40,6 +40,18 @@ jobs:
           ruby-version: '3.1' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install resume-cli and dependencies
+        run: |
+          npm install -g resume-cli
+          npm install
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+      - name: Generate resume HTML
+        run: ./scripts/resume.sh export resume.html elegant
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
