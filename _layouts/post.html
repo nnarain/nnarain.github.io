@@ -89,7 +89,47 @@ layout: default
 
 <br>
 
-<!-- Post Navigation -->
+<!-- Project Navigation (if post belongs to a project) -->
+{% if page.project_id %}
+<div class="py-6 border-t border-gray-200 dark:border-gray-700">
+  <div class="text-center mb-4">
+    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
+      Project: {{ page.project_id }}
+    </span>
+  </div>
+  <div class="flex items-center justify-between">
+    <div class="flex-1">
+      {% if page.project_previous %}
+        <a href="{{ page.project_previous.url | relative_url }}" class="inline-flex items-center text-primary hover:underline">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Previous in Project
+        </a>
+        <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 ml-5">
+          {{ page.project_previous.title }}
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="flex-1 text-right">
+      {% if page.project_next %}
+        <a href="{{ page.project_next.url | relative_url }}" class="inline-flex items-center text-primary hover:underline">
+          Next in Project
+          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 mr-5">
+          {{ page.project_next.title }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Post Navigation (chronological) -->
 <div class="flex items-center justify-between py-8 border-t border-gray-200 dark:border-gray-700">
   <div class="flex-1">
     {% if page.next.url %}
