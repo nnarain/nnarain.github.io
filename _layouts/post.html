@@ -132,7 +132,7 @@ layout: default
 <!-- Post Navigation (chronological) -->
 <div class="flex items-center justify-between py-8 border-t border-gray-200 dark:border-gray-700">
   <div class="flex-1">
-    {% if page.next.url %}
+    {% if page.previous.url %}
       <a href="{{ page.previous.url | prepend: site.url }}" class="text-primary hover:underline">← Previous</a>
     {% endif %}
   </div>
@@ -140,7 +140,7 @@ layout: default
   <a href="#" class="text-primary hover:underline">Top</a>
   
   <div class="flex-1 text-right">
-    {% if page.previous.url %}
+    {% if page.next.url %}
       <a href="{{ page.next.url | prepend: site.url }}" class="text-primary hover:underline">Next →</a>
     {% endif %}
   </div>
