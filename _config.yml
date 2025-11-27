@@ -56,12 +56,13 @@ plugins: [jekyll-paginate, jekyll-gist]
 
 # Giscus comments
 # Configure at https://giscus.app/
+# Required: repo_id and category_id must be set for comments to appear
 giscus:
   enabled: true
   repo: "nnarain/nnarain.github.io"
-  repo_id: ""  # Fill in after configuring at giscus.app
+  repo_id: ""  # Required: Get from https://giscus.app/
   category: "Announcements"
-  category_id: ""  # Fill in after configuring at giscus.app
+  category_id: ""  # Required: Get from https://giscus.app/
   mapping: "pathname"
   strict: "0"
   reactions_enabled: "1"
