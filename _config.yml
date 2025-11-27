@@ -53,3 +53,20 @@ tagarray: []
 
 # plugins
 plugins: [jekyll-paginate, jekyll-gist]
+
+# Giscus comments
+# Configure at https://giscus.app/
+giscus:
+  enabled: true
+  repo: "nnarain/nnarain.github.io"
+  repo_id: ""  # Fill in after configuring at giscus.app
+  category: "Announcements"
+  category_id: ""  # Fill in after configuring at giscus.app
+  mapping: "pathname"
+  strict: "0"
+  reactions_enabled: "1"
+  emit_metadata: "0"
+  input_position: "bottom"
+  theme: "preferred_color_scheme"
+  lang: "en"
+  loading: "lazy"
