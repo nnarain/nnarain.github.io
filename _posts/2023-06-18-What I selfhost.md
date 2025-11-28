@@ -3,6 +3,7 @@ layout: post
 title: What I selfhost
 tag: ['selfhosted', 'homeserver', 'docker', 'vpn', 'media']
 repo: 
+project_id: homelab
 ---
 
 I don't do many posts on my homeserver since it's mostly just running some services that I use and not much problem solving goes into it. However with the recent Reddit shenanigans I felt it was a good time to talk about what I self host and why.

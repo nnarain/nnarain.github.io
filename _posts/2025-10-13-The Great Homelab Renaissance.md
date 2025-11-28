@@ -3,6 +3,7 @@ layout: post
 title: The Great Homelab Renaissance
 tag: ['homelab']
 repo: 
+project_id: homelab
 ---
 
 Welp. It's been a year.
