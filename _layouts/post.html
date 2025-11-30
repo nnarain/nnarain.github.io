@@ -19,6 +19,20 @@ layout: default
 
     <h1 class="text-5xl font-sans font-bold text-gray-800 dark:text-gray-200 my-4">{{ page.title }}</h1>
     <div class="w-16 h-1 bg-gray-800 dark:bg-gray-200 mx-auto"></div>
+
+    {% if page.project_id %}
+      {% assign project = site.projects | where: "project_id", page.project_id | first %}
+      {% if project %}
+        <div class="mt-4">
+          <a href="{{ project.url | relative_url }}" class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 rounded-full hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors duration-200">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+            </svg>
+            {{ project.name }}
+          </a>
+        </div>
+      {% endif %}
+    {% endif %}
   </div>
 
   <!-- Post Content -->
