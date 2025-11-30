@@ -24,6 +24,21 @@ title: Home
       <a href="{{ post.url | relative_url }}" class="block hover:no-underline">
         <div>
           <time datetime="{{ post.date }}" class="text-gray-500 dark:text-gray-400 text-sm tracking-wide">{{ post.date | date: "%B %d, %Y" }}</time>
+          
+          {% if post.project_id %}
+            {% assign project = site.projects | where: "project_id", post.project_id | first %}
+            {% if project %}
+              <div class="mt-2 mb-1">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 rounded-full">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  </svg>
+                  {{ project.name }}
+                </span>
+              </div>
+            {% endif %}
+          {% endif %}
+          
           <h1 class="text-3xl font-sans font-bold text-gray-800 dark:text-gray-200 my-2 group-hover:text-primary transition-colors duration-200">{{ post.title }}</h1>
           <div class="h-1 w-8 bg-gray-800 dark:bg-gray-200 group-hover:w-20 transition-all duration-300"></div>
 
