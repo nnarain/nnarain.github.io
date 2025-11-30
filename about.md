@@ -245,10 +245,13 @@ function initTagHeatmap() {
   chart.render();
 
   // Update chart on theme change
+  let wasDarkMode = isDarkMode;
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.attributeName === 'class') {
         const isDark = document.documentElement.classList.contains('dark');
+        if (isDark === wasDarkMode) return;
+        wasDarkMode = isDark;
         chart.updateOptions({
           dataLabels: {
             style: {
