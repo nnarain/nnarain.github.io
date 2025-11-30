@@ -67,3 +67,237 @@ Most posts are project updates where I elaborate on problems I solved, interesti
 
 </div>
 </div>
+
+<!-- Blog Insights Section -->
+<div class="py-12">
+  <div class="mb-8">
+    <h2 class="text-3xl font-sans font-bold text-gray-800 dark:text-gray-200 mb-2">Blog Insights</h2>
+    <p class="text-gray-600 dark:text-gray-400">How topics in my blog posts relate to each other</p>
+  </div>
+
+  <!-- Tag Relationship Heatmap -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Tag Co-occurrence</h3>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Shows how often tags appear together in posts</p>
+    <div id="tag-heatmap-chart"></div>
+  </div>
+</div>
+
+<script>
+function initTagHeatmap() {
+  if (typeof ApexCharts === 'undefined') {
+    setTimeout(initTagHeatmap, 100);
+    return;
+  }
+
+  // Collect tag data from all posts
+  const postTags = [
+    {% for post in site.posts %}
+    {% if post.tag and post.tag.size > 0 %}
+    [{% for tag in post.tag %}"{{ tag | downcase | escape }}"{% unless forloop.last %},{% endunless %}{% endfor %}]{% unless forloop.last %},{% endunless %}
+    {% endif %}
+    {% endfor %}
+  ].filter(tags => tags && tags.length > 1);
+
+  // Count tag occurrences
+  const tagCount = {};
+  postTags.forEach(tags => {
+    tags.forEach(tag => {
+      tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+  });
+
+  // Get top tags by frequency
+  const topTags = Object.entries(tagCount)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 12)
+    .map(([tag]) => tag);
+
+  // Build co-occurrence matrix
+  const coOccurrence = {};
+  topTags.forEach(tag1 => {
+    coOccurrence[tag1] = {};
+    topTags.forEach(tag2 => {
+      coOccurrence[tag1][tag2] = 0;
+    });
+  });
+
+  postTags.forEach(tags => {
+    const relevantTags = tags.filter(t => topTags.includes(t));
+    for (let i = 0; i < relevantTags.length; i++) {
+      for (let j = 0; j < relevantTags.length; j++) {
+        if (i !== j) {
+          coOccurrence[relevantTags[i]][relevantTags[j]]++;
+        }
+      }
+    }
+  });
+
+  // Format data for ApexCharts heatmap
+  const series = topTags.map(tag1 => ({
+    name: tag1,
+    data: topTags.map(tag2 => ({
+      x: tag2,
+      y: tag1 === tag2 ? 0 : coOccurrence[tag1][tag2]
+    }))
+  }));
+
+  // Find max value for color scaling
+  let maxValue = 0;
+  series.forEach(s => {
+    s.data.forEach(d => {
+      if (d.y > maxValue) maxValue = d.y;
+    });
+  });
+
+  const isDarkMode = document.documentElement.classList.contains('dark');
+
+  const options = {
+    series: series,
+    chart: {
+      type: 'heatmap',
+      height: 400,
+      background: 'transparent',
+      toolbar: {
+        show: false
+      },
+      fontFamily: 'inherit'
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: '11px',
+        fontWeight: 500,
+        colors: [isDarkMode ? '#fff' : '#1f2937']
+      },
+      formatter: function(val) {
+        return val > 0 ? val : '';
+      }
+    },
+    plotOptions: {
+      heatmap: {
+        shadeIntensity: 0.5,
+        radius: 4,
+        useFillColorAsStroke: false,
+        colorScale: {
+          ranges: [
+            { from: 0, to: 0, color: isDarkMode ? '#1f2937' : '#f3f4f6', name: 'None' },
+            { from: 1, to: Math.ceil(maxValue * 0.25), color: '#bbf7d0', name: 'Low' },
+            { from: Math.ceil(maxValue * 0.25) + 1, to: Math.ceil(maxValue * 0.5), color: '#86efac', name: 'Medium' },
+            { from: Math.ceil(maxValue * 0.5) + 1, to: Math.ceil(maxValue * 0.75), color: '#4ade80', name: 'High' },
+            { from: Math.ceil(maxValue * 0.75) + 1, to: maxValue, color: '#22c55e', name: 'Very High' }
+          ]
+        }
+      }
+    },
+    stroke: {
+      width: 2,
+      colors: [isDarkMode ? '#374151' : '#fff']
+    },
+    xaxis: {
+      labels: {
+        style: {
+          colors: isDarkMode ? '#9ca3af' : '#4b5563',
+          fontSize: '11px'
+        },
+        rotate: -45,
+        rotateAlways: true
+      },
+      axisBorder: { show: false },
+      axisTicks: { show: false }
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: isDarkMode ? '#9ca3af' : '#4b5563',
+          fontSize: '11px'
+        }
+      }
+    },
+    grid: {
+      padding: {
+        right: 20,
+        bottom: 20
+      }
+    },
+    tooltip: {
+      enabled: true,
+      theme: isDarkMode ? 'dark' : 'light',
+      y: {
+        formatter: function(val, { seriesIndex, dataPointIndex, w }) {
+          const tag1 = w.config.series[seriesIndex].name;
+          const tag2 = w.config.series[seriesIndex].data[dataPointIndex].x;
+          if (tag1 === tag2) return 'Same tag';
+          if (val === 0) return 'No posts together';
+          return val + ' post' + (val !== 1 ? 's' : '') + ' together';
+        }
+      }
+    },
+    legend: {
+      show: false
+    }
+  };
+
+  const chartEl = document.querySelector('#tag-heatmap-chart');
+  if (!chartEl) return;
+
+  const chart = new ApexCharts(chartEl, options);
+  chart.render();
+
+  // Update chart on theme change
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.attributeName === 'class') {
+        const isDark = document.documentElement.classList.contains('dark');
+        chart.updateOptions({
+          dataLabels: {
+            style: {
+              colors: [isDark ? '#fff' : '#1f2937']
+            }
+          },
+          plotOptions: {
+            heatmap: {
+              colorScale: {
+                ranges: [
+                  { from: 0, to: 0, color: isDark ? '#1f2937' : '#f3f4f6', name: 'None' },
+                  { from: 1, to: Math.ceil(maxValue * 0.25), color: '#bbf7d0', name: 'Low' },
+                  { from: Math.ceil(maxValue * 0.25) + 1, to: Math.ceil(maxValue * 0.5), color: '#86efac', name: 'Medium' },
+                  { from: Math.ceil(maxValue * 0.5) + 1, to: Math.ceil(maxValue * 0.75), color: '#4ade80', name: 'High' },
+                  { from: Math.ceil(maxValue * 0.75) + 1, to: maxValue, color: '#22c55e', name: 'Very High' }
+                ]
+              }
+            }
+          },
+          stroke: {
+            colors: [isDark ? '#374151' : '#fff']
+          },
+          xaxis: {
+            labels: {
+              style: {
+                colors: isDark ? '#9ca3af' : '#4b5563'
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                colors: isDark ? '#9ca3af' : '#4b5563'
+              }
+            }
+          },
+          tooltip: {
+            theme: isDark ? 'dark' : 'light'
+          }
+        });
+      }
+    });
+  });
+  observer.observe(document.documentElement, { attributes: true });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTagHeatmap);
+} else {
+  initTagHeatmap();
+}
+</script>
