@@ -3,6 +3,7 @@ layout: post
 title: iRobot Create 2 - openGrid baseplate
 tag: [irobot, robotics, fusion, 3dprinting]
 repo: 
+project_id: genbu-robot
 ---
 
 I've been thinking about putting a robot project together using my iRobot as the mobile base. A tad over due but better late then never.
