@@ -8,7 +8,6 @@ tags: ['homelab']
 images:
   - /assets/2025/10/13/case-and-motherboard.jpg
 project_id: homelab
-order: 8
 ---
 
 ## Overview

@@ -15,7 +15,7 @@ permalink: /projects/
 
 <!-- Projects List with Infinite Scroll Style -->
 <div id="projects-container" class="space-y-16 pb-12">
-  {% assign sorted_projects = site.projects | sort: 'order' %}
+  {% assign sorted_projects = site.projects | sort: 'last_post_date' | reverse %}
   {% for project in sorted_projects %}
   <article class="project-item border-b border-gray-200 dark:border-gray-700 pb-16 last:border-b-0 opacity-0 translate-y-8 transition-all duration-700" data-index="{{ forloop.index }}">
     <!-- Project Header -->

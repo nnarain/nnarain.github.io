@@ -9,7 +9,6 @@ images:
   - /assets/2020/04/15/demo2.gif
   - /assets/2020/04/15/demo1.gif
 project_id: nescore
-order: 3
 ---
 
 ## Overview

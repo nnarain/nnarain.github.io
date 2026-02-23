@@ -8,7 +8,6 @@ tags: ["Gameboy", "Emulator", "C++"]
 images:
   - /static/projects/gameboy.gif
 project_id: gameboy-emulator
-order: 1
 ---
 
 ## Overview

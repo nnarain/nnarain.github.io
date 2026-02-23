@@ -8,7 +8,6 @@ tags: ["Drone", "Flight Controller", "Electronics", "STM32", "Rust", "Embedded"]
 images:
   - /assets/2024/09/14/icarus-revf-preview.png
 project_id: icarus-fc
-order: 4
 ---
 
 ## Overview

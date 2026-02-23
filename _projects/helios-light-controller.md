@@ -8,7 +8,6 @@ tags: ["ESP32", "LED Controller", "Electronics", "KiCad", "WLED"]
 images:
   - /assets/2022/09/23/reve.png
 project_id: helios-light-controller
-order: 7
 ---
 
 ## Overview

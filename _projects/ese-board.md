@@ -8,7 +8,6 @@ tags: ["Electronics", "C", "Embedded", "Altium"]
 images:
   - /static/projects/board-layout.png
 project_id: ese-board
-order: 2
 ---
 
 ## Overview

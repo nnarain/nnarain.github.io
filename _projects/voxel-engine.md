@@ -11,7 +11,6 @@ images:
   - /assets/2015/07/23/terrain-multiple-lights-lightmap.png
   - /assets/2015/07/23/terrain-per-face-lightning3.png
 project_id: voxel-engine
-order: 5
 ---
 
 ## Overview

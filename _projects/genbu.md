@@ -2,10 +2,12 @@
 layout: projects
 name: Genbu Robot
 repo_url: 
-description: An iRobot Create 2 based robot for general robot projects
+description: Personal ROS development robot based on the iRobot Create 2
 date: 2021-11-28
 tags: ['robotics']
-images: []
+images:
+  - /static/projects/genbu-logo.png
 project_id: genbu-robot
-order: 9
 ---
+
+Personal ROS Development platform

@@ -8,7 +8,6 @@ tags: ["Unity", "Procedural Generation", "C#", "Graphics", "Terrain"]
 images:
   - /assets/2018/01/14/gen1.gif
 project_id: world-procgen
-order: 6
 ---
 
 ## Overview
