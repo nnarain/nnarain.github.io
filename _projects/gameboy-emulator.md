@@ -1,7 +1,8 @@
 ---
 layout: projects
 name: Gameboy Emulator
-repo_url: https://github.com/nnarain/gameboy
+repo_url: https://github.com/nnarain/gameboycore
+site_url: https://nnarain.github.io/gameboycore
 description: A Gameboy emulator written in C++. Supports CPU emulation, graphics, and various memory bank controllers. Successfully runs classic Gameboy games and passes blaarg's test ROMs.
 date: 2016-09-01
 tags: ["Gameboy", "Emulator", "C++"]
