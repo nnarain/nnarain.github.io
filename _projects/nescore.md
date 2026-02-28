@@ -2,6 +2,7 @@
 layout: projects
 name: nescore - NES Emulator
 repo_url: https://github.com/nnarain/nescore
+site_url: https://nnarain.github.io/nescore
 description: A NES emulator written in Rust. Features accurate CPU and PPU emulation, supports multiple mappers, and can run as a library for desktop, libretro, or WebAssembly applications.
 date: 2020-04-15
 tags: ["NES", "Emulator", "Rust"]

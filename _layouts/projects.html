@@ -19,6 +19,15 @@ layout: default
         View on GitHub
       </a>
       {% endif %}
+      {% if page.site_url %}
+      <a href="{{ page.site_url }}" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-200">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+        </svg>
+        Visit Site
+      </a>
+      {% endif %}
     </div>
 
     <!-- Tags -->
