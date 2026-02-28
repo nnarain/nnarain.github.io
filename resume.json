@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Natesh Narain",
-    "label": "Senior Software Developer",
+    "label": "Staff Software Developer",
     "image": "/static/socials/profile.jpg",
     "email": "nnarain101@gmail.com",
     "url": "https://nnarain.github.io",
@@ -27,10 +27,22 @@
   },
   "work": [
     {
-      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Aquisition)",
+      "name": "OTTO by Rockwell Automation",
+      "position": "Staff Software Developer (AMR Embedded Systems)",
+      "startDate": "2025-10",
+      "endDate": "",
+      "summary": "Senior member of the AMR Embedded Systems Team focusing setting the technical direction for the team's software architecture. Expanding the scope of the team's work to to better support nearly a dozen different vehicle platforms and coordinating across different teams.",
+      "highlights": [
+        "Responsible for scoping, planning, a guiding the consolidation of OTTO and CPR software stacks to create a unified architecture.",
+        "Responsible for the overall quality and maintainability of the AMR Embedded Systems codebase and setting standards for software development across the team",
+        "Identifying key technical challenges for our team and plan solution to address them in a way that aligns with the team's long-term technical vision"
+      ]
+    },
+    {
+      "name": "OTTO by Rockwell Automation (Clearpath Inc, Post Acquisition)",
       "position": "Senior Software Developer (Vehicle Platform)",
       "startDate": "2021-01",
-      "endDate": "",
+      "endDate": "2025-10",
       "summary": "Senior member of the Vehicle Platform Software Team focusing on rapidly improving software capabilities to accommodate an expanding portfolio of vehicles. Led multiple team initiatives to enabling integrating the OTTO software stack on third-party OEM vehicles.",
       "highlights": [
         "Planned, designed and implemented a configurable system for integrating multiple fieldbus technologies (CAN, CANopen, J1939, Modbus, EtherNet/IP) into autonomous control stack",
@@ -286,6 +298,13 @@
       "keywords": [
         "Autonomous Systems",
         "Control Systems"
+      ]
+    },
+    {
+      "name": "Martial Arts and Fitness",
+      "keywords": [
+        "Karate",
+        "Brazillian Jiu Jitsu"
       ]
     }
   ],
