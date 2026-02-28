@@ -2,6 +2,7 @@
 layout: projects
 name: Helios Light Controller
 repo_url: https://github.com/nnarain/esp-light-controller
+site_url: https://nnarain.github.io/helios-light-controller/
 description: An ESP32-based LED controller board with WLED firmware support. Features temperature monitoring, fan control, and custom PCB design for managing high-power LED strips.
 date: 2019-08-05
 tags: ["ESP32", "LED Controller", "Electronics", "KiCad", "WLED"]

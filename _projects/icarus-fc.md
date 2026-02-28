@@ -2,6 +2,7 @@
 layout: projects
 name: Icarus Flight Controller
 repo_url: https://github.com/nnarain/icarus
+site_url: https://nnarain.github.io/icarus
 description: A custom-designed flight controller for micro quadcopters. Features STM32-based design with onboard IMU, magnetometer, and barometer. Supports multiple firmware implementations including Rust and C++.
 date: 2021-11-28
 tags: ["Drone", "Flight Controller", "Electronics", "STM32", "Rust", "Embedded"]
