@@ -86,18 +86,16 @@ layout: default
 
   <!-- Photo Mosaic -->
   {% if page.project_images and page.project_images.size > 0 %}
+  {% assign gallery_images = page.project_images | reverse %}
   <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
     <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">Photo Gallery</h3>
     <div class="project-mosaic">
-      {% for img in page.project_images limit:12 %}
+      {% for img in gallery_images %}
       <button class="mosaic-thumb" onclick="openMosaicLightbox('{{ img | relative_url }}', {{ forloop.index0 }})" aria-label="View image {{ forloop.index }}">
         <img src="{{ img | relative_url }}" alt="Project photo {{ forloop.index }}" loading="lazy">
       </button>
       {% endfor %}
     </div>
-    {% if page.project_images.size > 12 %}
-    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 text-right">Showing 12 of {{ page.project_images.size }} photos</p>
-    {% endif %}
   </div>
 
   <!-- Lightbox -->
@@ -110,7 +108,7 @@ layout: default
 
   <script>
     (function() {
-      var images = [{% for img in page.project_images limit:12 %}"{{ img | relative_url }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
+      var images = [{% for img in gallery_images %}"{{ img | relative_url }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
       var currentIndex = 0;
       var lb = document.getElementById('mosaic-lightbox');
       var lbImg = document.getElementById('mosaic-lightbox-img');
@@ -523,8 +521,6 @@ layout: default
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 4px;
-    max-height: 260px;
-    overflow: hidden;
   }
   .mosaic-thumb {
     position: relative;
