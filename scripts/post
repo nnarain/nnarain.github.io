@@ -61,7 +61,7 @@ def create_make(title):
     print(f'{date_string} -> {make_posts}')
 
     if date_string not in make_posts:
-        create_draft('Makes of the Month')
+        create_draft('Makes of the Month', layout='makesofthemonth')
 
     create_assets_folders()
 
