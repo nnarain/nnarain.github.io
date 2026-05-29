@@ -32,6 +32,7 @@ RUN apt-get update \
         libxml2-dev \
         libxslt1-dev \
         pkg-config \
+    && apt-get install -y ffmpeg \
     #
     # Install Node.js (for JSON Resume)
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
