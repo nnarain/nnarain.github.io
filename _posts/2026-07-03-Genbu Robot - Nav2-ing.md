@@ -3,6 +3,7 @@ layout: post
 title: Genbu Robot - Nav2-ing
 tag: [robotics, nav2, ros2, navigation]
 repo: nnarain/genbu_robot
+project_id: genbu-robot
 ---
 
 Ok in the latest post I talked about some issues I was having.
