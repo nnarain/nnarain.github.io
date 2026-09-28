@@ -8,3 +8,7 @@ gem 'jekyll-paginate'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem "webrick", "~> 1.8"
+
+gem "csv", "~> 3.3"
+
+gem "bigdecimal", "~> 4.1"
