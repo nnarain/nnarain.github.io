@@ -64,6 +64,8 @@ project_id: unique-project-identifier
 
 The project detail page will automatically display all posts with matching `project_id` in the "Related Posts" section.
 
+The Photo Gallery also automatically collects images and WebM videos from those posts. Videos can use the existing `{% include video.html webm="/assets/path/clip.webm" %}` include, Markdown links, or HTML `src`/`href` attributes. Duplicate URLs appear only once per project. Select a video thumbnail to play it in the gallery lightbox; closing the lightbox or navigating to another item stops playback.
+
 ## Image Carousel
 
 Projects with multiple images in the `images` array will automatically display:
