@@ -85,51 +85,81 @@ layout: default
   </div>
 
   <!-- Photo Mosaic -->
-  {% if page.project_images and page.project_images.size > 0 %}
-  {% assign gallery_images = page.project_images | reverse %}
+  {% if page.project_media and page.project_media.size > 0 %}
+  {% assign gallery_media = page.project_media | reverse %}
   <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
     <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">Photo Gallery</h3>
     <div class="project-mosaic">
-      {% for img in gallery_images %}
-      <button class="mosaic-thumb" onclick="openMosaicLightbox('{{ img | relative_url }}', {{ forloop.index0 }})" aria-label="View image {{ forloop.index }}">
-        <img src="{{ img | relative_url }}" alt="Project photo {{ forloop.index }}" loading="lazy">
+      {% for media in gallery_media %}
+      <button class="mosaic-thumb" onclick="openMosaicLightbox({{ forloop.index0 }})" aria-label="View {{ media.type }} {{ forloop.index }}">
+        {% if media.type == 'video' %}
+        <video src="{{ media.url | relative_url | escape }}" muted playsinline preload="metadata" aria-hidden="true"></video>
+        <span class="mosaic-video-play" aria-hidden="true">&#9654;</span>
+        {% else %}
+        <img src="{{ media.url | relative_url | escape }}" alt="Project photo {{ forloop.index }}" loading="lazy">
+        {% endif %}
       </button>
       {% endfor %}
     </div>
   </div>
 
   <!-- Lightbox -->
-  <div id="mosaic-lightbox" class="mosaic-lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery lightbox">
+  <div id="mosaic-lightbox" class="mosaic-lightbox" role="dialog" aria-modal="true" aria-label="Project media gallery lightbox">
     <button class="mosaic-lightbox-close" id="mosaic-lightbox-close" aria-label="Close">&times;</button>
     <button class="mosaic-lightbox-prev" id="mosaic-lightbox-prev" aria-label="Previous">&#8249;</button>
-    <img id="mosaic-lightbox-img" src="" alt="Project photo">
+    <img id="mosaic-lightbox-img" alt="Project photo" hidden>
+    <video id="mosaic-lightbox-video" controls playsinline preload="metadata" aria-label="Project video" hidden></video>
     <button class="mosaic-lightbox-next" id="mosaic-lightbox-next" aria-label="Next">&#8250;</button>
   </div>
 
   <script>
     (function() {
-      var images = [{% for img in gallery_images %}"{{ img | relative_url }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
+      var media = [{% for item in gallery_media %}{src: {{ item.url | relative_url | jsonify }}, type: {{ item.type | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}];
       var currentIndex = 0;
       var lb = document.getElementById('mosaic-lightbox');
       var lbImg = document.getElementById('mosaic-lightbox-img');
+      var lbVideo = document.getElementById('mosaic-lightbox-video');
       var lbClose = document.getElementById('mosaic-lightbox-close');
+      var previousFocus;
 
-      function closeLightbox() {
-        lb.classList.remove('active');
-        document.body.style.overflow = '';
+      function stopVideo() {
+        lbVideo.pause();
+        lbVideo.removeAttribute('src');
+        lbVideo.load();
       }
 
-      window.openMosaicLightbox = function(src, index) {
+      function showMedia() {
+        stopVideo();
+        var item = media[currentIndex];
+        lbImg.hidden = item.type === 'video';
+        lbVideo.hidden = item.type !== 'video';
+        if (item.type === 'video') {
+          lbImg.removeAttribute('src');
+          lbVideo.src = item.src;
+        } else {
+          lbImg.src = item.src;
+        }
+      }
+
+      function closeLightbox() {
+        stopVideo();
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+        if (previousFocus) previousFocus.focus();
+      }
+
+      window.openMosaicLightbox = function(index) {
+        previousFocus = document.activeElement;
         currentIndex = index;
-        lbImg.src = src;
+        showMedia();
         lb.classList.add('active');
         document.body.style.overflow = 'hidden';
         lbClose.focus();
       };
 
       window.mosaicLightboxNav = function(dir) {
-        currentIndex = (currentIndex + dir + images.length) % images.length;
-        lbImg.src = images[currentIndex];
+        currentIndex = (currentIndex + dir + media.length) % media.length;
+        showMedia();
       };
 
       lbClose.addEventListener('click', closeLightbox);
@@ -531,7 +561,8 @@ layout: default
     background: transparent;
     aspect-ratio: 1;
   }
-  .mosaic-thumb img {
+  .mosaic-thumb img,
+  .mosaic-thumb video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -540,9 +571,24 @@ layout: default
     margin: 0;
     display: block;
   }
-  .mosaic-thumb:hover img {
+  .mosaic-thumb:hover img,
+  .mosaic-thumb:hover video {
     transform: scale(1.05);
     opacity: 0.85;
+  }
+  .mosaic-video-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    text-shadow: 0 1px 5px #000;
+    pointer-events: none;
+  }
+  .mosaic-thumb video {
+    pointer-events: none;
   }
 
   /* Lightbox */
@@ -558,13 +604,17 @@ layout: default
   .mosaic-lightbox.active {
     display: flex;
   }
-  .mosaic-lightbox img {
+  .mosaic-lightbox img,
+  .mosaic-lightbox video {
     max-width: 90vw;
     max-height: 85vh;
     object-fit: contain;
     border-radius: 6px;
     display: block;
     margin: 0;
+  }
+  .mosaic-lightbox [hidden] {
+    display: none;
   }
   .mosaic-lightbox-close,
   .mosaic-lightbox-prev,
